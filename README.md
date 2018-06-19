@@ -116,7 +116,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 
 > #### Values
 >
-> `<number>`  
+> `[ <number> | 'inherit' ]`  
 > The left offset value.
 > 
 > `span <number>`  
@@ -127,7 +127,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 
 > #### Formal syntax
 >
-> `<number> / span && <number> [ / <number> ]?`
+> `[ <number> | 'inherit' ] / span && <number> [ / <number> ]?`
 
 ### Offset Shorthand  
 
@@ -138,21 +138,27 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 >
 > ```css
 > tidy-offset: 3 / 4;
-> tidy-offset: 0 / 1;
+> tidy-offset: 0 / 1; /* could also use `inherit` in place of `0` */
 > tidy-offset: 1;
 > ````
 
 > #### Values
 >
-> `<number>`  
+> `[ <number> | 'inherit' ]`  
 > The left offset value.
 > 
-> `<number>` (optional)  
+> `/ <number>` (optional)  
 > The right offset value.
 
 > #### Formal syntax
 >
 > `[ <number> | 'inherit' ] [ / <number> ]?`
+
+#### A note about the 'inherit' value
+
+The `inherit` value simply acts as a way to bypass the need to enter a required
+value in the shorthand properties. Nothing is actually _inherited_, but I found
+using a `0` value, which does the same thing, could potentially be confusing.
 
 ## Functions
 
