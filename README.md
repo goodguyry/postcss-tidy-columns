@@ -81,7 +81,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 > #### Values
 >
 > `<number>`  
-> The number of columns the element should be offset from the left edge of its parent.
+> The number of columns the element should be offset from the left edge of the site edge.
 
 ### Offset Right
 
@@ -99,7 +99,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 > #### Values
 >
 > `<number>`  
-> The number of columns the element should be offset from the right edge of its parent.
+> The number of columns the element should be offset from the right edge of the site edge.
 
 ### Column Shorthand  
 
@@ -165,7 +165,7 @@ the `tidy-span-full()` and `tidy-offset-full()` functions to set the static
 column and offset widths, respectively.
 
 Use cases include:
-* Use the `offset` value on properties other than `margin`, like for an 
+* Use the `offset` value on properties other than `margin`; for example, on an 
 absolutely-positioned element.
 * Use the `span` value properties other than `width` and `max-width`, such as in 
 a `translate` function.
@@ -307,7 +307,8 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 
 Declares whether or not to add a right gap margin to the column.
 
-Uses `:last-of-type` to reset the `margin-right` to `0`.
+When this is set to `true`, a `:last-of-type` rule will be added to reset the 
+`margin-right` to `0` for the last item.
 
 > #### CSS Syntax
 >
