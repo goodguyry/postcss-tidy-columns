@@ -1,0 +1,8 @@
+div {
+	left: calc((((100vw / 12 - 1.1458rem) * 2) + 1.25rem * 2) + 2rem);
+}
+@media (min-width: 90rem) {
+	div {
+		left: calc((((90rem / 12 - 1.1458rem) * 2) + 1.25rem * 2) + 2rem);
+	}
+}

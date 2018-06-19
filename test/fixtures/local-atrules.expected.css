@@ -1,0 +1,20 @@
+div {
+	width: calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 2);
+	max-width: calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 2);
+	margin-right: 0.625rem;
+	margin-left: calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem * 2);
+}
+div:last-of-type {
+	margin-right: 0;
+}
+@media (min-width: 75rem) {
+	div {
+		margin-left: calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem * 2);
+	}
+}
+@media (min-width: 60rem) {
+	div {
+		width: calc((((100vw - 32px * 2) / 12 - 1.1458rem) * 2) + 1.25rem);
+		max-width: calc((((75rem - 32px * 2) / 12 - 1.1458rem) * 2) + 1.25rem);
+	}
+}

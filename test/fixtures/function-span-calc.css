@@ -1,0 +1,8 @@
+@tidy columns 12;
+@tidy gap 1.25rem;
+@tidy site-max 90rem;
+
+div {
+	width: calc(tidy-span(2) + 20px);
+	max-width: calc(tidy-span-full(2) + 20px);
+}

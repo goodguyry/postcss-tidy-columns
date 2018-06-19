@@ -1,0 +1,8 @@
+div {
+	margin-right: calc((100vw / 12 - 1.1458rem) + 1.25rem);
+}
+@media (min-width: 90rem) {
+	div {
+		margin-right: calc((90rem / 12 - 1.1458rem) + 1.25rem);
+	}
+}

@@ -1,0 +1,52 @@
+{
+  "name": "postcss-tidy-columns",
+  "version": "0.0.0",
+  "description": "PostCSS plugin to manage grid alignment",
+  "keywords": [
+    "postcss",
+    "postcss-plugin",
+    "css",
+    "columns",
+    "grid",
+    "flexbox"
+  ],
+  "author": "Ryan Domingue <ryan@ryandomingue.com>",
+  "license": "MIT",
+  "repository": "goodguyry/postcss-tidy-columns",
+  "bugs": {
+    "url": "https://github.com/goodguyry/postcss-tidy-columns/issues"
+  },
+  "homepage": "https://github.com/goodguyry/postcss-tidy-columns",
+  "dependencies": {
+    "eslint-plugin-import": "^2.12.0",
+    "object-assign": "^4.1.1",
+    "postcss": "^6.0.22"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "jest": "^23.0.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watchAll --verbose"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-airbnb-base",
+    "env": {
+      "jest": true
+    },
+    "rules": {
+      "yoda": [
+        "error",
+        "always",
+        {
+          "onlyEquality": true
+        }
+      ]
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}

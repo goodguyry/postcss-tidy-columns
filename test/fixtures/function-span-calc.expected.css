@@ -1,0 +1,4 @@
+div {
+	width: calc((((100vw / 12 - 1.1458rem) * 2) + 1.25rem) + 20px);
+	max-width: calc((((90rem / 12 - 1.1458rem) * 2) + 1.25rem) + 20px);
+}

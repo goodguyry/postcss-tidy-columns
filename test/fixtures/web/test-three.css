@@ -1,0 +1,32 @@
+/**
+ * Tests full suite of options and properties.
+ */
+@tidy columns 12;
+@tidy gap 0.625rem / true;
+@tidy edge 10px;
+@tidy site-max 75rem;
+
+.test-three__item--single-column {
+	tidy-span: 1;
+	margin-bottom: 0.625rem;
+}
+
+.test-three__item--single-column:nth-child(12) {
+	margin-right: 0;
+}
+
+.test-three__item--offset {
+	tidy-span: 3;
+	tidy-offset-left: 1;
+}
+
+.test-three__item--offset-right {
+	tidy-span: 4;
+	tidy-offset-right: 1;
+	margin-left: 0.625rem;
+}
+
+.test-three__item--fractional-column {
+	tidy-span: 3.5;
+	tidy-offset-left: 1.5;
+}

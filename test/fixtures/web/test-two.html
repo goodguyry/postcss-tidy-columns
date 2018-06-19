@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tidy Columns Test Two</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		/* Basic layout styles unrelated to Tidy Columns */
+		html, body, div {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		.test-two {
+			width: 100%;
+			padding: 0 10px;
+		}
+
+		.test-two__reference-container {
+			display: grid;
+			grid-gap: 10px;
+			grid-template-columns: repeat(12, 1fr);
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		.reference-item {
+			background-color: lightpink;
+			height: 50px;
+		}
+
+		.reference-item--full-suite {
+			grid-column: 3 / span 3;
+		}
+
+		.reference-item--offset-right {
+			grid-column: 8 / span 4;
+		}
+
+		.reference-item--offset {
+			grid-column: 2 / span 11;
+		}
+
+		.reference-item--mq {
+			grid-column: 1 / span 12;
+		}
+
+		@media (min-width: 60rem) {
+			.reference-item--mq {
+				grid-column: 1 / span 3;
+			}
+		}
+
+		.test-two__container {
+			display: flex;
+			flex-flow: row wrap;
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		.test-two__item {
+			background-color: palegreen;
+			height: 50px;
+		}
+
+		.test-two__item--offset {
+			width: 100%;
+		}
+	</style>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="test-two.expected.css" />
+</head>
+<body>
+	<div class="grid-test-site">
+
+		<main id="content" role="main">
+
+			<div class="test-two">
+				<h1>Tests full suite of options and properties on full-width siteMax</h1>
+				<p><code>display: grid</code> (reference columns)</p>
+				<div class="test-two__reference-container">
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+				</div>
+
+				<p>postcss-tidy-columns output</p>
+				<div class="test-two__container">
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+					<div class="test-two__item test-two__item--single-column"></div>
+				</div>
+
+				<p>Single-column left offset</p>
+				<div class="test-two__reference-container">
+					<div class="reference-item reference-item--offset"></div>
+				</div>
+
+				<div class="test-two__container">
+					<div class="test-two__item test-two__item--offset"></div>
+				</div>
+
+				<p>3-column width + 2-column left offset</p>
+				<div class="test-two__reference-container">
+					<div class="reference-item reference-item--full-suite"></div>
+				</div>
+
+				<div class="test-two__container">
+					<div class="test-two__item test-two__item--full-suite"></div>
+				</div>
+
+				<p>4-column width + single column right offset</p>
+				<div class="test-two__reference-container">
+					<div class="reference-item reference-item--offset-right"></div>
+				</div>
+
+				<div class="test-two__container">
+					<div class="test-two__item test-two__item--offset-right"></div>
+				</div>
+
+				<p>`tidy-span` property nested inside media query</p>
+				<div class="test-two__reference-container">
+					<div class="reference-item reference-item--mq"></div>
+				</div>
+
+				<div class="test-two__container">
+					<div class="test-two__item test-two__item--mq"></div>
+				</div>
+
+				<p>Fractional columns: 5.5-column width + 1.5-column left offset</p>
+				<div class="test-two__reference-container">
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+				</div>
+
+				<div class="test-two__container">
+					<div class="test-two__item test-two__item--fractional-column"></div>
+				</div>
+			</div>
+		</main>
+
+	</div>
+
+</body>
+</html>

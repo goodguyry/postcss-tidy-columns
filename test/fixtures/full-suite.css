@@ -1,0 +1,15 @@
+@tidy columns 16;
+@tidy gap 0.625rem / true;
+@tidy edge 32px;
+@tidy site-max 75rem;
+
+div {
+	tidy-span: 3;
+	tidy-offset-left: 2;
+}
+@media (min-width: 60rem) {
+	div {
+		tidy-span: 2;
+		tidy-offset-right: 1;
+	}
+}

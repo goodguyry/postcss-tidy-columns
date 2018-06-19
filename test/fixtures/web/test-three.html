@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tidy Columns Test Three</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style>
+		/* Basic layout styles unrelated to Tidy Columns */
+		html, body, div {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		.test-three {
+			margin: 0 auto;
+			max-width: calc(1200rem / 16);
+			width: 100%;
+			padding: 0 10px;
+		}
+
+		.test-three__reference-container {
+			display: grid;
+			grid-gap: 10px;
+			grid-template-columns: repeat(12, 1fr);
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		.reference-item {
+			background-color: lightpink;
+			height: 50px;
+		}
+
+		.reference-item--full-suite {
+			grid-column: 3 / span 3;
+		}
+
+		.reference-item--offset-right:first-of-type {
+			grid-column: 3 / span 4;
+		}
+
+		.reference-item--offset-right:last-of-type {
+			grid-column: 8 / span 4;
+		}
+
+		.reference-item--offset:first-of-type {
+			grid-column: 2 / span 3;
+		}
+
+		.reference-item--offset:last-of-type {
+			grid-column: 6 / span 3;
+		}
+
+		.reference-item--mq {
+			grid-column: 1 / span 12;
+		}
+
+		@media (min-width: 60rem) {
+			.reference-item--mq {
+				grid-column: 1 / span 3;
+			}
+		}
+
+		.test-three__container {
+			display: flex;
+			flex-flow: row wrap;
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		.test-three__container--offset-right {
+			justify-content: flex-end;
+		}
+
+		.test-three__item {
+			background-color: palegreen;
+			height: 50px;
+		}
+
+		@media (min-width: 75rem) {
+			.test-three__item {
+				background-color: lightgreen;
+			}
+		}
+
+		.test-three__item--offset {
+			width: 100%;
+		}
+	</style>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="test-three.expected.css" />
+</head>
+<body>
+	<div class="grid-test-site">
+
+		<main id="content" role="main">
+
+			<div class="test-three">
+				<h1>Tests full suite of options and properties with multiple columns</h1>
+				<p><code>display: grid</code> (reference columns)</p>
+				<div class="test-three__reference-container">
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+				</div>
+
+				<p>postcss-tidy-columns output</p>
+				<div class="test-three__container">
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+					<div class="test-three__item test-three__item--single-column"></div>
+				</div>
+
+				<p>Two columns with left offset</p>
+				<div class="test-three__reference-container">
+					<div class="reference-item reference-item--offset"></div>
+					<div class="reference-item reference-item--offset"></div>
+				</div>
+
+				<div class="test-three__container">
+					<div class="test-three__item test-three__item--offset"></div>
+					<div class="test-three__item test-three__item--offset"></div>
+				</div>
+
+				<p>4-column width + single column right offset</p>
+				<div class="test-three__reference-container">
+					<div class="reference-item reference-item--offset-right"></div>
+					<div class="reference-item reference-item--offset-right"></div>
+				</div>
+
+				<div class="test-three__container test-three__container--offset-right">
+					<div class="test-three__item test-three__item--offset-right"></div>
+					<div class="test-three__item test-three__item--offset-right"></div>
+				</div>
+
+				<p>Fractional columns: 5.5-column width + 1.5-column left offset</p>
+				<div class="test-three__reference-container">
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+					<div class="reference-item"></div>
+				</div>
+
+				<div class="test-three__container">
+					<div class="test-three__item test-three__item--fractional-column"></div>
+					<div class="test-three__item test-three__item--fractional-column"></div>
+				</div>
+			</div>
+		</main>
+
+	</div>
+
+</body>
+</html>
