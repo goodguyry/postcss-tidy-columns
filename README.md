@@ -339,5 +339,5 @@ the global options.
 
 <!-- links -->
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/goodguyry/postcss-tidy-columns.svg
+[ci-img]:  https://travis-ci.com/goodguyry/postcss-tidy-columns.svg?branch=master
 [ci]:      https://travis-ci.org/goodguyry/postcss-tidy-columns
