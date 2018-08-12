@@ -13,7 +13,7 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
    */
   function plugin(root) {
     // Collect the global options.
-    const globalOptions = getGlobalOptions(root, options);
+    const globalOptions = Object.freeze(getGlobalOptions(root, options));
 
     // Parse rules and declarations, replace `tidy-` properties.
     root.walkRules((rule) => {

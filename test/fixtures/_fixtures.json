@@ -172,6 +172,15 @@
       }
     },
     {
+      "description": "tidy local atrules (overrides)",
+      "skip": false,
+      "options": {},
+      "fixtures": {
+        "input": "fixtures/local-at-rules-override.css",
+        "expected": "fixtures/local-at-rules-override.expected.css"
+      }
+    },
+    {
       "description": "tidy-span() function",
       "skip": false,
       "options": {},
