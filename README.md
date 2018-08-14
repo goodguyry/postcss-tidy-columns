@@ -81,7 +81,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 > #### Values
 >
 > `<number>`  
-> The number of columns the element should be offset from the left edge of the site edge.
+> The number of columns the element should be offset from the left edge of the parent element.
 
 ### Offset Right
 
@@ -99,7 +99,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 > #### Values
 >
 > `<number>`  
-> The number of columns the element should be offset from the right edge of the site edge.
+> The number of columns the element should be offset from the right edge of the parent element.
 
 ### Column Shorthand  
 
