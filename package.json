@@ -1,7 +1,7 @@
 {
   "name": "postcss-tidy-columns",
-  "version": "0.0.0",
-  "description": "PostCSS plugin to manage grid alignment",
+  "version": "0.1.1",
+  "description": "PostCSS plugin to manage column and margin alignment.",
   "keywords": [
     "postcss",
     "postcss-plugin",
