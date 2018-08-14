@@ -9,6 +9,12 @@ static values based on the site's maximum width.
 
 **PostCSS Tidy Columns does not set layout. Positioning elements is *your* job**.
 
+## Install
+
+```shell
+npm install postcss-tidy-columns
+```
+
 ## Example
 
 ```css
