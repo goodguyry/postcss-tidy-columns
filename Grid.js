@@ -87,10 +87,6 @@ class Grid {
   getEdges() {
     const { edge } = this.options;
 
-    if (varPattern.test(edge)) {
-      return `${edge} * 2`;
-    }
-
     return (undefined === edge) ? 0 : `${edge} * 2`;
   }
 
