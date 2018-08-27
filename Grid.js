@@ -1,3 +1,5 @@
+const { varPattern } = require('./lib/normalize-options');
+
 /**
  * Grid class
  * Calculate column and offset values based on processed options.
@@ -64,6 +66,10 @@ class Grid {
   getSharedGap() {
     const { gap, columns } = this.options;
 
+    if (varPattern.test(gap)) {
+      return `(${gap} / ${columns} * (${columns} - 1))`;
+    }
+
     if (undefined !== gap) {
       const [value, units] = this.constructor.splitCssUnit(gap);
       const sharedGap = (value / columns) * (columns - 1);
@@ -79,7 +85,13 @@ class Grid {
    * @returns {String|Number}
    */
   getEdges() {
-    return (undefined === this.options.edge) ? 0 : `${this.options.edge} * 2`;
+    const { edge } = this.options;
+
+    if (varPattern.test(edge)) {
+      return `${edge} * 2`;
+    }
+
+    return (undefined === edge) ? 0 : `${edge} * 2`;
   }
 
   /**

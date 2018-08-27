@@ -1,4 +1,4 @@
-const normalizeOptions = require('../lib/normalize-options');
+const { normalizeOptions } = require('../lib/normalize-options');
 
 /**
  * Test expected option values after normalization.
