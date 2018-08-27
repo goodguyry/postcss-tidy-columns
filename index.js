@@ -39,6 +39,7 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
 
       // Add the media query if a siteMax is declared and the `fullWidthRule` has children.
       if (undefined !== siteMax && fullWidthRule.nodes.length > 0) {
+        // TODO: Detect and handle `siteMax` custom property value for the media query param
         /**
          * The siteMax-width atRule.
          * Contains full-width margin offset declarations.
