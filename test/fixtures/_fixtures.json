@@ -232,9 +232,7 @@
     {
       "description": "custom properties",
       "skip": false,
-      "options": {
-        "custom-properties": true
-      },
+      "options": {},
       "fixtures": {
         "input": "fixtures/custom-properties.css",
         "expected": "fixtures/custom-properties.expected.css"
