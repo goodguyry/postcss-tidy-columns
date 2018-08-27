@@ -68,11 +68,10 @@ class Grid {
 
     if (varPattern.test(gap)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
-    }
-
-    if (undefined !== gap) {
+    } else if (undefined !== gap) {
       const [value, units] = this.constructor.splitCssUnit(gap);
       const sharedGap = (value / columns) * (columns - 1);
+
       return `${this.constructor.roundToPrecision(sharedGap, 4)}${units}`;
     }
 
