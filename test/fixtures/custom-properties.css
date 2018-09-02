@@ -2,13 +2,12 @@
 	--columns: 16;
 	--gap: 0.625rem;
 	--edge: 32px;
-	--site-max: 75rem;
 }
 
 @tidy columns var(--columns);
 @tidy gap var(--gap) / true;
 @tidy edge var(--edge);
-@tidy site-max var(--site-max);
+@tidy site-max 75rem;
 
 div {
 	tidy-span: 3;
