@@ -1,4 +1,4 @@
-# PostCSS Tidy Columns [![Build Status][ci-img]][ci]
+# PostCSS Tidy Columns [![Build Status][ci-img]][ci] [![npm version][npmjs-img]][npmjs]
 
 [PostCSS] plugin to manage column alignment.
 
@@ -387,3 +387,5 @@ Example:
 [PostCSS]: https://github.com/postcss/postcss
 [ci-img]:  https://travis-ci.com/goodguyry/postcss-tidy-columns.svg?branch=master
 [ci]:      https://travis-ci.org/goodguyry/postcss-tidy-columns
+[npmjs-img]: https://badge.fury.io/js/postcss-tidy-columns.svg
+[npmjs]: https://badge.fury.io/js/postcss-tidy-columns
