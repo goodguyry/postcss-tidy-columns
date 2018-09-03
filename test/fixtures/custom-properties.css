@@ -1,0 +1,21 @@
+:root {
+	--columns: 16;
+	--gap: 0.625rem;
+	--edge: 32px;
+}
+
+@tidy columns var(--columns);
+@tidy gap var(--gap) / true;
+@tidy edge var(--edge);
+@tidy site-max 75rem;
+
+div {
+	tidy-span: 3;
+	tidy-offset-left: 2;
+}
+@media (min-width: 60rem) {
+	div {
+		tidy-span: 2;
+		tidy-offset-right: 1;
+	}
+}
