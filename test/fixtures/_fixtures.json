@@ -264,6 +264,15 @@
         "input": "fixtures/web/test-three.css",
         "expected": "fixtures/web/test-three.expected.css"
       }
+    },
+    {
+      "description": "test-four: should correctly use CSS Custom Properties.",
+      "skip": false,
+      "options": {},
+      "fixtures": {
+        "input": "fixtures/web/test-four.css",
+        "expected": "fixtures/web/test-four.expected.css"
+      }
     }
   ]
 }
