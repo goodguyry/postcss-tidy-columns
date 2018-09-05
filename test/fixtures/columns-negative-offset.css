@@ -3,5 +3,5 @@
 @tidy site-max 90rem;
 
 div {
-	tidy-columns: -1 / span 3;
+	tidy-column: -1 / span 3;
 }
