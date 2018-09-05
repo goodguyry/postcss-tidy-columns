@@ -20,7 +20,7 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
       const tidy = new Tidy(rule, globalOptions);
 
       // Replace shorthand declarations with their long-form equivalents.
-      rule.walkDecls(/^tidy-(columns|offset)$/, (declaration) => {
+      rule.walkDecls(/^tidy-(column|offset)$/, (declaration) => {
         tidyShorthandProperty(declaration);
       });
 

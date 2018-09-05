@@ -55,7 +55,7 @@
       }
     },
     {
-      "description": "tidy-columns (offset + span shorthand)",
+      "description": "tidy-column (offset + span shorthand)",
       "skip": false,
       "options": {},
       "fixtures": {
@@ -64,7 +64,7 @@
       }
     },
     {
-      "description": "tidy-columns w/ fractional offset",
+      "description": "tidy-column w/ fractional offset",
       "skip": false,
       "options": {},
       "fixtures": {
@@ -73,7 +73,7 @@
       }
     },
     {
-      "description": "tidy-columns w/ gaps",
+      "description": "tidy-column w/ gaps",
       "skip": false,
       "options": {},
       "fixtures": {
@@ -82,7 +82,7 @@
       }
     },
     {
-      "description": "tidy-columns w/ negative offset",
+      "description": "tidy-column w/ negative offset",
       "skip": false,
       "options": {},
       "fixtures": {
@@ -91,7 +91,7 @@
       }
     },
     {
-      "description": "tidy-columns w/ zero offset",
+      "description": "tidy-column w/ zero offset",
       "skip": false,
       "options": {},
       "fixtures": {
@@ -100,7 +100,7 @@
       }
     },
     {
-      "description": "tidy-columns w/ inherit offset",
+      "description": "tidy-column w/ inherit offset",
       "skip": false,
       "options": {},
       "fixtures": {

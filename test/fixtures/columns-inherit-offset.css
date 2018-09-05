@@ -3,5 +3,5 @@
 @tidy site-max 90rem;
 
 div {
-	tidy-columns: inherit / span 3;
+	tidy-column: inherit / span 3;
 }
