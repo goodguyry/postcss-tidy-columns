@@ -3,7 +3,7 @@ const tidyColumns = require('../');
 const fs = require('fs');
 const path = require('path');
 const json = require('./fixtures/_fixtures.json');
-const mapFile = require('./fixtures/source-maps/mappings.json');
+const mapFile = require('./fixtures/source-maps/_mappings.json');
 
 /**
  * Test fixtures
