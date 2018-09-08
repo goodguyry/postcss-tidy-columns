@@ -497,8 +497,8 @@
         "generatedColumn": 1,
         "generatedLine": 2,
         "name": null,
-        "originalColumn": 0,
-        "originalLine": 1,
+        "originalColumn": 1,
+        "originalLine": 2,
         "source": "function-span.css"
       },
       {
