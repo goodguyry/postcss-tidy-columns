@@ -33,6 +33,30 @@ testMethod({
         full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -4)',
       },
     },
+    {
+      description: 'All options: fractional columns (less than 1)',
+      actual: new Grid(config.allValues).offsetCalc(0.75),
+      expected: {
+        fluid: 'calc(((100vw - 32px * 2) / 16 - 0.5859rem) * 0.75)',
+        full: 'calc(((75rem - 32px * 2) / 16 - 0.5859rem) * 0.75)',
+      },
+    },
+    {
+      description: 'All options: fractional columns (greater than one)',
+      actual: new Grid(config.allValues).offsetCalc(1.5),
+      expected: {
+        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 1.5) + 0.625rem)',
+        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 1.5) + 0.625rem)',
+      },
+    },
+    {
+      description: 'All options: fractional columns (greater than 2)',
+      actual: new Grid(config.allValues).offsetCalc(2.075),
+      expected: {
+        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
+        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
+      },
+    },
     // ---------- No siteMax
     {
       description: 'No siteMax: single column',
