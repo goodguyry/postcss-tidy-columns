@@ -63,7 +63,7 @@ gaps (if any) the element should span.
 > #### Syntax
 >
 > ```css
-> tidy-span: 4;
+> tidy-span: <number>;
 > ```
 
 ### Offset Left
@@ -76,7 +76,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 > #### Syntax
 >
 > ```css
-> tidy-offset-left: 2;
+> tidy-offset-left: <number>;
 > ```
 
 ### Offset Right
@@ -89,7 +89,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 > #### Syntax
 >
 > ```css
-> tidy-offset-right: 1;
+> tidy-offset-right: <number>;
 > ````
 
 ### Column Shorthand  
