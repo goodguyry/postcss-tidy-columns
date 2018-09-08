@@ -1,4 +1,3 @@
-const postcss = require('postcss');
 const Grid = require('./Grid');
 const { getLocalOptions } = require('./lib/parse-options');
 
@@ -27,9 +26,8 @@ class Tidy {
   */
   initRule() {
     // The media query's selector to which conditional declarations will be appended.
-    this.fullWidthRule = postcss.rule({
-      selector: this.rule.selector,
-    });
+    this.fullWidthRule = this.rule.clone({ nodes: [] });
+    this.fullWidthRule.cleanRaws();
 
     /**
      * Test the rule for whether or not gap margin declarations should be inserted.

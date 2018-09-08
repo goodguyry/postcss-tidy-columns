@@ -47,6 +47,7 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
           name: 'media',
           params: `(min-width: ${siteMax})`,
           nodes: [],
+          source: rule.source,
         }).append(fullWidthRule);
 
         // Insert the media query
