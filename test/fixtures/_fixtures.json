@@ -287,7 +287,7 @@
       }
     },
     {
-      "description": "source-maps: tidy-span",
+      "description": "source-maps: tidy-span (with `addGap`)",
       "skip": false,
       "options": {
         "addGap": true
@@ -296,6 +296,16 @@
       "fixtures": {
         "input": "fixtures/source-maps/span.css",
         "generated": "fixtures/source-maps/span.generated.css"
+      }
+    },
+    {
+      "description": "source-maps: tidy-column shorthand",
+      "skip": false,
+      "options": {},
+      "mapKey": "column",
+      "fixtures": {
+        "input": "fixtures/source-maps/column.css",
+        "generated": "fixtures/source-maps/column.generated.css"
       }
     }
   ]

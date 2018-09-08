@@ -200,5 +200,162 @@
       "source": "span.css"
     },
     "_sorted": true
+  },
+  "column": {
+    "_array": [
+      {
+        "generatedColumn": 0,
+        "generatedLine": 1,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 2,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 76,
+        "generatedLine": 2,
+        "name": null,
+        "originalColumn": 29,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 3,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 80,
+        "generatedLine": 3,
+        "name": null,
+        "originalColumn": 29,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 4,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 82,
+        "generatedLine": 4,
+        "name": null,
+        "originalColumn": 29,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 5,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 73,
+        "generatedLine": 5,
+        "name": null,
+        "originalColumn": 29,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 6,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 0,
+        "generatedLine": 7,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 8,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 2,
+        "generatedLine": 9,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 83,
+        "generatedLine": 9,
+        "name": null,
+        "originalColumn": 29,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 2,
+        "generatedLine": 10,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 74,
+        "generatedLine": 10,
+        "name": null,
+        "originalColumn": 29,
+        "originalLine": 2,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 2,
+        "generatedLine": 11,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "column.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 12,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "column.css"
+      }
+    ],
+    "_last": {
+      "generatedColumn": 1,
+      "generatedLine": 12,
+      "name": null,
+      "originalColumn": 1,
+      "originalLine": 3,
+      "source": "column.css"
+    },
+    "_sorted": true
   }
 }
