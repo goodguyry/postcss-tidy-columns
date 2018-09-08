@@ -74,7 +74,7 @@ The `tidy-span` property specifies the number of columns and adjacent column gap
 
 The `tidy-offset-left` and `tidy-offset-right` properties specify the number of columns and adjacent column gaps the element's margin should span. Supports positive, negative, and decimal values
 
-Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CSS property.
+Offsets use a [`siteMax`](#sitemax) breakpoint, since there's no `max-margin` CSS property.
 
 > #### Syntax
 >
@@ -195,7 +195,7 @@ Declares the width of the gap between each column. Supports any positive integer
 > @tidy gap <length> [ / <boolean> ]?;
 > ````
 
-See [`addGap`](#addGap) for more about the CSS syntax.
+See [`addGap`](#addgap) for more about the CSS syntax.
 
 ### `siteMax`
 
