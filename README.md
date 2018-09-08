@@ -191,6 +191,9 @@ property's `calc()` declaration for use in positioning.
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
 |[`addGap`](#addGap)|`{Boolean}`|`false`|Add a right `gap` margin to column declarations.|
 
+_As an alternative to the [PostCSS] JavaScript API, options may also be passed 
+via stylesheet `@tidy` at-rules._
+
 ### `columns`
 
 Declares the number of columns in your design. Supports any positive integer.
@@ -209,14 +212,10 @@ of unit [`px`|`em`|`rem`].
 > #### CSS Syntax
 >
 > ```css
-> @tidy gap <length>;
+> @tidy gap <length> [ / <boolean> ]?;
 > ````
 
-> #### Formal syntax
->
-> `<length> [ / <boolean> ]?`
->
-> See [`addGap`](#addGap) for more about this syntax.
+See [`addGap`](#addGap) for more about the CSS syntax.
 
 ### `siteMax`
 
@@ -237,7 +236,8 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 
 ### `edge`
 
-Set `edge` to the value of the space between the content and the edge of the page.
+Set `edge` to the non-cumulative value of the space between the content and the 
+edge of the page.
 
 Supports any positive integer of unit [`px`|`em`|`rem`].
 
@@ -249,7 +249,7 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 
 ### `addGap`
 
-Declares whether or not to add a right gap margin to the column.
+Declares whether or not to add a gap-wide `margin-right` to the columns.
 
 When this is set to `true`, a `:last-of-type` rule will be added to reset the 
 `margin-right` to `0` for the last item.
@@ -257,32 +257,32 @@ When this is set to `true`, a `:last-of-type` rule will be added to reset the
 > #### CSS Syntax
 >
 > ```css
-> /* Declared as a boolean value after `gap`; must be preceeded by a slash */
+> /**
+>  * Declared as a boolean value after the `gap` value.
+>  * Must be preceeded by a slash.
+>  */
 > @tidy gap <length> / <boolean>;
 > ````
 
-> #### Formal syntax
->
-> `<length> [ / <boolean> ]?`
+## Options Cascade
 
-## Passing options via CSS
+### Plugin options
 
-As an alternative to the [PostCSS] JavaScript API, options may also be passed 
-via stylesheet at-rules. See the above options for the CSS syntax.
+Options passed directly to the plugin via the PostCSS JavaScript API.
 
-### Global options
+### Global at-rules
 
-Global options are defined via `@tidy` rules outside of any selector 
-blocks. Values declared here take precedence over the [options](#options) passed 
-to Tidy Columns via JavaScript.
+Global options are defined via `@tidy` at-rules outside of any selector 
+blocks. Values declared here take precedence over the passed via the plugin 
+options.
 
-### Local options
+### Local at-rules
 
-Local options are defined via `@tidy` rules inside a selector block 
-and are scoped to the parent selector. Values declared here take precedence over 
-the global options.
+Local options are defined via `@tidy` at-rules inside a selector block and are 
+scoped to that rule block. Values declared here take precedence over the global 
+at-rules.
 
-### Using CSS Custom Properties in setting values
+## Using CSS Custom Properties in setting values
 
 [CSS Custom Proprties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) are 
 supported in `@tidy` rules, with the following caveats:
@@ -290,8 +290,8 @@ supported in `@tidy` rules, with the following caveats:
 1. Due to the nature of CSS Custom Properties, particularly the inability to use
 them in media query parmeters, a CSS Custom Property used as the `@tidy site-max`
 value will throw an error.
-2. The `@tidy gap` custom property value must only contain its length and not its
-`/ <boolean>` portion of the [gap shorthand](#addgap).
+2. The `@tidy gap` custom property value must only contain its length, and not its
+boolean `addGap` portion of the [gap shorthand](#addgap).
 
 Example:
 
