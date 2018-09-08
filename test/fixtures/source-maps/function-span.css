@@ -1,0 +1,4 @@
+div {
+	width: tidy-span(2);
+	max-width: tidy-span-full(2);
+}

@@ -317,6 +317,16 @@
         "input": "fixtures/source-maps/offset.css",
         "generated": "fixtures/source-maps/offset.generated.css"
       }
+    },
+    {
+      "description": "source-maps: tidy-span() function",
+      "skip": false,
+      "options": {},
+      "mapKey": "function-span",
+      "fixtures": {
+        "input": "fixtures/source-maps/function-span.css",
+        "generated": "fixtures/source-maps/function-span.generated.css"
+      }
     }
   ]
 }
