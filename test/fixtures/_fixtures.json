@@ -274,5 +274,59 @@
         "expected": "fixtures/web/test-four.expected.css"
       }
     }
+  ],
+  "source-maps": [
+    {
+      "description": "source-maps: tidy-offset-left",
+      "skip": false,
+      "options": {},
+      "mapKey": "offset-left",
+      "fixtures": {
+        "input": "fixtures/source-maps/offset-left.css",
+        "generated": "fixtures/source-maps/offset-left.generated.css"
+      }
+    },
+    {
+      "description": "source-maps: tidy-span (with `addGap`)",
+      "skip": false,
+      "options": {
+        "addGap": true
+      },
+      "mapKey": "span",
+      "fixtures": {
+        "input": "fixtures/source-maps/span.css",
+        "generated": "fixtures/source-maps/span.generated.css"
+      }
+    },
+    {
+      "description": "source-maps: tidy-column shorthand",
+      "skip": false,
+      "options": {},
+      "mapKey": "column",
+      "fixtures": {
+        "input": "fixtures/source-maps/column.css",
+        "generated": "fixtures/source-maps/column.generated.css"
+      }
+    },
+    {
+      "description": "source-maps: tidy-offset shorthand",
+      "skip": false,
+      "options": {},
+      "mapKey": "offset",
+      "fixtures": {
+        "input": "fixtures/source-maps/offset.css",
+        "generated": "fixtures/source-maps/offset.generated.css"
+      }
+    },
+    {
+      "description": "source-maps: tidy-span() function",
+      "skip": false,
+      "options": {},
+      "mapKey": "function-span",
+      "fixtures": {
+        "input": "fixtures/source-maps/function-span.css",
+        "generated": "fixtures/source-maps/function-span.generated.css"
+      }
+    }
   ]
 }

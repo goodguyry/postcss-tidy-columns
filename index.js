@@ -4,6 +4,7 @@ const { getGlobalOptions } = require('./lib/parse-options');
 const tidyShorthandProperty = require('./lib/tidy-shorthand-property');
 const tidyProperty = require('./lib/tidy-property');
 const tidyFunction = require('./lib/tidy-function');
+const cleanClone = require('./lib/cleanClone');
 
 module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
   /**
@@ -47,6 +48,7 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
           name: 'media',
           params: `(min-width: ${siteMax})`,
           nodes: [],
+          source: rule.source,
         }).append(fullWidthRule);
 
         // Insert the media query
@@ -64,11 +66,15 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
        * This is the :last-of-type override for the gap margins.
        */
       if (shouldAddGapDecl) {
-        rule.parent.insertAfter(rule, postcss.rule({
-          selector: `${rule.selector}:last-of-type`,
-        }).append({
+        rule.parent.insertAfter(rule, cleanClone(
+          rule,
+          {
+            selector: `${rule.selector}:last-of-type`,
+          },
+        ).append({
           prop: 'margin-right',
           value: '0',
+          source: tidy.declarationSource,
         }));
       }
     });
