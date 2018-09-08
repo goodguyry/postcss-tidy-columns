@@ -58,6 +58,8 @@ See [PostCSS] docs for examples for your environment.
 * [Options Cascade](#options-cascade)
 * [Using CSS Custom Properties in setting values](#using-css-custom-properties-in-setting-values)
 
+See the [Wiki][wiki] for additional documentation and tips.
+
 ## Tidy Properties
 
 ### Span
@@ -285,6 +287,7 @@ Example:
 ```
 
 <!-- links -->
+[wiki]: ../../wiki/
 [PostCSS]: https://github.com/postcss/postcss
 [ci-img]:  https://travis-ci.com/goodguyry/postcss-tidy-columns.svg?branch=master
 [ci]:      https://travis-ci.org/goodguyry/postcss-tidy-columns
