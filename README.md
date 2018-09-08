@@ -66,11 +66,6 @@ gaps (if any) the element should span.
 > tidy-span: 4;
 > ```
 
-> #### Values
->
-> `<number>`  
-> The number of columns the element should span.
-
 ### Offset Left
 
 The `tidy-offset-left` property specifies the number of columns and adjacent 
@@ -83,11 +78,6 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 > ```css
 > tidy-offset-left: 2;
 > ```
-
-> #### Values
->
-> `<number>`  
-> The number of columns the element should be offset from the left edge of the parent element.
 
 ### Offset Right
 
@@ -102,63 +92,39 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 > tidy-offset-right: 1;
 > ````
 
-> #### Values
->
-> `<number>`  
-> The number of columns the element should be offset from the right edge of the parent element.
-
 ### Column Shorthand  
 
 `tidy-column` is a shorthand property for setting `tidy-offset-left`, 
 `tidy-span`, and `tidy-offset-right` in one declaration.
 
+Use `none` to bypass a required value.
+
 > #### Syntax
 >
 > ```css
+> /* [ <number> | none ] / span && <number> [ / <number> ]? */
+>
 > tidy-column: 3 / span 2 / 4;
 > tidy-column: none / span 4 / 1;
 > tidy-column: 1 / span 4;
 > ````
-
-> #### Values
->
-> `[ <number> | none ]`  
-> The left offset value.
-> 
-> `span <number>`  
-> The column span value.
-> 
-> `[ <number> | none ]` (optional)  
-> The right offset value.
-
-> #### Formal syntax
->
-> `[ <number> | none ] / span && <number> [ / <number> ]?`
 
 ### Offset Shorthand  
 
 `tidy-offset` is a shorthand property for setting `tidy-offset-left` and 
 `tidy-offset-right` in one declaration.
 
+Use `none` to bypass a required value.
+
 > #### Syntax
 >
 > ```css
+> /* [ <number> | none ] [ / <number> ]? */
+>
 > tidy-offset: 3 / 4;
 > tidy-offset: none / 1;
 > tidy-offset: 1;
 > ````
-
-> #### Values
->
-> `[ <number> | none ]`  
-> The left offset value.
-> 
-> `/ <number>` (optional)  
-> The right offset value.
-
-> #### Formal syntax
->
-> `[ <number> | none ] [ / <number> ]?`
 
 ## Functions
 
@@ -201,16 +167,6 @@ sometimes designers just do what they want...
 > }
 > ````
 
-> #### Formal syntax
->
-> `tidy-span( <number> )`  
-> `tidy-span-full( <number> )`  
-> `calc( tidy-span( <number> ) <calc-sum>)`  
-> `calc( tidy-span-full( <number> ) <calc-sum>)`  
-> 
-> See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/calc#Formal_syntax) 
-> for more about the CSS calc() function.  
-
 ### Offset Function
 
 `tidy-offset()` and `tidy-offset-full()` functions return the `offset` 
@@ -232,16 +188,6 @@ property's `calc()` declaration for use in positioning.
 > 	}
 > }
 > ````
-
-> #### Formal syntax
->
-> `tidy-offset( <number> )`  
-> `tidy-offset-full( <number> )`  
-> `calc( tidy-offset( <number> ) <calc-sum>)`  
-> `calc( tidy-offset-full( <number> ) <calc-sum>)`  
-> 
-> See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/calc#Formal_syntax) 
-> for more about the CSS calc() function.  
 
 ## Options
 
