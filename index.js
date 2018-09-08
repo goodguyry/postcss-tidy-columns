@@ -67,9 +67,11 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
       if (shouldAddGapDecl) {
         rule.parent.insertAfter(rule, postcss.rule({
           selector: `${rule.selector}:last-of-type`,
+          source: rule.source,
         }).append({
           prop: 'margin-right',
           value: '0',
+          source: tidy.declarationSource,
         }));
       }
     });

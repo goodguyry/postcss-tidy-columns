@@ -43,6 +43,15 @@ class Tidy {
       !/(tidy-offset-right)/.test(this.rule.toString())
     ) && addGap;
   }
+
+  /**
+   * Save the declaration's source value for use in other scripts.
+   *
+   * @param {Object} decl The current declaration.
+   */
+  captureDeclarationSource(decl) {
+    this.declarationSource = decl.source;
+  }
 }
 
 module.exports = Tidy;
