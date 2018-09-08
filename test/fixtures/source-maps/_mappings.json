@@ -357,5 +357,130 @@
       "source": "column.css"
     },
     "_sorted": true
+  },
+  "offset": {
+    "_array": [
+      {
+        "generatedColumn": 0,
+        "generatedLine": 1,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 2,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 82,
+        "generatedLine": 2,
+        "name": null,
+        "originalColumn": 20,
+        "originalLine": 2,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 3,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 83,
+        "generatedLine": 3,
+        "name": null,
+        "originalColumn": 20,
+        "originalLine": 2,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 4,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 0,
+        "generatedLine": 5,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 6,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 2,
+        "generatedLine": 7,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 83,
+        "generatedLine": 7,
+        "name": null,
+        "originalColumn": 20,
+        "originalLine": 2,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 2,
+        "generatedLine": 8,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 84,
+        "generatedLine": 8,
+        "name": null,
+        "originalColumn": 20,
+        "originalLine": 2,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 2,
+        "generatedLine": 9,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "offset.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 10,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "offset.css"
+      }
+    ],
+    "_last": {
+      "generatedColumn": 1,
+      "generatedLine": 10,
+      "name": null,
+      "originalColumn": 1,
+      "originalLine": 3,
+      "source": "offset.css"
+    },
+    "_sorted": true
   }
 }

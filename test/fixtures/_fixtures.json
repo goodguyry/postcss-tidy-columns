@@ -307,6 +307,16 @@
         "input": "fixtures/source-maps/column.css",
         "generated": "fixtures/source-maps/column.generated.css"
       }
+    },
+    {
+      "description": "source-maps: tidy-offset shorthand",
+      "skip": false,
+      "options": {},
+      "mapKey": "offset",
+      "fixtures": {
+        "input": "fixtures/source-maps/offset.css",
+        "generated": "fixtures/source-maps/offset.generated.css"
+      }
     }
   ]
 }
