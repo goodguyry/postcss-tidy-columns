@@ -4,9 +4,9 @@ const { normalizeOptions } = require('../lib/normalize-options');
  * Test expected option values after normalization.
  */
 describe('Test option validation', () => {
-  test('omit invalid or `inherit` values', () => {
+  test('omit invalid or `none` values', () => {
     expect(normalizeOptions({
-      columns: 'inherit', gap: 0, edge: 2, siteMax: '90',
+      columns: 'none', gap: 0, edge: 2, siteMax: '90',
     })).toEqual({});
   });
 
