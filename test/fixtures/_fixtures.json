@@ -59,8 +59,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/columns.css",
-        "expected": "fixtures/columns.expected.css"
+        "input": "fixtures/column.css",
+        "expected": "fixtures/column.expected.css"
       }
     },
     {
@@ -68,8 +68,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/columns-fraction.css",
-        "expected": "fixtures/columns-fraction.expected.css"
+        "input": "fixtures/column-fraction.css",
+        "expected": "fixtures/column-fraction.expected.css"
       }
     },
     {
@@ -77,8 +77,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/columns-gap.css",
-        "expected": "fixtures/columns-gap.expected.css"
+        "input": "fixtures/column-gap.css",
+        "expected": "fixtures/column-gap.expected.css"
       }
     },
     {
@@ -86,8 +86,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/columns-negative-offset.css",
-        "expected": "fixtures/columns-negative-offset.expected.css"
+        "input": "fixtures/column-negative-offset.css",
+        "expected": "fixtures/column-negative-offset.expected.css"
       }
     },
     {
@@ -95,8 +95,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/columns-zero-offset.css",
-        "expected": "fixtures/columns-zero-offset.expected.css"
+        "input": "fixtures/column-zero-offset.css",
+        "expected": "fixtures/column-zero-offset.expected.css"
       }
     },
     {
@@ -104,8 +104,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/columns-inherit-offset.css",
-        "expected": "fixtures/columns-inherit-offset.expected.css"
+        "input": "fixtures/column-inherit-offset.css",
+        "expected": "fixtures/column-inherit-offset.expected.css"
       }
     },
     {
