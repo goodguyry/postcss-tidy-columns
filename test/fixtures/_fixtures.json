@@ -100,12 +100,12 @@
       }
     },
     {
-      "description": "tidy-column w/ inherit offset",
+      "description": "tidy-column w/ none offset",
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/column-inherit-offset.css",
-        "expected": "fixtures/column-inherit-offset.expected.css"
+        "input": "fixtures/column-none-offset.css",
+        "expected": "fixtures/column-none-offset.expected.css"
       }
     },
     {
@@ -136,12 +136,12 @@
       }
     },
     {
-      "description": "tidy-offset shorthand (inherit first value)",
+      "description": "tidy-offset shorthand (none first value)",
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/offset-inherit.css",
-        "expected": "fixtures/offset-inherit.expected.css"
+        "input": "fixtures/offset-none.css",
+        "expected": "fixtures/offset-none.expected.css"
       }
     },
     {

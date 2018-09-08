@@ -116,24 +116,24 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 >
 > ```css
 > tidy-column: 3 / span 2 / 4;
-> tidy-column: 0 / span 4 / 1; /* could also use `inherit` in place of `0` */
+> tidy-column: none / span 4 / 1;
 > tidy-column: 1 / span 4;
 > ````
 
 > #### Values
 >
-> `[ <number> | 'inherit' ]`  
+> `[ <number> | none ]`  
 > The left offset value.
 > 
 > `span <number>`  
 > The column span value.
 > 
-> `[ <number> | 'inherit' ]` (optional)  
+> `[ <number> | none ]` (optional)  
 > The right offset value.
 
 > #### Formal syntax
 >
-> `[ <number> | 'inherit' ] / span && <number> [ / <number> ]?`
+> `[ <number> | none ] / span && <number> [ / <number> ]?`
 
 ### Offset Shorthand  
 
@@ -144,13 +144,13 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 >
 > ```css
 > tidy-offset: 3 / 4;
-> tidy-offset: 0 / 1; /* could also use `inherit` in place of `0` */
+> tidy-offset: none / 1;
 > tidy-offset: 1;
 > ````
 
 > #### Values
 >
-> `[ <number> | 'inherit' ]`  
+> `[ <number> | none ]`  
 > The left offset value.
 > 
 > `/ <number>` (optional)  
@@ -158,13 +158,7 @@ Offsets use a [`siteMax`](#siteMax) breakpoint, since there's no `max-margin` CS
 
 > #### Formal syntax
 >
-> `[ <number> | 'inherit' ] [ / <number> ]?`
-
-#### A note about the 'inherit' value
-
-The `inherit` value simply acts as a way to bypass the need to enter a required
-value in the shorthand properties. Nothing is actually _inherited_, but I found
-using a `0` value, which does the same thing, could potentially be confusing.
+> `[ <number> | none ] [ / <number> ]?`
 
 ## Functions
 
