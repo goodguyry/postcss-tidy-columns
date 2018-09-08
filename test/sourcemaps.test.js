@@ -14,22 +14,24 @@ describe('Test CSS fixtures', () => {
     if (!item.skip) {
       test(`${item.description}`, () => {
         const from = path.join(__dirname, `${item.fixtures.input}`);
-        const to = path.join(__dirname, `${item.fixtures.expected}`);
+        const to = path.join(__dirname, `${item.fixtures.generated}`);
 
         const input = fs.readFileSync(from, 'utf8');
+        const opts = {
+          columns: 12,
+          gap: '1.25rem',
+          edge: '0.625rem',
+          siteMax: '90rem',
+        };
 
         return postcss([
-          tidyColumns({
-            columns: 12,
-            gap: '1.25rem',
-            edge: '0.625rem',
-            siteMax: '90rem',
-          }),
+          tidyColumns(Object.assign(opts, item.options)),
         ])
           .process(input, { from, to, map: { inline: false } })
           .then((result) => {
             // eslint-disable-next-line no-underscore-dangle
             expect(result.map._mappings).toEqual(mapFile[item.mapKey]);
+            // expect(result.css).toEqual(fs.readFileSync(to, 'utf8'));
             expect(result.warnings().length).toBe(0);
           });
       });
