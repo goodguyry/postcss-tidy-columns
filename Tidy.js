@@ -1,5 +1,6 @@
 const Grid = require('./Grid');
 const { getLocalOptions } = require('./lib/parse-options');
+const cleanClone = require('./lib/cleanClone');
 
 /**
  * Tidy class
@@ -26,8 +27,7 @@ class Tidy {
   */
   initRule() {
     // The media query's selector to which conditional declarations will be appended.
-    this.fullWidthRule = this.rule.clone({ nodes: [] });
-    this.fullWidthRule.cleanRaws();
+    this.fullWidthRule = cleanClone(this.rule);
 
     /**
      * Test the rule for whether or not gap margin declarations should be inserted.
