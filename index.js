@@ -66,9 +66,12 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
        * This is the :last-of-type override for the gap margins.
        */
       if (shouldAddGapDecl) {
-        rule.parent.insertAfter(rule, cleanClone(rule, {
-          selector: `${rule.selector}:last-of-type`,
-        }).append({
+        rule.parent.insertAfter(rule, cleanClone(
+          rule,
+          {
+            selector: `${rule.selector}:last-of-type`,
+          },
+        ).append({
           prop: 'margin-right',
           value: '0',
           source: tidy.declarationSource,
