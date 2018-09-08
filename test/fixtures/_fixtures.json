@@ -283,7 +283,19 @@
       "mapKey": "offset-left",
       "fixtures": {
         "input": "fixtures/source-maps/offset-left.css",
-        "expected": "fixtures/source-maps/offset-left.generated.css"
+        "generated": "fixtures/source-maps/offset-left.generated.css"
+      }
+    },
+    {
+      "description": "source-maps: tidy-span",
+      "skip": false,
+      "options": {
+        "addGap": true
+      },
+      "mapKey": "span",
+      "fixtures": {
+        "input": "fixtures/source-maps/span.css",
+        "generated": "fixtures/source-maps/span.generated.css"
       }
     }
   ]
