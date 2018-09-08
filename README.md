@@ -128,22 +128,14 @@ Use `none` to bypass a required value.
 
 ## Functions
 
-These functions are provided for incorporating the `tidy-span` and 
-`tidy-offset` output without using those properties. These can be used on their
-own or nested inside a `calc()` function.
+These functions are provided for incorporating the `tidy-` properties' output 
+without using the properties. These can be used on their own or nested inside 
+a `calc()` function, and allow more control over the declarations added by the
+plugin.
 
-When using these functions, the `siteMax` media query will not be added. Use 
-the `tidy-span-full()` and `tidy-offset-full()` functions to set the static 
-column and offset widths, respectively.
-
-Use cases include:
-* Use the `offset` value on properties other than `margin`; for example, on an 
-absolutely-positioned element.
-* Use the `span` value properties other than `width` and `max-width`, such as in 
-a `translate` function.
-* Increase the `span` or `offset` of an element by an arbitrary amount, because 
-sometimes designers just do what they want...
-* Have more control over the declarations added by Tidy Columns.
+When using these functions, **the `siteMax` media query will not be added**. Use 
+the `tidy-span-full()` and `tidy-offset-full()` functions to set the static `span` 
+and `offset` widths, respectively.
 
 ### Span Function
 
