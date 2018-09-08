@@ -12,6 +12,29 @@ PostCSS Tidy Columns sets an element's width based on a user-defined grid of col
 npm install postcss-tidy-columns
 ```
 
+## Contents
+
+* [Example](#example)
+* [Tidy Properties](#tidy-properties)
+    * [Span](#span)
+    * [Offsets](#offsets)
+    * [Column Shorthand](#column-shorthand)
+    * [Offset Shorthand](#offset-shorthand)
+* [Tidy Functions](#tidy-functions)
+    * [Span Function](#span-function)
+    * [Offset Function](#offset-function)
+* [Options](#options)
+    * [`columns`](#columns)
+    * [`gap`](#gap)
+    * [`siteMax`](#sitemax)
+    * [`edge`](#edge)
+    * [`addGap`](#addgap)
+* [Options Cascade](#options-cascade)
+    * [Plugin options](#plugin-options)
+    * [Global at-rules](#global-at-rules)
+    * [Local at-rules](#local-at-rules)
+* [Using CSS Custom Properties in setting values](#using-css-custom-properties-in-setting-values)
+
 ## Example
 
 ```css
