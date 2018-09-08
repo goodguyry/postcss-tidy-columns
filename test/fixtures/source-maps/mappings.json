@@ -1,0 +1,95 @@
+{
+  "offset-left" : {
+    "_array": [
+      {
+        "generatedColumn": 0,
+        "generatedLine": 1,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 2,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 72,
+        "generatedLine": 2,
+        "name": null,
+        "originalColumn": 21,
+        "originalLine": 2,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 3,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 0,
+        "generatedLine": 4,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 5,
+        "name": null,
+        "originalColumn": 0,
+        "originalLine": 1,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 2,
+        "generatedLine": 6,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 2,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 73,
+        "generatedLine": 6,
+        "name": null,
+        "originalColumn": 21,
+        "originalLine": 2,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 2,
+        "generatedLine": 7,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "offset-left.css"
+      },
+      {
+        "generatedColumn": 1,
+        "generatedLine": 8,
+        "name": null,
+        "originalColumn": 1,
+        "originalLine": 3,
+        "source": "offset-left.css"
+      }
+    ],
+    "_last": {
+      "generatedColumn": 1,
+      "generatedLine": 8,
+      "name": null,
+      "originalColumn": 1,
+      "originalLine": 3,
+      "source": "offset-left.css"
+    },
+    "_sorted": true
+  }
+}

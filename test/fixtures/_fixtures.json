@@ -280,8 +280,7 @@
       "description": "source-maps: tidy-offset-left",
       "skip": false,
       "options": {},
-      "name": "offset-left",
-      "root": "fixtures/source-maps",
+      "mapKey": "offset-left",
       "fixtures": {
         "input": "fixtures/source-maps/offset-left.css",
         "expected": "fixtures/source-maps/offset-left.generated.css"
