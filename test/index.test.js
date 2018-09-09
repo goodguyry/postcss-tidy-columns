@@ -16,6 +16,16 @@ const run = (input, output, opts) => postcss([plugin(opts)])
   });
 
 /**
+ * Read file utility for shorter line-lengths.
+ *
+ * @param {String} filename The name of the file to read.
+ * @returns
+ */
+function readFile(filename) {
+  return fs.readFileSync(path.join(__dirname, filename), 'utf8');
+}
+
+/**
  * Test fixtures
  * Reads JSON file of test declarations.
  */
@@ -23,8 +33,8 @@ describe('Test CSS fixtures', () => {
   json.tests.forEach((item) => {
     if (!item.skip) {
       test(`${item.description}`, () => {
-        const input = fs.readFileSync(path.join(__dirname, `${item.fixtures.input}`), 'utf8');
-        const output = fs.readFileSync(path.join(__dirname, `${item.fixtures.expected}`), 'utf8');
+        const input = readFile(item.fixtures.input);
+        const output = readFile(item.fixtures.expected);
         const result = run(input, output, item.options);
 
         return result;
@@ -38,4 +48,11 @@ describe('Test CSS fixtures', () => {
 
 // Make sure tidy rules are being removed.
 // This was the first test. It remains as a fun reminder of the beginning.
-test('Test removal of @tidys at-rule', () => run('@tidy columns 16; @tidy gap 0.625rem / true; @tidy edge 32px; @tidy site-max 75rem;', '', {}));
+test(
+  'Test removal of @tidys at-rule',
+  () => run(
+    '@tidy columns 16; @tidy gap 0.625rem / true; @tidy edge 32px; @tidy site-max 75rem;',
+    '',
+    {},
+  ),
+);
