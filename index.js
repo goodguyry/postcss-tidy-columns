@@ -1,18 +1,19 @@
 const postcss = require('postcss');
 const Tidy = require('./Tidy');
 const { getGlobalOptions } = require('./lib/parse-options');
+const cleanClone = require('./lib/cleanClone');
 const tidyShorthandProperty = require('./lib/tidy-shorthand-property');
 const tidyProperty = require('./lib/tidy-property');
 const tidyFunction = require('./lib/tidy-function');
-const cleanClone = require('./lib/cleanClone');
 
-module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
-  /**
-   * Parse rules and insert span and offset values.
-   *
-   * @param {Object} root The root CSS object.
-   */
-  function plugin(root) {
+/**
+ * Parse rules and insert span and offset values.
+ *
+ * @param {Object} root The root CSS object.
+ */
+module.exports = postcss.plugin(
+  'postcss-tidy-columns',
+  (options = {}) => function postcssTidyColumns(root) {
     // Collect the global options.
     const globalOptions = Object.freeze(getGlobalOptions(root, options));
 
@@ -78,7 +79,7 @@ module.exports = postcss.plugin('postcss-tidy-columns', (options = {}) => {
         }));
       }
     });
-  }
+  },
+);
 
-  return plugin;
-});
+// module.exports = postcss.plugin('postcss-tidy-columns', postcssTidyColumns);

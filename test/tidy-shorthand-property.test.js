@@ -4,15 +4,14 @@ const tidyShorthandProperty = require('../lib/tidy-shorthand-property');
 /**
  * Create a test plugin to replace shorthand properties.
  */
-const plugin = postcss.plugin('shorthand-props-test', () => {
-  function process(root) {
+const plugin = postcss.plugin(
+  'shorthand-props-test',
+  () => function process(root) {
     root.walkDecls(/^tidy-(column|offset)$/, (declaration) => {
       tidyShorthandProperty(declaration);
     });
-  }
-
-  return process;
-});
+  },
+);
 
 /**
  * Basic plugin test.
