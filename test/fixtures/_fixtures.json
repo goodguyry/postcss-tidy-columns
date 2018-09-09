@@ -1,232 +1,12 @@
 {
   "tests": [
     {
-      "description": "tidy-span",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/span.css",
-        "expected": "fixtures/span.expected.css"
-      }
-    },
-    {
-      "description": "tidy-span w/ gap margin",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/span-gap.css",
-        "expected": "fixtures/span-gap.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset-left",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/offset-left.css",
-        "expected": "fixtures/offset-left.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset-left (negative)",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/offset-left-negative.css",
-        "expected": "fixtures/offset-left-negative.expected.css"
-      }
-    },
-    {
-      "description": "tidy-span + tidy-offset-left",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/span-offset.css",
-        "expected": "fixtures/span-offset.expected.css"
-      }
-    },
-    {
       "description": "full-suite w/ media query",
       "skip": false,
       "options": {},
       "fixtures": {
         "input": "fixtures/full-suite.css",
         "expected": "fixtures/full-suite.expected.css"
-      }
-    },
-    {
-      "description": "tidy-column (offset + span shorthand)",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/column.css",
-        "expected": "fixtures/column.expected.css"
-      }
-    },
-    {
-      "description": "tidy-column w/ fractional offset",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/column-fraction.css",
-        "expected": "fixtures/column-fraction.expected.css"
-      }
-    },
-    {
-      "description": "tidy-column w/ gaps",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/column-gap.css",
-        "expected": "fixtures/column-gap.expected.css"
-      }
-    },
-    {
-      "description": "tidy-column w/ negative offset",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/column-negative-offset.css",
-        "expected": "fixtures/column-negative-offset.expected.css"
-      }
-    },
-    {
-      "description": "tidy-column w/ zero offset",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/column-zero-offset.css",
-        "expected": "fixtures/column-zero-offset.expected.css"
-      }
-    },
-    {
-      "description": "tidy-column w/ none offset",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/column-none-offset.css",
-        "expected": "fixtures/column-none-offset.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset-right",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/offset-right.css",
-        "expected": "fixtures/offset-right.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset-right (negative)",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/offset-right-negative.css",
-        "expected": "fixtures/offset-right-negative.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset shorthand",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/offset.css",
-        "expected": "fixtures/offset.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset shorthand (none first value)",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/offset-none.css",
-        "expected": "fixtures/offset-none.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset shorthand (zero first value)",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/offset-zero.css",
-        "expected": "fixtures/offset-zero.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset shorthand (no second value)",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/offset-single-value.css",
-        "expected": "fixtures/offset-single-value.expected.css"
-      }
-    },
-    {
-      "description": "tidy local atrules",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/local-atrules.css",
-        "expected": "fixtures/local-atrules.expected.css"
-      }
-    },
-    {
-      "description": "tidy local atrules (overrides)",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/local-at-rules-override.css",
-        "expected": "fixtures/local-at-rules-override.expected.css"
-      }
-    },
-    {
-      "description": "tidy-span() function",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/function-span.css",
-        "expected": "fixtures/function-span.expected.css"
-      }
-    },
-    {
-      "description": "tidy-span() function (nested in calc())",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/function-span-calc.css",
-        "expected": "fixtures/function-span-calc.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset() function",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/function-offset.css",
-        "expected": "fixtures/function-offset.expected.css"
-      }
-    },
-    {
-      "description": "tidy-offset() function (nested in calc())",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/function-offset-calc.css",
-        "expected": "fixtures/function-offset-calc.expected.css"
-      }
-    },
-    {
-      "description": "zero-gaps: should correctly equate columns with no gap.",
-      "skip": false,
-      "options": {
-        "columns": 12,
-        "siteMax": "75rem",
-        "edge": "10px"
-      },
-      "fixtures": {
-        "input": "fixtures/zero-gaps.css",
-        "expected": "fixtures/zero-gaps.expected.css"
       }
     },
     {
@@ -237,42 +17,6 @@
         "input": "fixtures/custom-properties.css",
         "expected": "fixtures/custom-properties.expected.css"
       }
-    },
-    {
-      "description": "test-one: should replace `tidy-` properties.",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/web/test-one.css",
-        "expected": "fixtures/web/test-one.expected.css"
-      }
-    },
-    {
-      "description": "test-two: should replace `tidy-` properties.",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/web/test-two.css",
-        "expected": "fixtures/web/test-two.expected.css"
-      }
-    },
-    {
-      "description": "test-three: should correctly equate rows with multiple columns.",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/web/test-three.css",
-        "expected": "fixtures/web/test-three.expected.css"
-      }
-    },
-    {
-      "description": "test-four: should correctly use CSS Custom Properties.",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "fixtures/web/test-four.css",
-        "expected": "fixtures/web/test-four.expected.css"
-      }
     }
   ],
   "source-maps": [
@@ -282,8 +26,8 @@
       "options": {},
       "mapKey": "offset-left",
       "fixtures": {
-        "input": "fixtures/source-maps/offset-left.css",
-        "generated": "fixtures/source-maps/offset-left.generated.css"
+        "input": "fixtures/offset-left.css",
+        "generated": "fixtures/offset-left.generated.css"
       }
     },
     {
@@ -294,8 +38,8 @@
       },
       "mapKey": "span",
       "fixtures": {
-        "input": "fixtures/source-maps/span.css",
-        "generated": "fixtures/source-maps/span.generated.css"
+        "input": "fixtures/span.css",
+        "generated": "fixtures/span.generated.css"
       }
     },
     {
@@ -304,8 +48,8 @@
       "options": {},
       "mapKey": "column",
       "fixtures": {
-        "input": "fixtures/source-maps/column.css",
-        "generated": "fixtures/source-maps/column.generated.css"
+        "input": "fixtures/column.css",
+        "generated": "fixtures/column.generated.css"
       }
     },
     {
@@ -314,8 +58,8 @@
       "options": {},
       "mapKey": "offset",
       "fixtures": {
-        "input": "fixtures/source-maps/offset.css",
-        "generated": "fixtures/source-maps/offset.generated.css"
+        "input": "fixtures/offset.css",
+        "generated": "fixtures/offset.generated.css"
       }
     },
     {
@@ -324,8 +68,8 @@
       "options": {},
       "mapKey": "function-span",
       "fixtures": {
-        "input": "fixtures/source-maps/function-span.css",
-        "generated": "fixtures/source-maps/function-span.generated.css"
+        "input": "fixtures/function-span.css",
+        "generated": "fixtures/function-span.generated.css"
       }
     }
   ]

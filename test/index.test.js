@@ -3,6 +3,7 @@ const plugin = require('../');
 const fs = require('fs');
 const path = require('path');
 const json = require('./fixtures/_fixtures.json');
+const mapFile = require('./fixtures/_mappings.json');
 
 /**
  * Basic plugin test.
@@ -16,6 +17,16 @@ const run = (input, output, opts) => postcss([plugin(opts)])
   });
 
 /**
+ * Read file utility for shorter line-lengths.
+ *
+ * @param {String} filename The name of the file to read.
+ * @returns
+ */
+function readFile(filename) {
+  return fs.readFileSync(path.join(__dirname, filename), 'utf8');
+}
+
+/**
  * Test fixtures
  * Reads JSON file of test declarations.
  */
@@ -23,8 +34,8 @@ describe('Test CSS fixtures', () => {
   json.tests.forEach((item) => {
     if (!item.skip) {
       test(`${item.description}`, () => {
-        const input = fs.readFileSync(path.join(__dirname, `${item.fixtures.input}`), 'utf8');
-        const output = fs.readFileSync(path.join(__dirname, `${item.fixtures.expected}`), 'utf8');
+        const input = readFile(item.fixtures.input);
+        const output = readFile(item.fixtures.expected);
         const result = run(input, output, item.options);
 
         return result;
@@ -36,6 +47,50 @@ describe('Test CSS fixtures', () => {
   });
 });
 
+/**
+ * Test sourcemaps
+ * Reads JSON file of test declarations.
+ */
+describe('Test sourcemaps', () => {
+  json['source-maps'].forEach((item) => {
+    if (!item.skip) {
+      test(`${item.description}`, () => {
+        const from = path.join(__dirname, `${item.fixtures.input}`);
+        const to = path.join(__dirname, `${item.fixtures.generated}`);
+
+        const input = readFile(item.fixtures.input);
+        const opts = {
+          columns: 12,
+          gap: '1.25rem',
+          edge: '0.625rem',
+          siteMax: '90rem',
+        };
+
+        return postcss([
+          plugin(Object.assign(opts, item.options)),
+        ])
+          .process(input, { from, to, map: { inline: false } })
+          .then((result) => {
+            // eslint-disable-next-line no-underscore-dangle
+            expect(result.map._mappings).toEqual(mapFile[item.mapKey]);
+            // expect(result.css).toEqual(readFile(item.fixtures.generated));
+            expect(result.warnings().length).toBe(0);
+          });
+      });
+    } else {
+      // Return `null` for skipped tests
+      test.skip(`${item.description}`, () => null);
+    }
+  });
+});
+
 // Make sure tidy rules are being removed.
 // This was the first test. It remains as a fun reminder of the beginning.
-test('Test removal of @tidys at-rule', () => run('@tidy columns 16; @tidy gap 0.625rem / true; @tidy edge 32px; @tidy site-max 75rem;', '', {}));
+test(
+  'Test removal of @tidys at-rule',
+  () => run(
+    '@tidy columns 16; @tidy gap 0.625rem / true; @tidy edge 32px; @tidy site-max 75rem;',
+    '',
+    {},
+  ),
+);
