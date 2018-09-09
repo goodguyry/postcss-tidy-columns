@@ -58,7 +58,7 @@ describe('Test sourcemaps', () => {
         const from = path.join(__dirname, `${item.fixtures.input}`);
         const to = path.join(__dirname, `${item.fixtures.generated}`);
 
-        const input = fs.readFileSync(from, 'utf8');
+        const input = readFile(item.fixtures.input);
         const opts = {
           columns: 12,
           gap: '1.25rem',
@@ -73,7 +73,7 @@ describe('Test sourcemaps', () => {
           .then((result) => {
             // eslint-disable-next-line no-underscore-dangle
             expect(result.map._mappings).toEqual(mapFile[item.mapKey]);
-            // expect(result.css).toEqual(fs.readFileSync(to, 'utf8'));
+            // expect(result.css).toEqual(readFile(item.fixtures.generated));
             expect(result.warnings().length).toBe(0);
           });
       });
