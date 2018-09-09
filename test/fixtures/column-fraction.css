@@ -1,7 +1,0 @@
-@tidy columns 12;
-@tidy gap 1.25rem;
-@tidy site-max 90rem;
-
-div {
-	tidy-column: 0.3333 / span 3;
-}
