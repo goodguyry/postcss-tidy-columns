@@ -9,7 +9,7 @@ const mapFile = require('./fixtures/source-maps/_mappings.json');
  * Test fixtures
  * Reads JSON file of test declarations.
  */
-describe('Test CSS fixtures', () => {
+describe('Test CSS fixtures\' sourcemaps', () => {
   json['source-maps'].forEach((item) => {
     if (!item.skip) {
       test(`${item.description}`, () => {

@@ -42,7 +42,7 @@ testMethod({
       },
     },
     {
-      description: 'All options: fractional columns (greater than one)',
+      description: 'All options: fractional columns (greater than 1)',
       actual: new Grid(config.allValues).spanCalc(1.75),
       expected: {
         fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 1.75) + 0.625rem)',
