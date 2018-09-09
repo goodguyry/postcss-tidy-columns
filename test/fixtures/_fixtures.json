@@ -26,8 +26,8 @@
       "options": {},
       "mapKey": "offset-left",
       "fixtures": {
-        "input": "fixtures/source-maps/offset-left.css",
-        "generated": "fixtures/source-maps/offset-left.generated.css"
+        "input": "fixtures/offset-left.css",
+        "generated": "fixtures/offset-left.generated.css"
       }
     },
     {
@@ -38,8 +38,8 @@
       },
       "mapKey": "span",
       "fixtures": {
-        "input": "fixtures/source-maps/span.css",
-        "generated": "fixtures/source-maps/span.generated.css"
+        "input": "fixtures/span.css",
+        "generated": "fixtures/span.generated.css"
       }
     },
     {
@@ -48,8 +48,8 @@
       "options": {},
       "mapKey": "column",
       "fixtures": {
-        "input": "fixtures/source-maps/column.css",
-        "generated": "fixtures/source-maps/column.generated.css"
+        "input": "fixtures/column.css",
+        "generated": "fixtures/column.generated.css"
       }
     },
     {
@@ -58,8 +58,8 @@
       "options": {},
       "mapKey": "offset",
       "fixtures": {
-        "input": "fixtures/source-maps/offset.css",
-        "generated": "fixtures/source-maps/offset.generated.css"
+        "input": "fixtures/offset.css",
+        "generated": "fixtures/offset.generated.css"
       }
     },
     {
@@ -68,8 +68,8 @@
       "options": {},
       "mapKey": "function-span",
       "fixtures": {
-        "input": "fixtures/source-maps/function-span.css",
-        "generated": "fixtures/source-maps/function-span.generated.css"
+        "input": "fixtures/function-span.css",
+        "generated": "fixtures/function-span.generated.css"
       }
     }
   ]
