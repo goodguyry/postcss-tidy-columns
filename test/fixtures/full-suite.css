@@ -1,14 +1,87 @@
-@tidy columns 16;
-@tidy gap 0.625rem / true;
-@tidy edge 32px;
-@tidy site-max 75rem;
+@tidy columns 12;
+@tidy site-max 90rem;
+@tidy gap 1.25rem;
+@tidy edge 0.625rem;
 
-div {
+/* `tidy-column` with all expected values */
+.column-shorthand {
+	tidy-column: 2 / span 3 / 1;
+}
+
+/* `tidy-span` */
+.span-property {
+	tidy-span: 3;
+}
+
+/* `tidy-span` with `addGap` */
+.span-property--gap {
+	@tidy addGap true;
+	tidy-span: 3;
+}
+
+/* `tidy-span()` and `tidy-span-full()` functions */
+.span-function {
+	width: tidy-span(2);
+	max-width: tidy-span-full(2);
+}
+
+/* `tidy-span()` and `tidy-span-full()` functions nested in a `calc()` function */
+.span-function--calc {
+	width: calc(tidy-span(2) + 20px);
+	max-width: calc(tidy-span-full(2) + 20px);
+}
+
+/* `tidy-offset` with all expected values */
+.offset-shorthand {
+	tidy-offset: 3 / 4;
+}
+
+/* `tidy-offset-[left|right]` properties */
+.offset-property {
+	tidy-offset-left: 2;
+	tidy-offset-right: 2;
+}
+
+/* `tidy-offset()` and `tidy-offset-full()` functions */
+.offset-function {
+	left: tidy-offset(2);
+}
+@media (min-width: 90rem) {
+	.offset-function {
+		left: tidy-offset-full(2);
+	}
+}
+
+/* `tidy-offset()` and `tidy-offset-full()` functions nested in a `calc()` function */
+.offset-function--calc {
+	left: calc(tidy-offset(2) + 2rem);
+}
+@media (min-width: 90rem) {
+	.offset-function--calc {
+		left: calc(tidy-offset-full(2) + 2rem);
+	}
+}
+
+/* Scoped option values */
+.scoped-atrules {
+	@tidy gap 0.625rem / true;
+	@tidy edge 1rem;
 	tidy-span: 3;
 	tidy-offset-left: 2;
 }
 @media (min-width: 60rem) {
-	div {
+	.scoped-atrules {
+		tidy-span: 2;
+	}
+}
+
+/* Media Query replacements */
+.media-query {
+	tidy-span: 3;
+	tidy-offset-left: 2;
+}
+@media (min-width: 60rem) {
+	.media-query {
 		tidy-span: 2;
 		tidy-offset-right: 1;
 	}
