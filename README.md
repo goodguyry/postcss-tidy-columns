@@ -64,7 +64,7 @@ See the [Wiki][wiki] for additional documentation and tips.
 
 ### Span
 
-The `tidy-span` property specifies the number of columns and adjacent column gaps the element should span.
+The `tidy-span` property specifies the number of columns and adjacent column gaps the element should span. Supports positive and decimal values.
 
 > #### Syntax
 >
