@@ -121,7 +121,7 @@ Use `none` to bypass a required value.
 
 These functions are provided for incorporating the `tidy-` properties' output without using the properties. These can be used on their own or nested inside a `calc()` function, and allow for more control over the declarations added by the plugin.
 
-When using these functions, **the `siteMax` media query will not be added**. Use the `tidy-span-full()` and `tidy-offset-full()` functions to set the static `span` and `offset` widths, respectively.
+When using these functions, **the `siteMax`-based static value will not be output**. Use the `tidy-span-full()` and `tidy-offset-full()` functions to set the static `span` and `offset` widths, respectively.
 
 ### Span Function
 
