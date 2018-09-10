@@ -264,27 +264,7 @@ supported in `@tidy` rules, with the following caveats:
 1. Due to the nature of CSS Custom Properties, particularly the inability to use them in media query parmeters, a CSS Custom Property used as the `@tidy site-max` value will throw an error.
 2. The `@tidy gap` custom property value must only contain its length, and not its boolean `addGap` portion of the [gap shorthand](#addgap).
 
-Example:
-
-```css
-:root {
-	--columns: 16;
-	--gap: 0.625rem;
-	--edge: 1.25;
-}
-
-@media (min-width: 75rem) {
-	:root {
-		--gap: 1rem;
-		--edge: 2rem;
-	}
-}
-
-@tidy columns var(--columns);
-@tidy gap var(--gap) / true;
-@tidy edge var(--edge);
-@tidy site-max 75rem;
-```
+See the [Tips and Tricks](../../wiki/Tips-and-Tricks) Wiki page for more.
 
 <!-- links -->
 [wiki]: ../../wiki/
