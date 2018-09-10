@@ -23,7 +23,7 @@ npm install postcss-tidy-columns
 
 div {
 	tidy-span: 3;
-	tidy-offset: 2;
+	tidy-offset-left: 2;
 }
 ```
 
