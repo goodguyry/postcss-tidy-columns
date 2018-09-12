@@ -3,7 +3,6 @@ const plugin = require('../');
 const fs = require('fs');
 const path = require('path');
 const json = require('./fixtures/_fixtures.json');
-const mapFile = require('./fixtures/_mappings.json');
 
 /**
  * Basic plugin test.
@@ -71,7 +70,7 @@ describe('Test sourcemaps', () => {
         ])
           .process(input, { from, to, map: { inline: false } })
           .then((result) => {
-            expect(JSON.parse(result.map)).toEqual(mapFile[item.mapKey]);
+            expect(JSON.parse(result.map)).toEqual(item.map);
             expect(result.warnings().length).toBe(0);
           });
       });
