@@ -71,9 +71,7 @@ describe('Test sourcemaps', () => {
         ])
           .process(input, { from, to, map: { inline: false } })
           .then((result) => {
-            // eslint-disable-next-line no-underscore-dangle
-            expect(result.map._mappings).toEqual(mapFile[item.mapKey]);
-            // expect(result.css).toEqual(readFile(item.fixtures.generated));
+            expect(JSON.parse(result.map)).toEqual(mapFile[item.mapKey]);
             expect(result.warnings().length).toBe(0);
           });
       });
