@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## next
+* CLEANUP: Source map fixtures.
+
 ## 0.3.2
 * BUGIFX: Fixes an issue in the way Tidy Columns cloned nodes (#12)
 
@@ -11,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * BREAKING CHANGE: `inherit` no longer supported in shorthand properties; use `none` instead (#9)
 
 ## 0.2.3
-* BUGFIX: Fixes issues with sourcemapping (#7)
+* BUGFIX: Fixes issues with source mapping (#7)
 * BUGFIX: Corrects `tidy-column` shorthand replacement for third `offset-right` property (#6)
 
 ## 0.2.2
