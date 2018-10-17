@@ -29,8 +29,8 @@ function compareBreakpoints(value, bp) {
 function matchMediaQuery(params, options, breakpoints) {
   // TODO: Convert between units if they don't match (options.breakpoints[i].base)
   // Determine mediaQuery units
-  const [, range, value] = params.match(/\((min|max)-width: ([a-z0-9]+)\)/);
-  const [paramValue, paramUnits] = value.match(/^\d+(px|r?em)$/);
+  const [, range, value] = params.match(/\((min|max)-width: ([a-z0-9\.]+)\)/);
+  const [paramValue, paramUnits] = value.match(/^[\.\d]+(px|r?em)$/);
 
   // Return false if it's not a min/max media query
   // TODO: Account for (min and max) params
