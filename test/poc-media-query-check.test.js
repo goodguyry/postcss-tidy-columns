@@ -52,6 +52,12 @@ function matchMediaQuery(params, options, breakpoints) {
   const [, range, value] = params.match(/\((min|max)-width: ([a-z0-9\.]+)\)/);
   const [paramValue, paramUnits] = value.match(/^[\.\d]+(px|r?em)$/);
 
+  // TODO: For each parseAtRuleParams(params)
+  // - test all of the below
+  // - compare found objects with Object.is();
+  // - return a perfect match or none at all
+  // At this point multiple matches would be considered unsupported
+
   // Return false if it's not a min/max media query
   // TODO: Account for (min and max) params
   if (! ['min', 'max'].includes(range)) {
