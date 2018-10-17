@@ -139,4 +139,27 @@ describe('Find a breakpoint match: px', () => {
         gap: '1rem',
       });
     });
+
+  test('max-width: 767px', () => {
+      expect(
+        matchMediaQuery(
+          '(max-width: 767px)',
+          options,
+          breakpoints,
+        )
+      ).toEqual(undefined);
+    });
+
+  test('max-width: 1023px', () => {
+      expect(
+        matchMediaQuery(
+          '(max-width: 1023px)',
+          options,
+          breakpoints,
+        )
+      ).toEqual({
+        breakpoint: '768px',
+        gap: '0.625rem',
+      });
+    });
 });
