@@ -5,6 +5,26 @@
 // [1024, 768].sort(collator.compare);
 
 /**
+ * Parse AtRule params
+ * @param  {String} params The atrule params.
+ *
+ * @return {Array}        And array of [range, width] arrays.
+ */
+function parseAtRuleParams(params) {
+  const andSplit = params.split('and');
+  const WIDTH_REGEX = /\((min|max)-width: ([\d\.]+(r?em|px))\)/;
+
+  return andSplit.reduce((acc, section) => {
+    if (WIDTH_REGEX.test(section) && 'screen' !== section.trim()) {
+      const [, minMax, width ] = section.match(WIDTH_REGEX);
+      acc.push([minMax, width]);
+    }
+
+    return acc;
+  }, []);
+}
+
+/**
  * Compare numerical strings.
  * @param  {String} value The parsed atrule param.
  * @param  {String} bp    The breakpoint length value.
@@ -268,5 +288,43 @@ describe('Find a breakpoint match: rem', () => {
         breakpoint: '48rem',
         gap: '0.625rem',
       });
+    });
+});
+
+describe('Parse media queries', () => {
+  test('min-width', () => {
+      expect(
+        parseAtRuleParams('(min-width: 100px)')
+      ).toEqual([["min", "100px"]]);
+    });
+
+  test('max-width', () => {
+      expect(
+        parseAtRuleParams('(max-width: 200px)')
+      ).toEqual([["max", "200px"]]);
+    });
+
+  test('min-width and max-width', () => {
+      expect(
+        parseAtRuleParams('(min-width: 100px) and (max-width: 200px)')
+      ).toEqual([["min", "100px"], ["max", "200px"]]);
+    });
+
+  test('screen and min-width', () => {
+      expect(
+        parseAtRuleParams('screen and (min-width: 200px)')
+      ).toEqual([["min", "200px"]]);
+    });
+
+  test('screen and max-width', () => {
+      expect(
+        parseAtRuleParams('screen and (max-width: 200px)')
+      ).toEqual([["max", "200px"]]);
+    });
+
+  test('screen and min-width and max-width', () => {
+      expect(
+        parseAtRuleParams('screen and (min-width: 100px) and (max-width: 200px)')
+      ).toEqual([["min", "100px"], ["max", "200px"]]);
     });
 });
