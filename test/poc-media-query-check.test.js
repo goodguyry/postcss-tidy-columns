@@ -163,3 +163,110 @@ describe('Find a breakpoint match: px', () => {
       });
     });
 });
+
+describe('Find a breakpoint match: rem', () => {
+  const options = {
+    breakpoints: [
+      {
+        breakpoint: '48rem',
+        gap: '0.625rem',
+      },
+      {
+        breakpoint: '64rem',
+        gap: '1rem',
+      },
+      {
+        breakpoint: '90rem',
+        gap: '1.25rem',
+      }
+    ]
+  };
+
+  const breakpoints = [
+    '48rem',
+    '64rem',
+    '90rem',
+  ];
+
+  test('min-width: 56.25rem', () => {
+      expect(
+        matchMediaQuery(
+          '(min-width: 56.25rem)',
+          options,
+          breakpoints
+        )
+      ).toEqual({
+        breakpoint: '48rem',
+        gap: '0.625rem',
+      });
+    });
+
+  test('min-width: 37.5rem', () => {
+      expect(
+        matchMediaQuery(
+          '(min-width: 37.5rem)',
+          options,
+          breakpoints,
+        )
+      ).toEqual(undefined);
+    });
+
+  test('max-width: 37.5rem', () => {
+      expect(
+        matchMediaQuery(
+          '(max-width: 37.5rem)',
+          options,
+          breakpoints,
+        )
+      ).toEqual(undefined);
+    });
+
+  test('max-width: 56.25rem', () => {
+      expect(
+        matchMediaQuery(
+          '(max-width: 56.25rem)',
+          options,
+          breakpoints,
+        )
+      ).toEqual({
+        breakpoint: '48rem',
+        gap: '0.625rem',
+      });
+    });
+
+  test('max-width: 89.9375rem', () => {
+      expect(
+        matchMediaQuery(
+          '(max-width: 89.9375rem)',
+          options,
+          breakpoints,
+        )
+      ).toEqual({
+        breakpoint: '64rem',
+        gap: '1rem',
+      });
+    });
+
+  test('max-width: 47.9375rem', () => {
+      expect(
+        matchMediaQuery(
+          '(max-width: 47.9375rem)',
+          options,
+          breakpoints,
+        )
+      ).toEqual(undefined);
+    });
+
+  test('max-width: 63.9375rem', () => {
+      expect(
+        matchMediaQuery(
+          '(max-width: 63.9375rem)',
+          options,
+          breakpoints,
+        )
+      ).toEqual({
+        breakpoint: '48rem',
+        gap: '0.625rem',
+      });
+    });
+});
