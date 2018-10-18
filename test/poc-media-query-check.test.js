@@ -1,8 +1,34 @@
-// TODO:
-// Pull the breakpoints out of the options as an array of width values
-// Sort the array:
-// var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
-// [1024, 768].sort(collator.compare);
+// TODO: Pull the breakpoints out of the options as an array of width values
+
+/**
+ * Check array values for like units.
+ *
+ * @param {Array} values An array of values to check.
+ *
+ * @returns {Boolean}
+ */
+function valuesHaveSameUnits(values) {
+  const units = values.reduce((acc, value) => {
+    const [, units] =  value.match(/^[\.\d]+(px|r?em)$/);
+    return [...acc, units];
+  }, []);
+
+  return (1 === new Set(units).size);
+}
+
+/**
+ * Sort breakpoints array.
+ *
+ * @param {Array} breakpoints An array of breakpoint values.
+ *
+ * @returns {Array|Boolean} Sorted array if all values have same units; false if not.
+ */
+function sortBreakpoints(breakpoints) {
+  const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+  const haveSameUnits = valuesHaveSameUnits(breakpoints);
+
+  return (haveSameUnits) ? breakpoints.sort(collator.compare) : false;
+}
 
 /**
  * Parse AtRule params
@@ -244,3 +270,32 @@ describe('Parse media queries', () => {
       ).toEqual([]);
     });
 });
+
+describe('Sort breakpoints array', () => {
+  test('Same units', () => {
+      expect(
+        sortBreakpoints(['1000px', '600px', '400px'])
+      ).toEqual(['400px', '600px', '1000px']);
+    });
+
+  test('Different units', () => {
+      expect(
+        sortBreakpoints(['1000px', '60rem', '400px'])
+      ).toEqual(false);
+    });
+});
+
+describe('Values have same units', () => {
+  test('Same units', () => {
+      expect(
+        valuesHaveSameUnits(['1000px', '600px', '400px'])
+      ).toEqual(true);
+    });
+
+  test('Different units', () => {
+      expect(
+        valuesHaveSameUnits(['1000px', '60rem', '400px'])
+      ).toEqual(false);
+    });
+});
+
