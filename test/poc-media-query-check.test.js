@@ -16,8 +16,8 @@ function parseAtRuleParams(params) {
 
   return andSplit.reduce((acc, section) => {
     if (WIDTH_REGEX.test(section) && 'screen' !== section.trim()) {
-      const [, minMax, width ] = section.match(WIDTH_REGEX);
-      return [...acc, {minMax, width}];
+      const [, minMax, value ] = section.match(WIDTH_REGEX);
+      return [...acc, {minMax, value}];
     }
 
     return acc;
@@ -301,36 +301,36 @@ describe('Parse media queries', () => {
   test('min-width', () => {
       expect(
         parseAtRuleParams('(min-width: 100px)')
-      ).toEqual([{minMax: 'min', width: '100px'}]);
+      ).toEqual([{minMax: 'min', value: '100px'}]);
     });
 
   test('max-width', () => {
       expect(
         parseAtRuleParams('(max-width: 200px)')
-      ).toEqual([{minMax: 'max', width: '200px'}]);
+      ).toEqual([{minMax: 'max', value: '200px'}]);
     });
 
   test('min-width and max-width', () => {
       expect(
         parseAtRuleParams('(min-width: 100px) and (max-width: 200px)')
-      ).toEqual([{minMax: 'min', width: '100px'}, {minMax: 'max', width: '200px'}]);
+      ).toEqual([{minMax: 'min', value: '100px'}, {minMax: 'max', value: '200px'}]);
     });
 
   test('screen and min-width', () => {
       expect(
         parseAtRuleParams('screen and (min-width: 200px)')
-      ).toEqual([{minMax: 'min', width: '200px'}]);
+      ).toEqual([{minMax: 'min', value: '200px'}]);
     });
 
   test('screen and max-width', () => {
       expect(
         parseAtRuleParams('screen and (max-width: 200px)')
-      ).toEqual([{minMax: 'max', width: '200px'}]);
+      ).toEqual([{minMax: 'max', value: '200px'}]);
     });
 
   test('screen and min-width and max-width', () => {
       expect(
         parseAtRuleParams('screen and (min-width: 100px) and (max-width: 200px)')
-      ).toEqual([{minMax: 'min', width: '100px'}, {minMax: 'max', width: '200px'}]);
+      ).toEqual([{minMax: 'min', value: '100px'}, {minMax: 'max', value: '200px'}]);
     });
 });
