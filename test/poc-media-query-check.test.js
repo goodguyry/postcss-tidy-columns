@@ -27,6 +27,7 @@ function sortBreakpoints(breakpoints) {
   const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
   const haveSameUnits = valuesHaveSameUnits(breakpoints);
 
+  // TODO: Warn if !haveSameUnits
   return (haveSameUnits) ? breakpoints.sort(collator.compare) : false;
 }
 
