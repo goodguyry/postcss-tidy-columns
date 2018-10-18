@@ -333,4 +333,16 @@ describe('Parse media queries', () => {
         parseAtRuleParams('screen and (min-width: 100px) and (max-width: 200px)')
       ).toEqual([{minMax: 'min', value: '100px'}, {minMax: 'max', value: '200px'}]);
     });
+
+  test('screen and min-width (rem) and max-width (em)', () => {
+      expect(
+        parseAtRuleParams('screen and (min-width: 10rem) and (max-width: 40em)')
+      ).toEqual([{minMax: 'min', value: '10rem'}, {minMax: 'max', value: '40em'}]);
+    });
+
+  test('screen and print', () => {
+      expect(
+        parseAtRuleParams('screen and print')
+      ).toEqual([]);
+    });
 });
