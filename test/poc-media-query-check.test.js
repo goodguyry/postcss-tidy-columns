@@ -102,7 +102,7 @@ describe('Find a breakpoint match: px', () => {
     '1440px',
   ];
 
-  test('min-width: 900px', () => {
+  test('Between breakpoint configs (min)', () => {
       expect(
         matchMediaQuery(
           '(min-width: 900px)',
@@ -115,27 +115,7 @@ describe('Find a breakpoint match: px', () => {
       });
     });
 
-  test('min-width: 600px', () => {
-      expect(
-        matchMediaQuery(
-          '(min-width: 600px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual(undefined);
-    });
-
-  test('max-width: 600px', () => {
-      expect(
-        matchMediaQuery(
-          '(max-width: 600px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual(undefined);
-    });
-
-  test('max-width: 900px', () => {
+  test('Between breakpoint configs (max)', () => {
       expect(
         matchMediaQuery(
           '(max-width: 900px)',
@@ -148,7 +128,27 @@ describe('Find a breakpoint match: px', () => {
       });
     });
 
-  test('max-width: 1439px', () => {
+  test('Below lowest breakpoint config (min)', () => {
+      expect(
+        matchMediaQuery(
+          '(min-width: 600px)',
+          options,
+          breakpoints,
+        )
+      ).toEqual(undefined);
+    });
+
+  test('Below lowest breakpoint config (max)', () => {
+      expect(
+        matchMediaQuery(
+          '(max-width: 600px)',
+          options,
+          breakpoints,
+        )
+      ).toEqual(undefined);
+    });
+
+  test('Up-to breakpoint config', () => {
       expect(
         matchMediaQuery(
           '(max-width: 1439px)',
@@ -161,7 +161,7 @@ describe('Find a breakpoint match: px', () => {
       });
     });
 
-  test('max-width: 767px', () => {
+  test('Up-to lowest breakpoint config', () => {
       expect(
         matchMediaQuery(
           '(max-width: 767px)',
@@ -171,20 +171,7 @@ describe('Find a breakpoint match: px', () => {
       ).toEqual(undefined);
     });
 
-  test('max-width: 1023px', () => {
-      expect(
-        matchMediaQuery(
-          '(max-width: 1023px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual({
-        breakpoint: '768px',
-        gap: '0.625rem',
-      });
-    });
-
-  test('min-width: 768px and max-width: 1023px', () => {
+  test('Between breakpoint configs (min-max)', () => {
       expect(
         matchMediaQuery(
           '(min-width: 768px) and (max-width: 1023px)',
@@ -196,125 +183,15 @@ describe('Find a breakpoint match: px', () => {
         gap: '0.625rem',
       });
     });
-});
 
-describe('Find a breakpoint match: rem', () => {
-  const options = {
-    breakpoints: [
-      {
-        breakpoint: '48rem',
-        gap: '0.625rem',
-      },
-      {
-        breakpoint: '64rem',
-        gap: '1rem',
-      },
-      {
-        breakpoint: '90rem',
-        gap: '1.25rem',
-      }
-    ]
-  };
-
-  const breakpoints = [
-    '48rem',
-    '64rem',
-    '90rem',
-  ];
-
-  test('min-width: 56.25rem', () => {
+  test('Spanning two breakpoint configs (min-max)', () => {
       expect(
         matchMediaQuery(
-          '(min-width: 56.25rem)',
-          options,
-          breakpoints
-        )
-      ).toEqual({
-        breakpoint: '48rem',
-        gap: '0.625rem',
-      });
-    });
-
-  test('min-width: 37.5rem', () => {
-      expect(
-        matchMediaQuery(
-          '(min-width: 37.5rem)',
+          '(min-width: 768px) and (max-width: 1439px)',
           options,
           breakpoints,
         )
       ).toEqual(undefined);
-    });
-
-  test('max-width: 37.5rem', () => {
-      expect(
-        matchMediaQuery(
-          '(max-width: 37.5rem)',
-          options,
-          breakpoints,
-        )
-      ).toEqual(undefined);
-    });
-
-  test('max-width: 56.25rem', () => {
-      expect(
-        matchMediaQuery(
-          '(max-width: 56.25rem)',
-          options,
-          breakpoints,
-        )
-      ).toEqual({
-        breakpoint: '48rem',
-        gap: '0.625rem',
-      });
-    });
-
-  test('max-width: 89.9375rem', () => {
-      expect(
-        matchMediaQuery(
-          '(max-width: 89.9375rem)',
-          options,
-          breakpoints,
-        )
-      ).toEqual({
-        breakpoint: '64rem',
-        gap: '1rem',
-      });
-    });
-
-  test('max-width: 47.9375rem', () => {
-      expect(
-        matchMediaQuery(
-          '(max-width: 47.9375rem)',
-          options,
-          breakpoints,
-        )
-      ).toEqual(undefined);
-    });
-
-  test('max-width: 63.9375rem', () => {
-      expect(
-        matchMediaQuery(
-          '(max-width: 63.9375rem)',
-          options,
-          breakpoints,
-        )
-      ).toEqual({
-        breakpoint: '48rem',
-        gap: '0.625rem',
-      });
-    });
-
-  test('min-width: 48rem and max-width: 63.9375rem', () => {
-      expect(
-        matchMediaQuery(
-          '(min-width: 48rem) and (max-width: 63.9375rem)',
-          options,
-          breakpoints,
-        )
-      ).toEqual({
-        breakpoint: '48rem',
-        gap: '0.625rem',
-      });
     });
 });
 
