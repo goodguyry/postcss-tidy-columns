@@ -48,39 +48,34 @@ function compareBreakpoints(value, bp) {
  */
 function matchMediaQuery(params, options, breakpoints) {
   // TODO: Convert between units if they don't match (options.breakpoints[i].base)
-  // Determine mediaQuery units
-  const [, range, value] = params.match(/\((min|max)-width: ([a-z0-9\.]+)\)/);
-  const [paramValue, paramUnits] = value.match(/^[\.\d]+(px|r?em)$/);
+  const parsedParams = parseAtRuleParams(params);
+  const matchingBp = parsedParams.map((param) => {
+    const { minMax, value } = param;
 
-  // TODO: For each parseAtRuleParams(params)
-  // - test all of the below
-  // - compare found objects with Object.is();
-  // - return a perfect match or none at all
-  // At this point multiple matches would be considered unsupported
+    // if the breakpoints array contains the value, just return it
+    if (breakpoints.includes(value)) {
+      return options.breakpoints.find(obj => obj.breakpoint == value);
+    }
 
-  // Return false if it's not a min/max media query
-  // TODO: Account for (min and max) params
-  if (! ['min', 'max'].includes(range)) {
-    return false;
+    // Reverse the breakpoints array for min value matching
+    if ('min' === minMax) {
+      breakpoints = breakpoints.reverse();
+    }
+
+    // A negative number if the `value` occurs before `bp`
+    // positive if the `value` occurs after `bp`
+    // 0 if they are equivalent
+    const matchingBp = breakpoints.reduce((acc, bp) => (0 < compareBreakpoints(value, bp)) ? bp : acc, '');
+    // Return the options breakpoint object, or undefined ir not found.
+    return options.breakpoints.find(obj => obj.breakpoint == matchingBp);
+  });
+
+  // TODO: Look into filtering this instead
+  if (1 === matchingBp.length) {
+    return matchingBp.pop();
+  } else {
+    return (Object.is(matchingBp[0], matchingBp[1])) ? matchingBp.pop() : undefined;
   }
-
-  // if the breakpoints array contains the value, just return it
-  if (breakpoints.includes(paramValue)) {
-    return options.breakpoints.find(obj => obj.breakpoint == value);
-  }
-
-  // Reverse the breakpoints array for min value matching
-  if ('min' === range) {
-    breakpoints = breakpoints.reverse();
-  }
-
-  // A negative number if the `value` occurs before `bp`
-  // positive if the `value` occurs after `bp`
-  // 0 if they are equivalent
-  const matchingBp = breakpoints.reduce((acc, bp) => (0 < compareBreakpoints(value, bp)) ? bp : acc, '');
-
-  // Return the options breakpoint object, or undefined ir not found.
-  return options.breakpoints.find(obj => obj.breakpoint == matchingBp);
 }
 
 describe('Find a breakpoint match: px', () => {
@@ -188,6 +183,19 @@ describe('Find a breakpoint match: px', () => {
         gap: '0.625rem',
       });
     });
+
+  test('min-width: 768px and max-width: 1023px', () => {
+      expect(
+        matchMediaQuery(
+          '(min-width: 768px) and (max-width: 1023px)',
+          options,
+          breakpoints,
+        )
+      ).toEqual({
+        breakpoint: '768px',
+        gap: '0.625rem',
+      });
+    });
 });
 
 describe('Find a breakpoint match: rem', () => {
@@ -287,6 +295,19 @@ describe('Find a breakpoint match: rem', () => {
       expect(
         matchMediaQuery(
           '(max-width: 63.9375rem)',
+          options,
+          breakpoints,
+        )
+      ).toEqual({
+        breakpoint: '48rem',
+        gap: '0.625rem',
+      });
+    });
+
+  test('min-width: 48rem and max-width: 63.9375rem', () => {
+      expect(
+        matchMediaQuery(
+          '(min-width: 48rem) and (max-width: 63.9375rem)',
           options,
           breakpoints,
         )
