@@ -96,12 +96,12 @@ function matchMediaQuery(params, options, breakpoints) {
     return options.breakpoints.find(obj => obj.breakpoint == matchingBp);
   });
 
-  // TODO: Look into filtering this instead
-  if (1 === matchingBp.length) {
-    return matchingBp.pop();
-  } else {
+  // TODO: Look into filtering this instead.
+  if (1 !== matchingBp.length) {
     return (Object.is(matchingBp[0], matchingBp[1])) ? matchingBp.pop() : undefined;
   }
+
+  return matchingBp.pop();
 }
 
 describe('Find a breakpoint match: px', () => {
