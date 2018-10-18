@@ -21,7 +21,7 @@ function valuesHaveSameUnits(values) {
  *
  * @param {Array} breakpoints An array of breakpoint values.
  *
- * @returns {Array|Boolean} Sorted array if all values have same units; false if not.
+ * @returns {Array|Boolean}   Sorted array if all values have same units; false if not.
  */
 function sortBreakpoints(breakpoints) {
   const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
@@ -31,10 +31,11 @@ function sortBreakpoints(breakpoints) {
 }
 
 /**
- * Parse AtRule params
+ * Parse AtRule params.
+ *
  * @param  {String} params The atrule params.
  *
- * @return {Array}        And array of [range, width] arrays.
+ * @returns {Array}        And array of [range, width] arrays.
  */
 function parseAtRuleParams(params) {
   const andSplit = params.split('and');
@@ -52,10 +53,11 @@ function parseAtRuleParams(params) {
 
 /**
  * Compare numerical strings.
+ *
  * @param  {String} value The parsed atrule param.
  * @param  {String} bp    The breakpoint length value.
  *
- * @return {Number}       A number representing how the value compares.
+ * @returns {Number}      A number representing how the value compares.
  *                        A negative number if the `value` occurs before `bp`.
  *                        positive if the `value` occurs after `bp`.
  *                        0 if they are equivalent
@@ -65,12 +67,13 @@ function compareBreakpoints(value, bp) {
 }
 
 /**
- * Check if an atrule.param is within a range of breakpoints
+ * Check if an atrule.param is within a range of breakpoints.
+ *
  * @param  {String} params      The atrule params.
  * @param  {Object} options     The options object.
  * @param  {Array} breakpoints  The array of breakpoint option values.
  *
- * @return {Object}             The matching options breakpoint object, or undefined.
+ * @returns {Object}            The matching options breakpoint object, or undefined.
  */
 function matchMediaQuery(params, options, breakpoints) {
   // TODO: Convert between units if they don't match (options.breakpoints[i].base)
@@ -78,7 +81,7 @@ function matchMediaQuery(params, options, breakpoints) {
   const matchingBp = parsedParams.map((param) => {
     const { minMax, value } = param;
 
-    // if the breakpoints array contains the value, just return it
+    // If the breakpoints array contains the value, just return it.
     if (breakpoints.includes(value)) {
       return options.breakpoints.find(obj => obj.breakpoint == value);
     }
@@ -88,10 +91,13 @@ function matchMediaQuery(params, options, breakpoints) {
       breakpoints = breakpoints.reverse();
     }
 
-    // A negative number if the `value` occurs before `bp`
-    // positive if the `value` occurs after `bp`
-    // 0 if they are equivalent
+    // Compare returns:
+    // - Negative number if the `value` occurs before `bp`
+    // - Positive if the `value` occurs after `bp`
+    // - 0 if they are equivalent
+    // TODO: Any way to clean this up?
     const matchingBp = breakpoints.reduce((acc, bp) => (0 < compareBreakpoints(value, bp)) ? bp : acc, '');
+
     // Return the options breakpoint object, or undefined ir not found.
     return options.breakpoints.find(obj => obj.breakpoint == matchingBp);
   });
