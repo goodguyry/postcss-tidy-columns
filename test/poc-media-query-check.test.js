@@ -54,16 +54,19 @@ function parseAtRuleParams(params) {
 /**
  * Compare numerical strings.
  *
+ * Compare returns:
+ * - Negative number if the `value` occurs before `bp`
+ * - Positive if the `value` occurs after `bp`
+ * - 0 if they are equivalent
+ *
  * @param  {String} value The parsed atrule param.
  * @param  {String} bp    The breakpoint length value.
  *
- * @returns {Number}      A number representing how the value compares.
- *                        A negative number if the `value` occurs before `bp`.
- *                        positive if the `value` occurs after `bp`.
- *                        0 if they are equivalent
+ * @returns {String}
  */
-function compareBreakpoints(value, bp) {
-  return value.localeCompare(bp, undefined, {numeric: true, sensitivity: 'base'});
+function compareBreakpoints(acc, bp, value) {
+  const compare = value.localeCompare(bp, undefined, {numeric: true, sensitivity: 'base'});
+  return (0 < compare) ? bp : acc
 }
 
 /**
@@ -91,12 +94,8 @@ function matchMediaQuery(params, options, breakpoints) {
       breakpoints = breakpoints.reverse();
     }
 
-    // Compare returns:
-    // - Negative number if the `value` occurs before `bp`
-    // - Positive if the `value` occurs after `bp`
-    // - 0 if they are equivalent
-    // TODO: Any way to clean this up?
-    const matchingBp = breakpoints.reduce((acc, bp) => (0 < compareBreakpoints(value, bp)) ? bp : acc, '');
+    // Find the breakpoint that encompases the param value.
+    const matchingBp = breakpoints.reduce((acc, bp) => compareBreakpoints(acc, bp, value), '');
 
     // Return the options breakpoint object, or undefined ir not found.
     return options.breakpoints.find(obj => obj.breakpoint == matchingBp);
