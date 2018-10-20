@@ -1,6 +1,6 @@
 const Grid = require('./Grid');
 const { getLocalOptions } = require('./lib/parse-options');
-const cleanClone = require('./lib/cleanClone');
+const cleanClone = require('./lib/utils/cleanClone');
 
 /**
  * Tidy class
