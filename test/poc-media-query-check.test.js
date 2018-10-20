@@ -16,20 +16,6 @@ function valuesHaveSameUnits(values) {
   return (1 === new Set(units).size);
 }
 
-/**
- * Sort breakpoints array.
- *
- * @param {Array} breakpoints An array of breakpoint values.
- *
- * @returns {Array|Boolean}   Sorted array if all values have same units; false if not.
- */
-function sortBreakpoints(breakpoints) {
-  const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
-  const haveSameUnits = valuesHaveSameUnits(breakpoints);
-
-  // TODO: Warn if !haveSameUnits
-  return (haveSameUnits) ? breakpoints.sort(collator.compare) : false;
-}
 
 /**
  * Parse AtRule params.
