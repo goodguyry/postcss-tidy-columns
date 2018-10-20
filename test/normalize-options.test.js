@@ -25,4 +25,24 @@ describe('Test option validation', () => {
       columns: 12,
     });
   });
+
+  test('Breakpoint with no units', () => {
+    expect(normalizeOptions({
+      breakpoints: [
+        {
+          breakpoint: 768,
+          gap: '1rem',
+          edge: '1.25rem',
+        }
+      ],
+    })).toEqual({
+      breakpoints: [
+        {
+          breakpoint: '768px',
+          gap: '1rem',
+          edge: '1.25rem',
+        }
+      ]
+    });
+  });
 });
