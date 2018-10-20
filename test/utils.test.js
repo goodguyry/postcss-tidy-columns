@@ -1,6 +1,7 @@
 const valuesHaveSameUnits = require('../lib/utils/valuesHaveSameUnits');
 const sortStrings = require('../lib/utils/sortStrings');
 const parseAtRuleParams = require('../lib/utils/parseAtRuleParams');
+const compareStrings = require('../lib/utils/compareStrings');
 
 describe('Values have same units', () => {
   test('Same units', () => {
@@ -77,5 +78,25 @@ describe('Parse media queries', () => {
       expect(
         parseAtRuleParams('screen and print')
       ).toEqual([]);
+    });
+});
+
+describe('Compare strings', () => {
+  test('Reference after compare', () => {
+      expect(
+        compareStrings('1000px', '600px')
+      ).toEqual(1);
+    });
+
+  test('Reference and compare are same', () => {
+      expect(
+        compareStrings('600px', '600px')
+      ).toEqual(0);
+    });
+
+  test('Reference before compare', () => {
+      expect(
+        compareStrings('400px', '1000px')
+      ).toEqual(-1);
     });
 });
