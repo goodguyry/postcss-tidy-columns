@@ -1,5 +1,4 @@
 const breakpointMatch = require('../lib/breakpoint-match');
-const valuesHaveSameUnits = require('../lib/utils/valuesHaveSameUnits');
 
 describe('Find a breakpoint match: px', () => {
   const options = {
@@ -15,8 +14,8 @@ describe('Find a breakpoint match: px', () => {
       {
         breakpoint: '1440px',
         gap: '1.25rem',
-      }
-    ]
+      },
+    ],
   };
 
   const breakpoints = [
@@ -26,94 +25,42 @@ describe('Find a breakpoint match: px', () => {
   ];
 
   test('Between breakpoint configs (min)', () => {
-      expect(
-        breakpointMatch(
-          '(min-width: 900px)',
-          options,
-          breakpoints
-        )
-      ).toEqual({
-        breakpoint: '768px',
-        gap: '0.625rem',
-      });
-    });
+    expect(breakpointMatch('(min-width: 900px)', options, breakpoints))
+      .toEqual({ breakpoint: '768px', gap: '0.625rem' });
+  });
 
   test('Between breakpoint configs (max)', () => {
-      expect(
-        breakpointMatch(
-          '(max-width: 900px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual({
-        breakpoint: '768px',
-        gap: '0.625rem',
-      });
-    });
+    expect(breakpointMatch('(max-width: 900px)', options, breakpoints))
+      .toEqual({ breakpoint: '768px', gap: '0.625rem' });
+  });
 
   test('Below lowest breakpoint config (min)', () => {
-      expect(
-        breakpointMatch(
-          '(min-width: 600px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual(undefined);
-    });
+    expect(breakpointMatch('(min-width: 600px)', options, breakpoints))
+      .toEqual(undefined);
+  });
 
   test('Below lowest breakpoint config (max)', () => {
-      expect(
-        breakpointMatch(
-          '(max-width: 600px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual(undefined);
-    });
+    expect(breakpointMatch('(max-width: 600px)', options, breakpoints))
+      .toEqual(undefined);
+  });
 
   test('Up-to breakpoint config', () => {
-      expect(
-        breakpointMatch(
-          '(max-width: 1439px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual({
-        breakpoint: '1024px',
-        gap: '1rem',
-      });
-    });
+    expect(breakpointMatch('(max-width: 1439px)', options, breakpoints))
+      .toEqual({ breakpoint: '1024px', gap: '1rem' });
+  });
 
   test('Up-to lowest breakpoint config', () => {
-      expect(
-        breakpointMatch(
-          '(max-width: 767px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual(undefined);
-    });
+    expect(breakpointMatch('(max-width: 767px)', options, breakpoints))
+      .toEqual(undefined);
+  });
 
   test('Between breakpoint configs (min-max)', () => {
-      expect(
-        breakpointMatch(
-          '(min-width: 768px) and (max-width: 1023px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual({
-        breakpoint: '768px',
-        gap: '0.625rem',
-      });
-    });
+    expect(breakpointMatch('(min-width: 768px) and (max-width: 1023px)', options, breakpoints))
+      .toEqual({ breakpoint: '768px', gap: '0.625rem' });
+  });
 
   test('Spanning two breakpoint configs (min-max)', () => {
-      expect(
-        breakpointMatch(
-          '(min-width: 768px) and (max-width: 1439px)',
-          options,
-          breakpoints,
-        )
-      ).toEqual(undefined);
-    });
+    expect(breakpointMatch('(min-width: 768px) and (max-width: 1439px)', options, breakpoints))
+      .toEqual(undefined);
+  });
 });
