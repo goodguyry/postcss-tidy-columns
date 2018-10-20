@@ -49,7 +49,7 @@ describe('Test option validation', () => {
     });
   });
 
-  test('Breakpoint with no units', () => {
+  test('Multiple breakpoints', () => {
     expect(normalizeOptions({
       breakpoints: [
         {
