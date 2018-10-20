@@ -31,29 +31,6 @@
     "test": "jest",
     "watch": "jest --watchAll --verbose"
   },
-  "eslintConfig": {
-    "extends": "eslint-config-airbnb-base",
-    "env": {
-      "jest": true
-    },
-    "rules": {
-      "yoda": [
-        "error",
-        "always",
-        {
-          "onlyEquality": true
-        }
-      ],
-      "max-len": [
-        "error",
-        100,
-        2,
-        {
-          "ignoreComments": true
-        }
-      ]
-    }
-  },
   "jest": {
     "testEnvironment": "node"
   }
