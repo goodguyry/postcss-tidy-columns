@@ -1,5 +1,5 @@
 const valuesHaveSameUnits = require('../lib/utils/valuesHaveSameUnits');
-const sortStrings = require('../lib/utils/sortStrings');
+const { sortStrings, sortObjectsByProperty } = require('../lib/utils/sortStrings');
 const parseAtruleParams = require('../lib/utils/parseAtruleParams');
 const compareStrings = require('../lib/utils/compareStrings');
 
@@ -83,5 +83,13 @@ describe('Compare strings', () => {
   test('Reference before compare', () => {
     expect(compareStrings('400px', '1000px'))
       .toEqual(-1);
+  });
+});
+
+describe('Sort Objects', () => {
+  test('Test one', () => {
+    // eslint-disable-next-line max-len
+    expect(sortObjectsByProperty([{ breakpoint: '1000px' }, { breakpoint: '600px' }, { breakpoint: '400px' }], 'breakpoint'))
+      .toEqual([{ breakpoint: '400px' }, { breakpoint: '600px' }, { breakpoint: '1000px' }]);
   });
 });
