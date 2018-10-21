@@ -96,10 +96,16 @@ describe('Sort Objects', () => {
     /* eslint-disable function-paren-newline */
     expect(
       sortObjectsByProperty(
-        [{ breakpoint: '1000px' }, { breakpoint: '600px' }, { breakpoint: '400px' }],
-        'breakpoint',
-      ),
-    )
-      .toEqual([{ breakpoint: '400px' }, { breakpoint: '600px' }, { breakpoint: '1000px' }]);
+        [
+          { breakpoint: '1000px', boo: 100 },
+          { breakpoint: '600px', foo: 0 },
+          { breakpoint: '400px', baz: 'zoo' },
+        ],
+        'breakpoint'))
+      .toEqual([
+        { breakpoint: '400px', baz: 'zoo' },
+        { breakpoint: '600px', foo: 0 },
+        { breakpoint: '1000px', boo: 100 },
+      ]);
   });
 });
