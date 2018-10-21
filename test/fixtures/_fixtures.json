@@ -26,6 +26,30 @@
         "input": "fixtures/custom-properties.css",
         "expected": "fixtures/custom-properties.expected.css"
       }
+    },
+    {
+      "description": "breakpoints",
+      "skip": false,
+      "options": {
+        "columns": 12,
+        "edge": "1rem",
+        "gap": "0.625rem",
+        "siteMax": "90rem",
+        "breakpoints": [
+          {
+            "breakpoint": "48rem",
+            "gap": "1rem"
+          },
+          {
+            "breakpoint": "64rem",
+            "edge": "1.25rem"
+          }
+        ]
+      },
+      "fixtures": {
+        "input": "fixtures/breakpoints.css",
+        "expected": "fixtures/breakpoints.expected.css"
+      }
     }
   ],
   "source-maps": [

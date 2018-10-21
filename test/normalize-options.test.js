@@ -49,7 +49,7 @@ describe('Test option validation', () => {
       });
   });
 
-  test('Multiple breakpoints', () => {
+  test('Multiple breakpoints (unsorted)', () => {
     expect(normalizeOptions({
       breakpoints: [
         {
@@ -65,17 +65,58 @@ describe('Test option validation', () => {
       .toEqual({
         breakpoints: [
           {
-            breakpoint: '1024px',
-            gap: '1.25rem',
+            breakpoint: '768px',
+            edge: '1.25rem',
           },
           {
-            breakpoint: '768px',
+            breakpoint: '1024px',
+            gap: '1.25rem',
             edge: '1.25rem',
           },
         ],
         collectedBreakpointValues: [
           '768px',
           '1024px',
+        ],
+      });
+  });
+
+  test('Multiple breakpoints', () => {
+    expect(normalizeOptions({
+      columns: 12,
+      edge: '1rem',
+      gap: '0.625rem',
+      siteMax: '90rem',
+      breakpoints: [
+        {
+          breakpoint: '48rem',
+          gap: '1rem',
+        },
+        {
+          breakpoint: '64rem',
+          edge: '1.25rem',
+        },
+      ],
+    }))
+      .toEqual({
+        columns: 12,
+        edge: '1rem',
+        gap: '0.625rem',
+        siteMax: '90rem',
+        breakpoints: [
+          {
+            breakpoint: '48rem',
+            gap: '1rem',
+          },
+          {
+            breakpoint: '64rem',
+            gap: '1rem',
+            edge: '1.25rem',
+          },
+        ],
+        collectedBreakpointValues: [
+          '48rem',
+          '64rem',
         ],
       });
   });

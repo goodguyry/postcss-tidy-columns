@@ -1,0 +1,23 @@
+/* Scoped option values */
+.scoped-atrules {
+	width: calc((((100vw - 1rem * 2) / 12 - 0.5729rem) * 3) + 0.625rem * 2);
+	max-width: calc((((90rem - 1rem * 2) / 12 - 0.5729rem) * 3) + 0.625rem * 2);
+	margin-left: calc((((100vw - 1rem * 2) / 12 - 0.5729rem) * 2) + 0.625rem * 2);
+}
+@media (min-width: 90rem) {
+	.scoped-atrules {
+		margin-left: calc((((90rem - 1rem * 2) / 12 - 0.5729rem) * 2) + 0.625rem * 2);
+	}
+}
+@media (min-width: 48rem) {
+	.scoped-atrules {
+		width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
+		max-width: calc((((90rem - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
+	}
+}
+@media (min-width: 80rem) {
+	.scoped-atrules {
+		width: calc((((100vw - 1.25rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
+		max-width: calc((((90rem - 1.25rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
+	}
+}
