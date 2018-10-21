@@ -16,14 +16,19 @@ describe('Values have same units', () => {
 });
 
 describe('Sort breakpoints array', () => {
-  test('Same units', () => {
+  test('Multiple values', () => {
     expect(sortStrings(['1000px', '600px', '400px']))
       .toEqual(['400px', '600px', '1000px']);
   });
 
-  test('Different units', () => {
-    expect(sortStrings(['1000px', '60rem', '400px']))
-      .toEqual(false);
+  test('Single value', () => {
+    expect(sortStrings(['1024px']))
+      .toEqual(['1024px']);
+  });
+
+  test('No values', () => {
+    expect(sortStrings([]))
+      .toEqual([]);
   });
 });
 
