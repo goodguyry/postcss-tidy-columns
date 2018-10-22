@@ -8,7 +8,12 @@
 		tidy-span: 2;
 	}
 }
-@media (min-width: 80rem) {
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
+	.breakpoints {
+		tidy-span: 3;
+	}
+}
+@media (max-width: 80rem) {
 	.breakpoints {
 		tidy-span: 2;
 	}
