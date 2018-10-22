@@ -1,5 +1,5 @@
 const valuesHaveSameUnits = require('../lib/utils/valuesHaveSameUnits');
-const { sortStrings, sortObjectsByProperty } = require('../lib/utils/sort');
+const { strings, objectsByProperty } = require('../lib/utils/sort');
 const parseAtruleParams = require('../lib/utils/parseAtruleParams');
 const compareStrings = require('../lib/utils/compareStrings');
 
@@ -17,17 +17,17 @@ describe('Values have same units', () => {
 
 describe('Sort breakpoints array', () => {
   test('Multiple values', () => {
-    expect(sortStrings(['1000px', '600px', '400px']))
+    expect(['1000px', '600px', '400px'].sort(strings()))
       .toEqual(['400px', '600px', '1000px']);
   });
 
   test('Single value', () => {
-    expect(sortStrings(['1024px']))
+    expect(['1024px'].sort(strings()))
       .toEqual(['1024px']);
   });
 
   test('No values', () => {
-    expect(sortStrings([]))
+    expect([].sort(strings()))
       .toEqual([]);
   });
 });
@@ -95,13 +95,11 @@ describe('Sort Objects', () => {
   test('Test one', () => {
     /* eslint-disable function-paren-newline */
     expect(
-      sortObjectsByProperty(
-        [
-          { breakpoint: '1000px', boo: 100 },
-          { breakpoint: '600px', foo: 0 },
-          { breakpoint: '400px', baz: 'zoo' },
-        ],
-        'breakpoint'))
+      [
+        { breakpoint: '1000px', boo: 100 },
+        { breakpoint: '600px', foo: 0 },
+        { breakpoint: '400px', baz: 'zoo' },
+      ].sort(objectsByProperty('breakpoint')))
       .toEqual([
         { breakpoint: '400px', baz: 'zoo' },
         { breakpoint: '600px', foo: 0 },
