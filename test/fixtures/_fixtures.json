@@ -35,7 +35,6 @@
         "edge": "1rem",
         "gap": "0.625rem",
         "addGap": true,
-        "siteMax": "90rem",
         "breakpoints": [
           {
             "breakpoint": "48rem",
@@ -45,7 +44,8 @@
           {
             "breakpoint": "64rem",
             "edge": "1.25rem",
-            "addGap": false
+            "addGap": false,
+            "siteMax": "90rem"
           }
         ]
       },
