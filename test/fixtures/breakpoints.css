@@ -1,15 +1,15 @@
 /* Scoped option values */
-.scoped-atrules {
+.breakpoints {
 	tidy-span: 3;
-	tidy-offset-left: 2;
+	margin-left: tidy-offset(2);
 }
 @media (min-width: 48rem) {
-	.scoped-atrules {
+	.breakpoints {
 		tidy-span: 2;
 	}
 }
 @media (min-width: 80rem) {
-	.scoped-atrules {
+	.breakpoints {
 		tidy-span: 2;
 	}
 }
