@@ -15,16 +15,16 @@ npm install postcss-tidy-columns
 ## Example
 
 ```js
-{
+require('postcss-tidy-columns')({
 	columns: 12,
 	gap: '1.25rem',
 	edge: '2rem',
 	siteMax: '90rem',
-};
+});
 ```
 
 ```css
-/* Input example */
+/* Input example, using the above plugins options */
 div {
 	tidy-span: 3;
 	tidy-offset-left: 2;
@@ -315,10 +315,10 @@ Which means, given the following options...
 **Caveats**
 
 - The `breakpoint` value must be based on a `min-width` media query.
-- `breakpoint` values must be the in same units (`px|rem|em`) as the media query it's responding to or it will be ignored.
-- All `breakpoints` must also be the in same units (`px|rem|em`) or it will be ignored.
-- A media query spanning more than one breakpoint config will be ignored.
-	- In the above configuration example, `(min-width: 48rem) and (max-width: 90rem)` would be ignored.
+- `breakpoint` values must be in the same units as the media query it's responding to or it will be ignored and use the root config.
+- All `breakpoints` must also be in the same units or it will be ignored and use the root config.
+- A media query spanning more than one breakpoint config will be ignored and use the root config.
+	- In the above configuration example, a media query with `(min-width: 48rem) and (max-width: 90rem)` would match two breakpoint configs and thus use the root config as a fallback.
 
 ## Options Cascade
 
