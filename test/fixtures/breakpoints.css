@@ -1,20 +1,19 @@
-/* Scoped option values */
-.breakpoints {
+.breakpoint-matching {
 	tidy-span: 3;
 	margin-left: tidy-offset(2);
 }
 @media (min-width: 48rem) {
-	.breakpoints {
+	.breakpoint-matching {
 		tidy-span: 2;
 	}
 }
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
-	.breakpoints {
+	.breakpoint-matching {
 		tidy-span: 3;
 	}
 }
 @media (max-width: 80rem) {
-	.breakpoints {
+	.breakpoint-matching {
 		tidy-span: 2;
 	}
 }
