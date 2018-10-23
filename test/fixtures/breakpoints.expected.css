@@ -26,7 +26,8 @@
 }
 @media (max-width: 80rem) {
 	.breakpoint-matching {
-		width: calc((((100vw - 1.25rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
-		max-width: calc((((90rem - 1.25rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
+		/* @tidy edge override */
+		width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
+		max-width: calc((((90rem - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
 	}
 }
