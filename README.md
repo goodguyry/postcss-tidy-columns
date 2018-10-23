@@ -14,13 +14,17 @@ npm install postcss-tidy-columns
 
 ## Example
 
+```js
+{
+	columns: 12,
+	gap: '1.25rem',
+	edge: '2rem',
+	siteMax: '90rem',
+};
+```
+
 ```css
 /* Input example */
-@tidy columns 12;
-@tidy gap 1.25rem;
-@tidy edge 2rem;
-@tidy site-max 90rem;
-
 div {
 	tidy-span: 3;
 	tidy-offset-left: 2;
@@ -174,6 +178,7 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
 |[`addGap`](#addGap)|`{Boolean}`|`false`|Add a right `gap` margin to column declarations.|
+|[`breakpoints`](#breakpoints)|`{Array}`|`[]`|An array of breakpoint-specific configuration objects.|
 
 _As an alternative to the [PostCSS] JavaScript API, options may also be passed via stylesheet `@tidy` at-rules._
 
@@ -241,6 +246,79 @@ When this is set to `true`, a `:last-of-type` rule will be added to reset the `m
 >  */
 > @tidy gap <length> / <boolean>;
 > ```
+
+### `breakpoints`
+
+Use the `breakpoints` array to configure a grid spec that changes for certain breakpoints.
+
+1. Define the small-screen grid in the root object.
+2. Define breakpoints at which the grid spec changes, and any configuration options that will change.
+
+Each breakpoint configuration object must contain a `breakpoint` (singular) property defining the `min-width` breakpoint at which the configuration becomes active. There is no CSS syntax for this config option.
+
+The root configuration will cascade through the breakpoints, with each breakpoint's config overriding any changed options. Each breakpoint config will also cascade through to the next larger breakpoint config.
+
+Which means, given the following options...
+
+```js
+{
+	columns: 9,
+	edge: '1rem',
+	gap: '0.625rem',
+	addGap: true,
+	breakpoints: [
+		{
+			breakpoint: '48rem',
+			columns: 12,
+			gap: '1rem'
+		},
+		{
+			breakpoint: '64rem',
+			edge: '1.25rem',
+			addGap: false,
+			siteMax: '90rem'
+		}
+	]
+};
+```
+
+... each breakpoint object will essentially end up like this:
+
+```js
+{
+	breakpoints: [
+		{ // small screens
+			columns: 9,
+			edge: '1rem',
+			gap: '0.625rem',
+			addGap: true,
+		},
+		{ // min-width: 48rem
+			breakpoint: '48rem',
+			columns: 12,
+			gap: '1rem'
+			edge: '1rem',
+			addGap: true,
+		},
+		{ // min-width: 64rem
+			breakpoint: '64rem',
+			edge: '1.25rem',
+			addGap: false,
+			siteMax: '90rem'
+			columns: 12,
+			gap: '1rem'
+		}
+	]
+};
+```
+
+**Caveats**
+
+- The `breakpoint` value must be based on a `min-width` media query.
+- `breakpoint` values must be the in same units (`px|rem|em`) as the media query it's responding to or it will be ignored.
+- All `breakpoints` must also be the in same units (`px|rem|em`) or it will be ignored.
+- A media query spanning more than one breakpoint config will be ignored.
+	- In the above configuration example, `(min-width: 48rem) and (max-width: 90rem)` would be ignored.
 
 ## Options Cascade
 
