@@ -1,7 +1,7 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## next
+## 0.3.3
 
 **Changed**
 
