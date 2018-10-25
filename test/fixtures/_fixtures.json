@@ -1,12 +1,21 @@
 {
   "tests": [
     {
-      "description": "full-suite w/ media query",
+      "description": "full-suite",
       "skip": false,
       "options": {},
       "fixtures": {
         "input": "fixtures/full-suite.css",
         "expected": "fixtures/full-suite.expected.css"
+      }
+    },
+    {
+      "description": "full-suite w/ no `siteMax`",
+      "skip": false,
+      "options": {},
+      "fixtures": {
+        "input": "fixtures/full-suite.no-sitemax.css",
+        "expected": "fixtures/full-suite.no-sitemax.expected.css"
       }
     },
     {
