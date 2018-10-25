@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Fixed**
 
+- Fixes a JavaScript error when `tidy-` functions were used with no `siteMax` option value (#18)
 - Improves handling of missing, zero, or invalid option values (#16)
 
 ## 0.3.2
