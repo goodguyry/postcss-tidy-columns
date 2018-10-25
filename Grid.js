@@ -45,6 +45,7 @@ class Grid {
 
     this.fullWidthRule = null;
     this.shouldAddGapDecl = false;
+    this.nonValues = [undefined, 0];
 
     // Bind class methods.
     this.getSharedGap = this.getSharedGap.bind(this);
@@ -68,7 +69,7 @@ class Grid {
 
     if (varPattern.test(gap)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
-    } else if (undefined !== gap) {
+    } else if (!this.nonValues.includes(gap)) {
       const [value, units] = this.constructor.splitCssUnit(gap);
       const sharedGap = (value / columns) * (columns - 1);
 
@@ -86,7 +87,7 @@ class Grid {
   getEdges() {
     const { edge } = this.options;
 
-    return (undefined === edge) ? 0 : `${edge} * 2`;
+    return this.nonValues.includes(edge) ? 0 : `${edge} * 2`;
   }
 
   /**
@@ -99,7 +100,7 @@ class Grid {
   getSingleColumn(siteMax) {
     const { columns } = this.options;
     // 100vw : (100vw - 10px * 2)
-    const siteMaxSize = 0 === this.edges ?
+    const siteMaxSize = this.nonValues.includes(this.edges) ?
       siteMax :
       `(${siteMax} - ${this.edges})`;
 
@@ -135,7 +136,7 @@ class Grid {
      * Check for gaps before adding the math for them.
      * Only multiply gaps if there are more than one.
      */
-    if (undefined !== gap && 0 !== gapSpan) {
+    if (!this.nonValues.includes(gap) && !this.nonValues.includes(gapSpan)) {
       const gapSpanCalc = (1 === gapSpan) ? gap : `${gap} * ${gapSpan}`;
 
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
