@@ -2,32 +2,64 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## next
-* CLEANUP: Source map fixtures.
+
+**Changed**
+
+- Source map fixtures.
+
+**Fixed**
+
+- Improves handling of missing, zero, or invalid option values (#16)
 
 ## 0.3.2
-* BUGIFX: Fixes an issue in the way Tidy Columns cloned nodes (#12)
+
+**Fixed**
+
+- Fixes an issue in the way Tidy Columns cloned nodes (#12)
 
 ## 0.3.1
-* Updates tests and documentation (#10, #11)
+
+**Changed**
+
+- Updates tests and documentation (#10, #11)
 
 ## 0.3.0
-* BREAKING CHANGE: `inherit` no longer supported in shorthand properties; use `none` instead (#9)
+
+**Changed**
+
+- `inherit` no longer supported in shorthand properties; use `none` instead (#9)
 
 ## 0.2.3
-* BUGFIX: Fixes issues with source mapping (#7)
-* BUGFIX: Corrects `tidy-column` shorthand replacement for third `offset-right` property (#6)
+
+**Fixed**
+
+- Fixes issues with source mapping (#7)
+- Corrects `tidy-column` shorthand replacement for third `offset-right` property (#6)
 
 ## 0.2.2
-* BUGFIX: Corrects `tidy-column` shorthand matching and replacement (#5)
+
+**Fixed**
+
+- Corrects `tidy-column` shorthand matching and replacement (#5)
 
 ## 0.2.1
-* Removes unused dependency (`object-assign`) (#4)
+
+**Removed**
+
+- Removes unused dependency (`object-assign`) (#4)
 
 ## 0.2.0
-* Adds support for CSS Custom Properties in `@tidy` rule values (#3)
+
+**Added**
+
+- Adds support for CSS Custom Properties in `@tidy` rule values (#3)
 
 ## 0.1.1
-* BUGFIX: Locally-scoped options not longer pollute global options (#2)
+
+**Fixed**
+
+- Locally-scoped options not longer pollute global options (#2)
 
 ## 0.1
-* Initial release
+
+- Initial release
