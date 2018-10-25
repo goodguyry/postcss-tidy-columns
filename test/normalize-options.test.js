@@ -4,9 +4,9 @@ const { normalizeOptions } = require('../lib/normalize-options');
  * Test expected option values after normalization.
  */
 describe('Test option validation', () => {
-  test('omit invalid or `none` values', () => {
+  test('omit invalid values', () => {
     expect(normalizeOptions({
-      columns: 'none', gap: 0, edge: 2, siteMax: '90',
+      columns: 'none', gap: '10vw', edge: 2, siteMax: '90',
     })).toEqual({});
   });
 
