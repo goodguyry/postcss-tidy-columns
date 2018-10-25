@@ -69,6 +69,11 @@
 	tidy-span: 3;
 	tidy-offset-left: 2;
 }
+.scoped-atrules--zero {
+	@tidy gap 0;
+	@tidy edge 0;
+	tidy-span: 2;
+}
 @media (min-width: 60rem) {
 	.scoped-atrules {
 		tidy-span: 2;

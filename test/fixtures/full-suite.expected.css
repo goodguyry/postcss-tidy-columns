@@ -99,6 +99,10 @@
 		margin-left: calc((((90rem - 1rem * 2) / 12 - 0.5729rem) * 2) + 0.625rem * 2);
 	}
 }
+.scoped-atrules--zero {
+	width: calc((100vw / 12) * 2);
+	max-width: calc((90rem / 12) * 2);
+}
 @media (min-width: 60rem) {
 	.scoped-atrules {
 		width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem);
