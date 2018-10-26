@@ -1,4 +1,4 @@
-const { normalizeOptions } = require('../lib/normalize-options');
+const { normalizeOptions, handleBreakpointConfigs } = require('../lib/normalize-options');
 
 /**
  * Test expected option values after normalization.
@@ -25,58 +25,34 @@ describe('Test option validation', () => {
       .toEqual({ columns: 12 });
   });
 
-  test('Breakpoint with no units', () => {
+  test('Single breakpoint', () => {
     expect(normalizeOptions({
+      columns: 12,
+      edge: '1rem',
+      gap: '0.625rem',
+      siteMax: '90rem',
       breakpoints: [
         {
-          breakpoint: 768,
+          breakpoint: '48rem',
           gap: '1rem',
           edge: '1.25rem',
         },
       ],
     }))
       .toEqual({
+        columns: 12,
+        edge: '1rem',
+        gap: '0.625rem',
+        siteMax: '90rem',
         breakpoints: [
           {
-            breakpoint: '768px',
+            breakpoint: '48rem',
             gap: '1rem',
             edge: '1.25rem',
           },
         ],
         collectedBreakpointValues: [
-          '768px',
-        ],
-      });
-  });
-
-  test('Multiple breakpoints (unsorted)', () => {
-    expect(normalizeOptions({
-      breakpoints: [
-        {
-          breakpoint: 1024,
-          gap: '1.25rem',
-        },
-        {
-          breakpoint: '768px',
-          edge: '1.25rem',
-        },
-      ],
-    }))
-      .toEqual({
-        breakpoints: [
-          {
-            breakpoint: '768px',
-            edge: '1.25rem',
-          },
-          {
-            breakpoint: '1024px',
-            gap: '1.25rem',
-            edge: '1.25rem',
-          },
-        ],
-        collectedBreakpointValues: [
-          '768px',
-          '1024px',
+          '48rem',
         ],
       });
   });
@@ -120,4 +96,99 @@ describe('Test option validation', () => {
         ],
       });
   });
+
+  test('Multiple breakpoints w/ zero overrides', () => {
+    expect(normalizeOptions({
+      columns: 12,
+      edge: '1rem',
+      gap: '0.625rem',
+      siteMax: '90rem',
+      breakpoints: [
+        {
+          breakpoint: '48rem',
+          gap: '1rem',
+        },
+        {
+          breakpoint: '64rem',
+          edge: 0,
+        },
+      ],
+    }))
+      .toEqual({
+        columns: 12,
+        edge: '1rem',
+        gap: '0.625rem',
+        siteMax: '90rem',
+        breakpoints: [
+          {
+            breakpoint: '48rem',
+            gap: '1rem',
+          },
+          {
+            breakpoint: '64rem',
+            gap: '1rem',
+            edge: 0,
+          },
+        ],
+        collectedBreakpointValues: [
+          '48rem',
+          '64rem',
+        ],
+      });
+  });
+});
+
+describe('Breakpoint validation and collection', () => {
+  test('Breakpoint with no units', () => {
+    expect(handleBreakpointConfigs([
+      {
+        breakpoint: 768,
+        gap: '1rem',
+        edge: '1.25rem',
+      },
+    ], {}))
+      .toEqual({
+        breakpoints: [
+          {
+            breakpoint: '768px',
+            gap: '1rem',
+            edge: '1.25rem',
+          },
+        ],
+        collectedBreakpointValues: [
+          '768px',
+        ],
+      });
+  });
+
+  test('Multiple breakpoints (unsorted)', () => {
+    expect(handleBreakpointConfigs([
+      {
+        breakpoint: 1024,
+        gap: '1.25rem',
+      },
+      {
+        breakpoint: '768px',
+        edge: '1.25rem',
+      },
+    ], {}))
+      .toEqual({
+        breakpoints: [
+          {
+            breakpoint: '768px',
+            edge: '1.25rem',
+          },
+          {
+            breakpoint: '1024px',
+            gap: '1.25rem',
+            edge: '1.25rem',
+          },
+        ],
+        collectedBreakpointValues: [
+          '768px',
+          '1024px',
+        ],
+      });
+  });
+
 });
