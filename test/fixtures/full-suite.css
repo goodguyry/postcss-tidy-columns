@@ -31,6 +31,12 @@
 	max-width: calc(tidy-span-full(2) + 20px);
 }
 
+/* Multiple `tidy-*` functions in the same property value */
+.span-function--multi {
+	padding: 0 tidy-offset(2) 0 tidy-offset-full(3);
+	margin: 0 calc(tidy-offset-full(2) + 50px) 0 tidy-offset(1);
+}
+
 /* `tidy-offset` with all expected values */
 .offset-shorthand {
 	tidy-offset: 3 / 4;
