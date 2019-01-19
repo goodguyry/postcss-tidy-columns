@@ -254,9 +254,9 @@ Use the `breakpoints` array to configure a grid spec that changes for certain br
 1. Define the small-screen grid in the root object.
 2. Define breakpoints at which the grid spec changes, and any configuration options that will change.
 
-Each breakpoint configuration object must contain a `breakpoint` (singular) property defining the `min-width` breakpoint at which the configuration becomes active. There is no CSS syntax for this config option.
+Each breakpoint configuration object must contain a `breakpoint` (singular) property defining the `min-width` breakpoint at which the configuration becomes active. There is no CSS syntax for this configuration option.
 
-The root configuration will cascade through the breakpoints, with each breakpoint's config overriding any changed options. Each breakpoint config will also cascade through to the next larger breakpoint config.
+The root configuration will merge into the breakpoint configurations, with each breakpoint's configuration overriding any changed options. Each breakpoint configuration will also cascade through to the next larger breakpoint configuration.
 
 Which means, given the following options...
 
@@ -314,8 +314,8 @@ Which means, given the following options...
 
 **Caveats**
 
-- The `breakpoint` value must be based on a `min-width` media query.
-- `breakpoint` values must be in the same units as the media query it's responding to or it will be ignored and use the root config.
+- The `breakpoint` value in the configuration must be based on a `min-width` media query.
+- `breakpoint` values must be in the same units as the CSS's media query it's responding to or it will be ignored and use the root config.
 - All `breakpoints` must also be in the same units or it will be ignored and use the root config.
 - A media query spanning more than one breakpoint config will be ignored and use the root config.
 	- In the above configuration example, a media query with `(min-width: 48rem) and (max-width: 90rem)` would match two breakpoint configs and thus use the root config as a fallback.
