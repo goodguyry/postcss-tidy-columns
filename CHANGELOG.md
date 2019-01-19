@@ -1,6 +1,12 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.4
+
+**Fixed**
+
+- Fixes an issue where only the first of multiple `tidy-` functions in the same declaration value was being processed (#22)
+
 ## 0.3.3
 
 **Changed**
