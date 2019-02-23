@@ -173,7 +173,6 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`gap`](#gap)|`{String}`|`undefined`|The width of grid column gaps.|
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
-|[`addGap`](#addGap)|`{Boolean}`|`false`|Add a right `gap` margin to column declarations.|
 
 _As an alternative to the [PostCSS] JavaScript API, options may also be passed via stylesheet `@tidy` at-rules._
 
@@ -194,10 +193,8 @@ Declares the width of the gap between each column. Supports any positive integer
 > #### CSS Syntax
 >
 > ```
-> @tidy gap <length> [ / <boolean> ]?;
+> @tidy gap <length>;
 > ```
-
-See [`addGap`](#addgap) for more about the CSS syntax.
 
 ### `siteMax`
 
@@ -228,21 +225,6 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 > @tidy edge <length>;
 > ```
 
-### `addGap`
-
-Declares whether or not to add a gap-wide `margin-right` to the columns.
-
-When this is set to `true`, a `:last-of-type` rule will be added to reset the `margin-right` to `0` for the last item.
-
-> #### CSS Syntax
->
-> Declared as a boolean value after the `gap` value.
-> Must be preceeded by a forward slash.
->
-> ```
-> @tidy gap <length> / <boolean>;
-> ```
-
 ## Options Cascade
 
 ### Plugin options
@@ -263,7 +245,6 @@ Local options are defined via `@tidy` at-rules _inside_ a selector block and are
 supported in `@tidy` rules, with the following caveats:
 
 1. Due to the nature of CSS Custom Properties, particularly the inability to use them in media query parmeters, a CSS Custom Property used as the `@tidy site-max` value will throw an error.
-2. The `@tidy gap` custom property value must only contain its length, and not its boolean `addGap` portion of the [gap shorthand](#addgap).
 
 See the [Tips and Tricks](../../wiki/Tips-and-Tricks) Wiki page for more.
 
