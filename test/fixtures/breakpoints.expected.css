@@ -24,6 +24,12 @@
 		margin-right: 0;
 	}
 }
+@media (min-width: 48rem) and (max-width: 80rem) {
+	.breakpoint-matching {
+		/* multiple matches; fall back to root config */
+		width: calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 3) + 0.625rem * 2);
+	}
+}
 @media (max-width: 80rem) {
 	.breakpoint-matching {
 		/* @tidy edge override */

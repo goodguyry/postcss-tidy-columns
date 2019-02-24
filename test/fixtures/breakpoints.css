@@ -12,6 +12,13 @@
 		tidy-span: 3;
 	}
 }
+@media (min-width: 48rem) and (max-width: 80rem) {
+	.breakpoint-matching {
+		@tidy addGap false;
+		/* multiple matches; fall back to root config */
+		tidy-span: 3;
+	}
+}
 @media (max-width: 80rem) {
 	.breakpoint-matching {
 		/* @tidy edge override */
