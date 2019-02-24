@@ -74,7 +74,7 @@ describe('Test `tidy-offset` shorthand property replacement', () => {
     'Second value missing',
     () => run(
       'div { tidy-offset: 1; }',
-      'div { tidy-offset-left: 1; }',
+      'div { tidy-offset-left: 1; tidy-offset-right: 1; }',
     ),
   );
 });

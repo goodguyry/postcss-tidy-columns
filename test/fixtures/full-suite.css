@@ -42,6 +42,11 @@
 	tidy-offset: 3 / 4;
 }
 
+/* `tidy-offset` with all a single value */
+.offset-shorthand {
+	tidy-offset: 3;
+}
+
 /* `tidy-offset-[left|right]` properties */
 .offset-property {
 	tidy-offset-left: 2;
