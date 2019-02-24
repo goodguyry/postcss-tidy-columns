@@ -48,7 +48,7 @@ describe('Test `tidy-column` shorthand property replacement', () => {
     'Last value missing',
     () => run(
       'div { tidy-column: 1 / span 2; }',
-      'div { tidy-span: 2; tidy-offset-left: 1; }',
+      'div { tidy-span: 2; tidy-offset-left: 1; tidy-offset-right: 1; }',
     ),
   );
 });
