@@ -44,7 +44,6 @@ class Grid {
     }
 
     this.fullWidthRule = null;
-    this.shouldAddGapDecl = false;
     this.nonValues = [undefined, 0];
 
     // Bind class methods.

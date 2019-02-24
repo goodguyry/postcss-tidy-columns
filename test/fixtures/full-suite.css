@@ -13,12 +13,6 @@
 	tidy-span: 3;
 }
 
-/* `tidy-span` with `addGap` */
-.span-property--gap {
-	@tidy addGap true;
-	tidy-span: 3;
-}
-
 /* `tidy-span()` and `tidy-span-full()` functions */
 .span-function {
 	width: tidy-span(2);
@@ -75,7 +69,7 @@
 
 /* Scoped option values */
 .scoped-atrules {
-	@tidy gap 0.625rem / true;
+	@tidy gap 0.625rem;
 	@tidy edge 1rem;
 	tidy-span: 3;
 	tidy-offset-left: 2;

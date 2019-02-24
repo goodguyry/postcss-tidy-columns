@@ -5,7 +5,7 @@
 }
 
 @tidy columns var(--columns);
-@tidy gap var(--gap) / true;
+@tidy gap var(--gap);
 @tidy edge var(--edge);
 @tidy site-max 75rem;
 
