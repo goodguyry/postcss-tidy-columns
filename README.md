@@ -94,8 +94,10 @@ Use `none` to bypass a required value. A single offset value applies to both `le
 > #### Syntax
 >
 > ```
-> /* [ <number> | none ] / span && <number> [ / <number> ]? */
+> [ <number> | none ] / span && <number> [ / <number> ]?
+> ```
 >
+> ```
 > tidy-column: 3 / span 2 / 4;
 > tidy-column: none / span 4 / 1;
 > tidy-column: 1 / span 4;
@@ -110,12 +112,14 @@ Use `none` to bypass a required value. A single value applies to both `left` and
 > #### Syntax
 >
 > ```
-> /* [ <number> | none ] [ / <number> ]? */
+>  [ <number> | none ] [ / <number> ]? */
+> ```
 >
+> ```
 > tidy-offset: 3 / 4;
 > tidy-offset: none / 1;
 > tidy-offset: 1;
-> ````
+> ```
 
 ## Tidy Functions
 
