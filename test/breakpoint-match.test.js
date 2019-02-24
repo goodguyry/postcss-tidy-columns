@@ -1,6 +1,7 @@
 const breakpointMatch = require('../lib/breakpoint-match');
 
 describe('Find a breakpoint match: px', () => {
+  // Parsed options.
   const options = {
     breakpoints: [
       {
