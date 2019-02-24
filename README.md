@@ -249,16 +249,11 @@ When this is set to `true`, a `:last-of-type` rule will be added to reset the `m
 
 ### `breakpoints`
 
-Use the `breakpoints` array to configure a grid spec that changes for certain breakpoints.
+Use the `breakpoints` array to configure a grid spec that changes across breakpoints.
 
 1. Define the small-screen grid in the root object.
-2. Define breakpoints at which the grid spec changes, and any configuration options that will change.
-
-Each breakpoint configuration object must contain a `breakpoint` (singular) property defining the `min-width` breakpoint at which the configuration becomes active. There is no CSS syntax for this configuration option.
-
-The root configuration will merge into the breakpoint configurations, with each breakpoint's configuration overriding any changed options. Each breakpoint configuration will also cascade through to the next larger breakpoint configuration.
-
-Which means, given the following options...
+2. Define `min-width` breakpoints at which the grid spec changes, and any configuration options that will change.
+3. The configuration settings cascade up from the root to the largest `breakpoint`.
 
 ```js
 require('postcss-tidy-columns')({
@@ -280,13 +275,7 @@ require('postcss-tidy-columns')({
 });
 ```
 
-**Caveats**
-
-- The `breakpoint` value in the configuration must be based on a `min-width` media query.
-- `breakpoint` values must be in the same units as the CSS's media query it's responding to or it will be ignored and use the root config.
-- All `breakpoints` must also be in the same units or it will be ignored and use the root config.
-- A media query spanning more than one breakpoint config will be ignored and use the root config.
-	- In the above configuration example, a media query with `(min-width: 48rem) and (max-width: 90rem)` would match two breakpoint configs and thus use the root config as a fallback.
+See the [Scoped Settings](../../wiki/Scoped-Settings) Wiki page for more.
 
 ## Options Cascade
 
