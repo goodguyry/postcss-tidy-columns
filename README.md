@@ -261,11 +261,10 @@ The root configuration will merge into the breakpoint configurations, with each 
 Which means, given the following options...
 
 ```js
-{
+require('postcss-tidy-columns')({
 	columns: 9,
 	edge: '1rem',
 	gap: '0.625rem',
-	addGap: true,
 	breakpoints: [
 		{
 			breakpoint: '48rem',
@@ -275,41 +274,10 @@ Which means, given the following options...
 		{
 			breakpoint: '64rem',
 			edge: '1.25rem',
-			addGap: false,
 			siteMax: '90rem'
 		}
 	]
-};
-```
-
-... each breakpoint object will essentially end up like this:
-
-```js
-{
-	breakpoints: [
-		{ // small screens
-			columns: 9,
-			edge: '1rem',
-			gap: '0.625rem',
-			addGap: true,
-		},
-		{ // min-width: 48rem
-			breakpoint: '48rem',
-			columns: 12,
-			gap: '1rem'
-			edge: '1rem',
-			addGap: true,
-		},
-		{ // min-width: 64rem
-			breakpoint: '64rem',
-			edge: '1.25rem',
-			addGap: false,
-			siteMax: '90rem'
-			columns: 12,
-			gap: '1rem'
-		}
-	]
-};
+});
 ```
 
 **Caveats**
