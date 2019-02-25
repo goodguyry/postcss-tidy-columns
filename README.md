@@ -45,7 +45,7 @@ div {
 ## Usage
 
 ```js
-postcss([ require('postcss-tidy-columns') ])
+postcss([ require('postcss-tidy-columns') ]);
 ```
 
 See [PostCSS] docs for examples for your environment.
@@ -68,7 +68,7 @@ The `tidy-span` property specifies the number of columns and adjacent column gap
 
 > #### Syntax
 >
-> ```css
+> ```
 > tidy-span: <number>;
 > ```
 
@@ -80,7 +80,7 @@ Offsets use a [`siteMax`](#sitemax) breakpoint, since there's no `max-margin` CS
 
 > #### Syntax
 >
-> ```css
+> ```
 > tidy-offset-left: <number>;
 > tidy-offset-right: <number>;
 > ```
@@ -93,13 +93,15 @@ Use `none` to bypass a required value. A single offset value applies to both `le
 
 > #### Syntax
 >
-> ```css
-> /* [ <number> | none ] / span && <number> [ / <number> ]? */
+> ```
+> [ <number> | none ] / span && <number> [ / <number> ]?
+> ```
 >
+> ```
 > tidy-column: 3 / span 2 / 4;
 > tidy-column: none / span 4 / 1;
 > tidy-column: 1 / span 4;
-> ````
+> ```
 
 ### Offset Shorthand  
 
@@ -109,13 +111,15 @@ Use `none` to bypass a required value. A single value applies to both `left` and
 
 > #### Syntax
 >
-> ```css
-> /* [ <number> | none ] [ / <number> ]? */
+> ```
+>  [ <number> | none ] [ / <number> ]? */
+> ```
 >
+> ```
 > tidy-offset: 3 / 4;
 > tidy-offset: none / 1;
 > tidy-offset: 1;
-> ````
+> ```
 
 ## Tidy Functions
 
@@ -142,7 +146,7 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 > 		width: calc(tidy-span-full(3) + 4rem);
 > 	}
 > }
-> ````
+> ```
 
 ### Offset Function
 
@@ -163,7 +167,7 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 > 		left: calc(tidy-offset-full(1) + 2rem);
 > 	}
 > }
-> ````
+> ```
 
 ## Options
 
@@ -173,7 +177,6 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`gap`](#gap)|`{String}`|`undefined`|The width of grid column gaps.|
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
-|[`addGap`](#addGap)|`{Boolean}`|`false`|Add a right `gap` margin to column declarations.|
 
 _As an alternative to the [PostCSS] JavaScript API, options may also be passed via stylesheet `@tidy` at-rules._
 
@@ -183,9 +186,9 @@ Declares the number of columns in your design. Supports any positive integer.
 
 > #### CSS Syntax
 >
-> ```css
+> ```
 > @tidy columns <number>;
-> ````
+> ```
 
 ### `gap`
 
@@ -193,11 +196,9 @@ Declares the width of the gap between each column. Supports any positive integer
 
 > #### CSS Syntax
 >
-> ```css
-> @tidy gap <length> [ / <boolean> ]?;
-> ````
-
-See [`addGap`](#addgap) for more about the CSS syntax.
+> ```
+> @tidy gap <length>;
+> ```
 
 ### `siteMax`
 
@@ -207,12 +208,14 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 
 > #### CSS Syntax
 >
-> ```css
+> ```
 > @tidy site-max <length>;
->
-> /* Alternatively use the camelCased JavaScript property */
+> ```
+> 
+> Alternatively, use the camelCased JavaScript property.
+> ```
 > @tidy siteMax <length>;
-> ````
+> ```
 
 ### `edge`
 
@@ -222,25 +225,9 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 
 > #### CSS Syntax
 >
-> ```css
+> ```
 > @tidy edge <length>;
-> ````
-
-### `addGap`
-
-Declares whether or not to add a gap-wide `margin-right` to the columns.
-
-When this is set to `true`, a `:last-of-type` rule will be added to reset the `margin-right` to `0` for the last item.
-
-> #### CSS Syntax
->
-> ```css
-> /**
->  * Declared as a boolean value after the `gap` value.
->  * Must be preceeded by a slash.
->  */
-> @tidy gap <length> / <boolean>;
-> ````
+> ```
 
 ## Options Cascade
 
@@ -262,7 +249,6 @@ Local options are defined via `@tidy` at-rules _inside_ a selector block and are
 supported in `@tidy` rules, with the following caveats:
 
 1. Due to the nature of CSS Custom Properties, particularly the inability to use them in media query parmeters, a CSS Custom Property used as the `@tidy site-max` value will throw an error.
-2. The `@tidy gap` custom property value must only contain its length, and not its boolean `addGap` portion of the [gap shorthand](#addgap).
 
 See the [Tips and Tricks](../../wiki/Tips-and-Tricks) Wiki page for more.
 

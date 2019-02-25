@@ -86,7 +86,7 @@ describe('Test sourcemaps', () => {
 test(
   'Test removal of @tidys at-rule',
   () => run(
-    '@tidy columns 16; @tidy gap 0.625rem / true; @tidy edge 32px; @tidy site-max 75rem;',
+    '@tidy columns 16; @tidy gap 0.625rem; @tidy edge 32px; @tidy site-max 75rem;',
     '',
     {},
   ),

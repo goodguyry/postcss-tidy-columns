@@ -28,20 +28,6 @@ class Tidy {
   initRule() {
     // The media query's selector to which conditional declarations will be appended.
     this.fullWidthRule = cleanClone(this.rule);
-
-    /**
-     * Test the rule for whether or not gap margin declarations should be inserted.
-     *
-     * Conditions for adding the gap margins
-     * - The `addGap` options is `true`.
-     * - There is a `tidy-span` declaration in this rule.
-     * - There is not a `tidy-offset-right` declaration in this rule.
-     */
-    const { addGap } = this.grid.options;
-    this.shouldAddGapDecl = (
-      /(tidy-span:)/.test(this.rule.toString()) &&
-      !/(tidy-offset-right)/.test(this.rule.toString())
-    ) && addGap;
   }
 
   /**
