@@ -1,27 +1,15 @@
 .breakpoint-matching {
 	width: calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 3) + 0.625rem * 2);
-	margin-right: 0.625rem;
 	margin-left: calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 2) + 0.625rem * 2);
-}
-.breakpoint-matching:last-of-type {
-	margin-right: 0;
 }
 @media (min-width: 48rem) {
 	.breakpoint-matching {
 		width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
-		margin-right: 1rem;
-	}
-	.breakpoint-matching:last-of-type {
-		margin-right: 0;
 	}
 }
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
 	.breakpoint-matching {
 		width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 3) + 1rem * 2);
-		margin-right: 1rem;
-	}
-	.breakpoint-matching:last-of-type {
-		margin-right: 0;
 	}
 }
 @media (min-width: 48rem) and (max-width: 80rem) {
