@@ -1,6 +1,24 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.4.0
+
+**Added**
+
+- Adds support for configuring different grid spec across multiple breakpoints (#20)
+
+**Changed**
+
+- Single offset values in `tidy-column` and `tidy-offset` shorthand properties will now apply to both offsets (#25)
+
+**Fixed**
+
+- Updates dependencies to fix known vulnerabilities (#26)
+
+**Removed**
+
+- Removes the `addGap` option for automatically adding the grid gap margin to column elements (#24)
+
 ## 0.3.4
 
 **Fixed**
