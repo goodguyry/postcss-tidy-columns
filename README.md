@@ -14,13 +14,17 @@ npm install postcss-tidy-columns
 
 ## Example
 
-```css
-/* Input example */
-@tidy columns 12;
-@tidy gap 1.25rem;
-@tidy edge 2rem;
-@tidy site-max 90rem;
+```js
+require('postcss-tidy-columns')({
+	columns: 12,
+	gap: '1.25rem',
+	edge: '2rem',
+	siteMax: '90rem',
+});
+```
 
+```css
+/* Input example, using the above plugins options */
 div {
 	tidy-span: 3;
 	tidy-offset-left: 2;
@@ -177,6 +181,7 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`gap`](#gap)|`{String}`|`undefined`|The width of grid column gaps.|
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
+|[`breakpoints`](#breakpoints)|`{Array}`|`[]`|An array of breakpoint-specific configuration objects.|
 
 _As an alternative to the [PostCSS] JavaScript API, options may also be passed via stylesheet `@tidy` at-rules._
 
@@ -228,6 +233,36 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 > ```
 > @tidy edge <length>;
 > ```
+
+### `breakpoints`
+
+Use the `breakpoints` array to configure a grid spec that changes across breakpoints.
+
+1. Define the small-screen grid in the root object.
+2. Define `min-width` breakpoints at which the grid spec changes, and any configuration options that will change.
+3. The configuration settings cascade up from the root to the largest `breakpoint`.
+
+```js
+require('postcss-tidy-columns')({
+	columns: 9,
+	edge: '1rem',
+	gap: '0.625rem',
+	breakpoints: [
+		{
+			breakpoint: '48rem',
+			columns: 12,
+			gap: '1rem'
+		},
+		{
+			breakpoint: '64rem',
+			edge: '1.25rem',
+			siteMax: '90rem'
+		}
+	]
+});
+```
+
+See the [Scoped Settings](../../wiki/Scoped-Settings) Wiki page for more.
 
 ## Options Cascade
 

@@ -1,0 +1,27 @@
+.breakpoint-matching {
+	tidy-span: 3;
+	margin-left: tidy-offset(2);
+}
+@media (min-width: 48rem) {
+	.breakpoint-matching {
+		tidy-span: 2;
+	}
+}
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
+	.breakpoint-matching {
+		tidy-span: 3;
+	}
+}
+@media (min-width: 48rem) and (max-width: 80rem) {
+	.breakpoint-matching {
+		/* multiple matches; fall back to root config */
+		tidy-span: 3;
+	}
+}
+@media (max-width: 80rem) {
+	.breakpoint-matching {
+		/* @tidy edge override */
+		@tidy edge 1rem;
+		tidy-span: 2;
+	}
+}

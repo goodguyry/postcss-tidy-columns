@@ -1,6 +1,6 @@
 {
   "name": "postcss-tidy-columns",
-  "version": "0.3.4",
+  "version": "0.4.0-beta1",
   "description": "PostCSS plugin to manage column and margin alignment.",
   "keywords": [
     "postcss",
@@ -30,29 +30,6 @@
   "scripts": {
     "test": "jest",
     "watch": "jest --watchAll --verbose"
-  },
-  "eslintConfig": {
-    "extends": "eslint-config-airbnb-base",
-    "env": {
-      "jest": true
-    },
-    "rules": {
-      "yoda": [
-        "error",
-        "always",
-        {
-          "onlyEquality": true
-        }
-      ],
-      "max-len": [
-        "error",
-        100,
-        2,
-        {
-          "ignoreComments": true
-        }
-      ]
-    }
   },
   "jest": {
     "testEnvironment": "node"
