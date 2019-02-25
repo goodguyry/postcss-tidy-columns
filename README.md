@@ -89,7 +89,7 @@ Offsets use a [`siteMax`](#sitemax) breakpoint, since there's no `max-margin` CS
 
 `tidy-column` is a shorthand property for setting `tidy-offset-left`, `tidy-span`, and `tidy-offset-right` in one declaration.
 
-Use `none` to bypass a required value.
+Use `none` to bypass a required value. A single offset value applies to both `left` and `right`.
 
 > #### Syntax
 >
@@ -105,7 +105,7 @@ Use `none` to bypass a required value.
 
 `tidy-offset` is a shorthand property for setting `tidy-offset-left` and `tidy-offset-right` in one declaration.
 
-Use `none` to bypass a required value.
+Use `none` to bypass a required value. A single value applies to both `left` and `right`.
 
 > #### Syntax
 >
@@ -114,7 +114,7 @@ Use `none` to bypass a required value.
 >
 > tidy-offset: 3 / 4;
 > tidy-offset: none / 1;
-> tidy-offset: 1; /* 1 / none */
+> tidy-offset: 1;
 > ````
 
 ## Tidy Functions

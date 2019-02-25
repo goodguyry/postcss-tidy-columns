@@ -58,6 +58,18 @@
 	}
 }
 
+/* `tidy-offset` with all a single value */
+.offset-shorthand {
+	margin-left: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3);
+	margin-right: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3);
+}
+@media (min-width: 90rem) {
+	.offset-shorthand {
+		margin-left: calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3);
+		margin-right: calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3);
+	}
+}
+
 /* `tidy-offset-[left|right]` properties */
 .offset-property {
 	margin-left: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
