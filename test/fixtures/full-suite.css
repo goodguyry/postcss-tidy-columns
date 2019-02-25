@@ -13,12 +13,6 @@
 	tidy-span: 3;
 }
 
-/* `tidy-span` with `addGap` */
-.span-property--gap {
-	@tidy addGap true;
-	tidy-span: 3;
-}
-
 /* `tidy-span()` and `tidy-span-full()` functions */
 .span-function {
 	width: tidy-span(2);
@@ -31,9 +25,20 @@
 	max-width: calc(tidy-span-full(2) + 20px);
 }
 
+/* Multiple `tidy-*` functions in the same property value */
+.span-function--multi {
+	padding: 0 tidy-offset(2) 0 tidy-offset-full(3);
+	margin: 0 calc(tidy-offset-full(2) + 50px) 0 tidy-offset(1);
+}
+
 /* `tidy-offset` with all expected values */
 .offset-shorthand {
 	tidy-offset: 3 / 4;
+}
+
+/* `tidy-offset` with all a single value */
+.offset-shorthand {
+	tidy-offset: 3;
 }
 
 /* `tidy-offset-[left|right]` properties */
@@ -64,7 +69,7 @@
 
 /* Scoped option values */
 .scoped-atrules {
-	@tidy gap 0.625rem / true;
+	@tidy gap 0.625rem;
 	@tidy edge 1rem;
 	tidy-span: 3;
 	tidy-offset-left: 2;

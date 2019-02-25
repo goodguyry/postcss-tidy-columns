@@ -78,18 +78,16 @@
       }
     },
     {
-      "description": "source-maps: tidy-span (with `addGap`)",
+      "description": "source-maps: tidy-span",
       "skip": false,
-      "options": {
-        "addGap": true
-      },
+      "options": {},
       "map": {
         "version": 3,
         "sources": [
           "span.css"
         ],
         "names": [],
-        "mappings": "AAAA;CACC,uEAAa;CAAb,2EAAa;CAAb,sBAAa;CACb;AAFD;CACC,gBAAa;CACb",
+        "mappings": "AAAA;CACC,uEAAa;CAAb,2EAAa;CACb",
         "file": "span.generated.css",
         "sourcesContent": [
           "div {\n\ttidy-span: 2;\n}\n"

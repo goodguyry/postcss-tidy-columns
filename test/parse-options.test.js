@@ -5,11 +5,10 @@ const { parseOptions } = require('../lib/parse-options');
  */
 describe('Test good option values', () => {
   test('full values', () => {
-    expect(parseOptions(['columns 12', 'gap 2rem / true', 'edge 2rem', 'site-max 90rem']))
+    expect(parseOptions(['columns 12', 'gap 2rem', 'edge 2rem', 'site-max 90rem']))
       .toEqual({
         columns: 12,
         gap: '2rem',
-        addGap: true,
         edge: '2rem',
         siteMax: '90rem',
       });
@@ -20,17 +19,7 @@ describe('Test good option values', () => {
       .toEqual({ columns: 12 });
   });
 
-  test('full gap (addGap true)', () => {
-    expect(parseOptions(['gap 2rem / true']))
-      .toEqual({ gap: '2rem', addGap: true });
-  });
-
-  test('full gap (addGap false)', () => {
-    expect(parseOptions(['gap 2rem / false']))
-      .toEqual({ gap: '2rem', addGap: false });
-  });
-
-  test('gap-only', () => {
+  test('gap', () => {
     expect(parseOptions(['gap 2rem']))
       .toEqual({ gap: '2rem' });
   });

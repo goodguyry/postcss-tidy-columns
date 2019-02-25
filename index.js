@@ -36,7 +36,7 @@ module.exports = postcss.plugin(
         tidyFunction(declaration, tidy);
       });
 
-      const { fullWidthRule, shouldAddGapDecl } = tidy;
+      const { fullWidthRule } = tidy;
       const { siteMax } = tidy.grid.options;
 
       // Add the media query if a siteMax is declared and the `fullWidthRule` has children.
@@ -60,23 +60,6 @@ module.exports = postcss.plugin(
           // Insert after the current rule.
           root.insertAfter(rule, fullWidthAtRule);
         }
-      }
-
-      /**
-       * Add the margin declaration here in order to maintain expected source order.
-       * This is the :last-of-type override for the gap margins.
-       */
-      if (shouldAddGapDecl) {
-        rule.parent.insertAfter(rule, cleanClone(
-          rule,
-          {
-            selector: `${rule.selector}:last-of-type`,
-          },
-        ).append({
-          prop: 'margin-right',
-          value: '0',
-          source: tidy.declarationSource,
-        }));
       }
     });
   },

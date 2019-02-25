@@ -11,13 +11,6 @@ describe('Test option validation', () => {
       .toEqual({});
   });
 
-  test('`addGap` String to Boolean', () => {
-    expect(normalizeOptions({
-      addGap: 'false',
-    }))
-      .toEqual({ addGap: false });
-  });
-
   test('`columns` String to Number', () => {
     expect(normalizeOptions({
       columns: '12',
