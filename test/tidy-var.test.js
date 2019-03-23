@@ -12,6 +12,12 @@ const run = (input, output) => (
       gap: '1.25rem',
       edge: '0.625rem',
       siteMax: '90rem',
+      breakpoints: [
+        {
+          breakpoint: '768px',
+          gap: '0.625rem',
+        },
+      ],
     }),
   ])
     .process(input, { from: undefined })
@@ -102,6 +108,15 @@ describe('Test `tidy-var` function replacement', () => {
     () => run(
       'div { margin-left: tidy-var(flurm); }',
       'div { margin-left: tidy-var(flurm); }',
+    ),
+  );
+
+  test(
+    'Breakpoint matching',
+    () => run(
+      // eslint-disable-next-line max-len
+      'div { margin-left: tidy-var(gap); } @media (min-width: 900px) { div { margin-left: tidy-var(gap); } }',
+      'div { margin-left: 1.25rem; } @media (min-width: 900px) { div { margin-left: 0.625rem; } }',
     ),
   );
 });
