@@ -1,7 +1,6 @@
 const postcss = require('postcss');
 const Tidy = require('./Tidy');
 const { getGlobalOptions } = require('./lib/parse-options');
-const cleanClone = require('./lib/utils/cleanClone');
 const tidyShorthandProperty = require('./lib/tidy-shorthand-property');
 const tidyProperty = require('./lib/tidy-property');
 const tidyFunction = require('./lib/tidy-function');
