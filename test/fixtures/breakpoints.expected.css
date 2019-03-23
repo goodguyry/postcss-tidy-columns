@@ -1,10 +1,12 @@
 .breakpoint-matching {
-	width: calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 3) + 0.625rem * 2);
 	margin-left: calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 2) + 0.625rem * 2);
+	width: 100vw;
+	max-width: calc(100vw - 1rem * 2);
 }
 @media (min-width: 48rem) {
 	.breakpoint-matching {
 		width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
+		margin-left: 1rem;
 	}
 }
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
@@ -23,5 +25,6 @@
 		/* @tidy edge override */
 		width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
 		max-width: calc((((90rem - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem);
+		paddding-left: 1rem;
 	}
 }

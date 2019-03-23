@@ -1,10 +1,12 @@
 .breakpoint-matching {
-	tidy-span: 3;
 	margin-left: tidy-offset(2);
+	width: 100vw;
+	max-width: calc(100vw - tidy-var(edge) * 2);
 }
 @media (min-width: 48rem) {
 	.breakpoint-matching {
 		tidy-span: 2;
+		margin-left: tidy-var('gap');
 	}
 }
 @media (min-width: 48rem) and (max-width: 63.9375rem) {
@@ -23,5 +25,6 @@
 		/* @tidy edge override */
 		@tidy edge 1rem;
 		tidy-span: 2;
+		paddding-left: tidy-var(edge);
 	}
 }
