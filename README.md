@@ -173,6 +173,21 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 > }
 > ```
 
+### Var Function
+
+`tidy-var()` function returns the specified option value.
+
+> #### Syntax
+>
+> ```css
+> /* property: tidy-var(string) */
+>
+> div {
+>   margin-left: tidy-var(gap);
+>   width: calc(tidy-var(siteMax) + tidy-var(edge) * 2);
+> }
+> ```
+
 ## Options
 
 |Name|Type|Default|Description|
