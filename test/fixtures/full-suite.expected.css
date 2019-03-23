@@ -137,3 +137,9 @@
 		margin-right: calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem);
 	}
 }
+
+/* `tidy-var()` function */
+.var-function {
+  margin-left: 1.25rem;
+  max-width: 90rem;
+}

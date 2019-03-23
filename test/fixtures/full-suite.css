@@ -96,3 +96,9 @@
 		tidy-offset-right: 1;
 	}
 }
+
+/* `tidy-var()` function */
+.var-function {
+  margin-left: tidy-var(gap);
+  max-width: tidy-var(siteMax);
+}
