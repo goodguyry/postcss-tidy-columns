@@ -4,6 +4,7 @@ const { getGlobalOptions } = require('./lib/parse-options');
 const tidyShorthandProperty = require('./lib/tidy-shorthand-property');
 const tidyProperty = require('./lib/tidy-property');
 const tidyFunction = require('./lib/tidy-function');
+const tidyVar = require('./lib/tidy-var');
 
 /**
  * Parse rules and insert span and offset values.
@@ -29,6 +30,8 @@ module.exports = postcss.plugin(
       tidy.initRule();
 
       rule.walkDecls((declaration) => {
+        // Replace `tidy-var()` functions.
+        tidyVar(declaration, tidy);
         // Replace `tidy-*` properties.
         tidyProperty(declaration, tidy);
         // Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
