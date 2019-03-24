@@ -86,3 +86,5 @@ test(
     {},
   ),
 );
+
+module.exports = run;
