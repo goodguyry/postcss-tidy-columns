@@ -35,9 +35,8 @@ describe('Test CSS fixtures', () => {
       test(`${item.description}`, () => {
         const input = readFile(item.fixtures.input);
         const output = readFile(item.fixtures.expected);
-        const result = run(input, output, item.options);
 
-        return result;
+        return run(input, output, item.options);
       });
     } else {
       // Return `null` for skipped tests
