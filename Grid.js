@@ -13,7 +13,7 @@ class Grid {
    * @param {Number} toRound       The number to round.
    * @param {Number} decimalPlaces The number of decimal places to round `toRound` to.
    *
-   * @returns {Number}
+   * @return {Number}
    */
   static roundToPrecision(toRound, decimalPlaces) {
     const precision = `1${'0'.repeat(decimalPlaces)}`;
@@ -26,7 +26,7 @@ class Grid {
    *
    * @param {String} value A CSS length value.
    *
-   * @returns {Array}
+   * @return {Array}
    */
   static splitCssUnit(value) {
     return ('string' === typeof value) ?
@@ -61,7 +61,7 @@ class Grid {
   /**
    * Calculate the shared gap amount to be removed from each column.
    *
-   * @returns {String|Number}
+   * @return {String|Number}
    */
   getSharedGap() {
     const { gap, columns } = this.options;
@@ -81,7 +81,7 @@ class Grid {
   /**
    * Calculate the total edge spacing.
    *
-   * @returns {String|Number}
+   * @return {String|Number}
    */
   getEdges() {
     const { edge } = this.options;
@@ -94,7 +94,7 @@ class Grid {
    *
    * @param {String} siteMax The current siteMax size.
    *
-   * @returns {String}
+   * @return {String}
    */
   getSingleColumn(siteMax) {
     const { columns } = this.options;
@@ -118,7 +118,7 @@ class Grid {
    * @param {Number} colSpan The number of columns to span.
    * @param {Number} gapSpan The number of gaps to span.
    *
-   * @returns {String}
+   * @return {String}
    */
   buildCalcFunction(siteMax, colSpan, gapSpan) {
     const { gap } = this.options;
@@ -149,7 +149,7 @@ class Grid {
    *
    * @param {String|Number} colSpan The number of columns to span.
    *
-   * @returns {Object}
+   * @return {Object}
    */
   spanCalc(colSpan) {
     const columnSpan = parseFloat(colSpan, 10);
@@ -172,7 +172,7 @@ class Grid {
    *
    * @param {String|Number} colSpan The number of columns to offset.
    *
-   * @returns {Object}
+   * @return {Object}
    */
   offsetCalc(colSpan) {
     const columnSpan = parseFloat(colSpan, 10);

@@ -20,7 +20,8 @@ const run = (input, output, opts) => postcss([plugin(opts)])
  * Read file utility for shorter line-lengths.
  *
  * @param {String} filename The name of the file to read.
- * @returns
+ *
+ * @return {String}
  */
 function readFile(filename) {
   return fs.readFileSync(path.join(__dirname, filename), 'utf8');
@@ -40,7 +41,7 @@ describe('Test CSS fixtures', () => {
         return run(input, output, item.options);
       });
     } else {
-      // Return `null` for skipped tests
+      // Return `null` for skipped tests.
       test.skip(`${item.description}`, () => null);
     }
   });
@@ -69,7 +70,7 @@ describe('Test sourcemaps', () => {
           });
       });
     } else {
-      // Return `null` for skipped tests
+      // Return `null` for skipped tests.
       test.skip(`${item.description}`, () => null);
     }
   });

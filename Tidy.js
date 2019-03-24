@@ -4,7 +4,7 @@ const cleanClone = require('./lib/utils/cleanClone');
 
 /**
  * Tidy class
- * Collect rule-specific settings and properties; instantiate a new Grid instance
+ * Collect rule-specific settings and properties; instantiate a new Grid instance.
  *
  * @param {Object} rule          The current CSS rule.
  * @param {Object} globalOptions The global plugin options.
