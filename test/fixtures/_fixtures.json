@@ -5,8 +5,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/full-suite.css",
-        "expected": "fixtures/full-suite.expected.css"
+        "input": "test/fixtures/full-suite.css",
+        "expected": "test/fixtures/full-suite.expected.css"
       }
     },
     {
@@ -14,8 +14,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/full-suite.no-sitemax.css",
-        "expected": "fixtures/full-suite.no-sitemax.expected.css"
+        "input": "test/fixtures/full-suite.no-sitemax.css",
+        "expected": "test/fixtures/full-suite.no-sitemax.expected.css"
       }
     },
     {
@@ -23,8 +23,8 @@
       "skip": false,
       "options": {},
       "fixtures": {
-        "input": "fixtures/custom-properties.css",
-        "expected": "fixtures/custom-properties.expected.css"
+        "input": "test/fixtures/custom-properties.css",
+        "expected": "test/fixtures/custom-properties.expected.css"
       }
     },
     {
@@ -48,8 +48,8 @@
         ]
       },
       "fixtures": {
-        "input": "fixtures/breakpoints.css",
-        "expected": "fixtures/breakpoints.expected.css"
+        "input": "test/fixtures/breakpoints.css",
+        "expected": "test/fixtures/breakpoints.expected.css"
       }
     }
   ],
@@ -71,8 +71,8 @@
         ]
       },
       "fixtures": {
-        "input": "fixtures/offset-left.css",
-        "generated": "fixtures/offset-left.generated.css"
+        "input": "test/fixtures/offset-left.css",
+        "generated": "test/fixtures/offset-left.generated.css"
       }
     },
     {
@@ -92,8 +92,8 @@
         ]
       },
       "fixtures": {
-        "input": "fixtures/span.css",
-        "generated": "fixtures/span.generated.css"
+        "input": "test/fixtures/span.css",
+        "generated": "test/fixtures/span.generated.css"
       }
     },
     {
@@ -113,8 +113,8 @@
         ]
       },
       "fixtures": {
-        "input": "fixtures/column.css",
-        "generated": "fixtures/column.generated.css"
+        "input": "test/fixtures/column.css",
+        "generated": "test/fixtures/column.generated.css"
       }
     },
     {
@@ -134,8 +134,8 @@
         ]
       },
       "fixtures": {
-        "input": "fixtures/offset.css",
-        "generated": "fixtures/offset.generated.css"
+        "input": "test/fixtures/offset.css",
+        "generated": "test/fixtures/offset.generated.css"
       }
     },
     {
@@ -155,8 +155,8 @@
         ]
       },
       "fixtures": {
-        "input": "fixtures/function-span.css",
-        "generated": "fixtures/function-span.generated.css"
+        "input": "test/fixtures/function-span.css",
+        "generated": "test/fixtures/function-span.generated.css"
       }
     }
   ]

@@ -1,7 +1,7 @@
 /**
  * Column and offset shared options.
  */
-const config = {
+module.exports = {
   allValues: {
     columns: 16,
     siteMax: '75rem',
@@ -51,5 +51,3 @@ const config = {
     gap: undefined,
   },
 };
-
-module.exports = config;

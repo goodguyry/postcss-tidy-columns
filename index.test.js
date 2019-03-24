@@ -1,8 +1,8 @@
 const postcss = require('postcss');
-const plugin = require('../');
+const plugin = require('.');
 const fs = require('fs');
 const path = require('path');
-const json = require('./fixtures/_fixtures.json');
+const json = require('./test/fixtures/_fixtures.json');
 
 /**
  * Basic plugin test.
