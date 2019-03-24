@@ -53,8 +53,8 @@ describe('Test sourcemaps', () => {
   json['source-maps'].forEach((item) => {
     if (!item.skip) {
       test(`${item.description}`, () => {
-        const from = path.join(__dirname, `${item.fixtures.input}`);
-        const to = path.join(__dirname, `${item.fixtures.generated}`);
+        const from = path.join(__dirname, item.fixtures.input);
+        const to = path.join(__dirname, item.fixtures.generated);
 
         const input = readFile(item.fixtures.input);
         const opts = {
