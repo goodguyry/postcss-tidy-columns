@@ -3,6 +3,7 @@ const plugin = require('.');
 const fs = require('fs');
 const path = require('path');
 const json = require('./test/fixtures/_fixtures.json');
+const { typical } = require('./test/sharedConfigs');
 
 /**
  * Basic plugin test.
@@ -57,15 +58,9 @@ describe('Test sourcemaps', () => {
         const to = path.join(__dirname, item.fixtures.generated);
 
         const input = readFile(item.fixtures.input);
-        const opts = {
-          columns: 12,
-          gap: '1.25rem',
-          edge: '0.625rem',
-          siteMax: '90rem',
-        };
 
         return postcss([
-          plugin(Object.assign(opts, item.options)),
+          plugin(Object.assign(typical, item.options)),
         ])
           .process(input, { from, to, map: { inline: false } })
           .then((result) => {
