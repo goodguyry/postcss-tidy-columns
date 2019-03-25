@@ -2,7 +2,7 @@ const postcss = require('postcss');
 const tidyColumns = require('.');
 const fs = require('fs');
 const path = require('path');
-const json = require('./test/fixtures/_fixtures.json');
+const fixtures = require('./test/fixtures/_fixtures.json');
 
 /**
  * Basic plugin test.
@@ -33,7 +33,7 @@ function readFile(filename) {
  * Reads JSON file of test declarations.
  */
 describe('Test CSS fixtures', () => {
-  json.tests.forEach((item) => {
+  fixtures.forEach((item) => {
     if (!item.skip) {
       test(`${item.description}`, () => {
         const input = readFile(item.fixtures.input);

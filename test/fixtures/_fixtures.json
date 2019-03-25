@@ -1,56 +1,54 @@
-{
-  "tests": [
-    {
-      "description": "full-suite",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "test/fixtures/full-suite.css",
-        "expected": "test/fixtures/full-suite.expected.css"
-      }
-    },
-    {
-      "description": "full-suite w/ no `siteMax`",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "test/fixtures/full-suite.no-sitemax.css",
-        "expected": "test/fixtures/full-suite.no-sitemax.expected.css"
-      }
-    },
-    {
-      "description": "custom properties",
-      "skip": false,
-      "options": {},
-      "fixtures": {
-        "input": "test/fixtures/custom-properties.css",
-        "expected": "test/fixtures/custom-properties.expected.css"
-      }
-    },
-    {
-      "description": "breakpoints",
-      "skip": false,
-      "options": {
-        "columns": 9,
-        "edge": "1rem",
-        "gap": "0.625rem",
-        "breakpoints": [
-          {
-            "breakpoint": "48rem",
-            "columns": 12,
-            "gap": "1rem"
-          },
-          {
-            "breakpoint": "64rem",
-            "edge": "1.25rem",
-            "siteMax": "90rem"
-          }
-        ]
-      },
-      "fixtures": {
-        "input": "test/fixtures/breakpoints.css",
-        "expected": "test/fixtures/breakpoints.expected.css"
-      }
+[
+  {
+    "description": "full-suite",
+    "skip": false,
+    "options": {},
+    "fixtures": {
+      "input": "test/fixtures/full-suite.css",
+      "expected": "test/fixtures/full-suite.expected.css"
     }
-  ]
-}
+  },
+  {
+    "description": "full-suite w/ no `siteMax`",
+    "skip": false,
+    "options": {},
+    "fixtures": {
+      "input": "test/fixtures/full-suite.no-sitemax.css",
+      "expected": "test/fixtures/full-suite.no-sitemax.expected.css"
+    }
+  },
+  {
+    "description": "custom properties",
+    "skip": false,
+    "options": {},
+    "fixtures": {
+      "input": "test/fixtures/custom-properties.css",
+      "expected": "test/fixtures/custom-properties.expected.css"
+    }
+  },
+  {
+    "description": "breakpoints",
+    "skip": false,
+    "options": {
+      "columns": 9,
+      "edge": "1rem",
+      "gap": "0.625rem",
+      "breakpoints": [
+        {
+          "breakpoint": "48rem",
+          "columns": 12,
+          "gap": "1rem"
+        },
+        {
+          "breakpoint": "64rem",
+          "edge": "1.25rem",
+          "siteMax": "90rem"
+        }
+      ]
+    },
+    "fixtures": {
+      "input": "test/fixtures/breakpoints.css",
+      "expected": "test/fixtures/breakpoints.expected.css"
+    }
+  }
+]
