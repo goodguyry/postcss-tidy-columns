@@ -1,23 +1,5 @@
 [
   {
-    "description": "full-suite",
-    "skip": false,
-    "options": {},
-    "fixtures": {
-      "input": "test/fixtures/full-suite.css",
-      "expected": "test/fixtures/full-suite.expected.css"
-    }
-  },
-  {
-    "description": "full-suite w/ no `siteMax`",
-    "skip": false,
-    "options": {},
-    "fixtures": {
-      "input": "test/fixtures/full-suite.no-sitemax.css",
-      "expected": "test/fixtures/full-suite.no-sitemax.expected.css"
-    }
-  },
-  {
     "description": "custom properties",
     "skip": false,
     "options": {},
