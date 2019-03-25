@@ -3,7 +3,6 @@ const tidyColumns = require('.');
 const fs = require('fs');
 const path = require('path');
 const json = require('./test/fixtures/_fixtures.json');
-const { typical } = require('./test/sharedConfigs');
 
 /**
  * Basic plugin test.
@@ -49,35 +48,6 @@ describe('Test CSS fixtures', () => {
   });
 });
 
-/**
- * Test sourcemaps
- * Reads JSON file of test declarations.
- */
-describe('Test sourcemaps', () => {
-  json['source-maps'].forEach((item) => {
-    if (!item.skip) {
-      test(`${item.description}`, () => {
-        const from = path.join(__dirname, item.fixtures.input);
-        const to = path.join(__dirname, item.fixtures.generated);
-
-        const input = readFile(item.fixtures.input);
-
-        return postcss([
-          tidyColumns(Object.assign(typical, item.options)),
-        ])
-          .process(input, { from, to, map: { inline: false } })
-          .then((result) => {
-            expect(JSON.parse(result.map)).toEqual(item.map);
-            expect(result.warnings().length).toBe(0);
-          });
-      });
-    } else {
-      // Return `null` for skipped tests.
-      test.skip(`${item.description}`, () => null);
-    }
-  });
-});
-
 // Make sure tidy rules are being removed.
 // This was the first test. It remains as a fun reminder of the beginning.
 test(
@@ -89,4 +59,7 @@ test(
   ),
 );
 
-module.exports = run;
+module.exports = {
+  run,
+  readFile,
+};
