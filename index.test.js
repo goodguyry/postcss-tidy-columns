@@ -1,5 +1,5 @@
 const postcss = require('postcss');
-const plugin = require('.');
+const tidyColumns = require('.');
 const fs = require('fs');
 const path = require('path');
 const json = require('./test/fixtures/_fixtures.json');
@@ -9,12 +9,14 @@ const { typical } = require('./test/sharedConfigs');
  * Basic plugin test.
  * Run the plugin and return the output.
  */
-const run = (input, output, opts) => postcss([plugin(opts)])
-  .process(input, { from: undefined })
-  .then((result) => {
-    expect(result.css).toEqual(output);
-    expect(result.warnings().length).toBe(0);
-  });
+const run = (input, output, opts, plugin = tidyColumns) => (
+  postcss([plugin(opts)])
+    .process(input, { from: undefined })
+    .then((result) => {
+      expect(result.css).toEqual(output);
+      expect(result.warnings().length).toBe(0);
+    })
+);
 
 /**
  * Read file utility for shorter line-lengths.
@@ -61,7 +63,7 @@ describe('Test sourcemaps', () => {
         const input = readFile(item.fixtures.input);
 
         return postcss([
-          plugin(Object.assign(typical, item.options)),
+          tidyColumns(Object.assign(typical, item.options)),
         ])
           .process(input, { from, to, map: { inline: false } })
           .then((result) => {
