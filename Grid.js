@@ -1,4 +1,4 @@
-const { varPattern } = require('./lib/normalize-options');
+const varPattern = require('./lib/utils/varPattern');
 
 /**
  * Grid class
