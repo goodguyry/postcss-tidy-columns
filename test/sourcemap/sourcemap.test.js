@@ -3,7 +3,7 @@ const tidyColumns = require('../../');
 const path = require('path');
 const sourceMapTests = require('./_sourcemap.json');
 const { typical } = require('../sharedConfigs');
-const { readFile } = require('../../index.test.js');
+const { readFile } = require('../');
 
 /**
  * Test sourcemaps

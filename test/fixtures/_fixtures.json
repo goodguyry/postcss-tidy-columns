@@ -4,8 +4,8 @@
     "skip": false,
     "options": {},
     "fixtures": {
-      "input": "test/fixtures/custom-properties.css",
-      "expected": "test/fixtures/custom-properties.expected.css"
+      "input": "fixtures/custom-properties.css",
+      "expected": "fixtures/custom-properties.expected.css"
     }
   },
   {
@@ -29,8 +29,8 @@
       ]
     },
     "fixtures": {
-      "input": "test/fixtures/breakpoints.css",
-      "expected": "test/fixtures/breakpoints.expected.css"
+      "input": "fixtures/breakpoints.css",
+      "expected": "fixtures/breakpoints.expected.css"
     }
   }
 ]
