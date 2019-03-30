@@ -3,7 +3,7 @@ const tidyColumns = require('../');
 
 /**
  * Basic test runner.
- * Runs the plugin and checks the output.
+ * Runs the plugin and verifies the output.
  */
 const run = (input, output, opts, plugin = tidyColumns) => (
   postcss([plugin(opts)])
@@ -16,7 +16,7 @@ const run = (input, output, opts, plugin = tidyColumns) => (
 
 /**
  * Options test runner.
- * Runs the plugin and checks the output.
+ * Runs the plugin and verifies the options.
  */
 const runOptions = (input, output, opts, plugin = tidyColumns) => (
   postcss([plugin(opts)])

@@ -40,7 +40,7 @@ const testGridMethod = (testConfig) => {
 };
 
 /**
- * Test splitting CSS values into [number, unit] arrays.
+ * Separate a CSS length value's number from its units.
  */
 testGridMethod({
   description: "Separate a CSS length value's number from its units",
@@ -69,7 +69,7 @@ testGridMethod({
 });
 
 /**
- * Test calculating the shared gap value based on the given options.
+ * Calculate the shared gap amount to be removed from each column.
  */
 testGridMethod({
   description: 'Calculate the shared gap amount to be removed from each column',
@@ -93,7 +93,7 @@ testGridMethod({
 });
 
 /**
- * Test rounding numbers to a given precision.
+ * Round the given number to the specified number of decimal places.
  */
 testGridMethod({
   description: 'Round the given number to the specified number of decimal places',
@@ -147,7 +147,7 @@ testGridMethod({
 });
 
 /**
- * Test column calc() functions.
+ * Create the column `calc()` function declaration for each siteMax.
  */
 testGridMethod({
   description: 'Create the column `calc()` function declaration for each siteMax',
@@ -377,7 +377,7 @@ testGridMethod({
 });
 
 /**
- * Test offset calc() functions.
+ * Create the offset `calc()` function declaration for each siteMax.
  */
 testGridMethod({
   description: 'Create the offset `calc()` function declaration for each siteMax',
