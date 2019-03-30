@@ -1,5 +1,18 @@
+const fs = require('fs');
+const path = require('path');
 const fixtures = require('./_fixtures.json');
-const { run, readFile } = require('../');
+const run = require('../');
+
+/**
+ * Read file utility for shorter line-lengths.
+ *
+ * @param {String} filename The name of the file to read.
+ *
+ * @return {String}
+ */
+function readFile(filename) {
+  return fs.readFileSync(path.join(__dirname, filename), 'utf8');
+}
 
 /**
  * Test fixtures

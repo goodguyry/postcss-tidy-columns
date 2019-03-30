@@ -1,7 +1,5 @@
 const postcss = require('postcss');
 const tidyColumns = require('../');
-const fs = require('fs');
-const path = require('path');
 
 /**
  * Basic plugin test.
@@ -16,21 +14,7 @@ const run = (input, output, opts, plugin = tidyColumns) => (
     })
 );
 
-/**
- * Read file utility for shorter line-lengths.
- *
- * @param {String} filename The name of the file to read.
- *
- * @return {String}
- */
-function readFile(filename) {
-  return fs.readFileSync(path.join(__dirname, filename), 'utf8');
-}
-
-module.exports = {
-  run,
-  readFile,
-};
+module.exports = run;
 
 // Make sure tidy rules are being removed.
 // This was the first test. It remains as a fun reminder of the beginning.
