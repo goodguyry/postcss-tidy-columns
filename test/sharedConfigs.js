@@ -50,6 +50,12 @@ module.exports = {
     edge: undefined,
     gap: undefined,
   },
+  customProperties: {
+    columns: 'var(--columns)',
+    gap: 'var(--gap)',
+    edge: 'var(--edge)',
+    siteMax: '90rem',
+  },
   typical: {
     columns: 12,
     gap: '1.25rem',

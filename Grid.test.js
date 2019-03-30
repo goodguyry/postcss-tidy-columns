@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const Grid = require('./Grid');
 const {
   allValues,
@@ -8,6 +9,7 @@ const {
   gapOnly,
   siteMaxOnly,
   columnsOnly,
+  customProperties,
 } = require('./test/sharedConfigs');
 
 /**
@@ -362,6 +364,15 @@ testGridMethod({
         fluid: 'calc((100vw / 12) * -3)',
       },
     },
+    // ---------- Custom Properties
+    {
+      description: 'Custom properties used in option values',
+      actual: new Grid(customProperties).spanCalc(3),
+      expected: {
+        fluid: 'calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)',
+        full: 'calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)',
+      },
+    },
   ],
 });
 
@@ -581,6 +592,15 @@ testGridMethod({
       actual: new Grid(columnsOnly).offsetCalc(-4),
       expected: {
         fluid: 'calc((100vw / 12) * -4)',
+      },
+    },
+    // ---------- Custom Properties
+    {
+      description: 'Custom properties used in option values',
+      actual: new Grid(customProperties).offsetCalc(3),
+      expected: {
+        fluid: 'calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)',
+        full: 'calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)',
       },
     },
   ],
