@@ -1,22 +1,19 @@
 const postcss = require('postcss');
 const tidyColumns = require('../../');
-const path = require('path');
-const sourceMapTests = require('./_sourcemap.json');
+const fs = require('fs');
+const sourceMapTests = require('./sourcemap.js');
 const { typical } = require('../sharedConfigs');
-const { readFile } = require('../');
 
 /**
  * Test sourcemaps
  * Reads JSON file of test declarations.
  */
-describe('Test sourcemaps', () => {
+describe('Sourcemaps are maintained after plugin processing', () => {
   sourceMapTests.forEach((item) => {
     if (!item.skip) {
       test(`${item.description}`, () => {
-        const from = path.join(__dirname, item.fixtures.input);
-        const to = path.join(__dirname, item.fixtures.generated);
-
-        const input = readFile(item.fixtures.input);
+        const { from, to } = item.fixtures;
+        const input = fs.readFileSync(from, 'utf8');
 
         return postcss([
           tidyColumns(Object.assign(typical, item.options)),
