@@ -15,7 +15,7 @@ function tidyVar(declaration, tidy) {
   const localRegExp = new RegExp(FUNCTION_REGEX);
 
   if (localRegExp.test(declaration.value)) {
-    const { grid } = tidy;
+    const { columns } = tidy;
     const fullMatch = declaration.value.match(globalRegExp);
 
     /**
@@ -34,8 +34,8 @@ function tidyVar(declaration, tidy) {
       const [match, value] = varMatch.match(localRegExp);
 
       // Replace the tidy-var() function with the real option value.
-      if (Object.keys(grid.options).includes(value)) {
-        return acc.replace(match, grid.options[value]);
+      if (Object.keys(columns.options).includes(value)) {
+        return acc.replace(match, columns.options[value]);
       }
 
       // There's no corresponding option value.

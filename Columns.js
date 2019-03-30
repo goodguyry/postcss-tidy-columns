@@ -1,12 +1,12 @@
 const varPattern = require('./lib/varPattern');
 
 /**
- * Grid class
+ * Columns class
  * Calculate column and offset values based on processed options.
  *
  * @param {Object} options The options for the current rule.
  */
-class Grid {
+class Columns {
   /**
    * Round the given number to the specified number of decimal places.
    *
@@ -187,4 +187,4 @@ class Grid {
   }
 }
 
-module.exports = Grid;
+module.exports = Columns;

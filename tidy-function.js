@@ -16,7 +16,7 @@ function tidyFunction(declaration, tidy) {
   const localRegExp = new RegExp(FUNCTION_REGEX);
 
   if (localRegExp.test(declaration.value)) {
-    const { grid } = tidy;
+    const { columns } = tidy;
     const fullMatch = declaration.value.match(globalRegExp);
 
     /**
@@ -43,8 +43,8 @@ function tidyFunction(declaration, tidy) {
        * full:  calc() function based on `siteMax` base.
        */
       const { fluid, full } = ('span' === slug) ?
-        grid.spanCalc(value) :
-        grid.offsetCalc(value);
+        columns.spanCalc(value) :
+        columns.offsetCalc(value);
 
       acc = ('-full' === modifier) ?
         // tidy-[span|offset]-full()

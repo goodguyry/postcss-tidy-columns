@@ -39,7 +39,7 @@ module.exports = postcss.plugin(
       });
 
       const { fullWidthRule } = tidy;
-      const { siteMax } = tidy.grid.options;
+      const { siteMax } = tidy.columns.options;
 
       // Add the media query if a siteMax is declared and the `fullWidthRule` has children.
       if (undefined !== siteMax && fullWidthRule.nodes.length > 0) {
