@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 const cleanClone = require('./lib/cleanClone');
+const stripExtraCalc = require('./lib/stripExtraCalc');
 
 /**
  * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
@@ -52,11 +53,8 @@ function tidyFunction(declaration, tidy) {
         // tidy-[span|offset] ()
         acc.replace(match, fluid);
 
-      /**
-       * Remove nested calc() function resulting from the tidy-* function replacement.
-       */
-      const NESTED_CALC_REGEX = /(calc[(\s]+)(calc\()/;
-      return (NESTED_CALC_REGEX.test(acc)) ? acc.replace(NESTED_CALC_REGEX, '$1(') : acc;
+      // Remove any nested calc() function.
+      return stripExtraCalc(acc);
     }, declaration.value);
 
     // Replace declaration(s) with cloned and updated declarations.
