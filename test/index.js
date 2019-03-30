@@ -2,8 +2,8 @@ const postcss = require('postcss');
 const tidyColumns = require('../');
 
 /**
- * Basic plugin test.
- * Run the plugin and return the output.
+ * Basic test runner.
+ * Runs the plugin and checks the output.
  */
 const run = (input, output, opts, plugin = tidyColumns) => (
   postcss([plugin(opts)])
@@ -14,7 +14,23 @@ const run = (input, output, opts, plugin = tidyColumns) => (
     })
 );
 
-module.exports = run;
+/**
+ * Options test runner.
+ * Runs the plugin and checks the output.
+ */
+const runOptions = (input, output, opts, plugin = tidyColumns) => (
+  postcss([plugin(opts)])
+    .process(input, { from: undefined })
+    .then((result) => {
+      expect(result.options).toEqual(output);
+      expect(result.warnings().length).toBe(0);
+    })
+);
+
+module.exports = {
+  run,
+  runOptions,
+};
 
 // Make sure tidy rules are being removed.
 // This was the first test. It remains as a fun reminder of the beginning.
