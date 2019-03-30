@@ -1,10 +1,10 @@
 const postcss = require('postcss');
 const Tidy = require('./Tidy');
 const getGlobalOptions = require('./src/getGlobalOptions');
-const tidyShorthandProperty = require('./tidy-shorthand-property');
-const tidyProperty = require('./tidy-property');
-const tidyFunction = require('./tidy-function');
-const tidyVar = require('./tidy-var');
+const { tidyShorthandProperty } = require('./tidy-shorthand-property');
+const { tidyProperty } = require('./tidy-property');
+const { tidyFunction } = require('./tidy-function');
+const { tidyVar } = require('./tidy-var');
 
 /**
  * Parse rules and insert span and offset values.

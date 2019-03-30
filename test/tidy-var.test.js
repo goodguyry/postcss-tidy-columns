@@ -1,5 +1,6 @@
 const run = require('.');
 const { typical, typicalWithBreakpoints } = require('./sharedConfigs');
+const { VAR_FUNCTION_REGEX } = require('../tidy-var');
 
 /**
  * Replace `tidy-var()` functions within property values.
@@ -58,5 +59,34 @@ describe('The `tidy-var()` function is replaced with the expected option value',
       'div { margin-left: 1.25rem; } @media (min-width: 900px) { div { margin-left: 0.625rem; } }',
       typicalWithBreakpoints,
     ),
+  );
+});
+
+/**
+ * Matches tidy-var() functions.
+ */
+describe('Matches tidy-var() functions', () => {
+  test.each([
+    'tidy-var(gap)',
+    'tidy-var(edge)',
+    'tidy-var(siteMax)',
+  ])(
+    'Matches expected tidy-var functions',
+    (input) => {
+      expect(VAR_FUNCTION_REGEX.test(input)).toBeTruthy();
+    },
+  );
+
+  test.each([
+    'tidy-span(gap)',
+    'tidy-span(4)',
+    'tidy-offset(1)',
+    'tidy-var(hello)',
+    'calc(tidy-var(hello))',
+  ])(
+    'Ignores non tidy-var() functions',
+    (input) => {
+      expect(VAR_FUNCTION_REGEX.test(input)).toBeFalsy();
+    },
   );
 });

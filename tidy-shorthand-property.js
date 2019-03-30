@@ -2,6 +2,20 @@ const cleanClone = require('./lib/cleanClone');
 const cleanShorthandValues = require('./lib/cleanShorthandValues');
 
 /**
+ * Matches valid tidy-column shorthand values.
+ *
+ * @type {RegExp}
+ */
+const COLUMNS_REGEX = /^([\d.-]+|none)\s?(\/\s?span\s[\d.-]+)\s?(\/\s?[\d.-]+)?$/;
+
+/**
+ * Matches valid tidy-offset shorthand values.
+ *
+ * @type {RegExp}
+ */
+const OFFSET_REGEX = /^(\d+|none)\s?(\/\s?\d+)?$/;
+
+/**
  * Replace `tidy-*` shorthand with long-form equivalents.
  *
  * @see https://github.com/goodguyry/postcss-tidy-columns#column-shorthand
@@ -18,7 +32,6 @@ function tidyShorthandProperty(declaration) {
    * - tidy-offset-right
    */
   if ('tidy-column' === declaration.prop) {
-    const COLUMNS_REGEX = /^([\d.-]+|none)\s?(\/\s?span\s[\d.-]+)\s?(\/\s?[\d.-]+)?$/;
     /**
      * {undefined}  The full declaration value.
      * offsetLeft:  The `tidy-offset-left` value.
@@ -77,7 +90,6 @@ function tidyShorthandProperty(declaration) {
    * - tidy-offset-right
    */
   if ('tidy-offset' === declaration.prop) {
-    const OFFSET_REGEX = /^(\d+|none)\s?(\/\s?\d+)?$/;
     /**
      * {undefined}  The full declaration value.
      * offsetLeft:  The `tidy-offset-left` value.
@@ -118,4 +130,8 @@ function tidyShorthandProperty(declaration) {
   }
 }
 
-module.exports = tidyShorthandProperty;
+module.exports = {
+  tidyShorthandProperty,
+  COLUMNS_REGEX,
+  OFFSET_REGEX,
+};

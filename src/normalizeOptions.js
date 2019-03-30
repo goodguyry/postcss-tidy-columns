@@ -3,6 +3,13 @@ const { strings, objectsByProperty } = require('../lib/sort');
 const valuesHaveSameUnits = require('../lib/valuesHaveSameUnits');
 
 /**
+ * Matches CSS length values of the supported unit values (px, em, rem).
+ *
+ * @type {RegExp}
+ */
+const LENGTH_REGEX = /^[0-9.]+(px|r?em)?$/;
+
+/**
  * Nomalize, collect and merge breakpoint configs.
  *
  * @param {Array} configs An array of breakpoint configs.
@@ -53,8 +60,6 @@ function handleBreakpointConfigs(configs, acc) {
  * @return {Object}
  */
 function normalizeOptions(options) {
-  const LENGTH_REGEX = /^[0-9.]+(px|r?em)?$/;
-
   const validateOptions = Object.keys(options)
     .reduce((acc, key) => {
       const option = options[key];
@@ -96,4 +101,5 @@ function normalizeOptions(options) {
 module.exports = {
   normalizeOptions,
   handleBreakpointConfigs,
+  LENGTH_REGEX,
 };

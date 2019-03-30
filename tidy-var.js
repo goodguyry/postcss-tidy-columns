@@ -2,6 +2,13 @@
 const cleanClone = require('./lib/cleanClone');
 
 /**
+ * Matches tidy-var() functions.
+ *
+ * @type {RegExp}
+ */
+const VAR_FUNCTION_REGEX = /tidy-var\(["']?(edge|gap|siteMax)["']?\)/i;
+
+/**
  * Replace `tidy-var()` functions within property values.
  *
  * @see https://github.com/goodguyry/postcss-tidy-columns#var-function
@@ -10,9 +17,8 @@ const cleanClone = require('./lib/cleanClone');
  * @param {Object} Tidy        An instance of the Tidy class.
  */
 function tidyVar(declaration, tidy) {
-  const FUNCTION_REGEX = /tidy-var\(["']?(edge|gap|siteMax)["']?\)/i;
-  const globalRegExp = new RegExp(FUNCTION_REGEX, 'g');
-  const localRegExp = new RegExp(FUNCTION_REGEX);
+  const globalRegExp = new RegExp(VAR_FUNCTION_REGEX, 'g');
+  const localRegExp = new RegExp(VAR_FUNCTION_REGEX);
 
   if (localRegExp.test(declaration.value)) {
     const { columns } = tidy;
@@ -53,4 +59,7 @@ function tidyVar(declaration, tidy) {
   }
 }
 
-module.exports = tidyVar;
+module.exports = {
+  tidyVar,
+  VAR_FUNCTION_REGEX,
+};

@@ -1,6 +1,13 @@
 /* eslint-disable no-param-reassign */
 const cleanClone = require('./lib/cleanClone');
-const stripExtraCalc = require('./lib/stripExtraCalc');
+const { stripExtraCalc } = require('./lib/stripExtraCalc');
+
+/**
+ * Pattern to match `tidy-*` functions in declaration values.
+ *
+ * @type {RegExp}
+ */
+const FUNCTION_REGEX = /tidy-(span|offset)(|-full)\(([\d.-]+)\)/;
 
 /**
  * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
@@ -12,7 +19,6 @@ const stripExtraCalc = require('./lib/stripExtraCalc');
  * @param {Object} Tidy        An instance of the Tidy class.
  */
 function tidyFunction(declaration, tidy) {
-  const FUNCTION_REGEX = /tidy-(span|offset)(|-full)\(([\d.-]+)\)/;
   const globalRegExp = new RegExp(FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(FUNCTION_REGEX);
 
@@ -68,4 +74,7 @@ function tidyFunction(declaration, tidy) {
   }
 }
 
-module.exports = tidyFunction;
+module.exports = {
+  tidyFunction,
+  FUNCTION_REGEX,
+};

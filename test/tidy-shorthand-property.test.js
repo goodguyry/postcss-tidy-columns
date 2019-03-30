@@ -1,6 +1,10 @@
 const run = require('.');
 const postcss = require('postcss');
-const tidyShorthandProperty = require('../tidy-shorthand-property');
+const {
+  tidyShorthandProperty,
+  COLUMNS_REGEX,
+  OFFSET_REGEX,
+} = require('../tidy-shorthand-property');
 
 /**
  * Create a test plugin to replace shorthand properties. Running a test plugin
@@ -69,5 +73,38 @@ describe('The `tidy-offset` shorthand property is replaced with the long-form eq
       'div { tidy-offset: 1; }',
       'div { tidy-offset-left: 1; tidy-offset-right: 1; }',
     ),
+  );
+});
+
+/**
+ * Matches valid tidy-column shorthand values.
+ */
+describe('Matches valid tidy-column shorthand values', () => {
+  test.each([
+    '2 / span 3 / 1',
+    '1 / span 6',
+    '0 / span 2 / 1',
+    'none / span 5',
+  ])(
+    'Matches expected, missing, and `none` or `0` tidy-column shorthand values',
+    (input) => {
+      expect(COLUMNS_REGEX.test(input)).toBeTruthy();
+    },
+  );
+});
+
+/**
+ * Matches valid tidy-offset shorthand values.
+ */
+describe('Matches valid tidy-offset shorthand values', () => {
+  test.each([
+    '2 / 1',
+    '1',
+    'none / 3',
+  ])(
+    'Matches expected, missing, and `none` or `0` tidy-offset shorthand values',
+    (input) => {
+      expect(OFFSET_REGEX.test(input)).toBeTruthy();
+    },
   );
 });

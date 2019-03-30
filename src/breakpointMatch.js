@@ -1,4 +1,4 @@
-const parseAtruleParams = require('../lib/parseAtruleParams');
+const { parseAtruleParams } = require('../lib/parseAtruleParams');
 const compareStrings = require('../lib/compareStrings');
 const getObjectByProperty = require('../lib/getObjectByProperty');
 

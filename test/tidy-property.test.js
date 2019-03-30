@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 const run = require('.');
 const { typical, edgeGutter } = require('./sharedConfigs');
+const { OFFSET_REGEX } = require('../tidy-property');
 
 /**
  * Replace `tidy-*` properties.
@@ -55,5 +56,32 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
       'div { width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
       edgeGutter,
     ),
+  );
+});
+
+/**
+ * Pattern to match the `tidy-offset-*` property.
+ */
+describe('Pattern to match the `tidy-offset-*` property', () => {
+  test.each([
+    'tidy-offset-left: 3',
+    'tidy-offset-right: 4',
+  ])(
+    'Matches simple tidy-offset-* properties',
+    (input) => {
+      expect(OFFSET_REGEX.test(input)).toBeTruthy();
+    },
+  );
+
+  test.each([
+    'tidy-span',
+    'tidy-offset',
+    'tidy-column',
+    'tidy-offset-full(6)',
+  ])(
+    'Ignores non tidy-offset-* properties',
+    (input) => {
+      expect(OFFSET_REGEX.test(input)).toBeFalsy();
+    },
   );
 });

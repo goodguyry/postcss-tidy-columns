@@ -1,4 +1,8 @@
-const { normalizeOptions, handleBreakpointConfigs } = require('../normalizeOptions');
+const {
+  normalizeOptions,
+  handleBreakpointConfigs,
+  LENGTH_REGEX,
+} = require('../normalizeOptions');
 
 /**
  * Nomalize, collect and merge breakpoint configs.
@@ -173,4 +177,34 @@ describe('Nomalize, collect and merge breakpoint configs', () => {
         ],
       });
   });
+});
+
+/**
+ * Matches CSS length values of the supported unit values (px, em, rem).
+ */
+describe('Matches CSS length values of the supported unit values (px, em, rem)', () => {
+  test.each([
+    '90rem',
+    '20px',
+    '4em',
+    '0.625rem',
+    '0',
+  ])(
+    'Correctly matches length values with supported units',
+    (input) => {
+      expect(LENGTH_REGEX.test(input)).toBeTruthy();
+    },
+  );
+
+  test.each([
+    '90vw',
+    '8vh',
+    '7ch',
+    '60 rem',
+  ])(
+    'Ignores unsupported length values',
+    (input) => {
+      expect(LENGTH_REGEX.test(input)).toBeFalsy();
+    },
+  );
 });
