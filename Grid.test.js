@@ -41,27 +41,27 @@ const testGridMethod = (testConfig) => {
  * Test splitting CSS values into [number, unit] arrays.
  */
 testGridMethod({
-  description: 'Split CSS Units',
+  description: "Separate a CSS length value's number from its units",
   tests: [
     {
-      description: 'px',
+      description: 'Separates a `px` value from its units',
       actual: Grid.splitCssUnit('10px'),
       expected: [10, 'px'],
     },
     {
-      description: 'rem',
+      description: 'Separates a `rem` value from its units',
       actual: Grid.splitCssUnit('0.625rem'),
       expected: [0.625, 'rem'],
     },
     {
-      description: 'em',
+      description: 'Separates a `em` value from its units',
       actual: Grid.splitCssUnit('2em'),
       expected: [2, 'em'],
     },
     {
-      description: 'Zero',
-      actual: Grid.splitCssUnit(0),
-      expected: 0,
+      description: 'Ignores a unitless value',
+      actual: Grid.splitCssUnit(12),
+      expected: 12,
     },
   ],
 });
@@ -70,32 +70,22 @@ testGridMethod({
  * Test calculating the shared gap value based on the given options.
  */
 testGridMethod({
-  description: 'Calculate the shared gap value',
+  description: 'Calculate the shared gap amount to be removed from each column',
   tests: [
     {
-      description: '0.625rem @ 16 columns',
+      description: 'Calculates a shared gap with `rem` value',
       actual: new Grid(allValues).getSharedGap(),
       expected: '0.5859rem',
     },
     {
-      description: '10px @ 12 columns',
+      description: 'Calculates a shared gap with `px` value',
       actual: new Grid(edgeGutter).getSharedGap(),
       expected: '9.1667px',
     },
     {
-      description: 'zero @ 16 columns',
+      description: 'Calculates a `0` shared gap if a gap option is not declared',
       actual: new Grid(edgeCanvas).getSharedGap(),
       expected: 0,
-    },
-    {
-      description: '15px @ 16 columns',
-      actual: new Grid(gapCanvas).getSharedGap(),
-      expected: '14.0625px',
-    },
-    {
-      description: '0.9375rem @ 12 columns',
-      actual: new Grid(gapOnly).getSharedGap(),
-      expected: '0.8594rem',
     },
   ],
 });
@@ -104,50 +94,50 @@ testGridMethod({
  * Test rounding numbers to a given precision.
  */
 testGridMethod({
-  description: 'Round numbers to precision',
+  description: 'Round the given number to the specified number of decimal places',
   tests: [
     {
-      description: 'Precision (1)',
+      description: 'Rounds to a single decimal place',
       actual: Grid.roundToPrecision(1.2345, 1),
       expected: 1.2,
     },
     {
-      description: 'Precision (2)',
+      description: 'Rounds to two decimal places',
       actual: Grid.roundToPrecision(1.2345, 2),
       expected: 1.23,
     },
     {
-      description: 'Precision (3)',
+      description: 'Rounds to three decimal places',
       actual: Grid.roundToPrecision(1.2345, 3),
       expected: 1.235,
     },
     {
-      description: 'Precision (4)',
+      description: 'Rounds to four decimal places',
       actual: Grid.roundToPrecision(1.2345, 4),
       expected: 1.2345,
     },
     {
-      description: 'Precision larger than input decimal places',
+      description: 'Ignores rounding a number shorter than the precision',
       actual: Grid.roundToPrecision(1.2, 4),
       expected: 1.2,
     },
     {
-      description: 'Whole number',
-      actual: Grid.roundToPrecision(1, 1),
+      description: 'Ignores a whole number',
+      actual: Grid.roundToPrecision(1, 3),
       expected: 1,
     },
     {
-      description: 'Floating point to zero precision',
+      description: 'Rounds to zero decimal places',
       actual: Grid.roundToPrecision(1.234, 0),
       expected: 1,
     },
     {
-      description: 'Round zero to precision',
-      actual: Grid.roundToPrecision(0, 1),
+      description: 'Ignores rounding a `0`',
+      actual: Grid.roundToPrecision(0, 4),
       expected: 0,
     },
     {
-      description: 'Negative number',
+      description: 'Rounds a negative number as expected',
       actual: Grid.roundToPrecision(-1.2345, 2),
       expected: -1.23,
     },
@@ -158,7 +148,7 @@ testGridMethod({
  * Test column calc() functions.
  */
 testGridMethod({
-  description: 'Column CSS calc() function',
+  description: 'Create the column `calc()` function declaration for each siteMax',
   tests: [
     // ---------- All options
     {
@@ -379,7 +369,7 @@ testGridMethod({
  * Test offset calc() functions.
  */
 testGridMethod({
-  description: 'Offset CSS calc() function',
+  description: 'Create the offset `calc()` function declaration for each siteMax',
   tests: [
     // ---------- All options
     {
