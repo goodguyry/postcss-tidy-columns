@@ -1,5 +1,5 @@
-const fixtures = require('./test/fixtures/_fixtures.json');
-const { run, readFile } = require('./test');
+const fixtures = require('./_fixtures.json');
+const { run, readFile } = require('../');
 
 /**
  * Test fixtures
@@ -20,14 +20,3 @@ describe('Test CSS fixtures', () => {
     }
   });
 });
-
-// Make sure tidy rules are being removed.
-// This was the first test. It remains as a fun reminder of the beginning.
-test(
-  'Test removal of @tidys at-rule',
-  () => run(
-    '@tidy columns 16; @tidy gap 0.625rem; @tidy edge 32px; @tidy site-max 75rem;',
-    '',
-    {},
-  ),
-);
