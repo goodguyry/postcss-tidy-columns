@@ -1,4 +1,4 @@
-const varPattern = require('./utils/varPattern');
+const varPattern = require('../lib/varPattern');
 const handleCustomProperties = require('./handleCustomProperties');
 
 /**

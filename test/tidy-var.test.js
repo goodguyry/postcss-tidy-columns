@@ -1,5 +1,5 @@
-const { run } = require('../test');
-const { typical, typicalWithBreakpoints } = require('../test/sharedConfigs');
+const run = require('.');
+const { typical, typicalWithBreakpoints } = require('./sharedConfigs');
 
 /**
  * Replace `tidy-var()` functions within property values.

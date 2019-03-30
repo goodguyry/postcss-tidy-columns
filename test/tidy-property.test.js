@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-const { run } = require('../test');
-const { typical, edgeGutter } = require('../test/sharedConfigs');
+const run = require('.');
+const { typical, edgeGutter } = require('./sharedConfigs');
 
 /**
  * Replace `tidy-*` properties.

@@ -1,4 +1,4 @@
-const parseOptions = require('./parseOptions');
+const parseOptions = require('../parseOptions');
 
 /**
  * Parse and compile CSS @tidy at-rule parameters.

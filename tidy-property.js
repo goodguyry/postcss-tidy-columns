@@ -1,4 +1,4 @@
-const cleanClone = require('./utils/cleanClone');
+const cleanClone = require('./lib/cleanClone');
 
 /**
  * Replace `tidy-*` properties.
@@ -14,7 +14,7 @@ const cleanClone = require('./utils/cleanClone');
  * @param {Object} tidy        An instance of the Tidy class.
  */
 function tidyProperty(declaration, tidy) {
-  const { fullWidthRule, grid } = tidy;
+  const { fullWidthRule, columns } = tidy;
 
   // Replace `tidy-span` declaration with a `width` declaration.
   if ('tidy-span' === declaration.prop) {
@@ -22,7 +22,7 @@ function tidyProperty(declaration, tidy) {
      * fluid: calc() function based on 100vw base.
      * full:  calc() function based on `siteMax` base.
      */
-    const { fluid, full } = grid.spanCalc(declaration.value);
+    const { fluid, full } = columns.spanCalc(declaration.value);
 
     const columnDecl = [];
 
@@ -61,7 +61,7 @@ function tidyProperty(declaration, tidy) {
      * fluid: calc() function based on 100vw base.
      * full:  calc() function based on `siteMax` base.
      */
-    const { fluid, full } = grid.offsetCalc(declaration.value);
+    const { fluid, full } = columns.offsetCalc(declaration.value);
 
     // Clone the declaration with `fluid` declaration overrides.
     const fluidDecl = cleanClone(

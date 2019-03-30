@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-const { run } = require('../test');
-const { typical } = require('../test/sharedConfigs');
+const run = require('.');
+const { typical } = require('./sharedConfigs');
 
 /**
  * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.

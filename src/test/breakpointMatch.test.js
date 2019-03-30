@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-const breakpointMatch = require('./breakpointMatch');
-const { run } = require('../test');
+const run = require('../../test');
+const breakpointMatch = require('../breakpointMatch');
 
 /**
  * Check if an atrule.param is within a range of breakpoints.
