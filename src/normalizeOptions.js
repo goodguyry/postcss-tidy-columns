@@ -1,6 +1,6 @@
-const varPattern = require('./utils/varPattern');
-const { strings, objectsByProperty } = require('./utils/sort');
-const valuesHaveSameUnits = require('./utils/valuesHaveSameUnits');
+const varPattern = require('../lib/varPattern');
+const { strings, objectsByProperty } = require('../lib/sort');
+const valuesHaveSameUnits = require('../lib/valuesHaveSameUnits');
 
 /**
  * Nomalize, collect and merge breakpoint configs.

@@ -1,4 +1,4 @@
-const varPattern = require('./lib/utils/varPattern');
+const varPattern = require('./lib/varPattern');
 
 /**
  * Grid class

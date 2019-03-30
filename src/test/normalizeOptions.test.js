@@ -1,4 +1,4 @@
-const { normalizeOptions, handleBreakpointConfigs } = require('./normalizeOptions');
+const { normalizeOptions, handleBreakpointConfigs } = require('../normalizeOptions');
 
 /**
  * Nomalize, collect and merge breakpoint configs.

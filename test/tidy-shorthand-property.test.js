@@ -1,6 +1,6 @@
-const { run } = require('../test');
+const run = require('.');
 const postcss = require('postcss');
-const tidyShorthandProperty = require('./tidy-shorthand-property');
+const tidyShorthandProperty = require('../tidy-shorthand-property');
 
 /**
  * Create a test plugin to replace shorthand properties. Running a test plugin

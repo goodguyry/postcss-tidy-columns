@@ -1,5 +1,5 @@
 const { normalizeOptions } = require('./normalizeOptions');
-const camelCaseString = require('./utils/camelCaseString');
+const camelCaseString = require('../lib/camelCaseString');
 
 /**
  * Parse and compile CSS @tidy at-rule parameters.

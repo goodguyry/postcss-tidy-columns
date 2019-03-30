@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-const cleanClone = require('./utils/cleanClone');
+const cleanClone = require('./lib/cleanClone');
 
 /**
  * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.

@@ -1,4 +1,4 @@
-const cleanClone = require('./utils/cleanClone');
+const cleanClone = require('./lib/cleanClone');
 
 /**
  * Replace `tidy-*` properties.

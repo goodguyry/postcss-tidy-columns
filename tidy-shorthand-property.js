@@ -1,4 +1,4 @@
-const cleanClone = require('./utils/cleanClone');
+const cleanClone = require('./lib/cleanClone');
 
 /**
  * Clean and trim shorthand property values.

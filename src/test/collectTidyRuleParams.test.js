@@ -1,6 +1,7 @@
 const postcss = require('postcss');
-const { run, runOptions } = require('../test');
-const collectTidyRuleParams = require('./collectTidyRuleParams');
+const runOptions = require('.');
+const run = require('../../test');
+const collectTidyRuleParams = require('../collectTidyRuleParams');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin

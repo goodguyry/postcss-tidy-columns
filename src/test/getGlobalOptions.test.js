@@ -1,7 +1,7 @@
 const postcss = require('postcss');
-const { runOptions } = require('../test');
-const getGlobalOptions = require('./getGlobalOptions');
-const { typical } = require('../test/sharedConfigs');
+const runOptions = require('.');
+const { typical } = require('../../test/sharedConfigs');
+const getGlobalOptions = require('../getGlobalOptions');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin

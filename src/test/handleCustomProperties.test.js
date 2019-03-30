@@ -1,4 +1,4 @@
-const handleCustomProperties = require('./handleCustomProperties');
+const handleCustomProperties = require('../handleCustomProperties');
 
 const rule = {
   error: () => false,

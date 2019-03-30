@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-const Grid = require('./Grid');
 const {
   allValues,
   edgeGutter,
@@ -10,7 +9,8 @@ const {
   siteMaxOnly,
   columnsOnly,
   customProperties,
-} = require('./test/sharedConfigs');
+} = require('./sharedConfigs');
+const Grid = require('../Grid');
 
 /**
  * Test a method of the Grid class.

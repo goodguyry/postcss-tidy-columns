@@ -1,6 +1,6 @@
-const parseAtruleParams = require('../lib/utils/parseAtruleParams');
-const compareStrings = require('../lib/utils/compareStrings');
-const getObjectByProperty = require('../lib/utils/getObjectByProperty');
+const parseAtruleParams = require('../lib/parseAtruleParams');
+const compareStrings = require('../lib/compareStrings');
+const getObjectByProperty = require('../lib/getObjectByProperty');
 
 /**
  * Check if an atrule.param is within a range of breakpoints.
