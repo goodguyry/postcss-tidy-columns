@@ -1,4 +1,4 @@
-const varPattern = require('./lib/varPattern');
+const { CUSTOM_PROP_REGEX } = require('./src/collectTidyRuleParams');
 
 /**
  * Columns class
@@ -66,7 +66,7 @@ class Columns {
   getSharedGap() {
     const { gap, columns } = this.options;
 
-    if (varPattern.test(gap)) {
+    if (CUSTOM_PROP_REGEX.test(gap)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
     } else if (!this.nonValues.includes(gap)) {
       const [value, units] = this.constructor.splitCssUnit(gap);

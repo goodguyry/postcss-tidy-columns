@@ -1,7 +1,10 @@
 const postcss = require('postcss');
 const runOptions = require('.');
 const run = require('../../test');
-const collectTidyRuleParams = require('../collectTidyRuleParams');
+const {
+  collectTidyRuleParams,
+  CUSTOM_PROP_REGEX
+} = require('../collectTidyRuleParams');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin
@@ -54,5 +57,20 @@ describe('Collect @tidy params from the provided CSS root', () => {
       '',
       {},
     ),
+  );
+});
+
+/**
+ * Pattern to match CSS Custom Properties.
+ */
+describe('Pattern to match CSS Custom Properties', () => {
+  test(
+    'Matches a custom property insertion',
+    () => expect(CUSTOM_PROP_REGEX.test('var(--the_123-propertyNAME)')).toBeTruthy(),
+  );
+
+  test(
+    'Ignores a simple property assignment',
+    () => expect(CUSTOM_PROP_REGEX.test('--the-variable name')).toBeFalsy(),
   );
 });
