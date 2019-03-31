@@ -92,6 +92,11 @@ testColumnsMethod({
       actual: new Columns(edgeCanvas).getSharedGap(),
       expected: 0,
     },
+    {
+      description: 'Builds the shared gap calculation when `gap` is a CSS Custom Property',
+      actual: new Columns(customProperties).getSharedGap(),
+      expected: `(${customProperties.gap} / ${customProperties.columns} * (${customProperties.columns} - 1))`,
+    },
   ],
 });
 
