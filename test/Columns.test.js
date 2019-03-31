@@ -31,11 +31,14 @@ const testColumnsMethod = (testConfig) => {
      *   @param {String} unitTest.expected    The expected plugin output.
      * }
      */
-    testConfig.tests.forEach((unitTest) => {
-      test(unitTest.description, () => {
-        expect(unitTest.actual).toEqual(unitTest.expected);
-      });
-    });
+    const reducedTests = testConfig.tests.reduce((acc, test) => [...acc, Object.values(test)], []);
+
+    test.each(reducedTests)(
+      '%s',
+      (theTest) => {
+        expect(theTest.actual).toEqual(theTest.expected);
+      },
+    );
   });
 };
 
