@@ -64,12 +64,13 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
  */
 describe('Pattern to match the `tidy-offset-*` property', () => {
   test.each([
-    'tidy-offset-left: 3',
-    'tidy-offset-right: 4',
+    ['tidy-offset-left: 3', ['tidy-offset-left', 'left']],
+    ['tidy-offset-right: 4', ['tidy-offset-right', 'right']],
   ])(
-    'Matches simple tidy-offset-* properties',
-    (input) => {
+    'Matches %s',
+    (input, expected) => {
       expect(OFFSET_REGEX.test(input)).toBeTruthy();
+      expect(JSON.stringify(input.match(OFFSET_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
 
@@ -79,9 +80,10 @@ describe('Pattern to match the `tidy-offset-*` property', () => {
     'tidy-column',
     'tidy-offset-full(6)',
   ])(
-    'Ignores non tidy-offset-* properties',
+    'Ignores %s',
     (input) => {
       expect(OFFSET_REGEX.test(input)).toBeFalsy();
+      expect(input.match(OFFSET_REGEX)).toEqual(null);
     },
   );
 });

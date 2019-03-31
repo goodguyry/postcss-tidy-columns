@@ -77,27 +77,33 @@ describe('The `tidy-span()` functions are replaced and their values reflect the 
  * Pattern to match `tidy-*` functions in declaration values.
  */
 describe('Pattern to match `tidy-*` functions in declaration values', () => {
+  // Wraps in JSON.stringify() to work around Jest bug.
   test.each([
-    'tidy-span(3)',
-    'tidy-offset(2)',
-    'tidy-span-full(1)',
-    'tidy-offset-full(4)',
+    [
+      'tidy-span(3)',
+      ['tidy-span(3)', 'span', '', '3'],
+    ],
+    [
+      'tidy-offset(2)',
+      ['tidy-offset(2)', 'offset', '', '2'],
+    ],
+    [
+      'tidy-span-full(1)',
+      ['tidy-span-full(1)', 'span', '-full', '1'],
+    ],
+    [
+      'tidy-offset-full(4)',
+      ['tidy-offset-full(4)', 'offset', '-full', '4'],
+    ],
+    [
+      'calc(tidy-span-full(1) + 20px)',
+      ['tidy-span-full(1)', 'span', '-full', '1'],
+    ],
   ])(
-    'Matches simple tidy-* function values',
-    (input) => {
+    'Matches %s',
+    (input, expected) => {
       expect(FUNCTION_REGEX.test(input)).toBeTruthy();
-    },
-  );
-
-  test.each([
-    'calc(tidy-span(3) + 20px)',
-    'calc(tidy-offset(2) + 20px)',
-    'calc(tidy-span-full(1) + 20px)',
-    'calc(tidy-offset-full(4) + 20px)',
-  ])(
-    'Matches tidy-* function values mixed with other values',
-    (input) => {
-      expect(FUNCTION_REGEX.test(input)).toBeTruthy();
+      expect(JSON.stringify(input.match(FUNCTION_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
 
@@ -107,8 +113,9 @@ describe('Pattern to match `tidy-*` functions in declaration values', () => {
     'tidy-offset',
     'calc(tidy-span(hello))',
   ])(
-    'Ignores non tidy-* function values',
+    'Ignores %s',
     (input) => {
+      expect(input.match(FUNCTION_REGEX)).toEqual(null);
       expect(FUNCTION_REGEX.test(input)).toBeFalsy();
     },
   );
