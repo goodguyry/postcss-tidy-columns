@@ -64,13 +64,22 @@ describe('Collect @tidy params from the provided CSS root', () => {
  * Pattern to match CSS Custom Properties.
  */
 describe('Pattern to match CSS Custom Properties', () => {
-  test(
+  test.each([
+    'var(--the_123-propertyNAME)',
+  ])(
     'Matches a custom property insertion',
-    () => expect(CUSTOM_PROP_REGEX.test('var(--the_123-propertyNAME)')).toBeTruthy(),
+    (input) => {
+      expect(CUSTOM_PROP_REGEX.test(input)).toBeTruthy();
+    },
   );
 
-  test(
-    'Ignores a simple property assignment',
-    () => expect(CUSTOM_PROP_REGEX.test('--the-variable name')).toBeFalsy(),
+  test.each([
+    '--var-name',
+    'var( hey-there )',
+  ])(
+    'Ignores property-like strings that aren\'t insertions',
+    (input) => {
+      expect(CUSTOM_PROP_REGEX.test(input)).toBeFalsy();
+    },
   );
 });
