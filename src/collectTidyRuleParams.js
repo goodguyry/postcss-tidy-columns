@@ -5,7 +5,7 @@ const handleCustomProperties = require('./handleCustomProperties');
  *
  * @type {RegExp}
  */
-const CUSTOM_PROP_REGEX = /var\((--[\w-]+)\)/;
+const CUSTOM_PROP_REGEX = /var\(\s?(--[\w-]+)\s?\)/;
 
 /**
  * Collect @tidy params from the provided CSS root.

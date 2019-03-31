@@ -66,6 +66,7 @@ describe('Collect @tidy params from the provided CSS root', () => {
 describe('Pattern to match CSS Custom Properties', () => {
   test.each([
     'var(--the_123-propertyNAME)',
+    'var( --the_123-propertyNAME )',
   ])(
     'Matches a custom property insertion',
     (input) => {
