@@ -87,7 +87,7 @@ describe('Matches valid tidy-column shorthand values', () => {
     ],
     [
       '1 / span 6',
-      ['1 / span 6', '1', '/ span 6', null],
+      ['1 / span 6', '1', '/ span 6', undefined],
     ],
     [
       '0 / span 2 / 1',
@@ -95,7 +95,7 @@ describe('Matches valid tidy-column shorthand values', () => {
     ],
     [
       'none / span 5',
-      ['none / span 5', 'none', '/ span 5', null],
+      ['none / span 5', 'none', '/ span 5', undefined],
     ],
   ])(
     'Matches tidy-column: %s',

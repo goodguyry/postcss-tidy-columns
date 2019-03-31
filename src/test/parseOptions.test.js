@@ -4,28 +4,32 @@ const parseOptions = require('../parseOptions');
  * Parse and compile CSS @tidy at-rule parameters.
  */
 describe('Parse and compile CSS @tidy at-rule parameters.', () => {
-  test('Collects all values as expected', () => {
-    expect(parseOptions(['columns 12', 'gap 2rem', 'edge 2rem', 'site-max 90rem']))
-      .toEqual({
+  test.each([
+    [
+      ['columns 12', 'gap 2rem', 'edge 2rem', 'site-max 90rem'],
+      {
         columns: 12,
         gap: '2rem',
         edge: '2rem',
         siteMax: '90rem',
-      });
-  });
-
-  test('Parses `columns` value as a number', () => {
-    expect(parseOptions(['columns 12']))
-      .toEqual({ columns: 12 });
-  });
-
-  test('Collects hyphenated `site-max` value', () => {
-    expect(parseOptions(['site-max 90rem']))
-      .toEqual({ siteMax: '90rem' });
-  });
-
-  test('Collects camelCased `siteMax` value', () => {
-    expect(parseOptions(['siteMax 90rem']))
-      .toEqual({ siteMax: '90rem' });
-  });
+      },
+    ],
+    [
+      ['columns 12'],
+      { columns: 12 },
+    ],
+    [
+      ['site-max 90rem'],
+      { siteMax: '90rem' },
+    ],
+    [
+      ['siteMax 90rem'],
+      { siteMax: '90rem' },
+    ],
+  ])(
+    'Parses: %O',
+    (input, expected) => {
+      expect(parseOptions(input)).toEqual(expected);
+    },
+  );
 });

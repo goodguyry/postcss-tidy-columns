@@ -62,22 +62,12 @@ describe('The `tidy-span()` functions are replaced and their values reflect the 
       typical,
     ),
   );
-
-  test(
-    'Replaces the `tidy-span()` function when inside a `calc()`` function',
-    () => run(
-      'div { max-width: calc(tidy-span-full(4) + 20px); }',
-      'div { max-width: calc(((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 4) + 1.25rem * 3) + 20px); }',
-      typical,
-    ),
-  );
 });
 
 /**
  * Pattern to match `tidy-*` functions in declaration values.
  */
 describe('Pattern to match `tidy-*` functions in declaration values', () => {
-  // Wraps in JSON.stringify() to work around Jest bug.
   test.each([
     [
       'tidy-span(3)',
@@ -103,6 +93,7 @@ describe('Pattern to match `tidy-*` functions in declaration values', () => {
     'Matches %s',
     (input, expected) => {
       expect(FUNCTION_REGEX.test(input)).toBeTruthy();
+      // Wrapped in JSON.stringify() to work around Jest bug.
       expect(JSON.stringify(input.match(FUNCTION_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
