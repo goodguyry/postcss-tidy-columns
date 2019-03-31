@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 const {
   allValues,
-  edgeGutter,
-  edgeCanvas,
-  gapCanvas,
+  edgeGap,
+  edgeSiteMax,
+  gapSiteMax,
   edgeOnly,
   gapOnly,
   siteMaxOnly,
@@ -84,12 +84,12 @@ testColumnsMethod({
     },
     {
       description: 'Calculates a shared gap with `px` value',
-      actual: new Columns(edgeGutter).getSharedGap(),
+      actual: new Columns(edgeGap).getSharedGap(),
       expected: '9.1667px',
     },
     {
       description: 'Calculates a `0` shared gap if a gap option is not declared',
-      actual: new Columns(edgeCanvas).getSharedGap(),
+      actual: new Columns(edgeSiteMax).getSharedGap(),
       expected: 0,
     },
     {
@@ -220,7 +220,7 @@ testColumnsMethod({
     // ---------- No siteMax
     {
       description: 'Omits a `full` value with no `siteMax` option',
-      actual: new Columns(edgeGutter).spanCalc(1),
+      actual: new Columns(edgeGap).spanCalc(1),
       expected: {
         fluid: 'calc((100vw - 1rem * 2) / 12 - 9.1667px)',
       },
@@ -228,7 +228,7 @@ testColumnsMethod({
     // ---------- No gap
     {
       description: 'Omits shared gap for single column with no `gap` option',
-      actual: new Columns(edgeCanvas).spanCalc(1),
+      actual: new Columns(edgeSiteMax).spanCalc(1),
       expected: {
         fluid: 'calc((100vw - 1.25rem * 2) / 16)',
         full: 'calc((1024px - 1.25rem * 2) / 16)',
@@ -236,7 +236,7 @@ testColumnsMethod({
     },
     {
       description: 'Omits the gap addition wtih no `gap` option',
-      actual: new Columns(edgeCanvas).spanCalc(2),
+      actual: new Columns(edgeSiteMax).spanCalc(2),
       expected: {
         fluid: 'calc(((100vw - 1.25rem * 2) / 16) * 2)',
         full: 'calc(((1024px - 1.25rem * 2) / 16) * 2)',
@@ -245,7 +245,7 @@ testColumnsMethod({
     // ---------- No edge
     {
       description: 'Omits the edge subtraction with no `edge` option',
-      actual: new Columns(gapCanvas).spanCalc(1),
+      actual: new Columns(gapSiteMax).spanCalc(1),
       expected: {
         fluid: 'calc(100vw / 16 - 14.0625px)',
         full: 'calc(60rem / 16 - 14.0625px)',
@@ -377,7 +377,7 @@ testColumnsMethod({
     // ---------- No siteMax
     {
       description: 'Omits a `full` value with no `siteMax` option',
-      actual: new Columns(edgeGutter).offsetCalc(1),
+      actual: new Columns(edgeGap).offsetCalc(1),
       expected: {
         fluid: 'calc(((100vw - 1rem * 2) / 12 - 9.1667px) + 10px)',
       },
@@ -385,7 +385,7 @@ testColumnsMethod({
     // ---------- No gap
     {
       description: 'Omits shared gap for single column with no `gap` option',
-      actual: new Columns(edgeCanvas).offsetCalc(1),
+      actual: new Columns(edgeSiteMax).offsetCalc(1),
       expected: {
         fluid: 'calc((100vw - 1.25rem * 2) / 16)',
         full: 'calc((1024px - 1.25rem * 2) / 16)',
@@ -393,7 +393,7 @@ testColumnsMethod({
     },
     {
       description: 'Omits the gap addition wtih no `gap` option',
-      actual: new Columns(edgeCanvas).offsetCalc(2),
+      actual: new Columns(edgeSiteMax).offsetCalc(2),
       expected: {
         fluid: 'calc(((100vw - 1.25rem * 2) / 16) * 2)',
         full: 'calc(((1024px - 1.25rem * 2) / 16) * 2)',
@@ -402,7 +402,7 @@ testColumnsMethod({
     // ---------- No edge
     {
       description: 'Omits the edge subtraction with no `edge` option',
-      actual: new Columns(gapCanvas).offsetCalc(1),
+      actual: new Columns(gapSiteMax).offsetCalc(1),
       expected: {
         fluid: 'calc((100vw / 16 - 14.0625px) + 15px)',
         full: 'calc((60rem / 16 - 14.0625px) + 15px)',
