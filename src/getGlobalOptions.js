@@ -1,6 +1,6 @@
 const parseOptions = require('./parseOptions');
 const { normalizeOptions } = require('./normalizeOptions');
-const collectTidyRuleParams = require('./collectTidyRuleParams');
+const { collectTidyRuleParams } = require('./collectTidyRuleParams');
 
 /**
   * Collect and merge global plugin options.

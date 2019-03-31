@@ -1,32 +1,19 @@
 const cleanClone = require('./lib/cleanClone');
+const cleanShorthandValues = require('./lib/cleanShorthandValues');
 
 /**
- * Clean and trim shorthand property values.
- * Remove slashes, spaces, and invalid/unneeded values.
+ * Matches valid tidy-column shorthand values.
  *
- * @param {Object} values An object of matched shorthand property values.
- *
- * @return {Object}
+ * @type {RegExp}
  */
-function cleanShorthandValues(values) {
-  const properties = Object.keys(values)
-    .reduce((acc, key) => {
-      const value = values[key];
+const COLUMNS_REGEX = /^([\d.-]+|none)\s?(\/\s?span\s[\d.-]+)\s?(\/\s?[\d.-]+)?$/;
 
-      if (undefined !== value) {
-        const cleanValue = value.replace(/\/|span/g, '').trim();
-
-        // Zero and `none` values are skipped.
-        if (0 !== Number(cleanValue, 10) && 'none' !== cleanValue) {
-          acc[key] = cleanValue;
-        }
-      }
-
-      return acc;
-    }, {});
-
-  return properties;
-}
+/**
+ * Matches valid tidy-offset shorthand values.
+ *
+ * @type {RegExp}
+ */
+const OFFSET_REGEX = /^(\d+|none)\s?(\/\s?\d+)?$/;
 
 /**
  * Replace `tidy-*` shorthand with long-form equivalents.
@@ -45,7 +32,6 @@ function tidyShorthandProperty(declaration) {
    * - tidy-offset-right
    */
   if ('tidy-column' === declaration.prop) {
-    const COLUMNS_REGEX = /^([\d.-]+|none)\s?(\/\s?span\s[\d.-]+)\s?(\/\s?[\d.-]+)?$/;
     /**
      * {undefined}  The full declaration value.
      * offsetLeft:  The `tidy-offset-left` value.
@@ -104,7 +90,6 @@ function tidyShorthandProperty(declaration) {
    * - tidy-offset-right
    */
   if ('tidy-offset' === declaration.prop) {
-    const OFFSET_REGEX = /^(\d+|none)\s?(\/\s?\d+)?$/;
     /**
      * {undefined}  The full declaration value.
      * offsetLeft:  The `tidy-offset-left` value.
@@ -145,4 +130,8 @@ function tidyShorthandProperty(declaration) {
   }
 }
 
-module.exports = tidyShorthandProperty;
+module.exports = {
+  tidyShorthandProperty,
+  COLUMNS_REGEX,
+  OFFSET_REGEX,
+};

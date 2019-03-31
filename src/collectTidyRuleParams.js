@@ -1,5 +1,11 @@
-const varPattern = require('../lib/varPattern');
 const handleCustomProperties = require('./handleCustomProperties');
+
+/**
+ * Pattern to match CSS Custom Properties.
+ *
+ * @type {RegExp}
+ */
+const CUSTOM_PROP_REGEX = /var\(\s?(--[\w-]+)\s?\)/;
 
 /**
  * Collect @tidy params from the provided CSS root.
@@ -19,7 +25,7 @@ function collectTidyRuleParams(css, fromCssRoot) {
 
     if (rootCheck) {
       // Reject `site-max` with CSS Custom Property.
-      if (varPattern.test(params)) {
+      if (CUSTOM_PROP_REGEX.test(params)) {
         handleCustomProperties(atrule, params);
       }
 
@@ -31,4 +37,7 @@ function collectTidyRuleParams(css, fromCssRoot) {
   return atRuleParams;
 }
 
-module.exports = collectTidyRuleParams;
+module.exports = {
+  collectTidyRuleParams,
+  CUSTOM_PROP_REGEX,
+};

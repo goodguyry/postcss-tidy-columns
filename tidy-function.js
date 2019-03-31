@@ -1,5 +1,13 @@
 /* eslint-disable no-param-reassign */
 const cleanClone = require('./lib/cleanClone');
+const { stripExtraCalc } = require('./lib/stripExtraCalc');
+
+/**
+ * Pattern to match `tidy-*` functions in declaration values.
+ *
+ * @type {RegExp}
+ */
+const FUNCTION_REGEX = /tidy-(span|offset)(|-full)\(([\d.-]+)\)/;
 
 /**
  * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
@@ -11,7 +19,6 @@ const cleanClone = require('./lib/cleanClone');
  * @param {Object} Tidy        An instance of the Tidy class.
  */
 function tidyFunction(declaration, tidy) {
-  const FUNCTION_REGEX = /tidy-(span|offset)(|-full)\(([\d.-]+)\)/;
   const globalRegExp = new RegExp(FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(FUNCTION_REGEX);
 
@@ -52,11 +59,8 @@ function tidyFunction(declaration, tidy) {
         // tidy-[span|offset] ()
         acc.replace(match, fluid);
 
-      /**
-       * Remove nested calc() function resulting from the tidy-* function replacement.
-       */
-      const NESTED_CALC_REGEX = /(calc[(\s]+)(calc\()/;
-      return (NESTED_CALC_REGEX.test(acc)) ? acc.replace(NESTED_CALC_REGEX, '$1(') : acc;
+      // Remove any nested calc() function.
+      return stripExtraCalc(acc);
     }, declaration.value);
 
     // Replace declaration(s) with cloned and updated declarations.
@@ -70,4 +74,7 @@ function tidyFunction(declaration, tidy) {
   }
 }
 
-module.exports = tidyFunction;
+module.exports = {
+  tidyFunction,
+  FUNCTION_REGEX,
+};

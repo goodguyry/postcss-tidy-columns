@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 const run = require('.');
 const { typical } = require('./sharedConfigs');
+const { FUNCTION_REGEX } = require('../tidy-function');
 
 /**
  * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
@@ -69,5 +70,46 @@ describe('The `tidy-span()` functions are replaced and their values reflect the 
       'div { max-width: calc(((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 4) + 1.25rem * 3) + 20px); }',
       typical,
     ),
+  );
+});
+
+/**
+ * Pattern to match `tidy-*` functions in declaration values.
+ */
+describe('Pattern to match `tidy-*` functions in declaration values', () => {
+  test.each([
+    'tidy-span(3)',
+    'tidy-offset(2)',
+    'tidy-span-full(1)',
+    'tidy-offset-full(4)',
+  ])(
+    'Matches simple tidy-* function values',
+    (input) => {
+      expect(FUNCTION_REGEX.test(input)).toBeTruthy();
+    },
+  );
+
+  test.each([
+    'calc(tidy-span(3) + 20px)',
+    'calc(tidy-offset(2) + 20px)',
+    'calc(tidy-span-full(1) + 20px)',
+    'calc(tidy-offset-full(4) + 20px)',
+  ])(
+    'Matches tidy-* function values mixed with other values',
+    (input) => {
+      expect(FUNCTION_REGEX.test(input)).toBeTruthy();
+    },
+  );
+
+  test.each([
+    'tidy-var(gap)',
+    'tidy-span',
+    'tidy-offset',
+    'calc(tidy-span(hello))',
+  ])(
+    'Ignores non tidy-* function values',
+    (input) => {
+      expect(FUNCTION_REGEX.test(input)).toBeFalsy();
+    },
   );
 });

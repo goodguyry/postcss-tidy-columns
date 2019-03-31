@@ -1,6 +1,13 @@
 const cleanClone = require('./lib/cleanClone');
 
 /**
+ * Pattern to match the `tidy-offset-*` property.
+ *
+ * @type {RegExp}
+ */
+const OFFSET_REGEX = /tidy-offset-(left|right)/;
+
+/**
  * Replace `tidy-*` properties.
  * - tidy-span
  * - tidy-offset-left
@@ -48,8 +55,6 @@ function tidyProperty(declaration, tidy) {
     declaration.replaceWith(columnDecl);
   }
 
-  const OFFSET_REGEX = /tidy-offset-(left|right)/;
-
   // Replace`tidy-offset-left|right` declaration with `margin-left|right`.
   if (OFFSET_REGEX.test(declaration.prop)) {
     /**
@@ -89,4 +94,7 @@ function tidyProperty(declaration, tidy) {
   }
 }
 
-module.exports = tidyProperty;
+module.exports = {
+  tidyProperty,
+  OFFSET_REGEX,
+};
