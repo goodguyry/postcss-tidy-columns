@@ -54,7 +54,7 @@ describe('The `tidy-var()` function is replaced with the expected option value',
   test(
     'Replaces `tidy-var` when used as a `tidy-*` property value',
     () => run(
-      'div { tidy-span: tidy-var(12); }',
+      'div { tidy-span: tidy-var(columns); }',
       'div { width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11); }',
       typicalWithBreakpoints,
     ),
