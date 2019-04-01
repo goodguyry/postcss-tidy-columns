@@ -38,7 +38,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Replaces the `tidy-offset()` function when inside a `calc()`` function',
     () => run(
       'div { margin-left: calc(20px + tidy-offset(3)); }',
-      'div { margin-left: calc(20px  + ((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3)); }',
+      'div { margin-left: calc(20px + ((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3)); }',
       typical,
     ),
   );
