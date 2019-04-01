@@ -61,6 +61,15 @@ describe('The `tidy-var()` function is replaced with the expected option value',
   );
 
   test(
+    'Replaces `tidy-var` when used as a `tidy-*` function value',
+    () => run(
+      'div { width: tidy-span(tidy-var(columns)); }',
+      'div { width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11); }',
+      typicalWithBreakpoints,
+    ),
+  );
+
+  test(
     'Replaces the correct value from within a matched breakpoint',
     () => run(
       // eslint-disable-next-line max-len
