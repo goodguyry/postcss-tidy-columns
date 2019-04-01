@@ -29,35 +29,45 @@ describe('Get options based on a matching breakpoint value.', () => {
     ],
   };
 
-  test('Matches a min-width media query value between breakpoint values', () => {
-    expect(breakpointMatch('(min-width: 900px)', options))
-      .toEqual({ breakpoint: '768px', gap: '0.625rem' });
-  });
+  test.each([
+    [
+      '(min-width: 900px)',
+      { breakpoint: '768px', gap: '0.625rem' },
+    ],
+    [
+      '(max-width: 900px)',
+      { breakpoint: '768px', gap: '0.625rem' },
+    ],
+    [
+      '(min-width: 768px) and (max-width: 1023px)',
+      { breakpoint: '768px', gap: '0.625rem' },
+    ],
+  ])(
+    'Matches %s',
+    (input, expected) => {
+      expect(breakpointMatch(input, options)).toEqual(expected);
+    },
+  );
 
-  test('Matches a max-width media query value between breakpoint values', () => {
-    expect(breakpointMatch('(max-width: 900px)', options))
-      .toEqual({ breakpoint: '768px', gap: '0.625rem' });
-  });
-
-  test('Matches a complex media query between two breakpoint values', () => {
-    expect(breakpointMatch('(min-width: 768px) and (max-width: 1023px)', options))
-      .toEqual({ breakpoint: '768px', gap: '0.625rem' });
-  });
-
-  test('Ignores a min-width media query value with no matching breakpoint', () => {
-    expect(breakpointMatch('(min-width: 600px)', options))
-      .toEqual(undefined);
-  });
-
-  test('Ignores a max-width media query value with no matching breakpoint', () => {
-    expect(breakpointMatch('(max-width: 600px)', options))
-      .toEqual(undefined);
-  });
-
-  test('Ignores a complex media query spanning multiple breakpoint values', () => {
-    expect(breakpointMatch('(min-width: 768px) and (max-width: 1439px)', options))
-      .toEqual(undefined);
-  });
+  test.each([
+    [
+      '(min-width: 600px)',
+      undefined,
+    ],
+    [
+      '(max-width: 600px)',
+      undefined,
+    ],
+    [
+      '(min-width: 768px) and (max-width: 1439px)',
+      undefined,
+    ],
+  ])(
+    'Ignores %s',
+    (input, expected) => {
+      expect(breakpointMatch(input, options)).toEqual(expected);
+    },
+  );
 });
 
 const options = {

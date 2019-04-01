@@ -3,7 +3,7 @@ const runOptions = require('.');
 const run = require('../../test');
 const {
   collectTidyRuleParams,
-  CUSTOM_PROP_REGEX
+  CUSTOM_PROP_REGEX,
 } = require('../collectTidyRuleParams');
 
 /**

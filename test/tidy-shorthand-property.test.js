@@ -81,14 +81,27 @@ describe('The `tidy-offset` shorthand property is replaced with the long-form eq
  */
 describe('Matches valid tidy-column shorthand values', () => {
   test.each([
-    '2 / span 3 / 1',
-    '1 / span 6',
-    '0 / span 2 / 1',
-    'none / span 5',
+    [
+      '2 / span 3 / 1',
+      ['2 / span 3 / 1', '2', '/ span 3', '/ 1'],
+    ],
+    [
+      '1 / span 6',
+      ['1 / span 6', '1', '/ span 6', undefined],
+    ],
+    [
+      '0 / span 2 / 1',
+      ['0 / span 2 / 1', '0', '/ span 2', '/ 1'],
+    ],
+    [
+      'none / span 5',
+      ['none / span 5', 'none', '/ span 5', undefined],
+    ],
   ])(
-    'Matches expected, missing, and `none` or `0` tidy-column shorthand values',
-    (input) => {
+    'Matches tidy-column: %s',
+    (input, expected) => {
       expect(COLUMNS_REGEX.test(input)).toBeTruthy();
+      expect(JSON.stringify(input.match(COLUMNS_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
 });
@@ -98,13 +111,23 @@ describe('Matches valid tidy-column shorthand values', () => {
  */
 describe('Matches valid tidy-offset shorthand values', () => {
   test.each([
-    '2 / 1',
-    '1',
-    'none / 3',
+    [
+      '2 / 1',
+      ['2 / 1', '2', '/ 1'],
+    ],
+    [
+      '1',
+      ['1', '1', null],
+    ],
+    [
+      'none / 3',
+      ['none / 3', 'none', '/ 3'],
+    ],
   ])(
-    'Matches expected, missing, and `none` or `0` tidy-offset shorthand values',
-    (input) => {
+    'Matches tidy-offset: %s',
+    (input, expected) => {
       expect(OFFSET_REGEX.test(input)).toBeTruthy();
+      expect(JSON.stringify(input.match(OFFSET_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
 });

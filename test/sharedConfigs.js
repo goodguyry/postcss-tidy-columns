@@ -8,19 +8,19 @@ module.exports = {
     edge: '32px',
     gap: '0.625rem', // 0.5859rem
   },
-  edgeGutter: {
+  edgeGap: {
     columns: 12,
     siteMax: undefined,
     edge: '1rem',
     gap: '10px', // 9.1667px
   },
-  edgeCanvas: {
+  edgeSiteMax: {
     columns: 16,
     siteMax: '1024px',
     edge: '1.25rem',
     gap: undefined,
   },
-  gapCanvas: {
+  gapSiteMax: {
     columns: 16,
     siteMax: '60rem',
     edge: undefined,

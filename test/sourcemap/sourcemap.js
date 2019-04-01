@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 const path = require('path');
+const { typical } = require('../sharedConfigs');
 
 module.exports = [
   {
     description: 'Sourcemap fixture: offset-left.css',
-    skip: false,
-    options: {},
+    options: typical,
     map: {
       version: 3,
       sources: [
@@ -25,8 +25,7 @@ module.exports = [
   },
   {
     description: 'Sourcemap fixture: span.css',
-    skip: false,
-    options: {},
+    options: typical,
     map: {
       version: 3,
       sources: [
@@ -46,8 +45,7 @@ module.exports = [
   },
   {
     description: 'Sourcemap fixture: column.css',
-    skip: false,
-    options: {},
+    options: typical,
     map: {
       version: 3,
       sources: [
@@ -67,8 +65,7 @@ module.exports = [
   },
   {
     description: 'Sourcemap fixture: offset.css',
-    skip: false,
-    options: {},
+    options: typical,
     map: {
       version: 3,
       sources: [
@@ -88,8 +85,7 @@ module.exports = [
   },
   {
     description: 'Sourcemap fixture: function-span.css',
-    skip: false,
-    options: {},
+    options: typical,
     map: {
       version: 3,
       sources: [

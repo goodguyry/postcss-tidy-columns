@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const run = require('.');
-const { typical, edgeGutter } = require('./sharedConfigs');
+const { typical, edgeGap } = require('./sharedConfigs');
 const { OFFSET_REGEX } = require('../tidy-property');
 
 /**
@@ -34,7 +34,7 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     () => run(
       'div { tidy-offset-right: 2; }',
       'div { margin-right: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px * 2); }',
-      edgeGutter,
+      edgeGap,
     ),
   );
 });
@@ -54,7 +54,7 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     () => run(
       'div { tidy-span: 2; }',
       'div { width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
-      edgeGutter,
+      edgeGap,
     ),
   );
 });
@@ -64,12 +64,14 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
  */
 describe('Pattern to match the `tidy-offset-*` property', () => {
   test.each([
-    'tidy-offset-left: 3',
-    'tidy-offset-right: 4',
+    ['tidy-offset-left: 3', ['tidy-offset-left', 'left']],
+    ['tidy-offset-right: 4', ['tidy-offset-right', 'right']],
   ])(
-    'Matches simple tidy-offset-* properties',
-    (input) => {
+    'Matches %s',
+    (input, expected) => {
       expect(OFFSET_REGEX.test(input)).toBeTruthy();
+      // Wrapped in JSON.stringify() to work around Jest bug.
+      expect(JSON.stringify(input.match(OFFSET_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
 
@@ -79,9 +81,10 @@ describe('Pattern to match the `tidy-offset-*` property', () => {
     'tidy-column',
     'tidy-offset-full(6)',
   ])(
-    'Ignores non tidy-offset-* properties',
+    'Ignores %s',
     (input) => {
       expect(OFFSET_REGEX.test(input)).toBeFalsy();
+      expect(input.match(OFFSET_REGEX)).toEqual(null);
     },
   );
 });

@@ -184,15 +184,32 @@ describe('Nomalize, collect and merge breakpoint configs', () => {
  */
 describe('Matches CSS length values of the supported unit values (px, em, rem)', () => {
   test.each([
-    '90rem',
-    '20px',
-    '4em',
-    '0.625rem',
-    '0',
+    [
+      '90rem',
+      ['90rem', 'rem'],
+    ],
+    [
+      '20px',
+      ['20px', 'px'],
+    ],
+    [
+      '4em',
+      ['4em', 'em'],
+    ],
+    [
+      '0.625rem',
+      ['0.625rem', 'rem'],
+    ],
+    [
+      '0',
+      ['0', null],
+    ],
   ])(
-    'Correctly matches length values with supported units',
-    (input) => {
+    'Correctly matches length values with supported units: %s',
+    (input, expected) => {
       expect(LENGTH_REGEX.test(input)).toBeTruthy();
+      // Wrapped in JSON.stringify() to work around Jest bug.
+      expect(JSON.stringify(input.match(LENGTH_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
 
@@ -202,9 +219,10 @@ describe('Matches CSS length values of the supported unit values (px, em, rem)',
     '7ch',
     '60 rem',
   ])(
-    'Ignores unsupported length values',
+    'Ignores unsupported length values: %s',
     (input) => {
       expect(LENGTH_REGEX.test(input)).toBeFalsy();
+      expect(input.match(LENGTH_REGEX)).toEqual(null);
     },
   );
 });

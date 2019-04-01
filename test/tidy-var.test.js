@@ -67,13 +67,24 @@ describe('The `tidy-var()` function is replaced with the expected option value',
  */
 describe('Matches tidy-var() functions', () => {
   test.each([
-    'tidy-var(gap)',
-    'tidy-var(edge)',
-    'tidy-var(siteMax)',
+    [
+      'tidy-var(gap)',
+      ['tidy-var(gap)', 'gap'],
+    ],
+    [
+      'tidy-var(edge)',
+      ['tidy-var(edge)', 'edge'],
+    ],
+    [
+      'tidy-var(siteMax)',
+      ['tidy-var(siteMax)', 'siteMax'],
+    ],
   ])(
-    'Matches expected tidy-var functions',
-    (input) => {
+    'Matches %s',
+    (input, expected) => {
       expect(VAR_FUNCTION_REGEX.test(input)).toBeTruthy();
+      // Wrapped in JSON.stringify() to work around Jest bug.
+      expect(JSON.stringify(input.match(VAR_FUNCTION_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
 
@@ -84,9 +95,10 @@ describe('Matches tidy-var() functions', () => {
     'tidy-var(hello)',
     'calc(tidy-var(hello))',
   ])(
-    'Ignores non tidy-var() functions',
+    'Ignores %s',
     (input) => {
       expect(VAR_FUNCTION_REGEX.test(input)).toBeFalsy();
+      expect(input.match(VAR_FUNCTION_REGEX)).toEqual(null);
     },
   );
 });
