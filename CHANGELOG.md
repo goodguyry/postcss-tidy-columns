@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 **Added**
 
 - Adds support for configuring different grid specs across multiple breakpoints (#20)
-- Adds a `tidy-var()` function for retrieving option values in property values (#27)
+- Adds a `tidy-var()` function for retrieving option values in property values (#27, #32)
 
 **Changed**
 
