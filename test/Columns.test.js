@@ -31,7 +31,11 @@ const testColumnsMethod = (testConfig) => {
      *   @param {String} unitTest.expected    The expected plugin output.
      * }
      */
-    const reducedTests = testConfig.tests.reduce((acc, test) => [...acc, Object.values(test)], []);
+    const reducedTests = testConfig.tests.reduce((acc, test) => {
+      // TODO: Use Object.values(test) once Node v6 support is dropped.
+      const testValues = Object.keys(test).map(key => test[key]);
+      return [...acc, testValues];
+    }, []);
 
     test.each(reducedTests)(
       '%s',
