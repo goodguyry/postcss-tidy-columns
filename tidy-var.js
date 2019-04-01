@@ -6,7 +6,7 @@ const cleanClone = require('./lib/cleanClone');
  *
  * @type {RegExp}
  */
-const VAR_FUNCTION_REGEX = /tidy-var\(["']?(edge|gap|siteMax)["']?\)/i;
+const VAR_FUNCTION_REGEX = /tidy-var\(["']?(columns|edge|gap|siteMax)["']?\)/i;
 
 /**
  * Replace `tidy-var()` functions within property values.
@@ -48,14 +48,18 @@ function tidyVar(declaration, tidy) {
       return acc;
     }, declaration.value);
 
-    // Replace declaration(s) with cloned and updated declarations.
-    declaration.replaceWith(cleanClone(
+    // Clone after so the new declaration can be walked again.
+    // This avoids a situation where another Tidy property or function is within this declaration.
+    declaration.cloneAfter(cleanClone(
       declaration,
       {
         prop: declaration.prop,
         value: replaceWithValue,
       },
     ));
+
+    // Remove the original declaration.
+    declaration.remove();
   }
 }
 
