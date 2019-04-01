@@ -52,6 +52,15 @@ describe('The `tidy-var()` function is replaced with the expected option value',
   );
 
   test(
+    'Replaces `tidy-var` when used as a `tidy-*` property value',
+    () => run(
+      'div { tidy-span: tidy-var(12); }',
+      'div { width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11); }',
+      typicalWithBreakpoints,
+    ),
+  );
+
+  test(
     'Replaces the correct value from within a matched breakpoint',
     () => run(
       // eslint-disable-next-line max-len
@@ -78,6 +87,14 @@ describe('Matches tidy-var() functions', () => {
     [
       'tidy-var(siteMax)',
       ['tidy-var(siteMax)', 'siteMax'],
+    ],
+    [
+      'tidy-var(columns)',
+      ['tidy-var(columns)', 'columns'],
+    ],
+    [
+      'tidy-span(tidy-var(columns))',
+      ['tidy-var(columns)', 'columns'],
     ],
   ])(
     'Matches %s',
