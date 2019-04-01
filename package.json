@@ -29,7 +29,8 @@
   },
   "scripts": {
     "test": "jest",
-    "watch": "jest --watchAll --verbose"
+    "watch": "jest --watchAll",
+    "watch:verbose": "jest --watchAll  --verbose"
   },
   "jest": {
     "testEnvironment": "node"

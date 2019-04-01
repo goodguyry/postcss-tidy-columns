@@ -1,10 +1,10 @@
-const Grid = require('./Grid');
-const { getLocalOptions } = require('./lib/parse-options');
-const cleanClone = require('./lib/utils/cleanClone');
+const Columns = require('./Columns');
+const getLocalOptions = require('./src/getLocalOptions');
+const cleanClone = require('./lib/cleanClone');
 
 /**
  * Tidy class
- * Collect rule-specific settings and properties; instantiate a new Grid instance
+ * Collect rule-specific settings and properties; instantiate a new Columns instance.
  *
  * @param {Object} rule          The current CSS rule.
  * @param {Object} globalOptions The global plugin options.
@@ -24,8 +24,8 @@ class Tidy {
       delete currentOptions.breakpoint;
     }
 
-    // Instantiate Grid based on the merged options.
-    this.grid = new Grid(currentOptions);
+    // Instantiate Columns based on the merged options.
+    this.columns = new Columns(currentOptions);
   }
 
   /**

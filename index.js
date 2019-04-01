@@ -1,10 +1,10 @@
 const postcss = require('postcss');
 const Tidy = require('./Tidy');
-const { getGlobalOptions } = require('./lib/parse-options');
-const tidyShorthandProperty = require('./lib/tidy-shorthand-property');
-const tidyProperty = require('./lib/tidy-property');
-const tidyFunction = require('./lib/tidy-function');
-const tidyVar = require('./lib/tidy-var');
+const getGlobalOptions = require('./src/getGlobalOptions');
+const { tidyShorthandProperty } = require('./tidy-shorthand-property');
+const { tidyProperty } = require('./tidy-property');
+const { tidyFunction } = require('./tidy-function');
+const { tidyVar } = require('./tidy-var');
 
 /**
  * Parse rules and insert span and offset values.
@@ -39,7 +39,7 @@ module.exports = postcss.plugin(
       });
 
       const { fullWidthRule } = tidy;
-      const { siteMax } = tidy.grid.options;
+      const { siteMax } = tidy.columns.options;
 
       // Add the media query if a siteMax is declared and the `fullWidthRule` has children.
       if (undefined !== siteMax && fullWidthRule.nodes.length > 0) {
