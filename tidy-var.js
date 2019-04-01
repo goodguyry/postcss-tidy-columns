@@ -48,14 +48,18 @@ function tidyVar(declaration, tidy) {
       return acc;
     }, declaration.value);
 
-    // Replace declaration(s) with cloned and updated declarations.
-    declaration.replaceWith(cleanClone(
+    // Clone after so the new declaration can be walked again.
+    // This avoids a situation where another Tidy property or function is within this declaration.
+    declaration.cloneAfter(cleanClone(
       declaration,
       {
         prop: declaration.prop,
         value: replaceWithValue,
       },
     ));
+
+    // Remove the original declaration.
+    declaration.remove();
   }
 }
 
