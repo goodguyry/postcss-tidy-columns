@@ -34,6 +34,9 @@ function tidyFunction(declaration, tidy) {
     const replaceWithValue = tidyMatches.reduce((acc, tidyMatch) => {
       const { match: tidyFunctionMatch, isNested } = tidyMatch;
 
+      // Conditionally suppress 'calc' in the output.
+      columns.suppressCalc = isNested;
+
       /**
        * match:    The full function expression.
        * slug:     One of either `span` or `offset`.
@@ -44,19 +47,14 @@ function tidyFunction(declaration, tidy) {
 
       /**
        * Get the span or offset `calc()` value(s).
+       * Use the object's `isNested` value to suppress the `calc` from the output.
        *
        * fluid: calc() function based on 100vw base.
        * full:  calc() function based on `siteMax` base.
        */
-      let { fluid, full } = ('span' === slug) ?
+      const { fluid, full } = ('span' === slug) ?
         columns.spanCalc(value) :
         columns.offsetCalc(value);
-
-      // Use the object's `isNested` value to remove the `calc` from { full, fluid }
-      if (tidyMatch.isNested) {
-        full = full.replace('calc', '');
-        fluid = fluid.replace('calc', '');
-      }
 
       return ('-full' === modifier) ?
         // tidy-[span|offset]-full()

@@ -56,6 +56,13 @@ class Columns {
 
     this.edges = this.getEdges();
     this.sharedGap = this.getSharedGap();
+
+    /**
+     * Suppress the `calc` string in the column output.
+     *
+     * @type {Boolean}
+     */
+    this.suppressCalc = false;
   }
 
   /**
@@ -114,9 +121,9 @@ class Columns {
   /**
    * Complete the calc() function.
    *
-   * @param {String} siteMax The current siteMax size.
-   * @param {Number} colSpan The number of columns to span.
-   * @param {Number} gapSpan The number of gaps to span.
+   * @param {String}  siteMax      The current siteMax size.
+   * @param {Number}  colSpan      The number of columns to span.
+   * @param {Number}  gapSpan      The number of gaps to span.
    *
    * @return {String}
    */
@@ -141,13 +148,13 @@ class Columns {
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
     }
 
-    return `calc(${cssCalcEquation})`;
+    return `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
   }
 
   /**
    * Create the column `calc()` function declaration for each siteMax.
    *
-   * @param {String|Number} colSpan The number of columns to span.
+   * @param {String|Number} colSpan      The number of columns to span.
    *
    * @return {Object}
    */
@@ -170,7 +177,8 @@ class Columns {
   /**
    * Create the offset `calc()` function declaration for each siteMax.
    *
-   * @param {String|Number} colSpan The number of columns to offset.
+   * @param {String|Number} colSpan      The number of columns to offset.
+   * @param {Boolean}       suppressCalc Suppress the `calc` string in the output.
    *
    * @return {Object}
    */
