@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 const cleanClone = require('./lib/cleanClone');
-const { stripExtraCalc } = require('./lib/stripExtraCalc');
+// const { stripExtraCalc } = require('./lib/stripExtraCalc');
+const { detectCalcWrapper } = require('./lib/detectCalcWrapper');
 
 /**
  * Pattern to match `tidy-*` functions in declaration values.
@@ -19,12 +20,17 @@ const FUNCTION_REGEX = /tidy-(span|offset)(|-full)\(([\d.-]+)\)/;
  * @param {Object} Tidy        An instance of the Tidy class.
  */
 function tidyFunction(declaration, tidy) {
-  const globalRegExp = new RegExp(FUNCTION_REGEX, 'g');
+  // const globalRegExp = new RegExp(FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(FUNCTION_REGEX);
 
-  if (localRegExp.test(declaration.value)) {
+  const matches = detectCalcWrapper(declaration.value);
+  // use the new detection function here to parse the matches
+  // if matches, then...
+  if (matches) {
     const { columns } = tidy;
-    const fullMatch = declaration.value.match(globalRegExp);
+    // i already have this from the detect function
+    // const fullMatch = declaration.value.match(globalRegExp);
+    // console.log(fullMatch);
 
     /**
      * Find all matches in the declaration value.
@@ -34,14 +40,16 @@ function tidyFunction(declaration, tidy) {
      *
      * @return {String}          The replacement value for the declaration.
      */
-    const replaceWithValue = fullMatch.reduce((acc, tidyMatch) => {
+    // We're now reducing an array of objects: { match, isNested }
+    const replaceWithValue = matches.reduce((acc, tidyMatch) => {
       /**
        * match:    The full function expression.
        * slug:     One of either `span` or `offset`.
        * modifier: One of either `undefined` or `-full`.
        * value:    The function's argument.
        */
-      const [match, slug, modifier, value] = tidyMatch.match(localRegExp);
+      // This needs to use the object's `match` value
+      const [match, slug, modifier, value] = tidyMatch.match.match(localRegExp);
 
       /**
        * Get the span or offset `calc()` value(s).
@@ -49,9 +57,15 @@ function tidyFunction(declaration, tidy) {
        * fluid: calc() function based on 100vw base.
        * full:  calc() function based on `siteMax` base.
        */
-      const { fluid, full } = ('span' === slug) ?
+      let { fluid, full } = ('span' === slug) ?
         columns.spanCalc(value) :
         columns.offsetCalc(value);
+
+      // Use the object's `isNested` value to remove the `calc` from { full, fluid }
+      if (tidyMatch.isNested) {
+        full = full.replace('calc', '');
+        fluid = fluid.replace('calc', '');
+      }
 
       acc = ('-full' === modifier) ?
         // tidy-[span|offset]-full()
@@ -60,7 +74,8 @@ function tidyFunction(declaration, tidy) {
         acc.replace(match, fluid);
 
       // Remove any nested calc() function.
-      return stripExtraCalc(acc);
+      // return stripExtraCalc(acc);
+      return acc;
     }, declaration.value);
 
     // Replace declaration(s) with cloned and updated declarations.
