@@ -1,12 +1,12 @@
 const cleanClone = require('./lib/cleanClone');
-const { detectCalcWrapper } = require('./lib/detectCalcWrapper');
+const detectCalcWrapper = require('./lib/detectCalcWrapper');
 
 /**
  * Pattern to match `tidy-*` functions in declaration values.
  *
  * @type {RegExp}
  */
-const FUNCTION_REGEX = /tidy-(span|offset)(|-full)\(([\d.-]+)\)/;
+const FUNCTION_REGEX = /tidy-(span|offset)(-full)?\(([\d.-]+)\)/;
 
 /**
  * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
@@ -21,7 +21,7 @@ function tidyFunction(declaration, tidy) {
   // Parse the tidy-* function matches.
   const tidyMatches = detectCalcWrapper(declaration.value);
 
-  if (Array.isArray(tidyMatches) && 0 < tidyMatches.length) {
+  if (0 < tidyMatches.length) {
     const { columns } = tidy;
     /**
      * Find all matches in the declaration value.

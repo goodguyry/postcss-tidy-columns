@@ -80,11 +80,11 @@ describe('Pattern to match `tidy-*` functions in declaration values', () => {
   test.each([
     [
       'tidy-span(3)',
-      ['tidy-span(3)', 'span', '', '3'],
+      ['tidy-span(3)', 'span', null, '3'],
     ],
     [
       'tidy-offset(2)',
-      ['tidy-offset(2)', 'offset', '', '2'],
+      ['tidy-offset(2)', 'offset', null, '2'],
     ],
     [
       'tidy-span-full(1)',
