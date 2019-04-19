@@ -98,6 +98,10 @@ describe('Matches valid tidy-column shorthand values', () => {
       ['1 / span 6', '1', 'span 6', undefined],
     ],
     [
+      '3',
+      ['3', '3', undefined, undefined],
+    ],
+    [
       '0 / span 2 / 1',
       ['0 / span 2 / 1', '0', 'span 2', '1'],
     ],

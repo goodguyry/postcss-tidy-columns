@@ -6,7 +6,7 @@ const cleanShorthandValues = require('./lib/cleanShorthandValues');
  *
  * @type {RegExp}
  */
-const COLUMNS_REGEX = /^([\d.-]+|none)[\s/]*(span\s[\d.-]+)[\s/]*([\d.-]+|none)?$/;
+const COLUMNS_REGEX = /^([\d.-]+|none)[\s/]*(span\s[\d.-]+)?[\s/]*([\d.-]+|none)?$/;
 
 /**
  * Matches valid tidy-offset shorthand values.
@@ -43,7 +43,7 @@ function tidyShorthandProperty(declaration) {
     // Remove slashes, spaces, and invalid/unneeded values.
     const values = cleanShorthandValues({
       offsetLeft,
-      span,
+      span: span || offsetLeft,
       offsetRight: offsetRight || offsetLeft,
     });
 
