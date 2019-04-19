@@ -10,11 +10,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Changed**
 
-- Single offset values in `tidy-column` and `tidy-offset` shorthand properties will now apply to both offsets (#25)
+- Single offset values in `tidy-column` and `tidy-offset` shorthand properties will now apply to all missing values (#25, #36)
 
 **Fixed**
 
 - Updates dependencies to fix known vulnerabilities (#26)
+- `tidy-*` functions nested within a `calc()` function are properly detected and escaped (#34)
+- Shorthand properties now accept documented values (#36)
 
 **Removed**
 
