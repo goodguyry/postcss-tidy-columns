@@ -91,35 +91,35 @@ describe('Matches valid tidy-column shorthand values', () => {
   test.each([
     [
       '2 / span 3 / 1',
-      ['2 / span 3 / 1', '2', '/ span 3', '/ 1'],
+      ['2 / span 3 / 1', '2', 'span 3', '1'],
     ],
     [
       '1 / span 6',
-      ['1 / span 6', '1', '/ span 6', undefined],
+      ['1 / span 6', '1', 'span 6', undefined],
     ],
     [
       '0 / span 2 / 1',
-      ['0 / span 2 / 1', '0', '/ span 2', '/ 1'],
+      ['0 / span 2 / 1', '0', 'span 2', '1'],
     ],
     [
       'none / span 5',
-      ['none / span 5', 'none', '/ span 5', undefined],
+      ['none / span 5', 'none', 'span 5', undefined],
     ],
     [
       '2 / span 1 / none',
-      ['2 / span 1 / none', '2', '/ span 1', '/ none'],
+      ['2 / span 1 / none', '2', 'span 1', 'none'],
     ],
     [
       'none / span 5 / none',
-      ['none / span 5 / none', 'none', '/ span 5', '/ none'],
+      ['none / span 5 / none', 'none', 'span 5', 'none'],
     ],
     [
       '0 / span 4 / none',
-      ['0 / span 4 / none', '0', '/ span 4', '/ none'],
+      ['0 / span 4 / none', '0', 'span 4', 'none'],
     ],
     [
       '-2 / span 3.75 / 1',
-      ['-2 / span 3.75 / 1', '-2', '/ span 3.75', '/ 1'],
+      ['-2 / span 3.75 / 1', '-2', 'span 3.75', '1'],
     ],
   ])(
     'Matches tidy-column: %s',
@@ -137,7 +137,7 @@ describe('Matches valid tidy-offset shorthand values', () => {
   test.each([
     [
       '2 / 1',
-      ['2 / 1', '2', '/ 1'],
+      ['2 / 1', '2', '1'],
     ],
     [
       '1',
@@ -145,15 +145,15 @@ describe('Matches valid tidy-offset shorthand values', () => {
     ],
     [
       'none / 3',
-      ['none / 3', 'none', '/ 3'],
+      ['none / 3', 'none', '3'],
     ],
     [
       '2 / none',
-      ['2 / none', '2', '/ none'],
+      ['2 / none', '2', 'none'],
     ],
     [
       '-2 / 1.5',
-      ['-2 / 1.5', '-2', '/ 1.5'],
+      ['-2 / 1.5', '-2', '1.5'],
     ],
   ])(
     'Matches tidy-offset: %s',

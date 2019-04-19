@@ -6,14 +6,14 @@ const cleanShorthandValues = require('./lib/cleanShorthandValues');
  *
  * @type {RegExp}
  */
-const COLUMNS_REGEX = /^([\d.-]+|none)\s?(\/\s?span\s[\d.-]+)\s?(\/\s?[\d.-]+)?$/;
+const COLUMNS_REGEX = /^([\d.-]+|none)[\s/]*(span\s[\d.-]+)[\s/]*([\d.-]+|none)?$/;
 
 /**
  * Matches valid tidy-offset shorthand values.
  *
  * @type {RegExp}
  */
-const OFFSET_REGEX = /^(\d+|none)\s?(\/\s?\d+)?$/;
+const OFFSET_REGEX = /^([\d.-]+|none)[\s/]*([\d.-]+|none)?$/;
 
 /**
  * Replace `tidy-*` shorthand with long-form equivalents.
