@@ -74,6 +74,14 @@ describe('The `tidy-offset` shorthand property is replaced with the long-form eq
       'div { tidy-offset-left: 1; tidy-offset-right: 1; }',
     ),
   );
+
+  test(
+    'A single value applies to the span and both offsets',
+    () => runShorthandTest(
+      'div { tidy-column: 3; }',
+      'div { tidy-span: 3; tidy-offset-left: 3; tidy-offset-right: 3; }',
+    ),
+  );
 });
 
 /**
@@ -96,6 +104,22 @@ describe('Matches valid tidy-column shorthand values', () => {
     [
       'none / span 5',
       ['none / span 5', 'none', '/ span 5', undefined],
+    ],
+    [
+      '2 / span 1 / none',
+      ['2 / span 1 / none', '2', '/ span 1', '/ none'],
+    ],
+    [
+      'none / span 5 / none',
+      ['none / span 5 / none', 'none', '/ span 5', '/ none'],
+    ],
+    [
+      '0 / span 4 / none',
+      ['0 / span 4 / none', '0', '/ span 4', '/ none'],
+    ],
+    [
+      '-2 / span 3.75 / 1',
+      ['-2 / span 3.75 / 1', '-2', '/ span 3.75', '/ 1'],
     ],
   ])(
     'Matches tidy-column: %s',
@@ -122,6 +146,14 @@ describe('Matches valid tidy-offset shorthand values', () => {
     [
       'none / 3',
       ['none / 3', 'none', '/ 3'],
+    ],
+    [
+      '2 / none',
+      ['2 / none', '2', '/ none'],
+    ],
+    [
+      '-2 / 1.5',
+      ['-2 / 1.5', '-2', '/ 1.5'],
     ],
   ])(
     'Matches tidy-offset: %s',
