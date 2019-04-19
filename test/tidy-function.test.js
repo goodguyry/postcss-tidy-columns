@@ -35,6 +35,15 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
   );
 
   test(
+    'Replaces the `tidy-offset()` function when inside a `calc()`` function',
+    () => run(
+      'div { margin-left: calc(20px + tidy-offset(3)); }',
+      'div { margin-left: calc(20px + ((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3)); }',
+      typical,
+    ),
+  );
+
+  test(
     'Replaces multiple `tidy-offset()`s in the same property value',
     () => run(
       'div { margin: 0 tidy-offset(3) 0 tidy-offset(1); }',
@@ -71,11 +80,11 @@ describe('Pattern to match `tidy-*` functions in declaration values', () => {
   test.each([
     [
       'tidy-span(3)',
-      ['tidy-span(3)', 'span', '', '3'],
+      ['tidy-span(3)', 'span', null, '3'],
     ],
     [
       'tidy-offset(2)',
-      ['tidy-offset(2)', 'offset', '', '2'],
+      ['tidy-offset(2)', 'offset', null, '2'],
     ],
     [
       'tidy-span-full(1)',
