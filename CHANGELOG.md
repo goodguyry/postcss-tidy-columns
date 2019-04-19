@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Updates dependencies to fix known vulnerabilities (#26)
 - `tidy-*` functions nested within a `calc()` function are properly detected and escaped (#34)
 - Shorthand properties now accept documented values (#36)
+- Corrects an issue with unitless non-zero config values not being ignored (#39)
 
 **Removed**
 
