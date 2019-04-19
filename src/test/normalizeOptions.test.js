@@ -218,6 +218,7 @@ describe('Matches CSS length values of the supported unit values (px, em, rem)',
     '8vh',
     '7ch',
     '60 rem',
+    '100',
   ])(
     'Ignores unsupported length values: %s',
     (input) => {
