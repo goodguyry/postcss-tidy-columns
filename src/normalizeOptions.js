@@ -7,7 +7,7 @@ const valuesHaveSameUnits = require('../lib/valuesHaveSameUnits');
  *
  * @type {RegExp}
  */
-const LENGTH_REGEX = /^[0-9.]+(px|r?em)?$/;
+const LENGTH_REGEX = /^[0]$|[0-9.]+(px|r?em)+$/;
 
 /**
  * Nomalize, collect and merge breakpoint configs.
