@@ -1,5 +1,5 @@
 const { CUSTOM_PROP_REGEX } = require('./collectTidyRuleParams');
-const { strings, objectsByProperty } = require('../lib/sort');
+const { strings } = require('../lib/sort');
 const valuesHaveSameUnits = require('../lib/valuesHaveSameUnits');
 
 /**
@@ -12,43 +12,50 @@ const LENGTH_REGEX = /^[0]$|[0-9.]+(px|r?em)+$/;
 /**
  * Nomalize, collect and merge breakpoint configs.
  *
- * @param {Array} configs An array of breakpoint configs.
- * @param {Array} acc     The `validateOptions.reduce` accumulator.
+ * @param {Object} bpConfigs A breakpoints config object.
+ * @param {Array}  acc       The `validateOptions.reduce` accumulator.
  */
-function handleBreakpointConfigs(configs, acc) {
-  const breakpoints = configs.reduce((bpAcc, opts) => {
-    // Only act if the Object has a `breakpoint` property.
-    if (Object.prototype.hasOwnProperty.call(opts, 'breakpoint')) {
-      return [...bpAcc, normalizeOptions(opts)]; // eslint-disable-line no-use-before-define
-    }
-
-    return bpAcc;
-  }, [])
+function handleBreakpointConfigs(bpConfigs, acc) {
+  // Normalize breakpoint configs.
+  const normalizedConfigs = Object.keys(bpConfigs)
     // Sort the breakpoints array before beginning.
-    .sort(objectsByProperty('breakpoint'))
+    .sort(strings())
     // Reverse the array to work from largest breakpoint to smallest.
     .reverse()
-    // Merge each config's smaller sibling into it to mimic the cascade.
-    .map((config, index, array) => {
-      // Close the sibling config.
-      const nextConfig = Object.assign({}, array[index + 1]);
-      // Remove the `breakpoint` property to avoid overwriting during merge.
-      delete nextConfig.breakpoint;
+    .reduce((bpAcc, oldKey) => {
+      // Assume `px` for unitless breakpoint value.
+      const newKey = /^[\d.]+$/.test(oldKey) ? `${oldKey}px` : oldKey;
 
-      return Object.assign({}, config, nextConfig);
-    });
+      // Assign the original value to the new key.
+      return { ...bpAcc, [newKey]: normalizeOptions(bpConfigs[oldKey]) }; // eslint-disable-line no-use-before-define
+    }, {});
 
-  // Re-sort the breakpoints.
-  acc.breakpoints = breakpoints.sort(objectsByProperty('breakpoint'));
-
-  // Save collected breakpoint values if present and all the same units.
-  // eslint-disable-next-line max-len
-  const collectedValues = breakpoints.reduce((valAcc, config) => [...valAcc, config.breakpoint], []);
-  if (valuesHaveSameUnits(collectedValues)) {
-    acc.collectedBreakpointValues = collectedValues.sort(strings());
+  // Return early if breakpoint values aren't all the same units.
+  if (!valuesHaveSameUnits(Object.keys(normalizedConfigs))) {
+    return acc;
   }
 
-  return acc;
+  // Merge breakpoint configs.
+  const mergedConfigs = Object.keys(normalizedConfigs)
+    .reduce((mergeAcc, config, index) => {
+      // Get the next config, if any.
+      const lookAhead = Object.keys(normalizedConfigs)[index + 1];
+      const nextConfig = Object.assign({}, normalizedConfigs[lookAhead]);
+
+      // Merge each config's smaller sibling into it to mimic the cascade.
+      const merged = Object.assign({}, normalizedConfigs[config], nextConfig);
+
+      return { ...mergeAcc, [config]: { ...merged } };
+    }, {});
+
+
+  // Re-sort the breakpoints object.
+  const breakpoints = Object.keys(mergedConfigs)
+    .sort(strings())
+    // Piece the object back together.
+    .reduce((testAcc, item) => ({ ...testAcc, [item]: mergedConfigs[item] }), {});
+
+  return { ...acc, breakpoints };
 }
 
 /**
@@ -80,15 +87,10 @@ function normalizeOptions(options) {
           acc[key] = (/(px|r?em)$/.test(option)) ? option : fallback;
         }
 
-        // Assume `px` for unitless option value.
-        if ('breakpoint' === key) {
-          acc[key] = /^[\d.]+$/.test(option) ? `${option}px` : option;
-        }
-
         // Nomalize, collect, and merge breakpoint configs.
         if ('breakpoints' === key) {
-          const { breakpoints, collectedBreakpointValues } = handleBreakpointConfigs(option, acc);
-          return Object.assign({}, acc, { breakpoints, collectedBreakpointValues });
+          const breakpoints = handleBreakpointConfigs(option, acc);
+          return Object.assign({}, acc, breakpoints);
         }
       }
 

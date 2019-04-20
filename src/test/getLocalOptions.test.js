@@ -58,28 +58,16 @@ describe('Declarations use the correct option values', () => {
         columns: 12,
         edge: '0.625rem',
         gap: '0.625rem',
-        breakpoints: [
-          {
-            breakpoint: '768px',
+        breakpoints: {
+          '768px': {
             gap: '0.625rem',
           },
-          {
-            breakpoint: '1024px',
+          '1024px': {
             siteMax: '90rem',
           },
-        ],
-        breakpoint: '768px',
-        collectedBreakpointValues: [
-          '768px',
-          '1024px',
-        ],
+        },
       },
-      Object.assign(typicalWithBreakpoints, {
-        collectedBreakpointValues: [
-          '768px',
-          '1024px',
-        ],
-      }),
+      typicalWithBreakpoints,
     ),
   );
 
@@ -91,20 +79,14 @@ describe('Declarations use the correct option values', () => {
         columns: 12,
         edge: '0.625rem',
         gap: '1.25rem',
-        breakpoints: [
-          {
-            breakpoint: '768px',
+        breakpoints: {
+          '768px': {
             gap: '0.625rem',
           },
-          {
-            breakpoint: '1024px',
+          '1024px': {
             siteMax: '90rem',
           },
-        ],
-        collectedBreakpointValues: [
-          '768px',
-          '1024px',
-        ],
+        },
       },
       typicalWithBreakpoints,
     ),

@@ -1,6 +1,5 @@
 const { parseAtruleParams } = require('../lib/parseAtruleParams');
 const compareStrings = require('../lib/compareStrings');
-const getObjectByProperty = require('../lib/getObjectByProperty');
 
 /**
  * Check if an atrule.param is within a range of breakpoints.
@@ -14,7 +13,8 @@ const getObjectByProperty = require('../lib/getObjectByProperty');
  * @return {Object} The matching options breakpoint object, or undefined.
  */
 function breakpointMatch(params, options) {
-  const { collectedBreakpointValues } = options;
+  const { breakpoints } = options;
+  const collectedBreakpointValues = Object.keys(breakpoints);
 
   if (undefined === collectedBreakpointValues) {
     return undefined;
@@ -29,7 +29,7 @@ function breakpointMatch(params, options) {
 
     // If the breakpoints array contains the value, just return it.
     if (breakpointValues.includes(value)) {
-      return getObjectByProperty(options.breakpoints, value, 'breakpoint');
+      return options.breakpoints[value];
     }
 
     // Reverse the breakpoints array for min value matching.
@@ -44,7 +44,7 @@ function breakpointMatch(params, options) {
     }, '');
 
     // Return the options breakpoint object, or undefined if not found.
-    return getObjectByProperty(options.breakpoints, matchingBp, 'breakpoint');
+    return options.breakpoints[matchingBp];
   });
 
   // Creating a Set removes duplicates.

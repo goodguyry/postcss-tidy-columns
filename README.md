@@ -16,33 +16,33 @@ npm install postcss-tidy-columns
 
 ```js
 require('postcss-tidy-columns')({
-	columns: 12,
-	gap: '1.25rem',
-	edge: '2rem',
-	siteMax: '90rem',
+  columns: 12,
+  gap: '1.25rem',
+  edge: '2rem',
+  siteMax: '90rem',
 });
 ```
 
 ```css
 /* Input example, using the above plugins options */
 div {
-	tidy-span: 3;
-	tidy-offset-left: 2;
+  tidy-span: 3;
+  tidy-offset-left: 2;
 }
 ```
 
 ```css
 /* Output example */
 div {
-	width: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-	max-width: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-	margin-left: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+  width: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  max-width: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  margin-left: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
 }
 
 @media (min-width: 90rem) {
-	div {
-		margin-left: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
-	}
+  div {
+    margin-left: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+  }
 }
 ```
 
@@ -142,13 +142,13 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 > /* property: calc(tidy-span(number) expression) */
 >
 > div {
-> 	width: calc(tidy-span(3) + 4rem);
+>   width: calc(tidy-span(3) + 4rem);
 > }
 >
 > @media (min-width: 75rem) {
-> 	div {
-> 		width: calc(tidy-span-full(3) + 4rem);
-> 	}
+>   div {
+>     width: calc(tidy-span-full(3) + 4rem);
+>   }
 > }
 > ```
 
@@ -163,13 +163,13 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 > /* property: calc(tidy-offset(number) expression) */
 >
 > div {
-> 	left: calc(tidy-offset(1) + 2rem);
+>   left: calc(tidy-offset(1) + 2rem);
 > }
 >
 > @media (min-width: 75rem) {
-> 	div {
-> 		left: calc(tidy-offset-full(1) + 2rem);
-> 	}
+>   div {
+>     left: calc(tidy-offset-full(1) + 2rem);
+>   }
 > }
 > ```
 
@@ -196,7 +196,7 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`gap`](#gap)|`{String}`|`undefined`|The width of grid column gaps.|
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
-|[`breakpoints`](#breakpoints)|`{Array}`|`[]`|An array of breakpoint-specific configuration objects.|
+|[`breakpoints`](#breakpoints)|`{Object}`|`{}`|Breakpoint-specific configuration options.|
 
 _As an alternative to the [PostCSS] JavaScript API, options may also be passed via stylesheet `@tidy` at-rules._
 
@@ -251,29 +251,27 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 
 ### `breakpoints`
 
-Use the `breakpoints` array to configure a grid spec that changes across breakpoints.
+Use the `breakpoints` object to define a grid configuration that will change based on screen size.
 
 1. Define the small-screen grid in the root object.
-2. Define `min-width` breakpoints at which the grid spec changes, and any configuration options that will change.
-3. The configuration settings cascade up from the root to the largest `breakpoint`.
+2. Define one or more `min-width` breakpoints at which the grid spec will change, and any configuration options that will change.
+4. The configuration settings cascade up from the root to the largest `breakpoint`.
 
 ```js
 require('postcss-tidy-columns')({
-	columns: 9,
-	edge: '1rem',
-	gap: '0.625rem',
-	breakpoints: [
-		{
-			breakpoint: '48rem',
-			columns: 12,
-			gap: '1rem'
-		},
-		{
-			breakpoint: '64rem',
-			edge: '1.25rem',
-			siteMax: '90rem'
-		}
-	]
+  columns: 9,
+  edge: '1rem',
+  gap: '0.625rem',
+  breakpoints: {
+    '48rem': {
+      columns: 12,
+      gap: '1rem'
+    },
+    '64rem': {
+      edge: '1.25rem',
+      siteMax: '90rem'
+    }
+  },
 });
 ```
 

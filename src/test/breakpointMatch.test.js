@@ -8,39 +8,31 @@ const breakpointMatch = require('../breakpointMatch');
 describe('Get options based on a matching breakpoint value.', () => {
   // Parsed options.
   const options = {
-    breakpoints: [
-      {
-        breakpoint: '768px',
+    breakpoints: {
+      '768px': {
         gap: '0.625rem',
       },
-      {
-        breakpoint: '1024px',
+      '1024px': {
         gap: '1rem',
       },
-      {
-        breakpoint: '1440px',
+      '1440px': {
         gap: '1.25rem',
       },
-    ],
-    collectedBreakpointValues: [
-      '768px',
-      '1024px',
-      '1440px',
-    ],
+    },
   };
 
   test.each([
     [
       '(min-width: 900px)',
-      { breakpoint: '768px', gap: '0.625rem' },
+      { gap: '0.625rem' },
     ],
     [
       '(max-width: 900px)',
-      { breakpoint: '768px', gap: '0.625rem' },
+      { gap: '0.625rem' },
     ],
     [
       '(min-width: 768px) and (max-width: 1023px)',
-      { breakpoint: '768px', gap: '0.625rem' },
+      { gap: '0.625rem' },
     ],
   ])(
     'Matches %s',
@@ -74,18 +66,16 @@ const options = {
   columns: 9,
   edge: '1rem',
   gap: '0.625rem',
-  breakpoints: [
-    {
-      breakpoint: '48rem',
+  breakpoints: {
+    '48rem': {
       columns: 12,
       gap: '1rem',
     },
-    {
-      breakpoint: '64rem',
+    '64rem': {
       edge: '1.25rem',
       siteMax: '90rem',
     },
-  ],
+  },
 };
 
 describe('The functions and properties values are replaced according a breakpoint match', () => {
