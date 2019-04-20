@@ -66,15 +66,13 @@ module.exports = {
     columns: 12,
     gap: '1.25rem',
     edge: '0.625rem',
-    breakpoints: [
-      {
-        breakpoint: '768px',
+    breakpoints: {
+      '768px': {
         gap: '0.625rem',
       },
-      {
-        breakpoint: '1024px',
+      '1024px': {
         siteMax: '90rem',
       },
-    ],
+    },
   },
 };
