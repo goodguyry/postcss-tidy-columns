@@ -1,5 +1,5 @@
-const run = require('.');
 const postcss = require('postcss');
+const run = require('.');
 const {
   tidyShorthandProperty,
   COLUMNS_REGEX,

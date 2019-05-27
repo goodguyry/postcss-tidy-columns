@@ -52,15 +52,15 @@ function tidyFunction(declaration, tidy) {
        * fluid: calc() function based on 100vw base.
        * full:  calc() function based on `siteMax` base.
        */
-      const { fluid, full } = ('span' === slug) ?
-        columns.spanCalc(value) :
-        columns.offsetCalc(value);
+      const { fluid, full } = ('span' === slug)
+        ? columns.spanCalc(value)
+        : columns.offsetCalc(value);
 
-      return ('-full' === modifier) ?
+      return ('-full' === modifier)
         // tidy-[span|offset]-full()
-        acc.replace(match, full) :
+        ? acc.replace(match, full)
         // tidy-[span|offset] ()
-        acc.replace(match, fluid);
+        : acc.replace(match, fluid);
     }, declaration.value);
 
     // Replace declaration(s) with cloned and updated declarations.
@@ -71,6 +71,9 @@ function tidyFunction(declaration, tidy) {
         value: replaceWithValue,
       },
     ));
+
+    // Reset suppress 'calc' to default.
+    columns.suppressCalc = false;
   }
 }
 
