@@ -71,6 +71,9 @@ function tidyFunction(declaration, tidy) {
         value: replaceWithValue,
       },
     ));
+
+    // Reset suppress 'calc' to default.
+    columns.suppressCalc = false;
   }
 }
 

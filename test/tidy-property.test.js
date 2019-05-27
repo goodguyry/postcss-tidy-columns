@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const run = require('.');
-const { typical, edgeGap } = require('./sharedConfigs');
+const { typical, edgeGap, allValues } = require('./sharedConfigs');
 const { OFFSET_REGEX } = require('../tidy-property');
 
 /**
@@ -55,6 +55,15 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
       'div { tidy-span: 2; }',
       'div { width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
       edgeGap,
+    ),
+  );
+
+  test(
+    'The `tidy-span` property is not influenced by other declarations',
+    () => run(
+      'div { margin-left: calc(tidy-offset(10) + tidy-var(edge)); tidy-span: 2; }',
+      'div { margin-left: calc(((((100vw - 32px * 2) / 16 - 0.5859rem) * 10) + 0.625rem * 10) + 32px); width: calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem); max-width: calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem); }',
+      allValues,
     ),
   );
 });
