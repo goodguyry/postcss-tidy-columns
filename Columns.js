@@ -29,9 +29,9 @@ class Columns {
    * @return {Array}
    */
   static splitCssUnit(value) {
-    return ('string' === typeof value) ?
-      [parseFloat(value), value.replace(/[\d.]/g, '')] :
-      value;
+    return ('string' === typeof value)
+      ? [parseFloat(value), value.replace(/[\d.]/g, '')]
+      : value;
   }
 
   constructor(options = {}) {
@@ -75,7 +75,9 @@ class Columns {
 
     if (CUSTOM_PROP_REGEX.test(gap)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
-    } else if (!this.nonValues.includes(gap)) {
+    }
+
+    if (!this.nonValues.includes(gap)) {
       const [value, units] = this.constructor.splitCssUnit(gap);
       const sharedGap = (value / columns) * (columns - 1);
 
@@ -106,14 +108,14 @@ class Columns {
   getSingleColumn(siteMax) {
     const { columns } = this.options;
     // 100vw : (100vw - 10px * 2)
-    const siteMaxSize = this.nonValues.includes(this.edges) ?
-      siteMax :
-      `(${siteMax} - ${this.edges})`;
+    const siteMaxSize = this.nonValues.includes(this.edges)
+      ? siteMax
+      : `(${siteMax} - ${this.edges})`;
 
     // 12 - 9.1667px : 12
-    const columnReduction = (this.sharedGap) ?
-      `${columns} - ${this.sharedGap}` :
-      `${columns}`;
+    const columnReduction = (this.sharedGap)
+      ? `${columns} - ${this.sharedGap}`
+      : `${columns}`;
 
     return `${siteMaxSize} / ${columnReduction}`;
   }
