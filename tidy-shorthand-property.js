@@ -1,3 +1,4 @@
+const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
 const cleanShorthandValues = require('./lib/cleanShorthandValues');
 
@@ -21,9 +22,11 @@ const OFFSET_REGEX = /^([\d.-]+|none)[\s/]*([\d.-]+|none)?$/;
  * @see https://github.com/goodguyry/postcss-tidy-columns#column-shorthand
  *
  * @param {Object} declaration The CSS declaration.
+ * @param {Object} tidy        An instance of the Tidy class.
  */
-function tidyShorthandProperty(declaration) {
+function tidyShorthandProperty(declaration, tidy) {
   const shortHandReplace = [];
+  const { columns: { options } } = tidy;
 
   /**
    * Replace `tidy-column` shorthand, based on delcaration values.
@@ -46,6 +49,11 @@ function tidyShorthandProperty(declaration) {
       span: span || offsetLeft,
       offsetRight: offsetRight || offsetLeft,
     });
+
+    // Save the original declaration in a comment for debugging.
+    if (options.debug) {
+      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    }
 
     // Conditionally add the `tidy-span` property.
     if (undefined !== values.span) {
@@ -102,6 +110,11 @@ function tidyShorthandProperty(declaration) {
       offsetLeft,
       offsetRight: offsetRight || offsetLeft,
     });
+
+    // Save the original declaration in a comment for debugging.
+    if (options.debug) {
+      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    }
 
     // Conditionally add the `tidy-offset-left` property.
     if (undefined !== values.offsetLeft) {

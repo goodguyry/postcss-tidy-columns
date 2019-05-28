@@ -28,9 +28,25 @@ describe('Collect and merge global plugin options', () => {
         edge: '0.625rem',
         gap: '1.25rem',
         siteMax: '90rem',
+        debug: false,
         breakpoints: [],
       },
       typical,
+    ),
+  );
+
+  test(
+    'Global debug option is collected as expected',
+    () => runGlobalOptionsPlugin(
+      {
+        columns: 12,
+        edge: '0.625rem',
+        gap: '1.25rem',
+        siteMax: '90rem',
+        debug: true,
+        breakpoints: [],
+      },
+      { ...typical, debug: true },
     ),
   );
 
@@ -43,6 +59,7 @@ describe('Collect and merge global plugin options', () => {
         edge: undefined,
         gap: undefined,
         siteMax: undefined,
+        debug: false,
       },
       {},
     ),

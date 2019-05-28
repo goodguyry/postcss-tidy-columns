@@ -1,3 +1,4 @@
+const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
 
 /**
@@ -21,7 +22,7 @@ const OFFSET_REGEX = /tidy-offset-(left|right)/;
  * @param {Object} tidy        An instance of the Tidy class.
  */
 function tidyProperty(declaration, tidy) {
-  const { fullWidthRule, columns } = tidy;
+  const { fullWidthRule, columns, columns: { options } } = tidy;
 
   // Replace `tidy-span` declaration with a `width` declaration.
   if ('tidy-span' === declaration.prop) {
@@ -32,6 +33,11 @@ function tidyProperty(declaration, tidy) {
     const { fluid, full } = columns.spanCalc(declaration.value);
 
     const columnDecl = [];
+
+    // Save the original declaration in a comment for debugging.
+    if (options.debug) {
+      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    }
 
     columnDecl.push(cleanClone(
       declaration,
@@ -67,6 +73,11 @@ function tidyProperty(declaration, tidy) {
      * full:  calc() function based on `siteMax` base.
      */
     const { fluid, full } = columns.offsetCalc(declaration.value);
+
+    // Save the original declaration in a comment for debugging.
+    if (options.debug) {
+      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    }
 
     // Clone the declaration with `fluid` declaration overrides.
     const fluidDecl = cleanClone(

@@ -80,6 +80,11 @@ function normalizeOptions(options) {
           acc[key] = Number(option);
         }
 
+        // `debug` should be a Boolean value.
+        if ('debug' === key && ['true', 'false'].includes(String(option))) {
+          acc[key] = ('true' === String(option));
+        }
+
         // These should all be valid, positive CSS length values.
         if (['gap', 'edge', 'siteMax'].includes(key) && LENGTH_REGEX.test(option)) {
           // Force `undefined` in place of unitless non-zero value.

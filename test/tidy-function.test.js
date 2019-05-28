@@ -51,6 +51,24 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
       typical,
     ),
   );
+
+  test(
+    'Maintains `tidy-offset` input as a /* comment */',
+    () => run(
+      'div { margin-left: tidy-offset(1); }',
+      'div { /* margin-left: tidy-offset(1) */ margin-left: calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
+      { ...typical, debug: true },
+    ),
+  );
+
+  test(
+    'Maintains `tidy-offset-full` input as a /* comment */',
+    () => run(
+      'div { margin-left: tidy-offset-full(1); }',
+      'div { /* margin-left: tidy-offset-full(1) */ margin-left: calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
+      { ...typical, debug: true },
+    ),
+  );
 });
 
 describe('The `tidy-span()` functions are replaced and their values reflect the expected options', () => {

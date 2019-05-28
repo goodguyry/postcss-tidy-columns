@@ -17,6 +17,7 @@ function getGlobalOptions(root, options) {
     gap: undefined,
     siteMax: undefined,
     edge: undefined,
+    debug: false,
     breakpoints: [],
   };
 

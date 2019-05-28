@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
 
 /**
@@ -21,7 +22,7 @@ function tidyVar(declaration, tidy) {
   const localRegExp = new RegExp(VAR_FUNCTION_REGEX);
 
   if (localRegExp.test(declaration.value)) {
-    const { columns } = tidy;
+    const { columns, columns: { options } } = tidy;
     const fullMatch = declaration.value.match(globalRegExp);
 
     /**
@@ -47,6 +48,11 @@ function tidyVar(declaration, tidy) {
       // There's no corresponding option value.
       return acc;
     }, declaration.value);
+
+    // Save the original declaration in a comment for debugging.
+    if (options.debug) {
+      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    }
 
     // Clone after so the new declaration can be walked again.
     // This avoids a situation where another Tidy property or function is within this declaration.

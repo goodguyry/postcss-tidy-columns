@@ -196,9 +196,10 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`gap`](#gap)|`{String}`|`undefined`|The width of grid column gaps.|
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
+|[`debug`](#debug)|`{Boolean}`|`false`|Add debug comments.|
 |[`breakpoints`](#breakpoints)|`{Object}`|`{}`|Breakpoint-specific configuration options.|
 
-_As an alternative to the [PostCSS] JavaScript API, options may also be passed via stylesheet `@tidy` at-rules._
+_As an alternative to the [PostCSS] JavaScript API, some options may also be passed via stylesheet `@tidy` at-rules._
 
 ### `columns`
 
@@ -247,6 +248,24 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 >
 > ```
 > @tidy edge <length>;
+> ```
+
+### `debug`
+
+Set `debug` to `true` to maintain the pre-processed CSS declaration as a comment.
+
+```css
+div {
+  /* tidy-span: 3 */
+  width: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  max-width: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+}
+```
+
+> #### CSS Syntax
+>
+> ```
+> @tidy debug <boolean>;
 > ```
 
 ### `breakpoints`

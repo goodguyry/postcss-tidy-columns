@@ -1,3 +1,4 @@
+const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
 const detectCalcWrapper = require('./lib/detectCalcWrapper');
 
@@ -22,7 +23,8 @@ function tidyFunction(declaration, tidy) {
   const tidyMatches = detectCalcWrapper(declaration.value);
 
   if (0 < tidyMatches.length) {
-    const { columns } = tidy;
+    const { columns, columns: { options } } = tidy;
+
     /**
      * Find all matches in the declaration value.
      *
@@ -62,6 +64,11 @@ function tidyFunction(declaration, tidy) {
         // tidy-[span|offset] ()
         : acc.replace(match, fluid);
     }, declaration.value);
+
+    // Save the original declaration in a comment for debugging.
+    if (options.debug) {
+      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    }
 
     // Replace declaration(s) with cloned and updated declarations.
     declaration.replaceWith(cleanClone(
