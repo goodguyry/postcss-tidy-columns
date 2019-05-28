@@ -197,8 +197,9 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
 |[`breakpoints`](#breakpoints)|`{Object}`|`{}`|Breakpoint-specific configuration options.|
+|[`debug`](#debug)|`{Boolean}`|`false`|Add debug comments.|
 
-_As an alternative to the [PostCSS] JavaScript API, options may also be passed via stylesheet `@tidy` at-rules._
+_As an alternative to the [PostCSS] JavaScript API, some options may also be passed via stylesheet `@tidy` at-rules._
 
 ### `columns`
 
@@ -276,6 +277,18 @@ require('postcss-tidy-columns')({
 ```
 
 See the [Scoped Settings](../../wiki/Scoped-Settings) Wiki page for more.
+
+### `debug`
+
+Set `debug` to `true` to maintain the pre-processed CSS declarations as comments.
+
+```css
+div {
+  /* tidy-span: 3 */
+  width: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  max-width: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+}
+```
 
 ## Options Cascade
 
