@@ -78,6 +78,15 @@ describe('The `tidy-var()` function is replaced with the expected option value',
       typicalWithBreakpoints,
     ),
   );
+
+  test(
+    'Maintains `tidy-var` input as a /* comment */',
+    () => run(
+      'div { margin-left: tidy-var(gap); }',
+      'div { /* margin-left: tidy-var(gap) */ margin-left: 1.25rem; }',
+      { ...typical, debug: true },
+    ),
+  );
 });
 
 /**

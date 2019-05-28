@@ -37,6 +37,15 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
       edgeGap,
     ),
   );
+
+  test(
+    'Maintains `tidy-offset-right` input as a /* comment */',
+    () => run(
+      'div { tidy-offset-right: 2; }',
+      'div { /* tidy-offset-right: 2 */ margin-right: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px * 2); }',
+      { ...edgeGap, debug: true },
+    ),
+  );
 });
 
 describe('The `tidy-span` property is replaced and its values reflect the expected options', () => {
@@ -64,6 +73,15 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
       'div { margin-left: calc(tidy-offset(10) + tidy-var(edge)); tidy-span: 2; }',
       'div { margin-left: calc(((((100vw - 32px * 2) / 16 - 0.5859rem) * 10) + 0.625rem * 10) + 32px); width: calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem); max-width: calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem); }',
       allValues,
+    ),
+  );
+
+  test(
+    'Maintains `tidy-span` input as a /* comment */',
+    () => run(
+      'div { tidy-span: 2; }',
+      'div { /* tidy-span: 2 */ width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
+      { ...edgeGap, debug: true },
     ),
   );
 });

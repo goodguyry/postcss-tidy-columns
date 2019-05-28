@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const postcss = require('postcss');
 const run = require('.');
 const {
@@ -10,12 +11,13 @@ const {
  * Create a test plugin to replace shorthand properties. Running a test plugin
  * limits the scope, which prevents any other features of the plugin from running.
  */
-const runShorthandTest = (input, output) => (
-  run(input, output, {}, postcss.plugin(
+const runShorthandTest = (input, output, options = {}) => (
+  run(input, output, options, postcss.plugin(
     'shorthand-props-test',
     () => function process(root) {
       root.walkDecls((declaration) => {
-        tidyShorthandProperty(declaration);
+        // Pass in a mock Tidy object.
+        tidyShorthandProperty(declaration, { columns: { options } });
       });
     },
   ))
@@ -46,6 +48,15 @@ describe('The `tidy-column` shorthand property is replaced with the long-form eq
     () => runShorthandTest(
       'div { tidy-column: 1 / span 2; }',
       'div { tidy-span: 2; tidy-offset-left: 1; tidy-offset-right: 1; }',
+    ),
+  );
+
+  test(
+    'Maintains `tidy-column` input as a /* comment */',
+    () => runShorthandTest(
+      'div { tidy-column: 1 / span 2 / 3; }',
+      'div { /* tidy-column: 1 / span 2 / 3 */ tidy-span: 2; tidy-offset-left: 1; tidy-offset-right: 3; }',
+      { debug: true },
     ),
   );
 });
@@ -80,6 +91,15 @@ describe('The `tidy-offset` shorthand property is replaced with the long-form eq
     () => runShorthandTest(
       'div { tidy-column: 3; }',
       'div { tidy-span: 3; tidy-offset-left: 3; tidy-offset-right: 3; }',
+    ),
+  );
+
+  test(
+    'Maintains `tidy-offset` input as a /* comment */',
+    () => runShorthandTest(
+      'div { tidy-offset: 1 / 3; }',
+      'div { /* tidy-offset: 1 / 3 */ tidy-offset-left: 1; tidy-offset-right: 3; }',
+      { debug: true },
     ),
   );
 });
