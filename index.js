@@ -23,7 +23,7 @@ module.exports = postcss.plugin(
 
       // Replace shorthand declarations with their long-form equivalents.
       rule.walkDecls(/^tidy-(column|offset)$/, (declaration) => {
-        tidyShorthandProperty(declaration);
+        tidyShorthandProperty(declaration, tidy);
       });
 
       // Set up rule-specific properties.
