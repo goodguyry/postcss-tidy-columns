@@ -84,6 +84,15 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
       { ...edgeGap, debug: true },
     ),
   );
+
+  test(
+    'Maintains `tidy-span` input as a /* comment */ via `@tidy debug` atRule',
+    () => run(
+      'div { @tidy debug true; tidy-span: 2; }',
+      'div { /* tidy-span: 2 */ width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
+      edgeGap,
+    ),
+  );
 });
 
 /**

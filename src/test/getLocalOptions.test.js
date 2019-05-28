@@ -39,10 +39,11 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
   test(
     '@tidy value adds a global option',
     () => runLocalOptionsPlugin(
-      'div { @tidy site-max 90rem; }',
+      'div { @tidy site-max 90rem; @tidy debug true; }',
       {
         columns: 12,
         siteMax: '90rem',
+        debug: true,
       },
       columnsOnly,
     ),
