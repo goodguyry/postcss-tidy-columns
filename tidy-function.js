@@ -66,8 +66,15 @@ function tidyFunction(declaration, tidy) {
     }, declaration.value);
 
     // Save the original declaration in a comment for debugging.
-    if (options.debug) {
-      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    if (options.debug && undefined !== declaration.parent) {
+      // Check for an existing comment.
+      const hasComment = declaration.parent.some(decl => (
+        'comment' === decl.type && decl.text.toString().includes(`${declaration.prop}:`)
+      ));
+
+      if (!hasComment) {
+        declaration.cloneBefore(postcss.comment({ text: declaration }));
+      }
     }
 
     // Replace declaration(s) with cloned and updated declarations.
