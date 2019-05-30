@@ -69,6 +69,15 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
       { ...typical, debug: true },
     ),
   );
+
+  test(
+    'Maintains input as a /* comment */ with multiple functions in the same declaration',
+    () => run(
+      'div { margin: tidy-offset(1) 0 0 tidy-var(gap); }',
+      'div { /* margin: tidy-offset(1) 0 0 tidy-var(gap) */ margin: calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem) 0 0 1.25rem; }',
+      { ...typical, debug: true },
+    ),
+  );
 });
 
 describe('The `tidy-span()` functions are replaced and their values reflect the expected options', () => {
