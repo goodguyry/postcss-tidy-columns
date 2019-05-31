@@ -1,5 +1,6 @@
 const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
+const hasComment = require('./lib/hasComment');
 
 /**
  * Pattern to match the `tidy-offset-*` property.
@@ -35,8 +36,12 @@ function tidyProperty(declaration, tidy) {
     const columnDecl = [];
 
     // Save the original declaration in a comment for debugging.
-    if (options.debug) {
-      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    if (
+      options.debug
+      && undefined !== declaration.parent
+      && !hasComment(declaration)
+    ) {
+      declaration.cloneBefore(postcss.comment({ text: declaration.toString() }));
     }
 
     columnDecl.push(cleanClone(
@@ -75,8 +80,12 @@ function tidyProperty(declaration, tidy) {
     const { fluid, full } = columns.offsetCalc(declaration.value);
 
     // Save the original declaration in a comment for debugging.
-    if (options.debug) {
-      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    if (
+      options.debug
+      && undefined !== declaration.parent
+      && !hasComment(declaration)
+    ) {
+      declaration.cloneBefore(postcss.comment({ text: declaration.toString() }));
     }
 
     // Clone the declaration with `fluid` declaration overrides.

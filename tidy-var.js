@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
+const hasComment = require('./lib/hasComment');
 
 /**
  * Matches tidy-var() functions.
@@ -50,8 +51,12 @@ function tidyVar(declaration, tidy) {
     }, declaration.value);
 
     // Save the original declaration in a comment for debugging.
-    if (options.debug) {
-      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    if (
+      options.debug
+      && undefined !== declaration.parent
+      && !hasComment(declaration)
+    ) {
+      declaration.cloneBefore(postcss.comment({ text: declaration.toString() }));
     }
 
     // Clone after so the new declaration can be walked again.
