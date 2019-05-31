@@ -1,6 +1,7 @@
 const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
 const detectCalcWrapper = require('./lib/detectCalcWrapper');
+const hasComment = require('./lib/hasComment');
 
 /**
  * Pattern to match `tidy-*` functions in declaration values.
@@ -66,15 +67,12 @@ function tidyFunction(declaration, tidy) {
     }, declaration.value);
 
     // Save the original declaration in a comment for debugging.
-    if (options.debug && undefined !== declaration.parent) {
-      // Check for an existing comment.
-      const hasComment = declaration.parent.some(decl => (
-        'comment' === decl.type && decl.text.toString().includes(`${declaration.prop}:`)
-      ));
-
-      if (!hasComment) {
-        declaration.cloneBefore(postcss.comment({ text: declaration }));
-      }
+    if (
+      options.debug
+      && undefined !== declaration.parent
+      && !hasComment(declaration)
+    ) {
+      declaration.cloneBefore(postcss.comment({ text: declaration.toString() }));
     }
 
     // Replace declaration(s) with cloned and updated declarations.

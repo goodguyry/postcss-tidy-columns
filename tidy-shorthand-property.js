@@ -1,6 +1,7 @@
 const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
 const cleanShorthandValues = require('./lib/cleanShorthandValues');
+const hasComment = require('./lib/hasComment');
 
 /**
  * Matches valid tidy-column shorthand values.
@@ -51,8 +52,12 @@ function tidyShorthandProperty(declaration, tidy) {
     });
 
     // Save the original declaration in a comment for debugging.
-    if (options.debug) {
-      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    if (
+      options.debug
+      && undefined !== declaration.parent
+      && !hasComment(declaration)
+    ) {
+      declaration.cloneBefore(postcss.comment({ text: declaration.toString() }));
     }
 
     // Conditionally add the `tidy-span` property.
@@ -112,8 +117,12 @@ function tidyShorthandProperty(declaration, tidy) {
     });
 
     // Save the original declaration in a comment for debugging.
-    if (options.debug) {
-      declaration.cloneBefore(postcss.comment({ text: declaration }));
+    if (
+      options.debug
+      && undefined !== declaration.parent
+      && !hasComment(declaration)
+    ) {
+      declaration.cloneBefore(postcss.comment({ text: declaration.toString() }));
     }
 
     // Conditionally add the `tidy-offset-left` property.
