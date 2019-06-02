@@ -30,7 +30,8 @@
   "scripts": {
     "test": "jest",
     "watch": "jest --watchAll",
-    "watch:verbose": "jest --watchAll  --verbose"
+    "watch:verbose": "jest --watchAll  --verbose",
+    "build": "npm test && node docs/client/build.js"
   },
   "jest": {
     "testEnvironment": "node"

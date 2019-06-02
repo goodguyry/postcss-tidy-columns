@@ -1,0 +1,6 @@
+/* Here's a descriptive comment */
+div {
+  /* tidy-span: 2 */
+  width: calc((((100vw - 1.5rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem);
+  max-width: calc((((90rem - 1.5rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem);
+}
