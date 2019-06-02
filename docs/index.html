@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tidy Columns</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+	<link href="https://meyerweb.com/eric/tools/css/reset/reset.css" rel="stylesheet">
+	<link href="client/styles.out.css" rel="stylesheet">
+</head>
+<body>
+	<div class="grid-overlay">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	<header
+		role="banner"
+		class="site-header"
+	>
+		<div class="site-header__inner">
+			<h1 class="site-header__title">PostCSS Tidy Columns</h1>
+			<button
+				class="site-header__toggle"
+				onClick="(function() { document.body.classList.toggle('show-grid'); })();return false;"
+			>Toggle Grid Overlay</button>
+
+			<nav
+				role="navigation"
+				class="menu"
+			>
+				<ul class="menu__list">
+					<li class="menu__item"><a href="">GitHub Repo</a></li>
+					<li class="menu__item"><a href="">GitHub Wiki</a></li>
+					<li class="menu__item"><a href="">Grid Layout Example</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main role="main">
+		<article class="article">
+			<header class="article__header">
+				<figure class="article-header__figure">
+					<img
+						src="client/francesco-califano-1569933-unsplash.jpg"
+						alt=""
+						class="article-header__img"
+					>
+
+					<div class="article-header__intro">
+						<h2>Tidy Columns Flexbox Example</h2>
+						<p>This page demonstrates use-cases for PostCSS Tidy Columns within a Flexbox layout. Use the button at the top of the page to toggle a grid overlay, and see the CSS file for more information about the use of the plugin to achieve the desired layout.</p>
+						<p>There's also an example page incorporating <a href="#tbd">PostCSS Tidy Columns with a Grid Layout</a>.</p>
+					</div>
+
+					<figcaption class="article-header__figcaption">
+						<p>The image caption should be nested beneath the image, but to the right of the absolutely-positioned article header. This is accomplished with tidy-offset-left.</p>
+					</figcaption>
+				</figure>
+			</header>
+
+			<div class="article__content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+				<figure class="content__figure content__figure--floated">
+					<img
+						src="client/eberhard-grossgasteiger-1482753-unsplash.jpg"
+						alt=""
+						class="content__img"
+					>
+					<figcaption class="content__figcaption">
+						<p>This image caption should be aligned with a grid line outside of the content area</p>
+					</figcaption>
+				</figure>
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+				<figure class="content__figure content__figure--fullwidth">
+					<img
+						src="client/jeremy-weber-1584016-unsplash.jpg"
+						alt=""
+						class="content__img"
+					>
+					<figcaption class="content__figcaption content__figcaption--fullwidth">This image caption should be aligned with a grid line outside of the content area</figcaption>
+				</figure>
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</article>
+	</main>
+
+	<footer role="contentinfo"><p>&copy; 2019 GoodGuyRy</p></footer>
+</body>
+</html>
