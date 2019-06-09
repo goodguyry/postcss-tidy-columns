@@ -1,0 +1,59 @@
+/**
+ * Styles the site header, including navigation.
+ */
+
+.site-header {
+  background-color: var(--header-color);
+  color: white;
+  height: 80px;
+  margin-bottom: 30px;
+  width: 100vw;
+}
+
+.site-header__inner {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 auto;
+  tidy-span: tidy-var(columns);
+}
+
+.site-header__title {
+  font-size: 30px;
+  margin-right: 50px;
+}
+
+.site-header__toggle {
+  appearance: none;
+  background-color: white;
+  border: 1px solid #455066;
+  border-radius: 3px;
+  color: var(--color-text);
+  font: inherit;
+  height: 36px;
+  margin: 0;
+  padding: 0 20px;
+}
+
+.menu {
+  display: flex;
+  margin-left: auto;
+}
+
+.menu__list {
+  align-items: center;
+  display: flex;
+}
+
+.menu__item {
+
+  &:not(:last-of-type) {
+    margin-right: 30px;
+  }
+
+  a {
+    color: white;
+    font-weight: normal;
+    text-decoration: none;
+  }
+}

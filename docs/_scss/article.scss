@@ -1,0 +1,31 @@
+/**
+ * Styles the article elements.
+ */
+
+.article {
+  margin: 0 auto 75px auto;
+}
+
+.article__header {
+  margin-bottom: 50px;
+}
+
+.article-header__figure {
+  position: relative;
+}
+
+.article-header__img {
+  margin-bottom: 20px;
+}
+
+.article-header__intro {
+  background-color: white;
+  padding: 20px 64px;
+  text-align: center;
+
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+}

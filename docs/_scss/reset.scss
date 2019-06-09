@@ -1,0 +1,127 @@
+/**
+ * Reset styles and setup.
+ */
+
+:root {
+  font-size: medium;
+  --color-text: #31313B;
+  --link-hover: #637392;
+  --header-color: #0E244B;
+  --overlay-column-color: #FBB294;
+}
+
+html {
+  background-color: white;
+}
+
+html, body, div, span,
+article, aside, footer, header, nav, section,
+h1, h2, h3, h4, h5, h6,
+p, em, strike, strong,
+a, button,
+figure, figcaption, img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font-style: normal;
+  font: inherit;
+  vertical-align: baseline;
+
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
+}
+
+article,
+aside,
+footer,
+header,
+main,
+nav,
+section {
+  display: block;
+}
+
+a {
+  color: inherit;
+  font-weight: 700;
+
+  &:focus,
+  &:hover {
+    color: var(--link-hover);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+p:not(:last-child) {
+  margin-bottom: 28px;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+button {
+  appearance: none;
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+figure {
+  display: block;
+  height: auto;
+  margin: 0;
+  max-width: 100%;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+svg {
+  display: block;
+  height: auto;
+  pointer-events: none;
+  width: 100%;
+}
+
+body {
+  background-color: white;
+  color: var(--color-text);
+  font-family: 'Open Sans', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.3;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  text-rendering: optimizeSpeed;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  word-break: keep-all;
+}
+
+[role="main"] {
+  /* tbd */
+}

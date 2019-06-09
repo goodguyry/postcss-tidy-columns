@@ -1,0 +1,30 @@
+/**
+ * Styles miscellaneous content elements.
+ */
+
+.content__figure {
+  position: relative;
+}
+
+.content__figure--floated {
+
+  img {
+    margin-bottom: 6px;
+  }
+}
+
+.content__figure--fullwidth {
+  margin-bottom: 28px;
+  width: 100vw;
+}
+
+.content__figcaption--fullwidth {
+  color: white;
+}
+
+.content__credit {
+  display: block;
+  font-size: 80%;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
