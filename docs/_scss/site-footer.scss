@@ -5,13 +5,4 @@
 [role="contentinfo"] {
   font-size: 12px;
   margin: 0 auto 10px auto;
-  tidy-span: tidy-var(columns);
-
-  p {
-    margin-left: tidy-offset(1.5);
-
-    @media (min-width: 80rem) {
-      margin-left: tidy-offset-full(1.5);
-    }
-  }
 }
