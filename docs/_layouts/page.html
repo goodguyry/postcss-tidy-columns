@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+<article class="article">
+
+	<header class="article__header">
+		<figure class="article-header__figure">
+			<img
+				src="/client/benjamin-voros-575800-unsplash-1220x650.jpg"
+				alt=""
+				class="article-header__img"
+			>
+
+			<div class="article-header__intro">
+				<h2>{{ page.title }}</h2>
+				<p>{{ page.description }}</p>
+			</div>
+
+			<figcaption class="article-header__figcaption">
+				<p>{{ page.hero-caption }}<span class="content__credit"><a href="https://unsplash.com/@vorosbenisop">Benjamin Voros</a> / Unsplash</span></p>
+			</figcaption>
+		</figure>
+	</header>
+
+	<div class="article__content">
+		{{ content }}
+	</div>
+
+</article>

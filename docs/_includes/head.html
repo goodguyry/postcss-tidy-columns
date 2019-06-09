@@ -1,0 +1,17 @@
+<head>
+	<title>{% if page.title %}{{ page.title | append: " | Tidy Columns" }}{% else %}{{ site.title }}{% endif %}</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+	<link href="/css/base.css" rel="stylesheet">
+	{% if page.title contains 'Flexbox' %}
+		<link href="client/styles.out.css" rel="stylesheet">
+	{% else if page.title contains 'Grid' %}
+		<!-- Hello -->
+	{% endif %}
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, user-scalable=1" />
+</head>

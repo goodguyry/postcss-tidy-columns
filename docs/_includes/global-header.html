@@ -1,0 +1,27 @@
+<header
+		role="banner"
+		class="site-header"
+	>
+	<div class="site-header__inner">
+		<h1 class="site-header__title">PostCSS Tidy Columns</h1>
+		<button
+			class="site-header__toggle"
+			onClick="(function() { document.body.classList.toggle('show-overlay'); })();return false;"
+		>Toggle Overlay</button>
+
+		<nav
+			role="navigation"
+			class="menu"
+		>
+			<ul class="menu__list">
+				<li class="menu__item"><a href="">GitHub Repo</a></li>
+				<li class="menu__item"><a href="">GitHub Wiki</a></li>
+				{% if page.title contains 'Flexbox' %}
+					<li class="menu__item"><a href="/grid-layout/">Grid Layout Example</a></li>
+				{% else if page.title contains 'Grid' %}
+					<li class="menu__item"><a href="/">Flexbox Layout Example</a></li>
+				{% endif %}
+			</ul>
+		</nav>
+	</div>
+</header>

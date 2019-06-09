@@ -1,0 +1,22 @@
+# Site settings
+title: 'PostCSS Tidy Columns'
+description: 'PostCSS Tidy Columns is neat!'
+
+# Development/Serve
+port: 8080
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+include: [_pages]
+timezone: America/Los_Angeles
+
+# Sass settings
+sass:
+  sass_dir: _scss
+  style: expanded
+
+# kramdown settings
+kramdown:
+  auto_ids: false
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
