@@ -17,7 +17,7 @@ html {
 html, body, div, span,
 article, aside, footer, header, nav, section,
 h1, h2, h3, h4, h5, h6,
-p, em, strike, strong,
+p, em, strike, strong, code,
 a, button,
 figure, figcaption, img {
   margin: 0;
@@ -64,12 +64,16 @@ h6 {
   font-weight: 400;
 }
 
-p:not(:last-child) {
-  margin-bottom: 1.75rem;
+p {
+
+  &:not(:last-child) {
+    margin-bottom: 1.75rem;
+  }
 }
 
 ol, ul {
-  list-style: none;
+  list-style-type: circle;
+  margin: 0 0 1.75rem 0;
 }
 
 button {
@@ -105,6 +109,18 @@ svg {
   height: auto;
   pointer-events: none;
   width: 100%;
+}
+
+code {
+
+  p &,
+  li & {
+    background-color: aliceblue;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    font: 400 90% 'Courier', monospace;
+    padding: 0 0.3em;
+  }
 }
 
 body {
