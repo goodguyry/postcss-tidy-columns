@@ -42,6 +42,8 @@
 .menu__list {
   align-items: center;
   display: flex;
+  list-style-type: none;
+  margin: 0;
 }
 
 .menu__item {

@@ -5,7 +5,7 @@
 :root {
   font-size: medium;
   --color-text: #31313B;
-  --link-hover: #637392;
+  --link-hover: #AC7DA9;
   --header-color: #0E244B;
   --overlay-column-color: #FBB294;
 }
@@ -48,6 +48,7 @@ section {
 a {
   color: inherit;
   font-weight: 700;
+  transition: color 250ms ease;
 
   &:focus,
   &:hover {
@@ -121,6 +122,14 @@ code {
     font: 400 90% 'Courier', monospace;
     padding: 0 0.3em;
   }
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background-color: lightgray;
+  width: 80%;
+  margin: 0 auto 1.75rem auto;
 }
 
 body {
