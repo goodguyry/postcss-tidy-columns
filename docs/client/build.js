@@ -22,3 +22,17 @@ fs.readFile('docs/client/styles.in.css', (err, css) => {
       }
     });
 });
+
+fs.readFile('docs/client/layout.grid.css', (err, css) => {
+  postcss([
+    tidyColumns(),
+    autoprefixer,
+  ])
+    .process(css, { from: 'docs/client/layout.grid.css', to: 'docs/css/layout.grid.css' })
+    .then((result) => {
+      fs.writeFile('docs/css/layout.grid.css', result.css, () => true);
+      if (result.map) {
+        fs.writeFile('docs/css/layout.grid.css.map', result.map, () => true);
+      }
+    });
+});

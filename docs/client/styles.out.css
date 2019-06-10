@@ -93,8 +93,6 @@
 }
 
 .content__figcaption--fullwidth {
-  bottom: 20px;
-  position: absolute;
   /* right: calc(tidy-var(edge) + tidy-offset(1)) */
   right: calc(1.875rem + (((100vw - 1.875rem * 2) / 12 - 1.1458rem) + 1.25rem));
 }
