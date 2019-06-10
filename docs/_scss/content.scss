@@ -9,17 +9,17 @@
 .content__figure--floated {
 
   img {
-    margin-bottom: 6px;
+    margin-bottom: 0.375rem;
   }
 }
 
 .content__figure--fullwidth {
-  margin-bottom: 28px;
+  margin-bottom: 1.75rem;
   width: 100vw;
 }
 
 .content__figcaption--fullwidth {
-  bottom: 20px;
+  bottom: 1.25rem;
   color: white;
   position: absolute;
 }
@@ -27,6 +27,6 @@
 .content__credit {
   display: block;
   font-size: 80%;
-  margin-top: 5px;
+  margin-top: 0.3125rem;
   text-transform: uppercase;
 }
