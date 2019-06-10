@@ -15,6 +15,11 @@ layout: default
 			<div class="article-header__intro">
 				<h2>{{ page.title }}</h2>
 				<p>{{ page.description }}</p>
+				{% if 'flex' == page.display %}
+					<p>There’s also a <a href="/grid-layout/">Grid Layout example</a>.</p>
+				{% else %}
+					<p>There’s also a <a href="/">Flexbox Layout example</a>.</p>
+				{% endif %}
 			</div>
 
 			<figcaption class="article-header__figcaption">

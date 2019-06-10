@@ -1,19 +1,28 @@
 ---
 layout: page
 title: Tidy Columns Flexbox Example
-description: This page demonstrates use-cases for PostCSS Tidy Columns within a Flexbox layout. Use the button at the top of the page to toggle a grid overlay, and see the CSS file for more information about the use of the plugin to achieve the desired layout.
-hero-caption: The image caption should be nested beneath the image, but to the right of the absolutely-positioned article header. This is accomplished with tidy-offset-left.
+description: This page demonstrates incorporating Tidy Columns into your flexbox layout. Toggle a grid overlay with the button in the header, and view the CSS file for additional context.
+hero-caption: On desktop, this image caption is nestled alongside the absolutely-positioned title wrapper.
 permalink: /
+display: flex
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+On desktop, the title holder in the article header above is absolutely-positioned, which means it's out of document flow, so the image caption can't naturally sit next to it. We can, however, use Tidy Columns to add a left offset to the image caption that makes it appear to be nestled alongside the title holder.
+
+---
 
 {% include figure-small.html %}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The width of the elements within this content area are set using Tidy Columns. The content area itself is six columns wide and one column left of center. This creates a scenario where the floated image should align with the edge of the title holder in the article header. Tidy Columns makes it dead simple to keep elements aligned down the page.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The design calls for floated images to be three-columns wide and be pulled exactly one column outside of the content parent. Using a negative right offset we can ensure disconnect elements are vertically aligned.
 
-{% include figure-wide.html %}
+{% include figure-wide.html caption="This image caption is absolutely-positioned and right-aligned with a column outside the content area." %}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The full-width image above should max out at the site’s max-width. Using Tidy Columns to pull the image in-line with the edge of the site means no more magic numbers, or fudging with the developer tools. This demonstrates the following features:
+
+- Using a negative value for with `tidy-offset`
+- Using Tidy Columns functions within a css `calc()` function
+- Using `tidy-var()` to retrieve a configuration value
+
+Just for kicks, the content in the site footer should align halfway through the second column. This demonstrates the ability to span and offset by a fraction of a column.
