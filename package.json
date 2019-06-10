@@ -32,7 +32,7 @@
     "test": "jest",
     "watch": "jest --watchAll",
     "watch:verbose": "jest --watchAll  --verbose",
-    "build": "node docs/client/build.js"
+    "build": "npm test && node docs/_bin/build.js"
   },
   "jest": {
     "testEnvironment": "node"
