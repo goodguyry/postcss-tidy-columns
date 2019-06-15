@@ -72,6 +72,14 @@ p {
   }
 }
 
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
 ol, ul {
   list-style-type: circle;
   margin: 0 0 1.75rem 0;
@@ -138,7 +146,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  line-height: 1.3;
+  line-height: 1.4;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   text-rendering: optimizeSpeed;
   -moz-text-size-adjust: 100%;
