@@ -7,6 +7,8 @@ permalink: /
 display: flexbox
 ---
 
+{% include intro.md %}
+
 On desktop, the title holder in the article header above is absolutely-positioned, which means it's out of document flow, so the image caption can't naturally sit next to it. We can, however, use Tidy Columns to add a left offset to the image caption that makes it appear to be nestled alongside the title holder.
 
 ---
