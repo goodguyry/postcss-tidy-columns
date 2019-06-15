@@ -17,7 +17,7 @@ On desktop, the title holder in the article header above is absolutely-positione
 
 The width of the elements within this content area are set using Tidy Columns. The content area itself is six columns wide and one column left of center. This creates a scenario where the floated image should align with the edge of the title holder in the article header. Tidy Columns makes it dead simple to keep elements aligned down the page.
 
-The design calls for floated images to be three-columns wide and be pulled exactly one column outside of the content parent. Using a negative right offset we can ensure disconnect elements are vertically aligned.
+The design calls for floated images to be three-columns wide and be pulled exactly one column outside of the content parent. Using a negative right offset we can ensure disconnected elements remain vertically aligned.
 
 {% include figure-wide.html caption="This image caption is absolutely-positioned and right-aligned with a column outside the content area." %}
 
