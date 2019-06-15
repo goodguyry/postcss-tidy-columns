@@ -4,7 +4,7 @@ title: Tidy Columns Flexbox Example
 description: This page demonstrates incorporating Tidy Columns into your flexbox layout. Toggle a grid overlay with the button in the header, and view the CSS file for additional context.
 hero-caption: On desktop, this image caption is nestled alongside the absolutely-positioned title wrapper.
 permalink: /
-display: flex
+display: flexbox
 ---
 
 On desktop, the title holder in the article header above is absolutely-positioned, which means it's out of document flow, so the image caption can't naturally sit next to it. We can, however, use Tidy Columns to add a left offset to the image caption that makes it appear to be nestled alongside the title holder.
