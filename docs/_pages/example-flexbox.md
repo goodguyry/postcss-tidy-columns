@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Tidy Columns Flexbox Example
-description: This page demonstrates incorporating Tidy Columns into your flexbox layout. Toggle a grid overlay with the button in the header, and view the CSS file for additional context.
+description: This page demonstrates incorporating Tidy Columns into your flexbox layout.
 hero-caption: On desktop, this image caption is nestled alongside the absolutely-positioned title wrapper.
 permalink: /
 display: flexbox

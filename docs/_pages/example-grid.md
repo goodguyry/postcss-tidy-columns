@@ -1,8 +1,7 @@
 ---
 layout: page
 title: Tidy Columns Grid Example
-description: This page demonstrates use-cases for PostCSS Tidy Columns within a Grid layout. Use the button at the top of the page to toggle a grid overlay, and see the CSS file for more information about the use of the plugin to achieve the desired layout.
-hero-caption: The image caption should be nested beneath the image, but to the right of the absolutely-positioned article header. This is accomplished with tidy-offset-left.
+description: This page demonstrates use-cases for PostCSS Tidy Columns within a Grid layout.
 permalink: /grid-layout/
 display: grid
 ---

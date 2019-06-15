@@ -14,8 +14,8 @@ layout: default
 
 			<div class="article-header__intro">
 				<h2>{{ page.title }}</h2>
-				<p>{{ page.description }}</p>
-				{% if 'flex' == page.display %}
+				<p>{{ page.description }} Toggle a grid overlay with the button in the header, and view <a href="/css/output.{{ page.display }}.css">the CSS file</a> for additional context.</p>
+				{% if 'flexbox' == page.display %}
 					<p>There’s also a <a href="/grid-layout/">Grid Layout example</a>.</p>
 				{% else %}
 					<p>There’s also a <a href="/">Flexbox Layout example</a>.</p>
