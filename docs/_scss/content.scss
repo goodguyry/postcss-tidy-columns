@@ -19,9 +19,12 @@
 }
 
 .content__figcaption--fullwidth {
-  bottom: 1.25rem;
-  color: white;
-  position: absolute;
+
+  @media (min-width: 80rem) {
+    bottom: 1.25rem;
+    color: white;
+    position: absolute;
+  }
 }
 
 .content__credit {

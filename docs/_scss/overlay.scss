@@ -2,19 +2,36 @@
  * Styles the grid overlay.
  */
 
+:root {
+  --columns: 8;
+  --gap: 0.5rem;
+  --edge: 0.75rem;
+  --siteMax: var(--siteMax);
+}
+
+@media (min-width: 64rem) {
+
+  :root {
+    --columns: 12;
+    --gap: 1.25rem;
+    --edge: 1.875rem;
+    --siteMax: 80rem;
+  }
+}
+
 .show-overlay {
 
   .grid-overlay {
     display: grid;
-    grid-gap: 0 0.625rem;
-    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 0 var(--gap);
+    grid-template-columns: repeat(var(--columns), 1fr);
     height: 100%;
     left: 0;
     margin-left: auto;
     margin-right: auto;
-    max-width: 80rem;
+    max-width: var(--siteMax);
     opacity: 0.3;
-    padding: 0 1.25rem;
+    padding: 0 var(--edge);
     pointer-events: none;
     position: fixed;
     right: 0;
@@ -22,13 +39,16 @@
     width: 100%;
     z-index: 1000;
 
-    @media (min-width: 48rem) {
-      grid-gap: 0 1.25rem;
-      padding: 0 1.875rem;
-    }
-
     span {
       background-color: var(--overlay-column-color);
+
+      &:nth-last-child(-n+4) {
+        display: none;
+
+        @media (min-width: 64rem) {
+          display: inline-block;
+        }
+      }
     }
   }
 }

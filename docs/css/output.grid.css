@@ -1,9 +1,3 @@
-:root {
-  --columns: 12;
-  --gap: 1.25rem;
-  --edge: 1.875rem;
-}
-
 .site-header__inner {
   margin-left: auto;
   margin-right: auto;

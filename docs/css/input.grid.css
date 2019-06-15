@@ -1,9 +1,3 @@
-:root {
-  --columns: 12;
-  --gap: 1.25rem;
-  --edge: 1.875rem;
-}
-
 @tidy columns var(--columns);
 @tidy siteMax 80rem;
 @tidy gap var(--gap);

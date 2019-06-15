@@ -6,11 +6,17 @@ const tidyColumns = require('../../');
 fs.readFile('docs/css/input.flexbox.css', (err, css) => {
   postcss([
     tidyColumns({
-      columns: 12,
-      siteMax: '80rem',
-      gap: '1.25rem',
-      edge: '1.875rem',
-      debug: true,
+      columns: 8,
+      gap: '0.5rem',
+      edge: '0.75rem',
+      breakpoints: {
+        '64rem': {
+          columns: 12,
+          gap: '1.25rem',
+          edge: '1.875rem',
+          siteMax: '80rem',
+        },
+      },
     }),
     autoprefixer,
   ])

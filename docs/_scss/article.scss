@@ -15,17 +15,32 @@
 }
 
 .article-header__img {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
+
+  @media (min-width: 64rem) {
+    margin-bottom: 1.25rem;
+  }
 }
 
 .article-header__intro {
   background-color: white;
-  padding: 1.25rem 4rem;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem 0.75rem;
   text-align: center;
 
+  @media (min-width: 64rem) {
+    margin-bottom: 0;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
   h2 {
-    font-size: 2.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
+
+    @media (min-width: 64rem) {
+      font-size: 2.25rem;
+    }
   }
 }
