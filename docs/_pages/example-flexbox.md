@@ -1,10 +1,7 @@
 ---
 layout: page
-title: Tidy Columns Flexbox Example
-description: This page demonstrates incorporating Tidy Columns into your flexbox layout.
-hero-caption: On desktop, this image caption is nestled alongside the absolutely-positioned title wrapper.
+title: Tidy Columns Example
 permalink: /
-display: flexbox
 ---
 
 {% include intro.md %}

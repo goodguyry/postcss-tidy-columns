@@ -11,11 +11,6 @@ highlighter: rouge
 include: [_pages]
 timezone: America/Los_Angeles
 
-# Sass settings
-sass:
-  sass_dir: _scss
-  style: expanded
-
 # kramdown settings
 kramdown:
   auto_ids: false
