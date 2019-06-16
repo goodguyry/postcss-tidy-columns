@@ -2,6 +2,7 @@ const fs = require('fs');
 const sass = require('node-sass');
 const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
+const units = require('postcss-units');
 const tidyColumns = require('../../');
 
 sass.render({
@@ -11,6 +12,9 @@ sass.render({
 }, (error, output) => {
   if (!error) {
     postcss([
+      units({
+        precision: 4,
+      }),
       tidyColumns({
         columns: 8,
         gap: '0.5rem',

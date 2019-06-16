@@ -21,7 +21,8 @@
     "autoprefixer": "^9.5.1",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
-    "postcss": "^6.0.22"
+    "postcss": "^6.0.22",
+    "postcss-units": "^1.2.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
