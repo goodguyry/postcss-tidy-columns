@@ -4,10 +4,6 @@
 
 :root {
   font-size: medium;
-  --color-text: #31313B;
-  --link-hover: #AC7DA9;
-  --header-color: #0E244B;
-  --overlay-column-color: #FBB294;
 }
 
 html {
@@ -52,7 +48,7 @@ a {
 
   &:focus,
   &:hover {
-    color: var(--link-hover);
+    color: $link-hover;
   }
 }
 
@@ -68,7 +64,7 @@ h6 {
 p {
 
   &:not(:last-child) {
-    margin-bottom: 1.75rem;
+    margin-bottom: $vertical-rhythm;
   }
 }
 
@@ -82,7 +78,7 @@ strong {
 
 ol, ul {
   list-style-type: circle;
-  margin: 0 0 1.75rem 0;
+  margin: 0 0 $vertical-rhythm 0;
   padding: 0;
 }
 
@@ -104,7 +100,7 @@ figure {
 }
 
 figcaption {
-  font-size: 0.75rem;
+  font-size: rem(12);
 }
 
 img {
@@ -134,16 +130,17 @@ code {
 }
 
 hr {
+  @include auto-margins;
   height: 1px;
   border: none;
   background-color: lightgray;
   width: 80%;
-  margin: 0 auto 1.75rem auto;
+  margin-bottom: $vertical-rhythm;
 }
 
 body {
   background-color: white;
-  color: var(--color-text);
+  color: $color-text;
   font-family: 'Open Sans', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;

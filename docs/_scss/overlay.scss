@@ -4,31 +4,28 @@
 
 :root {
   --columns: 8;
-  --gap: 0.5rem;
-  --edge: 0.75rem;
-  --siteMax: var(--siteMax);
-}
+  --gap: rem(8);
+  --edge: rem(12);
+  --siteMax: rem(1280);
+  --overlay-column-color: #FBB294;
 
-@media (min-width: 64rem) {
-
-  :root {
+  @media (min(lg)) {
     --columns: 12;
-    --gap: 1.25rem;
-    --edge: 1.875rem;
-    --siteMax: 80rem;
+    --gap: rem(20);
+    --edge: rem(30);
+    --siteMax: rem(1280);
   }
 }
 
 .show-overlay {
 
   .grid-overlay {
+    @include auto-margins;
     display: grid;
     grid-gap: 0 var(--gap);
     grid-template-columns: repeat(var(--columns), 1fr);
     height: 100%;
     left: 0;
-    margin-left: auto;
-    margin-right: auto;
     max-width: var(--siteMax);
     opacity: 0.3;
     padding: 0 var(--edge);
@@ -45,7 +42,7 @@
       &:nth-last-child(-n+4) {
         display: none;
 
-        @media (min-width: 64rem) {
+        @media (min(lg)) {
           display: inline-block;
         }
       }

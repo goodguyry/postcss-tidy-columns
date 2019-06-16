@@ -3,40 +3,41 @@
  */
 
 .site-header {
-  background-color: var(--header-color);
+  background-color: $header-color;
   color: white;
-  margin-bottom: 1.875rem;
+  margin-bottom: rem(30);
   width: 100vw;
 
-  @media (min-width: 64rem) {
-    height: 5rem;
+  @media (min(lg)) {
+    height: rem(80);
   }
 }
 
 .site-header__inner {
+  @include auto-margins;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  margin: 0 auto;
-  padding: var(--edge) 0;
+  padding: tidy-var(edge) 0;
   tidy-span: tidy-var(columns);
 
-  @media (min-width: 64rem) {
+  @media (min(lg)) {
     align-items: center;
     flex-wrap: nowrap;
+    padding: tidy-var(edge) 0;
     tidy-span: tidy-var(columns);
   }
 }
 
 .site-header__title {
-  font-size: 1.875rem;
-  margin-bottom: 1rem;
+  font-size: rem(30);
+  margin-bottom: rem(16);
   text-align: center;
   width: 100%;
 
-  @media (min-width: 64rem) {
+  @media (min(lg)) {
     margin-bottom: 0;
-    margin-right: 3.125rem;
+    margin-right: rem(50);
     text-align: left;
     width: auto;
   }
@@ -47,16 +48,17 @@
   background-color: white;
   border-radius: 3px;
   border: 1px solid #455066;
-  color: var(--color-text);
+  color: $color-text;
   font: inherit;
-  font-size: 0.875rem;
-  height: 2.25rem;
-  margin: 0 0 1rem 0;
-  padding: 0 var(--edge);
+  font-size: rem(14);
+  height: rem(36);
+  margin: 0 0 rem(16) 0;
+  padding: 0 tidy-var(edge);
 
-  @media (min-width: 64rem) {
-    font-size: 1rem;
+  @media (min(lg)) {
+    font-size: rem(16);
     margin-bottom: 0;
+    padding: 0 tidy-var(edge);
   }
 }
 
@@ -65,26 +67,26 @@
 }
 
 .menu__list {
-  font-size: 0.875rem;
+  font-size: rem(14);
   list-style-type: none;
   margin: 0;
   padding: 0;
 
-  @media (min-width: 48rem) {
+  @media (min(md)) {
     align-items: center;
     display: flex;
-    font-size: 1rem;
+    font-size: rem(16);
   }
 }
 
 .menu__item {
-  margin-bottom: 5px;
+  margin-bottom: rem(5);
 
-  @media (min-width: 48rem) {
+  @media (min(md)) {
     margin-bottom: 0;
 
     &:not(:last-of-type) {
-      margin-right: 1.875rem;
+      margin-right: rem(30);
     }
   }
 

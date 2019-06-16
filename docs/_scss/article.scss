@@ -3,15 +3,16 @@
  */
 
 .article {
-  margin: 0 auto 4.6875rem auto;
+  @include auto-margins;
+  margin-bottom: rem(75);
 
-  @media (min-width: 64rem) {
+  @media (min(lg)) {
     tidy-span: tidy-var(columns);
   }
 }
 
 .article__header {
-  margin-bottom: 3.125rem;
+  margin-bottom: rem(50);
 }
 
 .article-header__figure {
@@ -19,72 +20,71 @@
   flex-direction: column;
   position: relative;
 
-  @media (min-width: 64rem) {
+  @media (min(lg)) {
     display: block;
   }
 }
 
 .article-header__img {
-  margin-bottom: 0.5rem;
+  margin-bottom: rem(8);
   order: 2;
 
-  @media (min-width: 64rem) {
-    margin-bottom: 1.25rem;
+  @media (min(lg)) {
+    margin-bottom: rem(20);
     order: 0;
   }
 }
 
 .article-header__figcaption {
-  margin: 0 auto;
+  @include auto-margins;
   order: 2;
   tidy-span: 8;
 
-  @media (min-width: 64rem) {
+  @media (min(lg)) {
     order: 0;
     tidy-column: 9 / span 3 / 0;
   }
 }
 
 .article-header__intro {
+  @include auto-margins;
   background-color: white;
-  margin-bottom: 1.25rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1.25rem 0.75rem;
+  margin-bottom: rem(20);
+  padding: rem(20) rem(12);
   text-align: center;
   tidy-span: 8;
 
-  @media (min-width: 48rem) {
+  @media (min(md)) {
     tidy-span: 6;
   }
 
-  @media (min-width: 64rem) {
+  @media (min(lg)) {
     bottom: 0;
     left: 0;
     margin-bottom: 0;
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: rem(64);
+    padding-right: rem(64);
     position: absolute;
     right: 0;
     tidy-span: 6;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: rem(24);
     font-weight: 700;
-    margin-bottom: 0.75rem;
+    margin-bottom: rem(12);
 
-    @media (min-width: 64rem) {
-      font-size: 2.25rem;
+    @media (min(lg)) {
+      font-size: rem(36);
     }
   }
 }
 
 .article__content {
-  margin: 0 auto;
+  @include auto-margins;
   tidy-span: 6;
 
-  @media (min-width: 64rem) {
+  @media (min(lg)) {
     tidy-offset-left: 2;
     tidy-span: 6;
   }

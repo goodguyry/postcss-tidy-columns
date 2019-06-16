@@ -3,18 +3,19 @@
  */
 
 [role="contentinfo"] {
-  font-size: 0.75rem;
-  margin: 0 auto 0.625rem auto;
+  @include auto-margins;
+  font-size: rem(12);
+  margin-bottom: rem(10);
   tidy-span: tidy-var(columns);
 
-  @media (min-width: 80rem) {
+  @media (min(full)) {
     tidy-span: tidy-var(columns);
   }
 
   p {
     margin-left: tidy-offset(1.5);
 
-    @media (min-width: 80rem) {
+    @media (min(full)) {
       margin-left: tidy-offset(1.5);
       margin-left: tidy-offset-full(1.5);
     }
