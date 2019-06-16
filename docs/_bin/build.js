@@ -1,44 +1,37 @@
 const fs = require('fs');
+const sass = require('node-sass');
 const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
 const tidyColumns = require('../../');
 
-fs.readFile('docs/css/input.flexbox.css', (err, css) => {
-  postcss([
-    tidyColumns({
-      columns: 8,
-      gap: '0.5rem',
-      edge: '0.75rem',
-      breakpoints: {
-        '64rem': {
-          columns: 12,
-          gap: '1.25rem',
-          edge: '1.875rem',
-          siteMax: '80rem',
+sass.render({
+  file: 'docs/_scss/index.scss',
+  includePaths: ['docs/_scss'],
+  outputStyle: 'expanded',
+}, (error, output) => {
+  if (!error) {
+    postcss([
+      tidyColumns({
+        columns: 8,
+        gap: '0.5rem',
+        edge: '0.75rem',
+        breakpoints: {
+          '64rem': {
+            columns: 12,
+            gap: '1.25rem',
+            edge: '1.875rem',
+            siteMax: '80rem',
+          },
         },
-      },
-    }),
-    autoprefixer,
-  ])
-    .process(css, { from: 'docs/css/input.flexbox.css', to: 'docs/css/output.flexbox.css' })
-    .then((result) => {
-      fs.writeFile('docs/css/output.flexbox.css', result.css, () => true);
-      if (result.map) {
-        fs.writeFile('docs/css/output.flexbox.css.map', result.map, () => true);
-      }
-    });
-});
-
-fs.readFile('docs/css/input.grid.css', (err, css) => {
-  postcss([
-    tidyColumns(),
-    autoprefixer,
-  ])
-    .process(css, { from: 'docs/css/input.grid.css', to: 'docs/css/output.grid.css' })
-    .then((result) => {
-      fs.writeFile('docs/css/output.grid.css', result.css, () => true);
-      if (result.map) {
-        fs.writeFile('docs/css/output.grid.css.map', result.map, () => true);
-      }
-    });
+      }),
+      autoprefixer,
+    ])
+      .process(output.css, { from: 'docs/_scss/index.scss', to: 'docs/css/main.css' })
+      .then((result) => {
+        fs.writeFile('docs/css/main.css', result.css, () => true);
+        if (result.map) {
+          fs.writeFile('docs/css/main.css.map', result.map, () => true);
+        }
+      });
+  }
 });

@@ -4,6 +4,10 @@
 
 .article {
   margin: 0 auto 4.6875rem auto;
+
+  @media (min-width: 64rem) {
+    tidy-span: tidy-var(columns);
+  }
 }
 
 .article__header {
@@ -11,27 +15,58 @@
 }
 
 .article-header__figure {
+  display: flex;
+  flex-direction: column;
   position: relative;
+
+  @media (min-width: 64rem) {
+    display: block;
+  }
 }
 
 .article-header__img {
   margin-bottom: 0.5rem;
+  order: 2;
 
   @media (min-width: 64rem) {
     margin-bottom: 1.25rem;
+    order: 0;
+  }
+}
+
+.article-header__figcaption {
+  margin: 0 auto;
+  order: 2;
+  tidy-span: 8;
+
+  @media (min-width: 64rem) {
+    order: 0;
+    tidy-column: 9 / span 3 / 0;
   }
 }
 
 .article-header__intro {
   background-color: white;
   margin-bottom: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
   padding: 1.25rem 0.75rem;
   text-align: center;
+  tidy-span: 8;
+
+  @media (min-width: 48rem) {
+    tidy-span: 6;
+  }
 
   @media (min-width: 64rem) {
+    bottom: 0;
+    left: 0;
     margin-bottom: 0;
     padding-left: 4rem;
     padding-right: 4rem;
+    position: absolute;
+    right: 0;
+    tidy-span: 6;
   }
 
   h2 {
@@ -42,5 +77,15 @@
     @media (min-width: 64rem) {
       font-size: 2.25rem;
     }
+  }
+}
+
+.article__content {
+  margin: 0 auto;
+  tidy-span: 6;
+
+  @media (min-width: 64rem) {
+    tidy-offset-left: 2;
+    tidy-span: 6;
   }
 }

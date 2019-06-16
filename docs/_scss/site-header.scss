@@ -19,10 +19,12 @@
   height: 100%;
   margin: 0 auto;
   padding: var(--edge) 0;
+  tidy-span: tidy-var(columns);
 
   @media (min-width: 64rem) {
     align-items: center;
     flex-wrap: nowrap;
+    tidy-span: tidy-var(columns);
   }
 }
 
