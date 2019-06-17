@@ -79,13 +79,3 @@
     }
   }
 }
-
-.article__content {
-  @include auto-margins;
-  tidy-span: 6;
-
-  @media (min(lg)) {
-    tidy-offset-left: 2;
-    tidy-span: 6;
-  }
-}
