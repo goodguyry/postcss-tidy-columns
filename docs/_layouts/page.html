@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<article class="article">
+
+	<header class="article__header">
+		<figure class="article-header__figure">
+			<img
+				src="/images/benjamin-voros-575800-unsplash-1220x650.jpg"
+				alt=""
+				class="article-header__img"
+			>
+
+			<div class="article-header__intro">
+				<h1>{{ page.title }}</h1>
+				<p>This page demonstrates incorporating Tidy Columns into your flexbox layout. Toggle a grid overlay with the button in the header, and view <a href="/css/main.css">the CSS file</a> for additional context.</p>
+				<p>On desktop, this title holder is absolutely-positioned, which means it's out of document flow, so the image caption can't naturally sit next to it. Use Tidy Columns to add a left offset to the caption to correct maintain alignment and spacing.</p>
+			</div>
+
+			<figcaption class="article-header__figcaption">
+				<p>On desktop, this image caption is nestled alongside the absolutely-positioned title wrapper.<span class="content__credit"><a href="https://unsplash.com/@vorosbenisop">Benjamin Voros</a> / Unsplash</span></p>
+			</figcaption>
+		</figure>
+	</header>
+
+	<div class="content">
+		{{ content }}
+	</div>
+
+</article>

@@ -1,0 +1,108 @@
+/**
+ * Styles the article elements.
+ */
+
+.article {
+  @include auto-margins;
+  margin-bottom: rem(75);
+
+  @media (min(lg)) {
+    /**
+     * Quick and dirty full-width container.
+     *
+     * tidy-span: tidy-var(columns);
+     */
+    tidy-span: tidy-var(columns);
+  }
+}
+
+.article__header {
+  margin-bottom: rem(50);
+}
+
+.article-header__figure {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @media (min(lg)) {
+    display: block;
+  }
+}
+
+.article-header__img {
+  margin-bottom: rem(8);
+  order: 2;
+
+  @media (min(lg)) {
+    margin-bottom: rem(20);
+    order: 0;
+  }
+}
+
+.article-header__figcaption {
+  @include auto-margins;
+  order: 2;
+  /**
+   * Make the caption full-width on small screens.
+   *
+   * tidy-span: 8;
+   */
+  tidy-span: 8;
+
+  @media (min(lg)) {
+    order: 0;
+    /**
+     * Since `article-header__intro` is absolutely positioned, we'll use the
+     * column shorthand to size and offset the caption to look as if it's next
+     * to the header intro.
+     *
+     * tidy-column: 9 / span 3 / 0;
+     */
+    tidy-column: 9 / span 3 / 0;
+  }
+}
+
+.article-header__intro {
+  @include auto-margins;
+  background-color: white;
+  margin-bottom: rem(20);
+  padding: rem(20) rem(12);
+  text-align: center;
+  /**
+   * Make the header intro full-width on small screens.
+   *
+   * tidy-span: 8;
+   */
+  tidy-span: 8;
+
+  @media (min(md)) {
+    /**
+     * The header intro should span 6 columns on medium screens.
+     *
+     * tidy-span: 6;
+     */
+    tidy-span: 6;
+  }
+
+  @media (min(lg)) {
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+    padding-left: rem(64);
+    padding-right: rem(64);
+    position: absolute;
+    right: 0;
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * tidy-span: 6;
+     */
+    tidy-span: 6;
+  }
+}

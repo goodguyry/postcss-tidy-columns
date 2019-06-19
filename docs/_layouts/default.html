@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+{% include head.html %}
+
+<body>
+	{% include grid-overlay.html %}
+
+	{% include global-header.html %}
+
+	<main role="main">
+
+		{{ content }}
+
+	</main>
+
+	{% include global-footer.html %}
+
+	<!-- build: {{ site.time }} -->
+</body>
+
+</html>

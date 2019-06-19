@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/goodguyry/postcss-tidy-columns",
   "dependencies": {
-    "postcss": "^6.0.22"
+    "autoprefixer": "^9.5.1",
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.19.1",
+    "postcss": "^6.0.22",
+    "postcss-units": "^1.2.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
@@ -30,7 +34,9 @@
   "scripts": {
     "test": "jest",
     "watch": "jest --watchAll",
-    "watch:verbose": "jest --watchAll  --verbose"
+    "watch:verbose": "jest --watchAll  --verbose",
+    "build:css": "npm test && node docs/_bin/build.js",
+    "watch:css": "nodemon -e scss -x node docs/_bin/build.js"
   },
   "jest": {
     "testEnvironment": "node"

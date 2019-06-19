@@ -1,0 +1,51 @@
+/**
+ * Styles the grid overlay.
+ */
+
+:root {
+  --columns: 8;
+  --gap: rem(8);
+  --edge: rem(12);
+  --siteMax: rem(1280);
+  --overlay-column-color: #FBB294;
+
+  @media (min(lg)) {
+    --columns: 12;
+    --gap: rem(20);
+    --edge: rem(30);
+    --siteMax: rem(1280);
+  }
+}
+
+.show-overlay {
+
+  .grid-overlay {
+    @include auto-margins;
+    display: grid;
+    grid-gap: 0 var(--gap);
+    grid-template-columns: repeat(var(--columns), 1fr);
+    height: 100%;
+    left: 0;
+    max-width: var(--siteMax);
+    opacity: 0.3;
+    padding: 0 var(--edge);
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+    span {
+      background-color: var(--overlay-column-color);
+
+      &:nth-last-child(-n+4) {
+        display: none;
+
+        @media (min(lg)) {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
