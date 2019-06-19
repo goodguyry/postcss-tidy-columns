@@ -10,6 +10,9 @@ sass.render({
   includePaths: ['docs/_scss'],
   outputStyle: 'expanded',
 }, (error, output) => {
+  if (error) {
+    console.error(error);
+  }
   if (!error) {
     postcss([
       units({
