@@ -7,6 +7,11 @@
   margin-bottom: rem(75);
 
   @media (min(lg)) {
+    /**
+     * Quick and dirty full-width container.
+     *
+     * tidy-span: tidy-var(columns);
+     */
     tidy-span: tidy-var(columns);
   }
 }
@@ -38,10 +43,22 @@
 .article-header__figcaption {
   @include auto-margins;
   order: 2;
+  /**
+   * Make the caption full-width on small screens.
+   *
+   * tidy-span: 8;
+   */
   tidy-span: 8;
 
   @media (min(lg)) {
     order: 0;
+    /**
+     * Since `article-header__intro` is absolutely positioned, we'll use the
+     * column shorthand to size and offset the caption to look as if it's next
+     * to the header intro.
+     *
+     * tidy-column: 9 / span 3 / 0;
+     */
     tidy-column: 9 / span 3 / 0;
   }
 }
@@ -52,9 +69,19 @@
   margin-bottom: rem(20);
   padding: rem(20) rem(12);
   text-align: center;
+  /**
+   * Make the header intro full-width on small screens.
+   *
+   * tidy-span: 8;
+   */
   tidy-span: 8;
 
   @media (min(md)) {
+    /**
+     * The header intro should span 6 columns on medium screens.
+     *
+     * tidy-span: 6;
+     */
     tidy-span: 6;
   }
 
@@ -66,6 +93,16 @@
     padding-right: rem(64);
     position: absolute;
     right: 0;
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * tidy-span: 6;
+     */
     tidy-span: 6;
   }
 

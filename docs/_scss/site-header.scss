@@ -18,12 +18,35 @@
   display: flex;
   flex-wrap: wrap;
   height: 100%;
+  /**
+   * Using the `tidy-var()` to get a config value, for no other reason than that
+   * it's convenient.
+   *
+   * padding: tidy-var(edge) 0;
+   */
   padding: tidy-var(edge) 0;
+
+  /**
+   * Quick and dirty full-width container.
+   *
+   * tidy-span: tidy-var(columns);
+   */
   tidy-span: tidy-var(columns);
 
   @media (min(lg)) {
     align-items: center;
     flex-wrap: nowrap;
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * padding: tidy-var(edge) 0;
+     * tidy-span: tidy-var(columns);
+     */
     padding: tidy-var(edge) 0;
     tidy-span: tidy-var(columns);
   }
@@ -53,11 +76,27 @@
   font-size: rem(14);
   height: rem(36);
   margin: 0 0 rem(16) 0;
+  /**
+   * Using the `tidy-var()` to get a config value to keep the button edge
+   * padding consistent with any other horizontal spacing.
+   *
+   * padding: 0 tidy-var(edge);
+   */
   padding: 0 tidy-var(edge);
 
   @media (min(lg)) {
     font-size: rem(16);
     margin-bottom: 0;
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * padding: 0 tidy-var(edge);
+     */
     padding: 0 tidy-var(edge);
   }
 }

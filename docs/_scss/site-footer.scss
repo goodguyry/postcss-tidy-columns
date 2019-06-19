@@ -6,18 +6,48 @@
   @include auto-margins;
   font-size: rem(12);
   margin-bottom: rem(10);
+  /**
+   * Quick and dirty full-width container.
+   *
+   * tidy-span: tidy-var(columns);
+   */
   tidy-span: tidy-var(columns);
 
-  @media (min(full)) {
+  @media(min(lg)) {
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * tidy-span: tidy-var(columns);
+     */
     tidy-span: tidy-var(columns);
   }
 
   p {
-    margin-left: tidy-offset(1.5);
+    /**
+     * The design calls for the footer content to be offset by 1.5 columns.
+     * It happens.
+     *
+     * tidy-offset-left: 1.5;
+     */
+    tidy-offset-left: 1.5;
 
-    @media (min(full)) {
-      margin-left: tidy-offset(1.5);
-      margin-left: tidy-offset-full(1.5);
+    @media(min(lg)) {
+      /**
+       * Because I am using a breakpoint configuration to set up two distinct
+       * Tidy Columns configurations, the declaration must be re-declared within
+       * the breakpoint to ensure the correct values are used in the calculation.
+       *
+       * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+       * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+       *
+       * tidy-offset-left: 1.5;
+       */
+      tidy-offset-left: 1.5;
     }
   }
 }
