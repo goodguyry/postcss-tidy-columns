@@ -65,7 +65,28 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 400;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 64rem) {
+  h1 {
+    font-size: 2.25rem;
+  }
+}
+
+h2 {
+  font-size: 1.125rem;
+}
+
+@media (min-width: 64rem) {
+  h2 {
+    font-size: 1.875rem;
+  }
 }
 
 p:not(:last-child) {
@@ -495,18 +516,6 @@ body {
      */
     width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
     max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
-  }
-}
-
-.article-header__intro h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-
-@media (min-width: 64rem) {
-  .article-header__intro h2 {
-    font-size: 2.25rem;
   }
 }
 

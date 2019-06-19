@@ -105,14 +105,4 @@
      */
     tidy-span: 6;
   }
-
-  h2 {
-    font-size: rem(24);
-    font-weight: 700;
-    margin-bottom: rem(12);
-
-    @media (min(lg)) {
-      font-size: rem(36);
-    }
-  }
 }

@@ -58,7 +58,24 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 400;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: rem(24);
+  margin-bottom: rem(12);
+
+  @media (min(lg)) {
+    font-size: rem(36);
+  }
+}
+
+h2 {
+  font-size: rem(18);
+
+  @media (min(lg)) {
+    font-size: rem(30);
+  }
 }
 
 p {

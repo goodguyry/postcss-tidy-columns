@@ -1,6 +1,5 @@
 # Site settings
 title: 'PostCSS Tidy Columns'
-description: 'PostCSS Tidy Columns is neat!'
 repo: https://github.com/goodguyry/postcss-tidy-columns
 
 # Development/Serve
