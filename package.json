@@ -35,8 +35,8 @@
     "test": "jest",
     "watch": "jest --watchAll",
     "watch:verbose": "jest --watchAll  --verbose",
-    "build:css": "node docs/_bin/build.js",
-    "watch:css": "nodemon -e scss -x \"npm run build:css\""
+    "build:css": "npm test && node docs/_bin/build.js",
+    "watch:css": "nodemon -e scss -x node docs/_bin/build.js"
   },
   "jest": {
     "testEnvironment": "node"
