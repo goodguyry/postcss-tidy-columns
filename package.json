@@ -40,5 +40,10 @@
   },
   "jest": {
     "testEnvironment": "node"
-  }
+  },
+  "files": [
+    "/*.js",
+    "/lib/*.js",
+    "/src/*.js"
+  ]
 }
