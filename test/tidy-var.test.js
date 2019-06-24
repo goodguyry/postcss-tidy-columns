@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const run = require('.');
 const { typical, typicalWithBreakpoints } = require('./sharedConfigs');
 const { VAR_FUNCTION_REGEX } = require('../tidy-var');
@@ -72,7 +73,6 @@ describe('The `tidy-var()` function is replaced with the expected option value',
   test(
     'Replaces the correct value from within a matched breakpoint',
     () => run(
-      // eslint-disable-next-line max-len
       'div { margin-left: tidy-var(gap); } @media (min-width: 900px) { div { margin-left: tidy-var(gap); } }',
       'div { margin-left: 1.25rem; } @media (min-width: 900px) { div { margin-left: 0.625rem; } }',
       typicalWithBreakpoints,
@@ -85,6 +85,15 @@ describe('The `tidy-var()` function is replaced with the expected option value',
       'div { margin-left: tidy-var(gap); }',
       'div { /* margin-left: tidy-var(gap) */ margin-left: 1.25rem; }',
       { ...typical, debug: true },
+    ),
+  );
+
+  test(
+    'Negates a `tidy-var()` value',
+    () => run(
+      'div { margin-left: -tidy-var("gap"); }',
+      'div { margin-left: -1.25rem; }',
+      typical,
     ),
   );
 });
