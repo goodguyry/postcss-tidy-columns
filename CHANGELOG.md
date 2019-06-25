@@ -12,7 +12,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 **Changed**
 
 - Single offset values in `tidy-column` and `tidy-offset` shorthand properties will now apply to all missing values (#25, #36)
-- Drops support for Node 6 (#41)
 
 **Fixed**
 
@@ -23,7 +22,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Removed**
 
-- Removes the `addGap` option for automatically adding the grid gap margin to column elements (#24)
+- The `addGap` option for automatically adding the grid gap margin to column elements (#24)
+- Support for Node 6 (#41)
 
 ## 0.3.4
 
