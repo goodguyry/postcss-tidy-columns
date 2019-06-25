@@ -5,9 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Added**
 
-- Adds support for configuring different grid specs across multiple breakpoints (#20)
-- Adds a `tidy-var()` function for retrieving option values in property values (#27, #32)
-- Adds `debug` option for maintaining the input declaration as a comment (#45, #48)
+- Support for configuring different grid specs across multiple breakpoints (#20)
+- Use the `tidy-var()` function to retrieve option values in declarations (#27, #32)
+- Use the `debug` option to maintain the input declaration as a comment (#45, #48)
 
 **Changed**
 
