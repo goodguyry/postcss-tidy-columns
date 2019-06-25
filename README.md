@@ -1,10 +1,12 @@
-# PostCSS Tidy Columns [![Build Status][ci-img]][ci] [![npm version][npmjs-img]][npmjs]
+# Tidy Columns [![Build Status][ci-img]][ci] [![npm version][npmjs-img]][npmjs]
 
 [PostCSS] plugin to manage column alignment.
 
-PostCSS Tidy Columns sets an element's width based on a user-defined grid of columns and gaps using calculations based on `vw` units, which allows for easy vertical alignment of elements.
+Tidy Columns sets widths and margins, based on a user-defined configuration, with the goal that any elements along the vertical axis that should be aligned, are. 
 
-**PostCSS Tidy Columns does not set layout. Positioning elements is *your* job**.
+**This plugin will not set layout for you. Layout is *your* job**.
+
+See the [Wiki][wiki] for more about configuring the plugin.
 
 ## Install
 
@@ -68,7 +70,7 @@ See the [Wiki][wiki] for additional documentation and tips.
 
 ### Span
 
-The `tidy-span` property specifies the number of columns and adjacent column gaps the element should span. Supports positive and decimal values.
+The `tidy-span` property specifies the number of columns and adjacent column gaps the element should span. Supports positive integer and decimal values.
 
 > #### Syntax
 >
@@ -78,7 +80,7 @@ The `tidy-span` property specifies the number of columns and adjacent column gap
 
 ### Offsets
 
-The `tidy-offset-left` and `tidy-offset-right` properties specify the number of columns and adjacent column gaps the element's margin should span. Supports positive, negative, and decimal values
+The `tidy-offset-left` and `tidy-offset-right` properties specify the number of columns and adjacent column gaps the element's margin should span. Supports positive and negative integer and decimal values
 
 Offsets use a [`siteMax`](#sitemax) breakpoint, since there's no `max-margin` CSS property.
 
@@ -127,7 +129,7 @@ Use `none` to bypass a required value. A single value applies to both `left` and
 
 ## Tidy Functions
 
-These functions are provided for incorporating the `tidy-` properties' output without using the properties. These can be used on their own or nested inside a `calc()` function, and allow for more control over the declarations added by the plugin.
+These functions are provided for incorporating the `tidy-` properties' output without using the properties themselves. These can be used on their own or nested inside a `calc()` function, and allow for more control over the declarations added by the plugin.
 
 When using these functions, **the `siteMax`-based static value will not be output**. Use the `tidy-span-full()` and `tidy-offset-full()` functions to set the static `span` and `offset` widths, respectively.
 
@@ -192,7 +194,7 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|[`columns`](#columns)|`{Number}`|`12`|The number of grid columns.|
+|[`columns`](#columns)|`{Number}`|`undefined`|The number of grid columns.|
 |[`gap`](#gap)|`{String}`|`undefined`|The width of grid column gaps.|
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
@@ -294,7 +296,7 @@ require('postcss-tidy-columns')({
 });
 ```
 
-See the [Scoped Settings](../../wiki/Scoped-Settings) Wiki page for more.
+See the [Scoped Settings](https://github.com/goodguyry/postcss-tidy-columns/wiki/Scoped-Settings) Wiki page for more.
 
 ## Options Cascade
 
@@ -310,17 +312,17 @@ Global options are defined via `@tidy` at-rules _outside_ of any selector blocks
 
 Local options are defined via `@tidy` at-rules _inside_ a selector block and are scoped to that rule block. Values declared here take precedence over the global at-rules.
 
-## Using CSS Custom Properties in setting values
+## Using CSS Custom Properties
 
 [CSS Custom Proprties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) are 
-supported in `@tidy` rules, with the following caveats:
+supported in `@tidy` rules, with the following caveat:
 
 1. Due to the nature of CSS Custom Properties, particularly the inability to use them in media query parmeters, a CSS Custom Property used as the `@tidy site-max` value will throw an error.
 
-See the [Tips and Tricks](../../wiki/Tips-and-Tricks) Wiki page for more.
+See the [Tips and Tricks](https://github.com/goodguyry/postcss-tidy-columns/wiki/Tips-and-Tricks) Wiki page for more.
 
 <!-- links -->
-[wiki]: ../../wiki/
+[wiki]: https://github.com/goodguyry/postcss-tidy-columns/wiki
 [PostCSS]: https://github.com/postcss/postcss
 [ci-img]:  https://travis-ci.com/goodguyry/postcss-tidy-columns.svg?branch=master
 [ci]:      https://travis-ci.org/goodguyry/postcss-tidy-columns
