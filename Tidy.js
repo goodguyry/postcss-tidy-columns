@@ -1,10 +1,10 @@
-const Grid = require('./Grid');
-const { getLocalOptions } = require('./lib/parse-options');
+const Columns = require('./Columns');
+const getLocalOptions = require('./src/getLocalOptions');
 const cleanClone = require('./lib/cleanClone');
 
 /**
  * Tidy class
- * Collect rule-specific settings and properties; instantiate a new Grid instance
+ * Collect rule-specific settings and properties; instantiate a new Columns instance.
  *
  * @param {Object} rule          The current CSS rule.
  * @param {Object} globalOptions The global plugin options.
@@ -18,8 +18,14 @@ class Tidy {
 
     // Merge global and local options.
     const currentOptions = getLocalOptions(this.rule, globalOptions);
-    // Instantiate Grid based on the merged options.
-    this.grid = new Grid(currentOptions);
+
+    // Remove the `breakpoint` property that results from merging in the breakpoint config.
+    if (Object.prototype.hasOwnProperty.call(currentOptions, 'breakpoint')) {
+      delete currentOptions.breakpoint;
+    }
+
+    // Instantiate Columns based on the merged options.
+    this.columns = new Columns(currentOptions);
   }
 
   /**
@@ -28,20 +34,6 @@ class Tidy {
   initRule() {
     // The media query's selector to which conditional declarations will be appended.
     this.fullWidthRule = cleanClone(this.rule);
-
-    /**
-     * Test the rule for whether or not gap margin declarations should be inserted.
-     *
-     * Conditions for adding the gap margins
-     * - The `addGap` options is `true`.
-     * - There is a `tidy-span` declaration in this rule.
-     * - There is not a `tidy-offset-right` declaration in this rule.
-     */
-    const { addGap } = this.grid.options;
-    this.shouldAddGapDecl = (
-      /(tidy-span:)/.test(this.rule.toString()) &&
-      !/(tidy-offset-right)/.test(this.rule.toString())
-    ) && addGap;
   }
 
   /**

@@ -1,6 +1,30 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.4.0
+
+**Added**
+
+- Support for configuring different grid specs across multiple breakpoints (#20)
+- Use the `tidy-var()` function to retrieve option values in declarations (#27, #32)
+- Use the `debug` option to maintain the input declaration as a comment (#45, #48)
+
+**Changed**
+
+- Single offset values in `tidy-column` and `tidy-offset` shorthand properties will now apply to all missing values (#25, #36)
+
+**Fixed**
+
+- Updates dependencies to fix known vulnerabilities (#26, #42)
+- `tidy-*` functions nested within a `calc()` function are properly detected and escaped (#34)
+- Shorthand properties now accept documented values (#36)
+- Corrects an issue with unitless non-zero config values not being ignored (#39)
+
+**Removed**
+
+- The `addGap` option for automatically adding the grid gap margin to column elements (#24)
+- Support for Node 6 (#41)
+
 ## 0.3.4
 
 **Fixed**

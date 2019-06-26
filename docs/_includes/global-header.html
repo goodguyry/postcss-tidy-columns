@@ -1,0 +1,22 @@
+<header
+		role="banner"
+		class="site-header"
+	>
+	<div class="site-header__inner">
+		<h1 class="site-header__title">Tidy Columns</h1>
+		<button
+			class="site-header__toggle"
+			onClick="(function() { document.body.classList.toggle('show-overlay'); })();return false;"
+		>Toggle Overlay</button>
+
+		<nav
+			role="navigation"
+			class="menu"
+		>
+			<ul class="menu__list">
+				<li class="menu__item"><a href="{{ site.repo }}/">GitHub Repo</a></li>
+				<li class="menu__item"><a href="{{ site.repo }}/wiki">GitHub Wiki</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>

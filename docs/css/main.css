@@ -1,0 +1,814 @@
+/**
+ * Reset styles and setup.
+ */
+:root {
+  font-size: medium;
+}
+
+html {
+  background-color: white;
+}
+
+html, body, div, span,
+article, aside, footer, header, nav, section,
+h1, h2, h3, h4, h5, h6,
+p, em, strike, strong, code,
+a, button,
+figure, figcaption, img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font-style: normal;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+html::before, html::after, body::before, body::after, div::before, div::after, span::before, span::after,
+article::before,
+article::after, aside::before, aside::after, footer::before, footer::after, header::before, header::after, nav::before, nav::after, section::before, section::after,
+h1::before,
+h1::after, h2::before, h2::after, h3::before, h3::after, h4::before, h4::after, h5::before, h5::after, h6::before, h6::after,
+p::before,
+p::after, em::before, em::after, strike::before, strike::after, strong::before, strong::after, code::before, code::after,
+a::before,
+a::after, button::before, button::after,
+figure::before,
+figure::after, figcaption::before, figcaption::after, img::before, img::after {
+  box-sizing: inherit;
+}
+
+article,
+aside,
+footer,
+header,
+main,
+nav,
+section {
+  display: block;
+}
+
+a {
+  color: inherit;
+  font-weight: 700;
+  transition: color 250ms ease;
+}
+
+a:focus, a:hover {
+  color: #AC7DA9;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 64rem) {
+  h1 {
+    font-size: 2.25rem;
+  }
+}
+
+h2 {
+  font-size: 1.125rem;
+}
+
+@media (min-width: 64rem) {
+  h2 {
+    font-size: 1.875rem;
+  }
+}
+
+p:not(:last-child) {
+  margin-bottom: 1.75rem;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+ol, ul {
+  list-style-type: circle;
+  margin: 0 0 1.75rem 0;
+  padding: 0;
+}
+
+button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+figure {
+  display: block;
+  height: auto;
+  margin: 0;
+  max-width: 100%;
+}
+
+figcaption {
+  font-size: 0.75rem;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+svg {
+  display: block;
+  height: auto;
+  pointer-events: none;
+  width: 100%;
+}
+
+p code,
+li code {
+  background-color: aliceblue;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  font: 400 90% 'Courier', monospace;
+  padding: 0 0.3em;
+}
+
+hr {
+  margin-left: auto;
+  margin-right: auto;
+  height: 1px;
+  border: none;
+  background-color: lightgray;
+  width: 80%;
+  margin-bottom: 1.75rem;
+}
+
+body {
+  background-color: white;
+  color: #31313B;
+  font-family: 'Open Sans', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.4;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  text-rendering: optimizeSpeed;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  word-break: keep-all;
+}
+
+[role="main"] {
+  /* tbd */
+}
+
+/**
+ * Styles the grid overlay.
+ */
+:root {
+  --columns: 8;
+  --gap: 0.5rem;
+  --edge: 0.75rem;
+  --siteMax: 80rem;
+  --overlay-column-color: #FBB294;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --columns: 12;
+    --gap: 1.25rem;
+    --edge: 1.875rem;
+    --siteMax: 80rem;
+  }
+}
+
+.show-overlay .grid-overlay {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-gap: 0 var(--gap);
+  grid-template-columns: repeat(var(--columns), 1fr);
+  height: 100%;
+  left: 0;
+  max-width: var(--siteMax);
+  opacity: 0.3;
+  padding: 0 var(--edge);
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.show-overlay .grid-overlay span {
+  background-color: var(--overlay-column-color);
+}
+
+.show-overlay .grid-overlay span:nth-last-child(-n+4) {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .show-overlay .grid-overlay span:nth-last-child(-n+4) {
+    display: inline-block;
+  }
+}
+
+/**
+ * Styles the site header, including navigation.
+ */
+.site-header {
+  background-color: #0E244B;
+  color: white;
+  margin-bottom: 1.875rem;
+  width: 100vw;
+}
+
+@media (min-width: 64rem) {
+  .site-header {
+    height: 5rem;
+  }
+}
+
+.site-header__inner {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  /**
+   * Using the `tidy-var()` to get a config value, for no other reason than that
+   * it's convenient.
+   *
+   * padding: tidy-var(edge) 0;
+   */
+  padding: 0.75rem 0;
+  /**
+   * Quick and dirty full-width container.
+   *
+   * tidy-span: tidy-var(columns);
+   */
+  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+}
+
+@media (min-width: 64rem) {
+  .site-header__inner {
+    align-items: center;
+    flex-wrap: nowrap;
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * padding: tidy-var(edge) 0;
+     * tidy-span: tidy-var(columns);
+     */
+    padding: 1.875rem 0;
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+  }
+}
+
+.site-header__title {
+  font-size: 1.875rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 64rem) {
+  .site-header__title {
+    margin-bottom: 0;
+    margin-right: 3.125rem;
+    text-align: left;
+    width: auto;
+  }
+}
+
+.site-header__toggle {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid #455066;
+  color: #31313B;
+  font: inherit;
+  font-size: 0.875rem;
+  height: 2.25rem;
+  margin: 0 0 1rem 0;
+  /**
+   * Using the `tidy-var()` to get a config value to keep the button edge
+   * padding consistent with any other horizontal spacing.
+   *
+   * padding: 0 tidy-var(edge);
+   */
+  padding: 0 0.75rem;
+}
+
+@media (min-width: 64rem) {
+  .site-header__toggle {
+    font-size: 1rem;
+    margin-bottom: 0;
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * padding: 0 tidy-var(edge);
+     */
+    padding: 0 1.875rem;
+  }
+}
+
+.menu {
+  margin-left: auto;
+}
+
+.menu__list {
+  font-size: 0.875rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 48rem) {
+  .menu__list {
+    align-items: center;
+    display: flex;
+    font-size: 1rem;
+  }
+}
+
+.menu__item {
+  margin-bottom: 0.3125rem;
+}
+
+@media (min-width: 48rem) {
+  .menu__item {
+    margin-bottom: 0;
+  }
+  .menu__item:not(:last-of-type) {
+    margin-right: 1.875rem;
+  }
+}
+
+.menu__item a {
+  color: white;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+/**
+ * Styles the article elements.
+ */
+.article {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4.6875rem;
+}
+
+@media (min-width: 64rem) {
+  .article {
+    /**
+     * Quick and dirty full-width container.
+     *
+     * tidy-span: tidy-var(columns);
+     */
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+  }
+}
+
+.article__header {
+  margin-bottom: 3.125rem;
+}
+
+.article-header__figure {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (min-width: 64rem) {
+  .article-header__figure {
+    display: block;
+  }
+}
+
+.article-header__img {
+  margin-bottom: 0.5rem;
+  order: 2;
+}
+
+@media (min-width: 64rem) {
+  .article-header__img {
+    margin-bottom: 1.25rem;
+    order: 0;
+  }
+}
+
+.article-header__figcaption {
+  margin-left: auto;
+  margin-right: auto;
+  order: 2;
+  /**
+   * Make the caption full-width on small screens.
+   *
+   * tidy-span: 8;
+   */
+  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+}
+
+@media (min-width: 64rem) {
+  .article-header__figcaption {
+    order: 0;
+    /**
+     * Since `article-header__intro` is absolutely positioned, we'll use the
+     * column shorthand to size and offset the caption to look as if it's next
+     * to the header intro.
+     *
+     * tidy-column: 9 / span 3 / 0;
+     */
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+    margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 9) + 1.25rem * 9);
+  }
+}
+
+@media (min-width: 80rem) {
+  .article-header__figcaption {
+    margin-left: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 9) + 1.25rem * 9);
+  }
+}
+
+.article-header__intro {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem 0.75rem;
+  text-align: center;
+  /**
+   * Make the header intro full-width on small screens.
+   *
+   * tidy-span: 8;
+   */
+  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+}
+
+@media (min-width: 48rem) {
+  .article-header__intro {
+    /**
+     * The header intro should span 6 columns on medium screens.
+     *
+     * tidy-span: 6;
+     */
+    width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 6) + 0.5rem * 5);
+  }
+}
+
+@media (min-width: 64rem) {
+  .article-header__intro {
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    position: absolute;
+    right: 0;
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * tidy-span: 6;
+     */
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
+  }
+}
+
+/**
+ * Styles miscellaneous content elements.
+ */
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  /**
+   * The design calls for the content area to be 6 columns wide (out of 8) on
+   * small screens.
+   *
+   * tidy-span: 6;
+   */
+  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 6) + 0.5rem * 5);
+}
+
+@media (min-width: 64rem) {
+  .content {
+    /**
+     * There's no offset declared for small screens, since the content container
+     * is centered. On larger screens, though, it's one column left of center,
+     * or two columns from the left edge.
+     *
+     * tidy-offset-left: 2;
+     */
+    margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+    /**
+     * The design calls for the content area to be 6 columns wide (out of 12) on
+     * larger screens.
+     *
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * tidy-span: 6;
+     */
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
+  }
+}
+
+@media (min-width: 80rem) {
+  .content {
+    margin-left: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+  }
+}
+
+.content__figure {
+  position: relative;
+}
+
+.content__img {
+  margin-bottom: 0.375rem;
+}
+
+.content__figure--floated {
+  float: right;
+  /**
+   * Example use of the tidy-var() function to retrieve a value from the plugin
+   * configuration.
+   *
+   * margin-bottom: tidy-var(gap);
+   * margin-left: tidy-var(gap);
+   */
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  /**
+   * The design calls for floated images to be pulled out of the content
+   * container by one column. For elements floated to the right, use a negative
+   * `tidy-offset-right` value to pull the element out. Had this been floated
+   * left we'd have used the `tidy-offset-left` property.
+   *
+   * This is especially useful with CSS Grid Layout, as there's no other way to
+   * access the grandparent's grid.
+   *
+   * tidy-offset-right: -1;
+   */
+  margin-right: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * -1) + 0.5rem * -1);
+  /**
+   * Set the figure to span 4 columns. This could have been achieved with
+   * `width: calc(66.6666667% - 4px)`, but who wants to waste time with math?
+   *
+   * tidy-span: 4;
+   */
+  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 4) + 0.5rem * 3);
+}
+
+@media (min-width: 48rem) {
+  .content__figure--floated {
+    /**
+     * Set the figure to span 4 columns. This could have been achieved with
+     * `width: calc(50% - 4px)`, but who wants to waste time with math?
+     *
+     * tidy-span: 3;
+     */
+    width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 3) + 0.5rem * 2);
+  }
+}
+
+@media (min-width: 64rem) {
+  .content__figure--floated {
+    /**
+     * Re-declare the margin values within the large breakpoint to ensure the
+     * calculations use the correct configuration values; remember, we've got a
+     * different grid specification for mobile then we do for desktop.
+     *
+     * margin-bottom: tidy-var(gap);
+     * margin-left: tidy-var(gap);
+     */
+    margin-bottom: 1.25rem;
+    margin-left: 1.25rem;
+    /**
+     * Re-declare the right offset and span within the large breakpoint to
+     * ensure the calculations use the correct configuration values; remember,
+     * we've got a different grid specification for mobile then we do for
+     * desktop.
+     *
+     * tidy-offset-right: -1;
+     * tidy-span: 3;
+     */
+    margin-right: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * -1) + 1.25rem * -1);
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  }
+}
+
+@media (min-width: 80rem) {
+  .content__figure--floated {
+    margin-right: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * -1) + 1.25rem * -1);
+  }
+}
+
+.content__figure--fullwidth {
+  margin-bottom: 1.75rem;
+  /**
+   * The content container is offset from the edge of the site by one column. Use
+   * a negative offset to pull the figure element to the edge of the site, then
+   * tack on the edge value to pull the figure to the edge of the viewport.
+   *
+   * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+   */
+  margin-left: calc(((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * -1) + 0.5rem * -1) - 0.75rem);
+  max-width: 100vw;
+  width: 100vw;
+}
+
+@media (min-width: 64rem) {
+  .content__figure--fullwidth {
+    /**
+     * For larger screens, the content container is offset from the edge of the
+     * site by two columns. Use a negative offset to pull the figure element to
+     * the edge of the site, then tack on the edge value to pull the figure to
+     * the edge of the site's max-width.
+     *
+     * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+     */
+    margin-left: calc(((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * -2) + 1.25rem * -2) - 1.875rem);
+    max-width: 80rem;
+  }
+  .content__figure--fullwidth .content__img {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 80rem) {
+  .content__figure--fullwidth {
+    /**
+     * When using tidy-* functions in non-width properties, the `-full` version
+     * of the function must be declared in a media query matching the site's
+     * max-width to ensure the static value is calculated based on the site's
+     * max-width rather than `vw` units.
+     *
+     * margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
+     */
+    margin-left: calc(((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * -2) + 1.25rem * -2) - 1.875rem);
+  }
+}
+
+.content__figcaption--fullwidth {
+  margin-left: auto;
+  margin-right: auto;
+  /**
+   * For small screens, this is the same as "full-width minus the edges".
+   *
+   * tidy-span: 8
+   */
+  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+}
+
+@media (min-width: 64rem) {
+  .content__figcaption--fullwidth {
+    bottom: 1.25rem;
+    color: white;
+    position: absolute;
+    /**
+     * Because this element is absolutely positioned inside a full-width element,
+     * we must include the implied edge value in the offset so the distance is
+     * correct.
+     *
+     * right: calc(tidy-var(edge) + tidy-offset(1));
+     */
+    right: calc(1.875rem + (((100vw - 1.875rem * 2) / 12 - 1.1458rem) + 1.25rem));
+    width: auto;
+  }
+}
+
+@media (min-width: 80rem) {
+  .content__figcaption--fullwidth {
+    /**
+     * When using tidy-* functions in non-width properties, the `-full` version
+     * of the function must be declared in a media query matching the site's
+     * max-width to ensure the static value is calculated based on the site's
+     * max-width rather than `vw` units.
+     *
+     * right: calc(tidy-var(edge) + tidy-offset-full(1));
+     */
+    right: calc(1.875rem + (((80rem - 1.875rem * 2) / 12 - 1.1458rem) + 1.25rem));
+  }
+}
+
+.content__credit {
+  display: block;
+  font-size: 80%;
+  margin-top: 0.3125rem;
+  text-transform: uppercase;
+}
+
+/**
+ * Styles the site footer.
+ */
+[role="contentinfo"] {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.75rem;
+  margin-bottom: 0.625rem;
+  /**
+   * Quick and dirty full-width container.
+   *
+   * tidy-span: tidy-var(columns);
+   */
+  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+}
+
+@media (min-width: 64rem) {
+  [role="contentinfo"] {
+    /**
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * tidy-span: tidy-var(columns);
+     */
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+  }
+}
+
+[role="contentinfo"] p {
+  /**
+     * The design calls for the footer content to be offset by 1.5 columns.
+     * It happens.
+     *
+     * tidy-offset-left: 1.5;
+     */
+  margin-left: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 1.5) + 0.5rem);
+}
+
+@media (min-width: 64rem) {
+  [role="contentinfo"] p {
+    /**
+       * Because I am using a breakpoint configuration to set up two distinct
+       * Tidy Columns configurations, the declaration must be re-declared within
+       * the breakpoint to ensure the correct values are used in the calculation.
+       *
+       * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+       * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+       *
+       * tidy-offset-left: 1.5;
+       */
+    margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 1.5) + 1.25rem);
+  }
+}
+
+@media (min-width: 80rem) {
+  [role="contentinfo"] p {
+    margin-left: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 1.5) + 1.25rem);
+  }
+}

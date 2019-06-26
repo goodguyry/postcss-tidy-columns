@@ -1,10 +1,10 @@
 const postcss = require('postcss');
 const Tidy = require('./Tidy');
-const { getGlobalOptions } = require('./lib/parse-options');
-const cleanClone = require('./lib/cleanClone');
-const tidyShorthandProperty = require('./lib/tidy-shorthand-property');
-const tidyProperty = require('./lib/tidy-property');
-const tidyFunction = require('./lib/tidy-function');
+const getGlobalOptions = require('./src/getGlobalOptions');
+const { tidyShorthandProperty } = require('./tidy-shorthand-property');
+const { tidyProperty } = require('./tidy-property');
+const { tidyFunction } = require('./tidy-function');
+const { tidyVar } = require('./tidy-var');
 
 /**
  * Parse rules and insert span and offset values.
@@ -23,21 +23,23 @@ module.exports = postcss.plugin(
 
       // Replace shorthand declarations with their long-form equivalents.
       rule.walkDecls(/^tidy-(column|offset)$/, (declaration) => {
-        tidyShorthandProperty(declaration);
+        tidyShorthandProperty(declaration, tidy);
       });
 
       // Set up rule-specific properties.
       tidy.initRule();
 
       rule.walkDecls((declaration) => {
+        // Replace `tidy-var()` functions.
+        tidyVar(declaration, tidy);
         // Replace `tidy-*` properties.
         tidyProperty(declaration, tidy);
         // Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
         tidyFunction(declaration, tidy);
       });
 
-      const { fullWidthRule, shouldAddGapDecl } = tidy;
-      const { siteMax } = tidy.grid.options;
+      const { fullWidthRule } = tidy;
+      const { siteMax } = tidy.columns.options;
 
       // Add the media query if a siteMax is declared and the `fullWidthRule` has children.
       if (undefined !== siteMax && fullWidthRule.nodes.length > 0) {
@@ -60,23 +62,6 @@ module.exports = postcss.plugin(
           // Insert after the current rule.
           root.insertAfter(rule, fullWidthAtRule);
         }
-      }
-
-      /**
-       * Add the margin declaration here in order to maintain expected source order.
-       * This is the :last-of-type override for the gap margins.
-       */
-      if (shouldAddGapDecl) {
-        rule.parent.insertAfter(rule, cleanClone(
-          rule,
-          {
-            selector: `${rule.selector}:last-of-type`,
-          },
-        ).append({
-          prop: 'margin-right',
-          value: '0',
-          source: tidy.declarationSource,
-        }));
       }
     });
   },

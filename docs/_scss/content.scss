@@ -1,0 +1,201 @@
+/**
+ * Styles miscellaneous content elements.
+ */
+
+.content {
+  @include auto-margins;
+  /**
+   * The design calls for the content area to be 6 columns wide (out of 8) on
+   * small screens.
+   *
+   * tidy-span: 6;
+   */
+  tidy-span: 6;
+
+  @media (min(lg)) {
+    /**
+     * There's no offset declared for small screens, since the content container
+     * is centered. On larger screens, though, it's one column left of center,
+     * or two columns from the left edge.
+     *
+     * tidy-offset-left: 2;
+     */
+    tidy-offset-left: 2;
+    /**
+     * The design calls for the content area to be 6 columns wide (out of 12) on
+     * larger screens.
+     *
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     *
+     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
+     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
+     *
+     * tidy-span: 6;
+     */
+      tidy-span: 6;
+  }
+}
+
+.content__figure {
+  position: relative;
+}
+
+.content__img {
+  margin-bottom: rem(6);
+}
+
+.content__figure--floated {
+  float: right;
+  /**
+   * Example use of the tidy-var() function to retrieve a value from the plugin
+   * configuration.
+   *
+   * margin-bottom: tidy-var(gap);
+   * margin-left: tidy-var(gap);
+   */
+  margin-bottom: tidy-var(gap);
+  margin-left: tidy-var(gap);
+  /**
+   * The design calls for floated images to be pulled out of the content
+   * container by one column. For elements floated to the right, use a negative
+   * `tidy-offset-right` value to pull the element out. Had this been floated
+   * left we'd have used the `tidy-offset-left` property.
+   *
+   * This is especially useful with CSS Grid Layout, as there's no other way to
+   * access the grandparent's grid.
+   *
+   * tidy-offset-right: -1;
+   */
+  tidy-offset-right: -1;
+  /**
+   * Set the figure to span 4 columns. This could have been achieved with
+   * `width: calc(66.6666667% - 4px)`, but who wants to waste time with math?
+   *
+   * tidy-span: 4;
+   */
+  tidy-span: 4;
+
+  @media (min(md)) {
+    /**
+     * Set the figure to span 4 columns. This could have been achieved with
+     * `width: calc(50% - 4px)`, but who wants to waste time with math?
+     *
+     * tidy-span: 3;
+     */
+    tidy-span: 3;
+  }
+
+  @media (min(lg)) {
+    /**
+     * Re-declare the margin values within the large breakpoint to ensure the
+     * calculations use the correct configuration values; remember, we've got a
+     * different grid specification for mobile then we do for desktop.
+     *
+     * margin-bottom: tidy-var(gap);
+     * margin-left: tidy-var(gap);
+     */
+    margin-bottom: tidy-var(gap);
+    margin-left: tidy-var(gap);
+    /**
+     * Re-declare the right offset and span within the large breakpoint to
+     * ensure the calculations use the correct configuration values; remember,
+     * we've got a different grid specification for mobile then we do for
+     * desktop.
+     *
+     * tidy-offset-right: -1;
+     * tidy-span: 3;
+     */
+    tidy-offset-right: -1;
+    tidy-span: 3;
+  }
+}
+
+.content__figure--fullwidth {
+  margin-bottom: $vertical-rhythm;
+  /**
+   * The content container is offset from the edge of the site by one column. Use
+   * a negative offset to pull the figure element to the edge of the site, then
+   * tack on the edge value to pull the figure to the edge of the viewport.
+   *
+   * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+   */
+  margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+  max-width: 100vw;
+  width: 100vw;
+
+  @media (min(lg)) {
+    /**
+     * For larger screens, the content container is offset from the edge of the
+     * site by two columns. Use a negative offset to pull the figure element to
+     * the edge of the site, then tack on the edge value to pull the figure to
+     * the edge of the site's max-width.
+     *
+     * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+     */
+    margin-left: calc(tidy-offset(-2) - tidy-var(edge));
+    max-width: tidy-var(siteMax);
+
+    .content__img {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min(full)) {
+    /**
+     * When using tidy-* functions in non-width properties, the `-full` version
+     * of the function must be declared in a media query matching the site's
+     * max-width to ensure the static value is calculated based on the site's
+     * max-width rather than `vw` units.
+     *
+     * margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
+     */
+    margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
+  }
+}
+
+.content__figcaption--fullwidth {
+  @include auto-margins;
+  /**
+   * For small screens, this is the same as "full-width minus the edges".
+   *
+   * tidy-span: 8
+   */
+  tidy-span: 8;
+
+  @media (min(lg)) {
+    bottom: rem(20);
+    color: white;
+    position: absolute;
+    /**
+     * Because this element is absolutely positioned inside a full-width element,
+     * we must include the implied edge value in the offset so the distance is
+     * correct.
+     *
+     * right: calc(tidy-var(edge) + tidy-offset(1));
+     */
+    right: calc(tidy-var(edge) + tidy-offset(1));
+    // Override the `tidy-span` property from the rule's root.
+    width: auto;
+  }
+
+  @media (min(full)) {
+    /**
+     * When using tidy-* functions in non-width properties, the `-full` version
+     * of the function must be declared in a media query matching the site's
+     * max-width to ensure the static value is calculated based on the site's
+     * max-width rather than `vw` units.
+     *
+     * right: calc(tidy-var(edge) + tidy-offset-full(1));
+     */
+    right: calc(tidy-var(edge) + tidy-offset-full(1));
+  }
+}
+
+.content__credit {
+  display: block;
+  font-size: 80%;
+  margin-top: rem(5);
+  text-transform: uppercase;
+}
