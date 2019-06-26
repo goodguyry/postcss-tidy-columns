@@ -6,7 +6,7 @@ Tidy Columns sets widths and margins, based on a user-defined configuration, wit
 
 **This plugin will not set layout for you. Layout is *your* job**.
 
-See the [Wiki][wiki] for more about configuring the plugin.
+See the [demo page][demo] to see it in action, and check out the [Wiki][wiki] for more about configuring the plugin.
 
 ## Install
 
@@ -328,3 +328,4 @@ See the [Tips and Tricks](https://github.com/goodguyry/postcss-tidy-columns/wiki
 [ci]:      https://travis-ci.org/goodguyry/postcss-tidy-columns
 [npmjs-img]: https://badge.fury.io/js/postcss-tidy-columns.svg
 [npmjs]: https://badge.fury.io/js/postcss-tidy-columns
+[demo]: https://goodguyry.github.io/postcss-tidy-columns/
