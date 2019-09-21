@@ -1,0 +1,16 @@
+div {
+	width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem);
+}
+
+@media (min-width: 768px) {
+  div {
+    width: calc((((100vw - 0.625rem * 2) / 12 - 0.5859rem) * 2) + 0.625rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  div {
+    width: calc((((100vw - 0.625rem * 2) / 12 - 0.5859rem) * 2) + 1.25rem);
+    max-width: calc((((90rem - 0.625rem * 2) / 12 - 0.5859rem) * 2) + 1.25rem);
+  }
+}
