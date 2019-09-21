@@ -32,7 +32,7 @@ const runShorthandTest = (input, output, options = {}) => (
  */
 describe('The `!tidy` signals a declaration should be duplicated inside any configured breakpoints', () => {
   test(
-    'A property declaration including the `!tidy` rule is duplicated as expected',
+    'A property declaration is duplicated as expected',
     () => runShorthandTest(
       'div { tidy-span: 3 !tidy; }',
       `div { tidy-span: 3; }
@@ -45,7 +45,7 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
   );
 
   test(
-    'A function declaration including the `!tidy` rule is duplicated as expected',
+    'A function declaration is duplicated as expected',
     () => runShorthandTest(
       'div { width: calc(tidy-span(3) + 2rem) !tidy; }',
       `div { width: calc(tidy-span(3) + 2rem); }
@@ -58,7 +58,7 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
   );
 
   test(
-    'A non-tidy declaration including the `!tidy` rule is duplicated as expected',
+    'A non-tidy declaration is duplicated as expected',
     () => runShorthandTest(
       'div { width: 14px !tidy; }',
       `div { width: 14px; }
@@ -66,6 +66,15 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
  div { width: 14px; } }
 @media (min-width: 1024px) {
  div { width: 14px; } }`,
+      typicalWithBreakpoints,
+    ),
+  );
+
+  test(
+    'A tidy declaration inside a media query is duplicated as expected',
+    () => runShorthandTest(
+      '@media (min-width: 768px) { div { tidy-span: 3 !tidy; } }',
+      '@media (min-width: 768px) { div { tidy-span: 3; } } @media (min-width: 1024px) { div { tidy-span: 3; } }',
       typicalWithBreakpoints,
     ),
   );
