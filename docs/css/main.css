@@ -261,35 +261,45 @@ body {
    * Using the `tidy-var()` to get a config value, for no other reason than that
    * it's convenient.
    *
-   * padding: tidy-var(edge) 0;
+   * This padding is the same for all screen sizes.
+   *
+   * Because I am using a breakpoint configuration to set up two distinct
+   * Tidy Columns configurations, the declaration must be re-declared within
+   * the breakpoint to ensure the correct values are used in the calculation.
+   * For such cases, append !tidy to the declaration for it to automatically
+   * be duplicated inside the configuration's breakpoints.
+   *
+   * padding: tidy-var(edge) 0 !tidy;
    */
   padding: 0.75rem 0;
   /**
-   * Quick and dirty full-width container.
+   * Quick and dirty, fully-responsive, full-width container.
    *
-   * tidy-span: tidy-var(columns);
+   * Because I am using a breakpoint configuration to set up two distinct
+   * Tidy Columns configurations, the declaration must be re-declared within
+   * the breakpoint to ensure the correct values are used in the calculation.
+   * For such cases, append !tidy to the declaration for it to automatically
+   * be duplicated inside the configuration's breakpoints.
+   *
+   * tidy-span: tidy-var(columns) !tidy;
    */
   width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
 }
 
 @media (min-width: 64rem) {
   .site-header__inner {
-    align-items: center;
-    flex-wrap: nowrap;
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: tidy-var(edge) 0;
-     * tidy-span: tidy-var(columns);
-     */
     padding: 1.875rem 0;
+  }
+  .site-header__inner {
     width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
     max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+  }
+}
+
+@media (min-width: 64rem) {
+  .site-header__inner {
+    align-items: center;
+    flex-wrap: nowrap;
   }
 }
 
@@ -323,28 +333,29 @@ body {
   margin: 0 0 1rem 0;
   /**
    * Using the `tidy-var()` to get a config value to keep the button edge
-   * padding consistent with any other horizontal spacing.
+   * padding consistent across screen sizes with any other horizontal spacing.
    *
-   * padding: 0 tidy-var(edge);
+   * Because I am using a breakpoint configuration to set up two distinct
+   * Tidy Columns configurations, the declaration must be re-declared within
+   * the breakpoint to ensure the correct values are used in the calculation.
+   * For such cases, append !tidy to the declaration for it to automatically
+   * be duplicated inside the configuration's breakpoints.
+   *
+   * padding: 0 tidy-var(edge) !tidy;
    */
   padding: 0 0.75rem;
 }
 
 @media (min-width: 64rem) {
   .site-header__toggle {
+    padding: 0 1.875rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .site-header__toggle {
     font-size: 1rem;
     margin-bottom: 0;
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: 0 tidy-var(edge);
-     */
-    padding: 0 1.875rem;
   }
 }
 
@@ -487,11 +498,24 @@ body {
 @media (min-width: 48rem) {
   .article-header__intro {
     /**
-     * The header intro should span 6 columns on medium screens.
+     * The header intro should span 6 columns on medium screens AND large screens.
+     *
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     * For such cases, append !tidy to the declaration for it to automatically
+     * be duplicated inside the configuration's breakpoints.
      *
      * tidy-span: 6;
      */
     width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 6) + 0.5rem * 5);
+  }
+}
+
+@media (min-width: 64rem) {
+  .article-header__intro {
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
   }
 }
 
@@ -504,18 +528,6 @@ body {
     padding-right: 4rem;
     position: absolute;
     right: 0;
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * tidy-span: 6;
-     */
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
   }
 }
 
@@ -527,11 +539,25 @@ body {
   margin-right: auto;
   /**
    * The design calls for the content area to be 6 columns wide (out of 8) on
-   * small screens.
+   * small screens AND large screens.
    *
-   * tidy-span: 6;
+   * Because I am using a breakpoint configuration to set up two distinct
+   * Tidy Columns configurations, the declaration must be re-declared within
+   * the breakpoint to ensure the correct values are used in the calculation.
+   * For such cases, append !tidy to the declaration for it to automatically
+   * be duplicated inside the configuration's breakpoints.
+   *
+   * When compiling from Sass, you are required to escape the exclamation: \!tidy
+   *
+   * tidy-span: 6 !tidy;
    */
   width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 6) + 0.5rem * 5);
+}
+@media (min-width: 64rem) {
+  .content {
+    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
+    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
+  }
 }
 
 @media (min-width: 64rem) {
@@ -544,21 +570,6 @@ body {
      * tidy-offset-left: 2;
      */
     margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
-    /**
-     * The design calls for the content area to be 6 columns wide (out of 12) on
-     * larger screens.
-     *
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * tidy-span: 6;
-     */
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
   }
 }
 
@@ -757,25 +768,20 @@ body {
   font-size: 0.75rem;
   margin-bottom: 0.625rem;
   /**
-   * Quick and dirty full-width container.
+   * Quick and dirty, fully-responsive, full-width container.
    *
-   * tidy-span: tidy-var(columns);
+   * Because I am using a breakpoint configuration to set up two distinct
+   * Tidy Columns configurations, the declaration must be re-declared within
+   * the breakpoint to ensure the correct values are used in the calculation.
+   * For such cases, append !tidy to the declaration for it to automatically
+   * be duplicated inside the configuration's breakpoints.
+   *
+   * tidy-span: tidy-var(columns) !tidy;
    */
   width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
 }
-
 @media (min-width: 64rem) {
   [role="contentinfo"] {
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * tidy-span: tidy-var(columns);
-     */
     width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
     max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
   }
@@ -786,23 +792,21 @@ body {
      * The design calls for the footer content to be offset by 1.5 columns.
      * It happens.
      *
-     * tidy-offset-left: 1.5;
+     * This ofset is for all screen sizes.
+     *
+     * Because I am using a breakpoint configuration to set up two distinct
+     * Tidy Columns configurations, the declaration must be re-declared within
+     * the breakpoint to ensure the correct values are used in the calculation.
+     * For such cases, append !tidy to the declaration for it to automatically
+     * be duplicated inside the configuration's breakpoints.
+     *
+     * tidy-offset-left: 1.5 !tidy;
      */
   margin-left: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 1.5) + 0.5rem);
 }
 
 @media (min-width: 64rem) {
   [role="contentinfo"] p {
-    /**
-       * Because I am using a breakpoint configuration to set up two distinct
-       * Tidy Columns configurations, the declaration must be re-declared within
-       * the breakpoint to ensure the correct values are used in the calculation.
-       *
-       * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-       * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-       *
-       * tidy-offset-left: 1.5;
-       */
     margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 1.5) + 1.25rem);
   }
 }
