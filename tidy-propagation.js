@@ -30,7 +30,7 @@ function tidyPropagation(declaration, tidy, root) {
         declaration,
         {
           declaration: declaration.prop,
-          value: declaration.value.replace(/\s?!tidy/, ''),
+          value: declaration.value.replace(/\s?\\?!tidy/, ''),
         },
       );
 
@@ -54,7 +54,7 @@ function tidyPropagation(declaration, tidy, root) {
       declaration,
       {
         declaration: declaration.prop,
-        value: declaration.value.replace(/\s?!tidy/, ''),
+        value: declaration.value.replace(/\s?\\?!tidy/, ''),
       },
     ));
   });

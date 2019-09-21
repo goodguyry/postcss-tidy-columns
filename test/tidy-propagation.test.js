@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len, no-useless-escape */
 const postcss = require('postcss');
 const run = require('.');
 const Tidy = require('../Tidy');
@@ -35,6 +35,19 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
     'A property declaration is duplicated as expected',
     () => runShorthandTest(
       'div { tidy-span: 3 !tidy; }',
+      `div { tidy-span: 3; }
+@media (min-width: 768px) {
+ div { tidy-span: 3; } }
+@media (min-width: 1024px) {
+ div { tidy-span: 3; } }`,
+      typicalWithBreakpoints,
+    ),
+  );
+
+  test(
+    'A property declaration with escaped ! (\!tidy) is duplicated as expected',
+    () => runShorthandTest(
+      'div { tidy-span: 3 \!tidy; }',
       `div { tidy-span: 3; }
 @media (min-width: 768px) {
  div { tidy-span: 3; } }
