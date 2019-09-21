@@ -9,24 +9,22 @@ function tidyPropagation(declaration, tidy, root) {
   let breakpointKeys = Object.keys(breakpoints);
 
   // Handle parent atRule.
-  if ('atrule' === rule.parent.type) {
-    const [atRuleParams] = parseAtruleParams(rule.parent.params);
-    const { minMax, value } = atRuleParams;
+  const hasAtRuleParent = 'atrule' === rule.parent.type;
+  const [atRuleParams] = hasAtRuleParent
+    ? parseAtruleParams(rule.parent.params)
+    : [{}];
+  const { minMax, value } = atRuleParams;
 
-    // Ignore max-width breakpoints.
-    if ('min' === minMax) {
-      // Rebuild breakpointKeys array without those that won't apply.
-      breakpointKeys = breakpointKeys.filter(breakpoint => (
-        -1 === compareStrings(value, breakpoint)
-      ));
-    }
+  // Filter out breakpoint values that don't apply; ignore max-width breakpoints.
+  if (hasAtRuleParent && 'min' === minMax) {
+    breakpointKeys = breakpointKeys.filter(breakpoint => -1 === compareStrings(value, breakpoint));
   }
 
   // Reverse the breakpoints to make sure they're inserted in the correct order.
   breakpointKeys.reverse().forEach((breakpoint) => {
     const atRule = getObjectByProperty(atRules, `(min-width: ${breakpoint})`, 'params');
 
-    if (undefined !== atRule) {
+    if (undefined !== atRule && 'max' !== minMax) {
       // Clone the declaration without `!tidy`.
       const cleanDecl = cleanClone(
         declaration,

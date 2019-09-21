@@ -78,4 +78,13 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
       typicalWithBreakpoints,
     ),
   );
+
+  test(
+    'Ignores declaration inside max-width media query',
+    () => runShorthandTest(
+      '@media (max-width: 768px) { div { tidy-span: 3 !tidy; } }',
+      '@media (max-width: 768px) { div { tidy-span: 3; } }',
+      typicalWithBreakpoints,
+    ),
+  );
 });
