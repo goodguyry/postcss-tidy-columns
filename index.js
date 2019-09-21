@@ -1,6 +1,7 @@
 const postcss = require('postcss');
 const Tidy = require('./Tidy');
 const getGlobalOptions = require('./src/getGlobalOptions');
+const { tidyPropagation } = require('./tidy-propagation');
 const { tidyShorthandProperty } = require('./tidy-shorthand-property');
 const { tidyProperty } = require('./tidy-property');
 const { tidyFunction } = require('./tidy-function');
@@ -20,6 +21,13 @@ module.exports = postcss.plugin(
     // Parse rules and declarations, replace `tidy-` properties.
     root.walkRules((rule) => {
       const tidy = new Tidy(rule, globalOptions);
+
+      // // Duplicate declarations containing the `!tidy` rule.
+      rule.walkDecls((declaration) => {
+        if (/!tidy/.test(declaration.value)) {
+          tidyPropagation(declaration, tidy, root);
+        }
+      });
 
       // Replace shorthand declarations with their long-form equivalents.
       rule.walkDecls(/^tidy-(column|offset)$/, (declaration) => {
