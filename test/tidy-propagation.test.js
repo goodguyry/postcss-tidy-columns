@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 const postcss = require('postcss');
 const run = require('.');
+const Tidy = require('../Tidy');
 const { typicalWithBreakpoints } = require('./sharedConfigs');
 const { tidyPropagation } = require('../tidy-propagation');
 
@@ -12,11 +13,15 @@ const runShorthandTest = (input, output, options = {}) => (
   run(input, output, options, postcss.plugin(
     'shorthand-props-test',
     () => function process(root) {
-      root.walkDecls((declaration) => {
-        if (/!tidy/.test(declaration.value)) {
-          // Pass in a mock Tidy object.
-          tidyPropagation(declaration, { columns: { options } }, root);
-        }
+      root.walkRules((rule) => {
+        const tidy = new Tidy(rule, options);
+
+        root.walkDecls((declaration) => {
+          if (/!tidy/.test(declaration.value)) {
+            // Pass in a mock Tidy object.
+            tidyPropagation(declaration, tidy, root);
+          }
+        });
       });
     },
   ))
