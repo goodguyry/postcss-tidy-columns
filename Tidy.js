@@ -1,4 +1,3 @@
-const postcss = require('postcss');
 const Columns = require('./Columns');
 const getLocalOptions = require('./src/getLocalOptions');
 const cleanClone = require('./lib/cleanClone');
@@ -16,7 +15,6 @@ class Tidy {
 
     // Bind class methods.
     this.initRule = this.initRule.bind(this);
-    this.collectBreakpointAtRules = this.collectBreakpointAtRules.bind(this);
 
     // Merge global and local options.
     const currentOptions = getLocalOptions(this.rule, globalOptions);
@@ -25,9 +23,6 @@ class Tidy {
     if (Object.prototype.hasOwnProperty.call(currentOptions, 'breakpoint')) {
       delete currentOptions.breakpoint;
     }
-
-    // Create and store an atRule for each breakpoint in the config.
-    this.atRules = this.collectBreakpointAtRules(currentOptions);
 
     // Instantiate Columns based on the merged options.
     this.columns = new Columns(currentOptions);
@@ -39,26 +34,6 @@ class Tidy {
   initRule() {
     // The media query's selector to which conditional declarations will be appended.
     this.fullWidthRule = cleanClone(this.rule);
-  }
-
-  /**
-   * Create breakpoint atRules for later use.
-   *
-   * @param  {Object} options The current config options.
-   * @return {Array}         An array of breakpoint atRules.
-   */
-  collectBreakpointAtRules(options) {
-    const { breakpoints } = options;
-
-    return Object.keys(breakpoints).map(breakpoint => (
-      // Create the atRule.
-      postcss.atRule({
-        name: 'media',
-        params: `(min-width: ${breakpoint})`,
-        nodes: [],
-        source: this.rule.source,
-      })
-    ));
   }
 
   /**

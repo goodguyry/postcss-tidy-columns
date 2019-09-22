@@ -1,12 +1,11 @@
+const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
-const getObjectByProperty = require('./lib/getObjectByProperty');
 const { parseAtruleParams } = require('./lib/parseAtruleParams');
 const compareStrings = require('./lib/compareStrings');
 
 function tidyPropagation(declaration, tidy) {
-  const { atRules, columns: { options: { breakpoints } } } = tidy;
+  const { columns: { options: { breakpoints } } } = tidy;
   const rule = declaration.parent;
-  const root = declaration.root();
   let breakpointKeys = Object.keys(breakpoints);
 
   // Handle parent atRule.
@@ -22,10 +21,8 @@ function tidyPropagation(declaration, tidy) {
   }
 
   // Reverse the breakpoints to make sure they're inserted in the correct order.
-  breakpointKeys.reverse().forEach((breakpoint) => {
-    const atRule = getObjectByProperty(atRules, `(min-width: ${breakpoint})`, 'params');
-
-    if (undefined !== atRule && 'max' !== minMax) {
+  const atRules = breakpointKeys.reduce((acc, breakpoint) => {
+    if ('max' !== minMax) {
       // Clone the declaration without `!tidy`.
       const cleanDecl = cleanClone(
         declaration,
@@ -35,30 +32,43 @@ function tidyPropagation(declaration, tidy) {
         },
       );
 
+      const atRule = postcss.atRule({
+        name: 'media',
+        params: `(min-width: ${breakpoint})`,
+        nodes: [],
+        source: rule.source,
+      });
+
       // Clone the rule and add the cloned declaration.
       const newRule = cleanClone(rule);
       newRule.append(cleanDecl);
       atRule.append(newRule);
 
-      // Insert the media query
-      if ('atrule' === rule.parent.type) {
-        // Insert after the parent at-rule.
-        root.insertAfter(rule.parent, atRule);
-      } else {
-        // Insert after the current rule.
-        root.insertAfter(rule, atRule);
-      }
+      return [...acc, atRule];
     }
 
-    // Replace the declaration with `!tidy` clipped off.
-    declaration.replaceWith(cleanClone(
-      declaration,
-      {
-        declaration: declaration.prop,
-        value: declaration.value.replace(/\s?\\?!tidy/, ''),
-      },
-    ));
-  });
+    return acc;
+  }, []);
+
+  const root = declaration.root();
+
+  // Insert the media query
+  if ('atrule' === rule.parent.type) {
+  //   // Insert after the parent at-rule.
+    root.insertAfter(rule.parent, atRules);
+  } else {
+  //   // Insert after the current rule.
+    root.insertAfter(rule, atRules);
+  }
+
+  // Replace the declaration with `!tidy` clipped off.
+  declaration.replaceWith(cleanClone(
+    declaration,
+    {
+      declaration: declaration.prop,
+      value: declaration.value.replace(/\s?\\?!tidy/, ''),
+    },
+  ));
 }
 
 module.exports = {
