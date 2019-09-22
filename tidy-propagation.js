@@ -3,9 +3,10 @@ const getObjectByProperty = require('./lib/getObjectByProperty');
 const { parseAtruleParams } = require('./lib/parseAtruleParams');
 const compareStrings = require('./lib/compareStrings');
 
-function tidyPropagation(declaration, tidy, root) {
+function tidyPropagation(declaration, tidy) {
   const { atRules, columns: { options: { breakpoints } } } = tidy;
   const rule = declaration.parent;
+  const root = declaration.root();
   let breakpointKeys = Object.keys(breakpoints);
 
   // Handle parent atRule.

@@ -25,7 +25,7 @@ module.exports = postcss.plugin(
       // Duplicate declarations containing the `!tidy` rule.
       rule.walkDecls((declaration) => {
         if (/!tidy/.test(declaration.value)) {
-          tidyPropagation(declaration, tidy, root);
+          tidyPropagation(declaration, tidy);
         }
       });
 
