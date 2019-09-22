@@ -20,18 +20,18 @@ function tidyPropagation(declaration, tidy) {
     breakpointKeys = breakpointKeys.filter(breakpoint => -1 === compareStrings(value, breakpoint));
   }
 
+  // Clone the declaration without `!tidy`.
+  const cleanDecl = cleanClone(
+    declaration,
+    {
+      declaration: declaration.prop,
+      value: declaration.value.replace(/\s?\\?!tidy/, ''),
+    },
+  );
+
   // Reverse the breakpoints to make sure they're inserted in the correct order.
   const atRules = breakpointKeys.reduce((acc, breakpoint) => {
     if ('max' !== minMax) {
-      // Clone the declaration without `!tidy`.
-      const cleanDecl = cleanClone(
-        declaration,
-        {
-          declaration: declaration.prop,
-          value: declaration.value.replace(/\s?\\?!tidy/, ''),
-        },
-      );
-
       const atRule = postcss.atRule({
         name: 'media',
         params: `(min-width: ${breakpoint})`,
@@ -41,7 +41,7 @@ function tidyPropagation(declaration, tidy) {
 
       // Clone the rule and add the cloned declaration.
       const newRule = cleanClone(rule);
-      newRule.append(cleanDecl);
+      newRule.append(cleanDecl.clone());
       atRule.append(newRule);
 
       return [...acc, atRule];
@@ -62,13 +62,7 @@ function tidyPropagation(declaration, tidy) {
   }
 
   // Replace the declaration with `!tidy` clipped off.
-  declaration.replaceWith(cleanClone(
-    declaration,
-    {
-      declaration: declaration.prop,
-      value: declaration.value.replace(/\s?\\?!tidy/, ''),
-    },
-  ));
+  declaration.replaceWith(cleanDecl.clone());
 }
 
 module.exports = {
