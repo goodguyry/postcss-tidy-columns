@@ -266,8 +266,11 @@ body {
    * Because I am using a breakpoint configuration to set up two distinct
    * Tidy Columns configurations, the declaration must be re-declared within
    * the breakpoint to ensure the correct values are used in the calculation.
-   * For such cases, append !tidy to the declaration for it to automatically
-   * be duplicated inside the configuration's breakpoints.
+   *
+   * Append !tidy to the declaration to automatically duplicate it inside the
+   * configuration's breakpoints.
+   *
+   * When compiling from Sass, you are required to escape the exclamation: \!tidy
    *
    * padding: tidy-var(edge) 0 !tidy;
    */
@@ -278,8 +281,11 @@ body {
    * Because I am using a breakpoint configuration to set up two distinct
    * Tidy Columns configurations, the declaration must be re-declared within
    * the breakpoint to ensure the correct values are used in the calculation.
-   * For such cases, append !tidy to the declaration for it to automatically
-   * be duplicated inside the configuration's breakpoints.
+   *
+   * Append !tidy to the declaration to automatically duplicate it inside the
+   * configuration's breakpoints.
+   *
+   * When compiling from Sass, you are required to escape the exclamation: \!tidy
    *
    * tidy-span: tidy-var(columns) !tidy;
    */
@@ -288,11 +294,14 @@ body {
 
 @media (min-width: 64rem) {
   .site-header__inner {
-    padding: 1.875rem 0;
-  }
-  .site-header__inner {
     width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
     max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+  }
+}
+
+@media (min-width: 64rem) {
+  .site-header__inner {
+    padding: 1.875rem 0;
   }
 }
 
@@ -338,8 +347,11 @@ body {
    * Because I am using a breakpoint configuration to set up two distinct
    * Tidy Columns configurations, the declaration must be re-declared within
    * the breakpoint to ensure the correct values are used in the calculation.
-   * For such cases, append !tidy to the declaration for it to automatically
-   * be duplicated inside the configuration's breakpoints.
+   *
+   * Append !tidy to the declaration to automatically duplicate it inside the
+   * configuration's breakpoints.
+   *
+   * When compiling from Sass, you are required to escape the exclamation: \!tidy
    *
    * padding: 0 tidy-var(edge) !tidy;
    */
@@ -503,10 +515,13 @@ body {
      * Because I am using a breakpoint configuration to set up two distinct
      * Tidy Columns configurations, the declaration must be re-declared within
      * the breakpoint to ensure the correct values are used in the calculation.
-     * For such cases, append !tidy to the declaration for it to automatically
-     * be duplicated inside the configuration's breakpoints.
      *
-     * tidy-span: 6;
+     * Append !tidy to the declaration to automatically duplicate it inside the
+     * configuration's breakpoints.
+     *
+     * When compiling from Sass, you are required to escape the exclamation: \!tidy
+     *
+     * tidy-span: 6 !tidy;
      */
     width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 6) + 0.5rem * 5);
   }
@@ -544,8 +559,9 @@ body {
    * Because I am using a breakpoint configuration to set up two distinct
    * Tidy Columns configurations, the declaration must be re-declared within
    * the breakpoint to ensure the correct values are used in the calculation.
-   * For such cases, append !tidy to the declaration for it to automatically
-   * be duplicated inside the configuration's breakpoints.
+   *
+   * Append !tidy to the declaration to automatically duplicate it inside the
+   * configuration's breakpoints.
    *
    * When compiling from Sass, you are required to escape the exclamation: \!tidy
    *
@@ -773,8 +789,11 @@ body {
    * Because I am using a breakpoint configuration to set up two distinct
    * Tidy Columns configurations, the declaration must be re-declared within
    * the breakpoint to ensure the correct values are used in the calculation.
-   * For such cases, append !tidy to the declaration for it to automatically
-   * be duplicated inside the configuration's breakpoints.
+   *
+   * Append !tidy to the declaration to automatically duplicate it inside the
+   * configuration's breakpoints.
+   *
+   * When compiling from Sass, you are required to escape the exclamation: \!tidy
    *
    * tidy-span: tidy-var(columns) !tidy;
    */
@@ -792,13 +811,16 @@ body {
      * The design calls for the footer content to be offset by 1.5 columns.
      * It happens.
      *
-     * This ofset is for all screen sizes.
+     * This offset is for all screen sizes.
      *
      * Because I am using a breakpoint configuration to set up two distinct
      * Tidy Columns configurations, the declaration must be re-declared within
      * the breakpoint to ensure the correct values are used in the calculation.
-     * For such cases, append !tidy to the declaration for it to automatically
-     * be duplicated inside the configuration's breakpoints.
+     *
+     * Append !tidy to the declaration to automatically duplicate it inside the
+     * configuration's breakpoints.
+     *
+     * When compiling from Sass, you are required to escape the exclamation: \!tidy
      *
      * tidy-offset-left: 1.5 !tidy;
      */
