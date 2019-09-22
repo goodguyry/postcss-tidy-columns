@@ -60,6 +60,7 @@ See [PostCSS] docs for examples for your environment.
 
 * [Tidy Properties](#tidy-properties)
 * [Tidy Functions](#tidy-functions)
+* [!tidy Rule](#tidy-rule)
 * [Options](#options)
 * [Options Cascade](#options-cascade)
 * [Using CSS Custom Properties in setting values](#using-css-custom-properties-in-setting-values)
@@ -198,12 +199,12 @@ breakpoint changes.
 > #### Example
 >
 > ```css
-> /* Assuming there's only one '64rem' breakpoint change configured this... */
+> /* Assuming there's only one '64rem' breakpoint change configured, this... */
 > div {
 >   tidy-span: 3 !tidy;
 > }
 >
-> /* ...is identical to this */
+> /* ...is identical to this: */
 > div {
 >   tidy-span: 3;
 > }
