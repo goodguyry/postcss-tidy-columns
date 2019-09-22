@@ -6,14 +6,14 @@ const compareStrings = require('./lib/compareStrings');
 function tidyPropagation(declaration, tidy) {
   const { columns: { options: { breakpoints } } } = tidy;
   const rule = declaration.parent;
+  const root = declaration.root();
   let breakpointKeys = Object.keys(breakpoints);
 
   // Handle parent atRule.
   const hasAtRuleParent = 'atrule' === rule.parent.type;
-  const [atRuleParams] = hasAtRuleParent
+  const [{ minMax, value }] = hasAtRuleParent
     ? parseAtruleParams(rule.parent.params)
     : [{}];
-  const { minMax, value } = atRuleParams;
 
   // Filter out breakpoint values that don't apply; ignore max-width breakpoints.
   if (hasAtRuleParent && 'min' === minMax) {
@@ -50,14 +50,12 @@ function tidyPropagation(declaration, tidy) {
     return acc;
   }, []);
 
-  const root = declaration.root();
-
   // Insert the media query
   if ('atrule' === rule.parent.type) {
-  //   // Insert after the parent at-rule.
+    // Insert after the parent at-rule.
     root.insertAfter(rule.parent, atRules);
   } else {
-  //   // Insert after the current rule.
+    // Insert after the current rule.
     root.insertAfter(rule, atRules);
   }
 
