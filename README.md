@@ -190,6 +190,31 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 > }
 > ```
 
+## `!tidy` Rule
+
+`!tidy` signifies that a declaration should cascade through configured 
+breakpoint changes.
+
+> #### Example
+>
+> ```css
+> /* Assuming there's only one '64rem' breakpoint change configured this... */
+> div {
+>   tidy-span: 3 !tidy;
+> }
+>
+> /* ...is identical to this */
+> div {
+>   tidy-span: 3;
+> }
+>
+> @media (min-width: 64rem) {
+>   div {
+>     tidy-span: 3;
+>   }
+> }
+> ```
+
 ## Options
 
 |Name|Type|Default|Description|
