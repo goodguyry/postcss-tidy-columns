@@ -65,7 +65,9 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
 @media (min-width: 768px) {
  div { width: calc(tidy-span(3) + 2rem); } }
 @media (min-width: 1024px) {
- div { width: calc(tidy-span(3) + 2rem); } }`,
+ div { width: calc(tidy-span(3) + 2rem); } }
+@media (min-width: 90rem) {
+ div { width: calc(tidy-span-full(3) + 2rem); } }`,
       typicalWithBreakpoints,
     ),
   );
@@ -97,6 +99,21 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
     () => runShorthandTest(
       '@media (max-width: 768px) { div { tidy-span: 3 !tidy; } }',
       '@media (max-width: 768px) { div { tidy-span: 3; } }',
+      typicalWithBreakpoints,
+    ),
+  );
+
+  test(
+    'Adds tidy-offset-full() when a !tidy declaration contains tidy-offset()',
+    () => runShorthandTest(
+      'div { width: calc(tidy-offset(3) + 2rem) !tidy; }',
+      `div { width: calc(tidy-offset(3) + 2rem); }
+@media (min-width: 768px) {
+ div { width: calc(tidy-offset(3) + 2rem); } }
+@media (min-width: 1024px) {
+ div { width: calc(tidy-offset(3) + 2rem); } }
+@media (min-width: 90rem) {
+ div { width: calc(tidy-offset-full(3) + 2rem); } }`,
       typicalWithBreakpoints,
     ),
   );
