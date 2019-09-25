@@ -28,7 +28,7 @@ const runShorthandTest = (input, output, options = {}) => (
 );
 
 /**
- * Clean and trim shorthand property values.
+ * Duplicate properties with a !tidy rule.
  */
 describe('The `!tidy` signals a declaration should be duplicated inside any configured breakpoints', () => {
   test(
@@ -119,6 +119,9 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
   );
 });
 
+/**
+ * Find the siteMax option value, if any.
+ */
 describe('getSiteMax properly retrieves the relevant siteMax value', () => {
   test('Single siteMax in root is returned', () => {
     const options = { siteMax: '90rem' };
