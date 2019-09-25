@@ -29,22 +29,20 @@ function getSiteMax(options) {
   if (undefined !== breakpoints) {
     const breakpointKeys = Object.keys(breakpoints);
 
-    if (0 < breakpointKeys.length) {
-      const siteMaxValues = breakpointKeys.reduce((acc, breakpoint) => {
-        if (undefined !== breakpoints[breakpoint].siteMax) {
-          return [...acc, breakpoints[breakpoint].siteMax];
-        }
+    const siteMaxValues = breakpointKeys.reduce((acc, breakpoint) => {
+      if (undefined !== breakpoints[breakpoint].siteMax) {
+        return [...acc, breakpoints[breakpoint].siteMax];
+      }
 
-        return acc;
-      }, collectedValues);
+      return acc;
+    }, collectedValues);
 
-      // We only want the last definition.
-      return siteMaxValues.pop();
-    }
+    // We only want the last definition.
+    return siteMaxValues.pop();
   }
 
-  // No siteMax defined.
-  return false;
+  // Return the value from the root, or false if there is none.
+  return (0 < collectedValues.length) ? collectedValues.pop() : false;
 }
 
 /**
