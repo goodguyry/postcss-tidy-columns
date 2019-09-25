@@ -171,4 +171,5 @@ function tidyPropagation(declaration, tidy) {
 
 module.exports = {
   tidyPropagation,
+  getSiteMax,
 };

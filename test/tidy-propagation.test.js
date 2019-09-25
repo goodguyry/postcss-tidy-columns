@@ -3,7 +3,7 @@ const postcss = require('postcss');
 const run = require('.');
 const Tidy = require('../Tidy');
 const { typicalWithBreakpoints } = require('./sharedConfigs');
-const { tidyPropagation } = require('../tidy-propagation');
+const { tidyPropagation, getSiteMax } = require('../tidy-propagation');
 
 /**
  * Create a test plugin to replace shorthand properties. Running a test plugin
@@ -117,4 +117,56 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
       typicalWithBreakpoints,
     ),
   );
+});
+
+describe('getSiteMax properly retrieves the relevant siteMax value', () => {
+  test('Single siteMax in root is returned', () => {
+    const options = { siteMax: '90rem' };
+    expect(getSiteMax(options)).toEqual('90rem');
+  });
+
+  test('Single siteMax in a breakpoint', () => {
+    const options = {
+      breakpoints: {
+        '100px': {
+          siteMax: '64rem',
+        },
+      },
+    };
+    expect(getSiteMax(options)).toEqual('64rem');
+  });
+
+  test('Multiple siteMax values; only the last is returned', () => {
+    const options = {
+      siteMax: '20rem',
+      breakpoints: {
+        '100px': {
+          siteMax: '64rem',
+        },
+        '900px': {
+          siteMax: '90rem',
+        },
+      },
+    };
+    expect(getSiteMax(options)).toEqual('90rem');
+  });
+
+  test('Single siteMax value returned, with breakpoints ignored', () => {
+    const options = {
+      siteMax: '20rem',
+      breakpoints: {
+        '100px': {
+          columns: 12,
+        },
+        '900px': {
+          gap: '1.25rem',
+        },
+      },
+    };
+    expect(getSiteMax(options)).toEqual('20rem');
+  });
+
+  test('No siteMax to be found', () => {
+    expect(getSiteMax({})).toBeFalsy();
+  });
 });
