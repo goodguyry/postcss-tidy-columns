@@ -132,7 +132,13 @@ Use `none` to bypass a required value. A single value applies to both `left` and
 
 These functions are provided for incorporating the `tidy-` properties' output without using the properties themselves. These can be used on their own or nested inside a `calc()` function, and allow for more control over the declarations added by the plugin.
 
-When using these functions, **the `siteMax`-based static value will not be output**. Use the `tidy-span-full()` and `tidy-offset-full()` functions to set the static `span` and `offset` widths, respectively.
+**Unlike the above _properties_, these functions only output one value:**
+* `tidy-[offset|span]()` outputs the fluid value
+* `tidy-[offset|span]-full()` outputs the static value, based on the `siteMax` in the configuration.
+
+Be sure to use the function most appropriate for your use-case. Typically, this means redeclaring the the `-full` version of the function in the breakpoint at which the site becomes static width. 
+
+**TIP:** For any function declarations that should stay the same across breakpoint configurations, or simply to redclare the `-full` version of a function, append the declaration with `!tidy` to signal to the plugin to handle duplicating the declaration.
 
 ### Span Function
 
@@ -198,13 +204,16 @@ breakpoint changes.
 
 > #### Example
 >
+> Assuming one '64rem' breakpoint change configured...
+>
 > ```css
-> /* Assuming there's only one '64rem' breakpoint change configured, this... */
+>
+> /* Input: */
 > div {
 >   tidy-span: 3 !tidy;
 > }
 >
-> /* ...is identical to this: */
+> /* Output: */
 > div {
 >   tidy-span: 3;
 > }
