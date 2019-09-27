@@ -127,26 +127,20 @@
      * the edge of the site, then tack on the edge value to pull the figure to
      * the edge of the site's max-width.
      *
-     * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+     * When using tidy-* functions in non-width properties, the `-full` version
+     * of the function must be declared in a media query matching the site's
+     * max-width to ensure the static value is calculated based on the site's
+     * max-width rather than `vw` units. Appending the declaration with !tidy
+     * automates this..
+     *
+     * margin-left: calc(tidy-offset(-1) - tidy-var(edge)) !tidy;
      */
-    margin-left: calc(tidy-offset(-2) - tidy-var(edge));
+    margin-left: calc(tidy-offset(-2) - tidy-var(edge)) \!tidy;
     max-width: tidy-var(siteMax);
 
     .content__img {
       margin-bottom: 0;
     }
-  }
-
-  @media (min(full)) {
-    /**
-     * When using tidy-* functions in non-width properties, the `-full` version
-     * of the function must be declared in a media query matching the site's
-     * max-width to ensure the static value is calculated based on the site's
-     * max-width rather than `vw` units.
-     *
-     * margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
-     */
-    margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
   }
 }
 
@@ -168,23 +162,17 @@
      * we must include the implied edge value in the offset so the distance is
      * correct.
      *
-     * right: calc(tidy-var(edge) + tidy-offset(1));
-     */
-    right: calc(tidy-var(edge) + tidy-offset(1));
-    // Override the `tidy-span` property from the rule's root.
-    width: auto;
-  }
-
-  @media (min(full)) {
-    /**
      * When using tidy-* functions in non-width properties, the `-full` version
      * of the function must be declared in a media query matching the site's
      * max-width to ensure the static value is calculated based on the site's
-     * max-width rather than `vw` units.
+     * max-width rather than `vw` units. Appending the declaration with !tidy
+     * automates this..
      *
-     * right: calc(tidy-var(edge) + tidy-offset-full(1));
+     * right: calc(tidy-var(edge) + tidy-offset(1)) \!tidy;
      */
-    right: calc(tidy-var(edge) + tidy-offset-full(1));
+    right: calc(tidy-var(edge) + tidy-offset(1)) \!tidy;
+    // Override the `tidy-span` property from the rule's root.
+    width: auto;
   }
 }
 

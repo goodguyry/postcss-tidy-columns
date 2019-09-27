@@ -702,7 +702,13 @@ body {
      * the edge of the site, then tack on the edge value to pull the figure to
      * the edge of the site's max-width.
      *
-     * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+     * When using tidy-* functions in non-width properties, the `-full` version
+     * of the function must be declared in a media query matching the site's
+     * max-width to ensure the static value is calculated based on the site's
+     * max-width rather than `vw` units. Appending the declaration with !tidy
+     * automates this..
+     *
+     * margin-left: calc(tidy-offset(-1) - tidy-var(edge)) !tidy;
      */
     margin-left: calc(((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * -2) + 1.25rem * -2) - 1.875rem);
     max-width: 80rem;
@@ -714,14 +720,6 @@ body {
 
 @media (min-width: 80rem) {
   .content__figure--fullwidth {
-    /**
-     * When using tidy-* functions in non-width properties, the `-full` version
-     * of the function must be declared in a media query matching the site's
-     * max-width to ensure the static value is calculated based on the site's
-     * max-width rather than `vw` units.
-     *
-     * margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
-     */
     margin-left: calc(((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * -2) + 1.25rem * -2) - 1.875rem);
   }
 }
@@ -747,7 +745,13 @@ body {
      * we must include the implied edge value in the offset so the distance is
      * correct.
      *
-     * right: calc(tidy-var(edge) + tidy-offset(1));
+     * When using tidy-* functions in non-width properties, the `-full` version
+     * of the function must be declared in a media query matching the site's
+     * max-width to ensure the static value is calculated based on the site's
+     * max-width rather than `vw` units. Appending the declaration with !tidy
+     * automates this..
+     *
+     * right: calc(tidy-var(edge) + tidy-offset(1)) \!tidy;
      */
     right: calc(1.875rem + (((100vw - 1.875rem * 2) / 12 - 1.1458rem) + 1.25rem));
     width: auto;
@@ -756,14 +760,6 @@ body {
 
 @media (min-width: 80rem) {
   .content__figcaption--fullwidth {
-    /**
-     * When using tidy-* functions in non-width properties, the `-full` version
-     * of the function must be declared in a media query matching the site's
-     * max-width to ensure the static value is calculated based on the site's
-     * max-width rather than `vw` units.
-     *
-     * right: calc(tidy-var(edge) + tidy-offset-full(1));
-     */
     right: calc(1.875rem + (((80rem - 1.875rem * 2) / 12 - 1.1458rem) + 1.25rem));
   }
 }
