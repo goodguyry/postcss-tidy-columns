@@ -331,7 +331,7 @@ require('postcss-tidy-columns')({
 });
 ```
 
-See the [Scoped Settings](https://github.com/goodguyry/postcss-tidy-columns/wiki/Scoped-Settings) Wiki page for more.
+See the [Gotchas](https://github.com/goodguyry/postcss-tidy-columns/wiki/Gotchas#configuration-breakpoints-caveats) Wiki page for more.
 
 ## Options Cascade
 
