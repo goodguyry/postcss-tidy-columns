@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Added**
 
-- Support for configuring different grid specs across multiple breakpoints (#20)
+- Support for configuring different column specs across multiple breakpoints (#20)
 - Use the `tidy-var()` function to retrieve option values in declarations (#27, #32)
 - Use the `debug` option to maintain the input declaration as a comment (#45, #48)
 
@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Removed**
 
-- The `addGap` option for automatically adding the grid gap margin to column elements (#24)
+- The `addGap` option for automatically adding the column gap margin to column elements (#24)
 - Support for Node 6 (#41)
 
 ## 0.3.4

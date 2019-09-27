@@ -229,8 +229,8 @@ breakpoint changes.
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|[`columns`](#columns)|`{Number}`|`undefined`|The number of grid columns.|
-|[`gap`](#gap)|`{String}`|`undefined`|The width of grid column gaps.|
+|[`columns`](#columns)|`{Number}`|`undefined`|The number of columns.|
+|[`gap`](#gap)|`{String}`|`undefined`|The width of column gaps.|
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
 |[`debug`](#debug)|`{Boolean}`|`false`|Add debug comments.|
@@ -307,10 +307,10 @@ div {
 
 ### `breakpoints`
 
-Use the `breakpoints` object to define a grid configuration that will change based on screen size.
+Use the `breakpoints` object to define a columns configuration that will change based on screen size.
 
-1. Define the small-screen grid in the root object.
-2. Define one or more `min-width` breakpoints at which the grid spec will change, and any configuration options that will change.
+1. Define the small-screen columns configuration in the root object.
+2. Define one or more `min-width` breakpoints at which the columns configuration will change, and any configuration options that will change.
 4. The configuration settings cascade up from the root to the largest `breakpoint`.
 
 ```js
