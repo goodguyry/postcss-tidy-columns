@@ -174,7 +174,7 @@ describe('Matches CSS length values of the supported unit values (px, em, rem)',
     'Correctly matches length values with supported units: %s',
     (input, expected) => {
       expect(LENGTH_REGEX.test(input)).toBeTruthy();
-      // Wrapped in JSON.stringify() to work around Jest bug.
+      // https://github.com/facebook/jest/issues/5998
       expect(JSON.stringify(input.match(LENGTH_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
