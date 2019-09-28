@@ -18,18 +18,18 @@
   },
   "homepage": "https://github.com/goodguyry/postcss-tidy-columns",
   "dependencies": {
+    "postcss": "^6.0.22"
+  },
+  "devDependencies": {
     "autoprefixer": "^9.5.1",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
-    "postcss": "^6.0.22",
-    "postcss-units": "^1.2.1"
-  },
-  "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.0",
     "jest": "^24.7.1",
-    "jest-cli": "^24.7.1"
+    "jest-cli": "^24.7.1",
+    "postcss-units": "^1.2.1"
   },
   "scripts": {
     "test": "jest",
