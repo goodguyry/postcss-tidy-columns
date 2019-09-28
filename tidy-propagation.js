@@ -27,11 +27,9 @@ function getSiteMax(options) {
 
   // Get any definitions within the breakpoints.
   if (undefined !== breakpoints) {
-    const breakpointKeys = Object.keys(breakpoints);
-
-    const siteMaxValues = breakpointKeys.reduce((acc, breakpoint) => {
-      if (undefined !== breakpoints[breakpoint].siteMax) {
-        return [...acc, breakpoints[breakpoint].siteMax];
+    const siteMaxValues = Object.keys(breakpoints).reduce((acc, bp) => {
+      if (undefined !== breakpoints[bp].siteMax) {
+        return [...acc, breakpoints[bp].siteMax];
       }
 
       return acc;
