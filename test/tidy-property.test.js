@@ -11,9 +11,7 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'The `tidy-offset-left` property is replaced.',
     () => run(
       'div { tidy-offset-left: 1; }',
-      `div { margin-left: calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }
-@media (min-width: 90rem) {
- div { margin-left: calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); } }`,
+      'div { margin-left: calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); } @media (min-width: 90rem) { div { margin-left: calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); } }',
       typical,
     ),
   );
@@ -22,9 +20,7 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'The `tidy-offset-right` property is replaced.',
     () => run(
       'div { tidy-offset-right: 2; }',
-      `div { margin-right: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2); }
-@media (min-width: 90rem) {
- div { margin-right: calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2); } }`,
+      'div { margin-right: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2); } @media (min-width: 90rem) { div { margin-right: calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2); } }',
       typical,
     ),
   );

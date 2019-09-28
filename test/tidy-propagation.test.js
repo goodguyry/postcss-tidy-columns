@@ -34,11 +34,7 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
     'A property declaration is duplicated as expected',
     () => runShorthandTest(
       'div { tidy-span: 3 !tidy; }',
-      `div { tidy-span: 3; }
-@media (min-width: 768px) {
- div { tidy-span: 3; } }
-@media (min-width: 1024px) {
- div { tidy-span: 3; } }`,
+      'div { tidy-span: 3; } @media (min-width: 768px) { div { tidy-span: 3; } } @media (min-width: 1024px) { div { tidy-span: 3; } }',
       typicalWithBreakpoints,
     ),
   );
@@ -47,11 +43,7 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
     'A property declaration with escaped ! (\!tidy) is duplicated as expected',
     () => runShorthandTest(
       'div { tidy-span: 3 \!tidy; }',
-      `div { tidy-span: 3; }
-@media (min-width: 768px) {
- div { tidy-span: 3; } }
-@media (min-width: 1024px) {
- div { tidy-span: 3; } }`,
+      'div { tidy-span: 3; } @media (min-width: 768px) { div { tidy-span: 3; } } @media (min-width: 1024px) { div { tidy-span: 3; } }',
       typicalWithBreakpoints,
     ),
   );
@@ -60,13 +52,7 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
     'A function declaration is duplicated as expected',
     () => runShorthandTest(
       'div { width: calc(tidy-span(3) + 2rem) !tidy; }',
-      `div { width: calc(tidy-span(3) + 2rem); }
-@media (min-width: 768px) {
- div { width: calc(tidy-span(3) + 2rem); } }
-@media (min-width: 1024px) {
- div { width: calc(tidy-span(3) + 2rem); } }
-@media (min-width: 90rem) {
- div { width: calc(tidy-span-full(3) + 2rem); } }`,
+      'div { width: calc(tidy-span(3) + 2rem); } @media (min-width: 768px) { div { width: calc(tidy-span(3) + 2rem); } } @media (min-width: 1024px) { div { width: calc(tidy-span(3) + 2rem); } } @media (min-width: 90rem) { div { width: calc(tidy-span-full(3) + 2rem); } }',
       typicalWithBreakpoints,
     ),
   );
@@ -75,11 +61,7 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
     'A non-tidy declaration is duplicated as expected',
     () => runShorthandTest(
       'div { width: 14px !tidy; }',
-      `div { width: 14px; }
-@media (min-width: 768px) {
- div { width: 14px; } }
-@media (min-width: 1024px) {
- div { width: 14px; } }`,
+      'div { width: 14px; } @media (min-width: 768px) { div { width: 14px; } } @media (min-width: 1024px) { div { width: 14px; } }',
       typicalWithBreakpoints,
     ),
   );
@@ -106,13 +88,7 @@ describe('The `!tidy` signals a declaration should be duplicated inside any conf
     'Adds tidy-offset-full() when a !tidy declaration contains tidy-offset()',
     () => runShorthandTest(
       'div { width: calc(tidy-offset(3) + 2rem) !tidy; }',
-      `div { width: calc(tidy-offset(3) + 2rem); }
-@media (min-width: 768px) {
- div { width: calc(tidy-offset(3) + 2rem); } }
-@media (min-width: 1024px) {
- div { width: calc(tidy-offset(3) + 2rem); } }
-@media (min-width: 90rem) {
- div { width: calc(tidy-offset-full(3) + 2rem); } }`,
+      'div { width: calc(tidy-offset(3) + 2rem); } @media (min-width: 768px) { div { width: calc(tidy-offset(3) + 2rem); } } @media (min-width: 1024px) { div { width: calc(tidy-offset(3) + 2rem); } } @media (min-width: 90rem) { div { width: calc(tidy-offset-full(3) + 2rem); } }',
       typicalWithBreakpoints,
     ),
   );
