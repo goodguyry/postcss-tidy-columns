@@ -149,6 +149,7 @@ describe('Matches valid tidy-column shorthand values', () => {
     'Matches tidy-column: %s',
     (input, expected) => {
       expect(COLUMNS_REGEX.test(input)).toBeTruthy();
+      // https://github.com/facebook/jest/issues/5998
       expect(JSON.stringify(input.match(COLUMNS_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
@@ -183,6 +184,7 @@ describe('Matches valid tidy-offset shorthand values', () => {
     'Matches tidy-offset: %s',
     (input, expected) => {
       expect(OFFSET_REGEX.test(input)).toBeTruthy();
+      // https://github.com/facebook/jest/issues/5998
       expect(JSON.stringify(input.match(OFFSET_REGEX))).toEqual(JSON.stringify(expected));
     },
   );

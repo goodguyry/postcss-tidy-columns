@@ -136,7 +136,7 @@ describe('Matches tidy-var() functions', () => {
     'Matches %s',
     (input, expected) => {
       expect(VAR_FUNCTION_REGEX.test(input)).toBeTruthy();
-      // Wrapped in JSON.stringify() to work around Jest bug.
+      // https://github.com/facebook/jest/issues/5998
       expect(JSON.stringify(input.match(VAR_FUNCTION_REGEX))).toEqual(JSON.stringify(expected));
     },
   );

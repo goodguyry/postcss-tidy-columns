@@ -129,7 +129,7 @@ describe('Pattern to match `tidy-*` functions in declaration values', () => {
     'Matches %s',
     (input, expected) => {
       expect(FUNCTION_REGEX.test(input)).toBeTruthy();
-      // Wrapped in JSON.stringify() to work around Jest bug.
+      // https://github.com/facebook/jest/issues/5998
       expect(JSON.stringify(input.match(FUNCTION_REGEX))).toEqual(JSON.stringify(expected));
     },
   );
