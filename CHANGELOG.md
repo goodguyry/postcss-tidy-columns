@@ -1,6 +1,16 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.4.1
+
+**Added**
+
+- Support for automatically duplicating declarations that should propagate through breakpoints (#52)
+
+**Fixed**
+
+- Updates dependencies to fix known vulnerabilities (#55)
+
 ## 0.4.0
 
 **Added**
