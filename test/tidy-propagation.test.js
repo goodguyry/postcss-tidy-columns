@@ -18,7 +18,6 @@ const runShorthandTest = (input, output, options = {}) => (
 
         root.walkDecls((declaration) => {
           if (/!tidy/.test(declaration.value)) {
-            // Pass in a mock Tidy object.
             tidyPropagation(declaration, tidy, root);
           }
         });
