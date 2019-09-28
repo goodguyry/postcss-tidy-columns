@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const run = require('.');
-const { typical, typicalWithBreakpoints } = require('./sharedConfigs');
+const { typical, typicalWithBreakpoints, customProperties } = require('./sharedConfigs');
 const { VAR_FUNCTION_REGEX } = require('../tidy-var');
 
 /**
@@ -94,6 +94,15 @@ describe('The `tidy-var()` function is replaced with the expected option value',
       'div { margin-left: -tidy-var("gap"); }',
       'div { margin-left: -1.25rem; }',
       typical,
+    ),
+  );
+
+  test(
+    'Replaces a `tidy-var()` with a Custom Property value',
+    () => run(
+      'div { margin-left: tidy-var(columns); }',
+      'div { margin-left: var(--columns); }',
+      customProperties,
     ),
   );
 });
