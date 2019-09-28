@@ -60,6 +60,7 @@ See [PostCSS] docs for examples for your environment.
 
 * [Tidy Properties](#tidy-properties)
 * [Tidy Functions](#tidy-functions)
+* [!tidy Rule](#tidy-rule)
 * [Options](#options)
 * [Options Cascade](#options-cascade)
 * [Using CSS Custom Properties in setting values](#using-css-custom-properties-in-setting-values)
@@ -131,7 +132,13 @@ Use `none` to bypass a required value. A single value applies to both `left` and
 
 These functions are provided for incorporating the `tidy-` properties' output without using the properties themselves. These can be used on their own or nested inside a `calc()` function, and allow for more control over the declarations added by the plugin.
 
-When using these functions, **the `siteMax`-based static value will not be output**. Use the `tidy-span-full()` and `tidy-offset-full()` functions to set the static `span` and `offset` widths, respectively.
+**Unlike the above _properties_, these functions only output one value:**
+* `tidy-[offset|span]()` outputs the fluid value
+* `tidy-[offset|span]-full()` outputs the static value, based on the `siteMax` in the configuration.
+
+Be sure to use the function most appropriate for your use-case. Typically, this means redeclaring the the `-full` version of the function in the breakpoint at which the site becomes static width. 
+
+**TIP:** For any function declarations that should stay the same across breakpoint configurations, or simply to redclare the `-full` version of a function, append the declaration with `!tidy` to signal to the plugin to handle duplicating the declaration.
 
 ### Span Function
 
@@ -190,12 +197,40 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 > }
 > ```
 
+## `!tidy` Rule
+
+`!tidy` signifies that a declaration should cascade through configured 
+breakpoint changes.
+
+> #### Example
+>
+> Assuming one '64rem' breakpoint change configured...
+>
+> ```css
+>
+> /* Input: */
+> div {
+>   tidy-span: 3 !tidy;
+> }
+>
+> /* Output: */
+> div {
+>   tidy-span: 3;
+> }
+>
+> @media (min-width: 64rem) {
+>   div {
+>     tidy-span: 3;
+>   }
+> }
+> ```
+
 ## Options
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|[`columns`](#columns)|`{Number}`|`undefined`|The number of grid columns.|
-|[`gap`](#gap)|`{String}`|`undefined`|The width of grid column gaps.|
+|[`columns`](#columns)|`{Number}`|`undefined`|The number of columns.|
+|[`gap`](#gap)|`{String}`|`undefined`|The width of column gaps.|
 |[`siteMax`](#siteMax)|`{String}`|`undefined`|The max-width of the site.|
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
 |[`debug`](#debug)|`{Boolean}`|`false`|Add debug comments.|
@@ -272,10 +307,10 @@ div {
 
 ### `breakpoints`
 
-Use the `breakpoints` object to define a grid configuration that will change based on screen size.
+Use the `breakpoints` object to define a columns configuration that will change based on screen size.
 
-1. Define the small-screen grid in the root object.
-2. Define one or more `min-width` breakpoints at which the grid spec will change, and any configuration options that will change.
+1. Define the small-screen columns configuration in the root object.
+2. Define one or more `min-width` breakpoints at which the columns configuration will change, and any configuration options that will change.
 4. The configuration settings cascade up from the root to the largest `breakpoint`.
 
 ```js
@@ -296,7 +331,7 @@ require('postcss-tidy-columns')({
 });
 ```
 
-See the [Scoped Settings](https://github.com/goodguyry/postcss-tidy-columns/wiki/Scoped-Settings) Wiki page for more.
+See the [Gotchas](https://github.com/goodguyry/postcss-tidy-columns/wiki/Gotchas#configuration-breakpoints-caveats) Wiki page for more.
 
 ## Options Cascade
 

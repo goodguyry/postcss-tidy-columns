@@ -22,33 +22,40 @@
    * Using the `tidy-var()` to get a config value, for no other reason than that
    * it's convenient.
    *
-   * padding: tidy-var(edge) 0;
+   * This padding is the same for all screen sizes.
+   *
+   * Because I am using a breakpoint configuration to set up two distinct
+   * Tidy Columns configurations, the declaration must be re-declared within
+   * the breakpoint to ensure the correct values are used in the calculation.
+   *
+   * Append !tidy to the declaration to automatically duplicate it inside the
+   * configuration's breakpoints.
+   *
+   * When compiling from Sass, you are required to escape the exclamation: \!tidy
+   *
+   * padding: tidy-var(edge) 0 !tidy;
    */
-  padding: tidy-var(edge) 0;
+  padding: tidy-var(edge) 0 \!tidy;
 
   /**
-   * Quick and dirty full-width container.
+   * Quick and dirty, fully-responsive, full-width container.
    *
-   * tidy-span: tidy-var(columns);
+   * Because I am using a breakpoint configuration to set up two distinct
+   * Tidy Columns configurations, the declaration must be re-declared within
+   * the breakpoint to ensure the correct values are used in the calculation.
+   *
+   * Append !tidy to the declaration to automatically duplicate it inside the
+   * configuration's breakpoints.
+   *
+   * When compiling from Sass, you are required to escape the exclamation: \!tidy
+   *
+   * tidy-span: tidy-var(columns) !tidy;
    */
-  tidy-span: tidy-var(columns);
+  tidy-span: tidy-var(columns) \!tidy;
 
   @media (min(lg)) {
     align-items: center;
     flex-wrap: nowrap;
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: tidy-var(edge) 0;
-     * tidy-span: tidy-var(columns);
-     */
-    padding: tidy-var(edge) 0;
-    tidy-span: tidy-var(columns);
   }
 }
 
@@ -78,26 +85,24 @@
   margin: 0 0 rem(16) 0;
   /**
    * Using the `tidy-var()` to get a config value to keep the button edge
-   * padding consistent with any other horizontal spacing.
+   * padding consistent across screen sizes with any other horizontal spacing.
    *
-   * padding: 0 tidy-var(edge);
+   * Because I am using a breakpoint configuration to set up two distinct
+   * Tidy Columns configurations, the declaration must be re-declared within
+   * the breakpoint to ensure the correct values are used in the calculation.
+   *
+   * Append !tidy to the declaration to automatically duplicate it inside the
+   * configuration's breakpoints.
+   *
+   * When compiling from Sass, you are required to escape the exclamation: \!tidy
+   *
+   * padding: 0 tidy-var(edge) !tidy;
    */
-  padding: 0 tidy-var(edge);
+  padding: 0 tidy-var(edge) \!tidy;
 
   @media (min(lg)) {
     font-size: rem(16);
     margin-bottom: 0;
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: 0 tidy-var(edge);
-     */
-    padding: 0 tidy-var(edge);
   }
 }
 

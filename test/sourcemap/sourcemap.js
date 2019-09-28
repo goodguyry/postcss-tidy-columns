@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const path = require('path');
-const { typical } = require('../sharedConfigs');
+const { typical, typicalWithBreakpoints } = require('../sharedConfigs');
 
 module.exports = [
   {
@@ -101,6 +101,26 @@ module.exports = [
     fixtures: {
       from: path.join(__dirname, 'function-span.css'),
       to: path.join(__dirname, 'function-span.generated.css'),
+    },
+  },
+  {
+    description: 'Sourcemap fixture: propagation.css',
+    options: typicalWithBreakpoints,
+    map: {
+      version: 3,
+      sources: [
+        'propagation.css',
+      ],
+      names: [],
+      mappings: 'AAAA;CACC,uEAAmB;CACnB;AAFD;CAAA;EACC,wEAAmB;EACnB;CAAA;AAFD;CAAA;EACC,wEAAmB;EAAnB,4EAAmB;EACnB;CAAA',
+      file: 'propagation.generated.css',
+      sourcesContent: [
+        'div {\n\ttidy-span: 2 !tidy;\n}\n',
+      ],
+    },
+    fixtures: {
+      from: path.join(__dirname, 'propagation.css'),
+      to: path.join(__dirname, 'propagation.generated.css'),
     },
   },
 ];
