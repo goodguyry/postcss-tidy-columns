@@ -41,7 +41,8 @@
     "build:parser": "jison lib/postcss-calc/src/parser.jison -o lib/parser.js"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": ["<rootDir>/lib/postcss-calc/"]
   },
   "files": [
     "/*.js",
