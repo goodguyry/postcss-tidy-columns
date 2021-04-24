@@ -1,4 +1,5 @@
 const { CUSTOM_PROP_REGEX } = require('./src/collectTidyRuleParams');
+const ROUNDING_PRECISION = require('./lib/roundingPrecision');
 
 /**
  * Columns class
@@ -15,7 +16,7 @@ class Columns {
    *
    * @return {Number}
    */
-  static roundToPrecision(toRound, decimalPlaces) {
+  static roundToPrecision(toRound, decimalPlaces = ROUNDING_PRECISION) {
     const precision = `1${'0'.repeat(decimalPlaces)}`;
 
     return (0 === toRound) ? 0 : Math.round((toRound + 0.00001) * precision) / precision;
@@ -81,7 +82,7 @@ class Columns {
       const [value, units] = this.constructor.splitCssUnit(gap);
       const sharedGap = (value / columns) * (columns - 1);
 
-      return `${this.constructor.roundToPrecision(sharedGap, 4)}${units}`;
+      return `${this.constructor.roundToPrecision(sharedGap)}${units}`;
     }
 
     return 0;
