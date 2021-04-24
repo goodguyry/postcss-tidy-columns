@@ -2,7 +2,7 @@
 
 [PostCSS] plugin to manage column alignment.
 
-Tidy Columns sets widths and margins, based on a user-defined configuration, with the goal that any elements along the vertical axis that should be aligned, are. 
+Tidy Columns creates a global grid, allowing authors to set widths and margins while maintaining alignment along the y-axis.
 
 **This plugin will not set layout for you. Layout is *your* job**.
 
@@ -20,12 +20,12 @@ npm install postcss-tidy-columns
 require('postcss-tidy-columns')({
   columns: 12,
   gap: '1.25rem',
-  edge: '2rem',
-  siteMax: '90rem',
+  edge: '1.875rem',
+  siteMax: '80rem',
 });
 ```
 
-```css
+```scss
 /* Input example, using the above plugins options */
 div {
   tidy-span: 3;
@@ -33,17 +33,17 @@ div {
 }
 ```
 
-```css
+```scss
 /* Output example */
 div {
-  width: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-  max-width: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-  margin-left: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+  width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
 }
 
-@media (min-width: 90rem) {
+@media (min-width: 80rem) {
   div {
-    margin-left: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+    margin-left: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
   }
 }
 ```
@@ -200,6 +200,7 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
 |[`debug`](#debug)|`{Boolean}`|`false`|Add debug comments.|
 |[`breakpoints`](#breakpoints)|`{Object}`|`{}`|Breakpoint-specific configuration options.|
+|[`reduce`](#reduce)|`{Boolean}`|`false`| Reduce `calc()` functions using [postcss-calc](https://github.com/postcss/postcss-calc).|
 
 _As an alternative to the [PostCSS] JavaScript API, some options may also be passed via stylesheet `@tidy` at-rules._
 
@@ -256,11 +257,11 @@ Supports any positive integer of unit [`px`|`em`|`rem`].
 
 Set `debug` to `true` to maintain the pre-processed CSS declaration as a comment.
 
-```css
+```scss
 div {
   /* tidy-span: 3 */
-  width: calc((((100vw - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-  max-width: calc((((90rem - 2rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  width: calc(25vw - 1.8749rem);
+  max-width: 18.1251rem;
 }
 ```
 
@@ -289,14 +290,35 @@ require('postcss-tidy-columns')({
       gap: '1rem'
     },
     '64rem': {
-      edge: '1.25rem',
-      siteMax: '90rem'
+      edge: '1.875rem',
+      siteMax: '80rem'
+      gap: '1.25rem',
     }
   },
 });
 ```
 
 See the [Scoped Settings](https://github.com/goodguyry/postcss-tidy-columns/wiki/Scoped-Settings) Wiki page for more.
+
+### `reduce`
+
+Set `reduce` to `true` to simplify the calc output using [postcss-calc](https://github.com/postcss/postcss-calc).
+
+```scss
+/* Before reduce */
+div {
+  width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+  max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
+}
+```
+
+```scss
+/* After reduce */
+div {
+  width: calc(25vw - 1.8749rem);
+  max-width: 18.1251rem;
+}
+```
 
 ## Options Cascade
 
