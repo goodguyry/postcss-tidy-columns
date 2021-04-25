@@ -185,16 +185,16 @@ testColumnsMethod({
       description: 'All options: three columns',
       actual: new Columns(allValues).spanCalc(4),
       expected: {
-        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 4) + 0.625rem * 3)',
-        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 4) + 0.625rem * 3)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 4) + 1.875rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 4) + 1.875rem)',
       },
     },
     {
       description: 'All options: negative columns',
       actual: new Columns(allValues).spanCalc(-4),
       expected: {
-        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * -4) + 0.625rem * -3)',
-        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * -4) + 0.625rem * -3)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * -4) + -1.875rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * -4) + -1.875rem)',
       },
     },
     {
@@ -217,8 +217,8 @@ testColumnsMethod({
       description: 'All options: fractional columns (greater than 2)',
       actual: new Columns(allValues).spanCalc(2.5),
       expected: {
-        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)',
-        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2.5) + 1.25rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2.5) + 1.25rem)',
       },
     },
     // ---------- No siteMax
@@ -334,24 +334,24 @@ testColumnsMethod({
       description: 'All options: two columns',
       actual: new Columns(allValues).offsetCalc(2),
       expected: {
-        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2) + 0.625rem * 2)',
-        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2) + 0.625rem * 2)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2) + 1.25rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2) + 1.25rem)',
       },
     },
     {
       description: 'All options: three columns',
       actual: new Columns(allValues).offsetCalc(3),
       expected: {
-        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 3) + 0.625rem * 3)',
-        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 3) + 0.625rem * 3)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 3) + 1.875rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 3) + 1.875rem)',
       },
     },
     {
       description: 'All options: negative columns',
       actual: new Columns(allValues).offsetCalc(-4),
       expected: {
-        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * -4) + 0.625rem * -4)',
-        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * -4) + 0.625rem * -4)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * -4) + -2.5rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * -4) + -2.5rem)',
       },
     },
     {
@@ -374,8 +374,8 @@ testColumnsMethod({
       description: 'All options: fractional columns (greater than 2)',
       actual: new Columns(allValues).offsetCalc(2.075),
       expected: {
-        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
-        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2.075) + 1.25rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2.075) + 1.25rem)',
       },
     },
     // ---------- No siteMax

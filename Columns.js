@@ -154,12 +154,20 @@ class Columns {
       cssCalcEquation = `(${cssCalcEquation}) * ${colSpan}`;
     }
 
-    /**
-     * Check for gaps before adding the math for them.
-     * Only multiply gaps if there are more than one.
-     */
+    // Check for gaps before adding the math for them.
     if (!this.nonValues.includes(gap) && !this.nonValues.includes(gapSpan)) {
-      const gapSpanCalc = (1 === gapSpan) ? gap : `${gap} * ${gapSpan}`;
+      let gapSpanCalc = gap;
+
+      // Only multiply gaps if there are more or fewer than one.
+      if (1 !== gapSpan) {
+        if (CUSTOM_PROP_REGEX.test(gap)) {
+          // Don't reduce math for Custom Properties.
+          gapSpanCalc = `${gap} * ${gapSpan}`;
+        } else {
+          const [value, units] = this.constructor.splitCssUnit(gap);
+          gapSpanCalc = `${value * gapSpan}${units}`;
+        }
+      }
 
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
     }
