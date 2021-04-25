@@ -39,8 +39,8 @@ const testColumnsMethod = (testConfig) => {
 
     test.each(reducedTests)(
       '%s',
-      (theTest) => {
-        expect(theTest.actual).toEqual(theTest.expected);
+      (theTest, actual, expected) => {
+        expect(actual).toEqual(expected);
       },
     );
   });
