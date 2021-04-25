@@ -11,9 +11,9 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'The `tidy-offset-left` property is replaced.',
     () => run(
       'div { tidy-offset-left: 1; }',
-      `div { margin-left: calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }
+      `div { margin-left: calc(((100vw - 1.25rem) / 12 - 1.1458rem) + 1.25rem); }
 @media (min-width: 90rem) {
- div { margin-left: calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); } }`,
+ div { margin-left: calc(((90rem - 1.25rem) / 12 - 1.1458rem) + 1.25rem); } }`,
       typical,
     ),
   );
@@ -22,9 +22,9 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'The `tidy-offset-right` property is replaced.',
     () => run(
       'div { tidy-offset-right: 2; }',
-      `div { margin-right: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2); }
+      `div { margin-right: calc((((100vw - 1.25rem) / 12 - 1.1458rem) * 2) + 1.25rem * 2); }
 @media (min-width: 90rem) {
- div { margin-right: calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2); } }`,
+ div { margin-right: calc((((90rem - 1.25rem) / 12 - 1.1458rem) * 2) + 1.25rem * 2); } }`,
       typical,
     ),
   );
@@ -33,7 +33,7 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'Offsets without a `siteMax` do not output a media query',
     () => run(
       'div { tidy-offset-right: 2; }',
-      'div { margin-right: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px * 2); }',
+      'div { margin-right: calc((((100vw - 2rem) / 12 - 9.1667px) * 2) + 10px * 2); }',
       edgeGap,
     ),
   );
@@ -42,7 +42,7 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'Maintains `tidy-offset-right` input as a /* comment */',
     () => run(
       'div { tidy-offset-right: 2; }',
-      'div { /* tidy-offset-right: 2 */ margin-right: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px * 2); }',
+      'div { /* tidy-offset-right: 2 */ margin-right: calc((((100vw - 2rem) / 12 - 9.1667px) * 2) + 10px * 2); }',
       { ...edgeGap, debug: true },
     ),
   );
@@ -53,7 +53,7 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'The `tidy-span` property is replaced.',
     () => run(
       'div { tidy-span: 2; }',
-      'div { width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem); max-width: calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem); }',
+      'div { width: calc((((100vw - 1.25rem) / 12 - 1.1458rem) * 2) + 1.25rem); max-width: calc((((90rem - 1.25rem) / 12 - 1.1458rem) * 2) + 1.25rem); }',
       typical,
     ),
   );
@@ -62,7 +62,7 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'Spans without a `siteMax` do not output a `max-width` declaration',
     () => run(
       'div { tidy-span: 2; }',
-      'div { width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
+      'div { width: calc((((100vw - 2rem) / 12 - 9.1667px) * 2) + 10px); }',
       edgeGap,
     ),
   );
@@ -71,7 +71,7 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'The `tidy-span` property is not influenced by other declarations',
     () => run(
       'div { margin-left: calc(tidy-offset(10) + tidy-var(edge)); tidy-span: 2; }',
-      'div { margin-left: calc(((((100vw - 32px * 2) / 16 - 0.5859rem) * 10) + 0.625rem * 10) + 32px); width: calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem); max-width: calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem); }',
+      'div { margin-left: calc(((((100vw - 64px) / 16 - 0.5859rem) * 10) + 0.625rem * 10) + 32px); width: calc((((100vw - 64px) / 16 - 0.5859rem) * 2) + 0.625rem); max-width: calc((((75rem - 64px) / 16 - 0.5859rem) * 2) + 0.625rem); }',
       allValues,
     ),
   );
@@ -80,7 +80,7 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'Maintains `tidy-span` input as a /* comment */',
     () => run(
       'div { tidy-span: 2; }',
-      'div { /* tidy-span: 2 */ width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
+      'div { /* tidy-span: 2 */ width: calc((((100vw - 2rem) / 12 - 9.1667px) * 2) + 10px); }',
       { ...edgeGap, debug: true },
     ),
   );
@@ -89,7 +89,7 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'Maintains `tidy-span` input as a /* comment */ via `@tidy debug` atRule',
     () => run(
       'div { @tidy debug true; tidy-span: 2; }',
-      'div { /* tidy-span: 2 */ width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
+      'div { /* tidy-span: 2 */ width: calc((((100vw - 2rem) / 12 - 9.1667px) * 2) + 10px); }',
       edgeGap,
     ),
   );

@@ -169,56 +169,56 @@ testColumnsMethod({
       description: 'All options: single column',
       actual: new Columns(allValues).spanCalc(1),
       expected: {
-        fluid: 'calc((100vw - 32px * 2) / 16 - 0.5859rem)',
-        full: 'calc((75rem - 32px * 2) / 16 - 0.5859rem)',
+        fluid: 'calc((100vw - 64px) / 16 - 0.5859rem)',
+        full: 'calc((75rem - 64px) / 16 - 0.5859rem)',
       },
     },
     {
       description: 'All options: two columns',
       actual: new Columns(allValues).spanCalc(2),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2) + 0.625rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2) + 0.625rem)',
       },
     },
     {
       description: 'All options: three columns',
       actual: new Columns(allValues).spanCalc(4),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 4) + 0.625rem * 3)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 4) + 0.625rem * 3)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 4) + 0.625rem * 3)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 4) + 0.625rem * 3)',
       },
     },
     {
       description: 'All options: negative columns',
       actual: new Columns(allValues).spanCalc(-4),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -3)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -3)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * -4) + 0.625rem * -3)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * -4) + 0.625rem * -3)',
       },
     },
     {
       description: 'All options: fractional columns (less than 1)',
       actual: new Columns(allValues).spanCalc(0.5),
       expected: {
-        fluid: 'calc(((100vw - 32px * 2) / 16 - 0.5859rem) * 0.5)',
-        full: 'calc(((75rem - 32px * 2) / 16 - 0.5859rem) * 0.5)',
+        fluid: 'calc(((100vw - 64px) / 16 - 0.5859rem) * 0.5)',
+        full: 'calc(((75rem - 64px) / 16 - 0.5859rem) * 0.5)',
       },
     },
     {
       description: 'All options: fractional columns (greater than 1)',
       actual: new Columns(allValues).spanCalc(1.75),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 1.75) + 0.625rem)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 1.75) + 0.625rem)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 1.75) + 0.625rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 1.75) + 0.625rem)',
       },
     },
     {
       description: 'All options: fractional columns (greater than 2)',
       actual: new Columns(allValues).spanCalc(2.5),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)',
       },
     },
     // ---------- No siteMax
@@ -226,7 +226,7 @@ testColumnsMethod({
       description: 'Omits a `full` value with no `siteMax` option',
       actual: new Columns(edgeGap).spanCalc(1),
       expected: {
-        fluid: 'calc((100vw - 1rem * 2) / 12 - 9.1667px)',
+        fluid: 'calc((100vw - 2rem) / 12 - 9.1667px)',
       },
     },
     // ---------- No gap
@@ -234,16 +234,16 @@ testColumnsMethod({
       description: 'Omits shared gap for single column with no `gap` option',
       actual: new Columns(edgeSiteMax).spanCalc(1),
       expected: {
-        fluid: 'calc((100vw - 1.25rem * 2) / 16)',
-        full: 'calc((1024px - 1.25rem * 2) / 16)',
+        fluid: 'calc((100vw - 2.5rem) / 16)',
+        full: 'calc((1024px - 2.5rem) / 16)',
       },
     },
     {
       description: 'Omits the gap addition wtih no `gap` option',
       actual: new Columns(edgeSiteMax).spanCalc(2),
       expected: {
-        fluid: 'calc(((100vw - 1.25rem * 2) / 16) * 2)',
-        full: 'calc(((1024px - 1.25rem * 2) / 16) * 2)',
+        fluid: 'calc(((100vw - 2.5rem) / 16) * 2)',
+        full: 'calc(((1024px - 2.5rem) / 16) * 2)',
       },
     },
     // ---------- No edge
@@ -260,7 +260,7 @@ testColumnsMethod({
       description: 'Omits undeclared values from span ouput: `edge` only',
       actual: new Columns(edgeOnly).spanCalc(1),
       expected: {
-        fluid: 'calc((100vw - 20px * 2) / 12)',
+        fluid: 'calc((100vw - 40px) / 12)',
       },
     },
     // ---------- Gap only
@@ -326,56 +326,56 @@ testColumnsMethod({
       description: 'All options: single column',
       actual: new Columns(allValues).offsetCalc(1),
       expected: {
-        fluid: 'calc(((100vw - 32px * 2) / 16 - 0.5859rem) + 0.625rem)',
-        full: 'calc(((75rem - 32px * 2) / 16 - 0.5859rem) + 0.625rem)',
+        fluid: 'calc(((100vw - 64px) / 16 - 0.5859rem) + 0.625rem)',
+        full: 'calc(((75rem - 64px) / 16 - 0.5859rem) + 0.625rem)',
       },
     },
     {
       description: 'All options: two columns',
       actual: new Columns(allValues).offsetCalc(2),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem * 2)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem * 2)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2) + 0.625rem * 2)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2) + 0.625rem * 2)',
       },
     },
     {
       description: 'All options: three columns',
       actual: new Columns(allValues).offsetCalc(3),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 3)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 3)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 3) + 0.625rem * 3)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 3) + 0.625rem * 3)',
       },
     },
     {
       description: 'All options: negative columns',
       actual: new Columns(allValues).offsetCalc(-4),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -4)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -4)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * -4) + 0.625rem * -4)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * -4) + 0.625rem * -4)',
       },
     },
     {
       description: 'All options: fractional columns (less than 1)',
       actual: new Columns(allValues).offsetCalc(0.75),
       expected: {
-        fluid: 'calc(((100vw - 32px * 2) / 16 - 0.5859rem) * 0.75)',
-        full: 'calc(((75rem - 32px * 2) / 16 - 0.5859rem) * 0.75)',
+        fluid: 'calc(((100vw - 64px) / 16 - 0.5859rem) * 0.75)',
+        full: 'calc(((75rem - 64px) / 16 - 0.5859rem) * 0.75)',
       },
     },
     {
       description: 'All options: fractional columns (greater than 1)',
       actual: new Columns(allValues).offsetCalc(1.5),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 1.5) + 0.625rem)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 1.5) + 0.625rem)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 1.5) + 0.625rem)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 1.5) + 0.625rem)',
       },
     },
     {
       description: 'All options: fractional columns (greater than 2)',
       actual: new Columns(allValues).offsetCalc(2.075),
       expected: {
-        fluid: 'calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
-        full: 'calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
+        fluid: 'calc((((100vw - 64px) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
+        full: 'calc((((75rem - 64px) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
       },
     },
     // ---------- No siteMax
@@ -383,7 +383,7 @@ testColumnsMethod({
       description: 'Omits a `full` value with no `siteMax` option',
       actual: new Columns(edgeGap).offsetCalc(1),
       expected: {
-        fluid: 'calc(((100vw - 1rem * 2) / 12 - 9.1667px) + 10px)',
+        fluid: 'calc(((100vw - 2rem) / 12 - 9.1667px) + 10px)',
       },
     },
     // ---------- No gap
@@ -391,16 +391,16 @@ testColumnsMethod({
       description: 'Omits shared gap for single column with no `gap` option',
       actual: new Columns(edgeSiteMax).offsetCalc(1),
       expected: {
-        fluid: 'calc((100vw - 1.25rem * 2) / 16)',
-        full: 'calc((1024px - 1.25rem * 2) / 16)',
+        fluid: 'calc((100vw - 2.5rem) / 16)',
+        full: 'calc((1024px - 2.5rem) / 16)',
       },
     },
     {
       description: 'Omits the gap addition wtih no `gap` option',
       actual: new Columns(edgeSiteMax).offsetCalc(2),
       expected: {
-        fluid: 'calc(((100vw - 1.25rem * 2) / 16) * 2)',
-        full: 'calc(((1024px - 1.25rem * 2) / 16) * 2)',
+        fluid: 'calc(((100vw - 2.5rem) / 16) * 2)',
+        full: 'calc(((1024px - 2.5rem) / 16) * 2)',
       },
     },
     // ---------- No edge
@@ -417,14 +417,14 @@ testColumnsMethod({
       description: 'Omits undeclared values from span ouput: `edge` only',
       actual: new Columns(edgeOnly).offsetCalc(1),
       expected: {
-        fluid: 'calc((100vw - 20px * 2) / 12)',
+        fluid: 'calc((100vw - 40px) / 12)',
       },
     },
     {
       description: 'Omits undeclared values from span ouput: `edge` only (multiple columns)',
       actual: new Columns(edgeOnly).offsetCalc(2),
       expected: {
-        fluid: 'calc(((100vw - 20px * 2) / 12) * 2)',
+        fluid: 'calc(((100vw - 40px) / 12) * 2)',
       },
     },
     // ---------- Gap only

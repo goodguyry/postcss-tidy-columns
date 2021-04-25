@@ -96,7 +96,20 @@ class Columns {
   getEdges() {
     const { edge } = this.options;
 
-    return this.nonValues.includes(edge) ? 0 : `${edge} * 2`;
+    // Force `0` for missing or invalid values.
+    if (this.nonValues.includes(edge)) {
+      return 0;
+    }
+
+    // Don't reduce math for Custom Properties.
+    if (CUSTOM_PROP_REGEX.test(edge)) {
+      return `${edge} * 2`;
+    }
+
+    const [value, units] = this.constructor.splitCssUnit(edge);
+    const product = (value * 2);
+
+    return `${product}${units}`;
   }
 
   /**
