@@ -35,6 +35,17 @@ class Columns {
       : value;
   }
 
+  /**
+   * Returns true if the value is a CSS Custom Property.
+   *
+   * @param {String} value A CSS property value.
+   *
+   * @return {Boolean}
+   */
+  static isCustomProperty(value) {
+    return CUSTOM_PROP_REGEX.test(value);
+  }
+
   constructor(options = {}) {
     this.options = options;
 
@@ -74,7 +85,7 @@ class Columns {
   getSharedGap() {
     const { gap, columns } = this.options;
 
-    if (CUSTOM_PROP_REGEX.test(gap)) {
+    if (this.constructor.isCustomProperty(gap)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
     }
 
@@ -102,7 +113,7 @@ class Columns {
     }
 
     // Don't reduce math for Custom Properties.
-    if (CUSTOM_PROP_REGEX.test(edge)) {
+    if (this.constructor.isCustomProperty(edge)) {
       return `${edge} * 2`;
     }
 
@@ -160,7 +171,7 @@ class Columns {
 
       // Only multiply gaps if there are more or fewer than one.
       if (1 !== gapSpan) {
-        if (CUSTOM_PROP_REGEX.test(gap)) {
+        if (this.constructor.isCustomProperty(gap)) {
           // Don't reduce math for Custom Properties.
           gapSpanCalc = `${gap} * ${gapSpan}`;
         } else {
