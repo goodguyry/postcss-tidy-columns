@@ -159,6 +159,40 @@ testColumnsMethod({
 });
 
 /**
+ * Check if the values have the same units.
+ */
+testColumnsMethod({
+  description: 'Check if the values have the same units',
+  tests: [
+    {
+      description: 'vw & px',
+      actual: Columns.haveSameValues('vw', 'px'),
+      expected: false,
+    },
+    {
+      description: 'rem & rem',
+      actual: Columns.haveSameValues('rem', 'rem'),
+      expected: 'rem',
+    },
+    {
+      description: 'px & rem & vw',
+      actual: Columns.haveSameValues('px', 'rem', 'vw'),
+      expected: false,
+    },
+    {
+      description: 'rem & em',
+      actual: Columns.haveSameValues('rem', 'em'),
+      expected: false,
+    },
+    {
+      description: 'none & none',
+      actual: Columns.haveSameValues(undefined, undefined),
+      expected: false,
+    },
+  ],
+});
+
+/**
  * Create the column `calc()` function declaration for each siteMax.
  */
 testColumnsMethod({

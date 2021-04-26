@@ -36,6 +36,20 @@ class Columns {
   }
 
   /**
+   * Check for matching units.
+   *
+   * @param {Arguments} units Argument list of units to check.
+   *
+   * @return {String}
+   */
+  static haveSameValues(...units) {
+    const set = new Set(units);
+    const { value } = set.values().next();
+
+    return (1 === set.size && undefined !== value) ? value : false;
+  }
+
+  /**
    * Returns true if the value is a CSS Custom Property.
    *
    * @param {String} value A CSS property value.
