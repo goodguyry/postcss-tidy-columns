@@ -36,14 +36,14 @@ div {
 ```scss
 /* Output example */
 div {
-  width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-  max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-  margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+  width: calc(25vw - 0.9375rem - 3.4374rem + 2.5rem);
+  max-width: 18.1251rem;
+  margin-left: calc(16.6667vw - 0.625rem - 2.2916rem + 2.5rem);
 }
 
 @media (min-width: 80rem) {
   div {
-    margin-left: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+    margin-left: 12.9167rem;
   }
 }
 ```
@@ -200,7 +200,6 @@ When using these functions, **the `siteMax`-based static value will not be outpu
 |[`edge`](#edge)|`{String}`|`undefined`|The value of the site's edge padding.|
 |[`debug`](#debug)|`{Boolean}`|`false`|Add debug comments.|
 |[`breakpoints`](#breakpoints)|`{Object}`|`{}`|Breakpoint-specific configuration options.|
-|[`reduce`](#reduce)|`{Boolean}`|`false`| Reduce `calc()` functions using [postcss-calc](https://github.com/postcss/postcss-calc).|
 
 _As an alternative to the [PostCSS] JavaScript API, some options may also be passed via stylesheet `@tidy` at-rules._
 
@@ -260,7 +259,7 @@ Set `debug` to `true` to maintain the pre-processed CSS declaration as a comment
 ```scss
 div {
   /* tidy-span: 3 */
-  width: calc(25vw - 1.8749rem);
+  width: calc(25vw - 0.9375rem - 3.4374rem + 2.5rem);
   max-width: 18.1251rem;
 }
 ```
@@ -299,26 +298,6 @@ require('postcss-tidy-columns')({
 ```
 
 See the [Scoped Settings](https://github.com/goodguyry/postcss-tidy-columns/wiki/Scoped-Settings) Wiki page for more.
-
-### `reduce`
-
-Set `reduce` to `true` to simplify the calc output using [postcss-calc](https://github.com/postcss/postcss-calc).
-
-```scss
-/* Before reduce */
-div {
-  width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-  max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-}
-```
-
-```scss
-/* After reduce */
-div {
-  width: calc(25vw - 1.8749rem);
-  max-width: 18.1251rem;
-}
-```
 
 ## Options Cascade
 
