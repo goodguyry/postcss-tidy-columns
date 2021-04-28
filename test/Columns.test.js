@@ -193,6 +193,51 @@ testColumnsMethod({
 });
 
 /**
+ * Test reducing calc functions.
+ */
+testColumnsMethod({
+  description: 'Reduce calculations',
+  tests: [
+    {
+      description: 'All options: Span six columns',
+      actual: new Columns(allValues).spanCalc(6),
+      expected: {
+        // calc((((100vw - 64px) / 16 - 0.5859rem) * 6) + 3.125rem)
+        fluid: 'calc(37.5vw - 24px - 3.5154rem + 3.125rem)',
+        // calc((((75rem - 64px) / 16 - 0.5859rem) * 6) + 3.125rem)
+        full: 'calc(28.125rem - 24px - 3.5154rem + 3.125rem)', // calc(27.7346rem - 24px)
+      },
+    },
+    {
+      description: 'All options: Offset two columns',
+      actual: new Columns(allValues).offsetCalc(2),
+      expected: {
+        // calc((((100vw - 64px) / 16 - 0.5859rem) * 2) + 1.25rem)
+        fluid: 'calc(12.5vw - 8px - 1.1718rem + 1.25rem)',
+        // calc((((75rem - 64px) / 16 - 0.5859rem) * 2) + 1.25rem)
+        full: 'calc(9.375rem - 8px - 1.1718rem + 1.25rem)', // calc(9.4532rem - 8px)
+      },
+    },
+    {
+      description: 'Custom properties used in option values',
+      actual: new Columns(customProperties).spanCalc(3),
+      expected: {
+        fluid: 'calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)',
+        full: 'calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)',
+      },
+    },
+    {
+      description: 'Custom properties used in option values',
+      actual: new Columns(customProperties).offsetCalc(3),
+      expected: {
+        fluid: 'calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)',
+        full: 'calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)',
+      },
+    },
+  ],
+});
+
+/**
  * Create the column `calc()` function declaration for each siteMax.
  */
 testColumnsMethod({
