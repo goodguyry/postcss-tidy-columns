@@ -169,18 +169,47 @@ class Columns {
    * @return {String}
    */
   buildCalcFunction(siteMax, colSpan, gapSpan) {
-    const { gap } = this.options;
+    const { gap, edge, columns } = this.options;
+    const expressions = [];
+    let cssCalcEquation = '';
+    const hasCustomProperty = this.constructor.isCustomProperty(gap)
+      || this.constructor.isCustomProperty(edge)
+      || this.constructor.isCustomProperty(columns);
 
-    // The base calc() equation.
-    let cssCalcEquation = this.getSingleColumn(siteMax);
+    if (hasCustomProperty) {
+      // The base calc() equation.
+      cssCalcEquation = this.getSingleColumn(siteMax);
 
-    // Only multiply columns if there are more than one.
-    if (1 !== colSpan) {
-      cssCalcEquation = `(${cssCalcEquation}) * ${colSpan}`;
+      // Only multiply columns if there are more than one.
+      if (1 !== colSpan) {
+        cssCalcEquation = `(${cssCalcEquation}) * ${colSpan}`;
+      }
+    } else {
+      const theProduct = value => value * colSpan;
+
+      const [siteMaxValue, siteMaxUnits] = this.constructor.splitCssUnit(siteMax);
+      expressions.push(`${theProduct(siteMaxValue / columns)}${siteMaxUnits}`);
+
+      if (!this.nonValues.includes(this.edges)) {
+        const [edgesValue, edgesUnits] = this.constructor.splitCssUnit(this.edges);
+        const edges = this.constructor.roundToPrecision(theProduct(edgesValue / columns));
+        expressions.push(`${edges}${edgesUnits}`);
+      }
+
+      if (this.sharedGap) {
+        const [sharedGapValue, sharedGapUnits] = this.constructor.splitCssUnit(this.sharedGap);
+        const gaps = this.constructor.roundToPrecision(theProduct(sharedGapValue));
+        expressions.push(`${gaps}${sharedGapUnits}`);
+      }
+
+      cssCalcEquation = expressions.join(' - ');
     }
 
+    // Capture the array intersect.
+    const filteredArray = [gap, gapSpan].filter(value => this.nonValues.includes(value));
+
     // Check for gaps before adding the math for them.
-    if (!this.nonValues.includes(gap) && !this.nonValues.includes(gapSpan)) {
+    if (filteredArray.length < 1) {
       let gapSpanCalc = gap;
 
       // Only multiply gaps if there are more or fewer than one.
@@ -194,7 +223,10 @@ class Columns {
         }
       }
 
-      cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
+      // Format differs when we're outputting Custom Properties.
+      cssCalcEquation = hasCustomProperty
+        ? `(${cssCalcEquation}) + ${gapSpanCalc}`
+        : `${cssCalcEquation} + ${gapSpanCalc}`;
     }
 
     return `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
