@@ -230,6 +230,38 @@ testColumnsMethod({
         },
       },
     },
+    {
+      description: 'Parse options: Custom properties',
+      actual: new Columns(customProperties).parseDeclarationOptions(),
+      expected: {
+        hasCustomProperty: true,
+        canReduce: false,
+        siteMax: {
+          raw: '90rem',
+          value: 90,
+          units: 'rem',
+          each: undefined,
+        },
+        gap: {
+          raw: 'var(--gap)',
+          value: undefined,
+          units: undefined,
+          each: undefined,
+        },
+        edge: {
+          raw: 'var(--edge)',
+          value: undefined,
+          units: undefined,
+          each: undefined,
+        },
+        columns: {
+          raw: 'var(--columns)',
+          value: undefined,
+          units: undefined,
+          each: undefined,
+        },
+      },
+    },
   ],
 });
 

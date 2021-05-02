@@ -172,12 +172,16 @@ class Columns {
     const parsedConfig = Object.keys(this.options).reduce((acc, key) => {
       const raw = this.options[key];
 
-      /*
-       * Check for CSS Custom Preoperties.
-       * Keep it false until it's true.
-       */
+      // Handle CSS Custom Preoperties.
       if (true === this.constructor.isCustomProperty(raw)) {
         acc.hasCustomProperty = true;
+
+        return {
+          ...acc,
+          [key]: {
+            raw,
+          },
+        };
       }
 
       const [value, units] = this.constructor.splitCssUnit(raw);
@@ -203,6 +207,7 @@ class Columns {
     }, { hasCustomProperty: false });
 
     const {
+      hasCustomProperty,
       columns: {
         raw: columns,
       },
@@ -211,25 +216,30 @@ class Columns {
       gap,
     } = parsedConfig;
 
-    // Get the per-column value for `siteMax`.
-    if (undefined !== siteMax) {
-      const { value, units } = siteMax;
-      const product = this.constructor.roundToPrecision((value / columns));
-      siteMax.each = `${product}${units}`;
-    }
+    // Get per-column values.
+    if (!hasCustomProperty) {
+      /*
+       * Even though `siteMax` can't be a Custom Property, we skip doing the
+       * `each` math; Custom Properties output a differently-formatted `calc()`
+       * function.
+       */
+      if (undefined !== siteMax) {
+        const { value, units } = siteMax;
+        const product = this.constructor.roundToPrecision((value / columns));
+        siteMax.each = `${product}${units}`;
+      }
 
-    // Get the per-column value for `edge`.
-    if (undefined !== edge) {
-      const { value, units } = edge;
-      const product = this.constructor.roundToPrecision(((value * 2) / columns));
-      edge.each = `${product}${units}`;
-    }
+      if (undefined !== edge) {
+        const { value, units } = edge;
+        const product = this.constructor.roundToPrecision(((value * 2) / columns));
+        edge.each = `${product}${units}`;
+      }
 
-    // Get the per-column value for `gap`.
-    if (undefined !== gap) {
-      const { value, units } = gap;
-      const product = this.constructor.roundToPrecision((value / columns) * (columns - 1));
-      gap.each = `${product}${units}`;
+      if (undefined !== gap) {
+        const { value, units } = gap;
+        const product = this.constructor.roundToPrecision((value / columns) * (columns - 1));
+        gap.each = `${product}${units}`;
+      }
     }
 
     // Get collectUnits values of items with more than on instance of the unit.
