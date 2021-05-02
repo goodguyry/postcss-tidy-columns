@@ -32,7 +32,7 @@ class Columns {
   static splitCssUnit(value) {
     return ('string' === typeof value)
       ? [parseFloat(value), value.replace(/[\d.]/g, '')]
-      : value;
+      : [value, undefined];
   }
 
   /**
@@ -70,11 +70,12 @@ class Columns {
     }
 
     this.fullWidthRule = null;
-    this.nonValues = [undefined, 0];
+    this.nonValues = [undefined, 0, '0'];
 
     // Bind class methods.
     this.getSharedGap = this.getSharedGap.bind(this);
     this.getEdges = this.getEdges.bind(this);
+    this.parseDeclarationOptions = this.parseDeclarationOptions.bind(this);
     this.getSingleColumn = this.getSingleColumn.bind(this);
     this.buildCalcFunction = this.buildCalcFunction.bind(this);
     this.spanCalc = this.spanCalc.bind(this);
@@ -157,6 +158,103 @@ class Columns {
       : `${columns}`;
 
     return `${siteMaxSize} / ${columnReduction}`;
+  }
+
+  /**
+   * Parse and collect the current option values.
+   *
+   * @return {Object} Parsed options.
+   */
+  parseDeclarationOptions() {
+    const collectedUnits = {};
+
+    // Get raw and parsed values for option properties.
+    const parsedConfig = Object.keys(this.options).reduce((acc, key) => {
+      const raw = this.options[key];
+
+      /*
+       * Check for CSS Custom Preoperties.
+       * Keep it false until it's true.
+       */
+      if (true === this.constructor.isCustomProperty(raw)) {
+        acc.hasCustomProperty = true;
+      }
+
+      const [value, units] = this.constructor.splitCssUnit(raw);
+
+      // Track how many of each unit values are found.
+      if (!this.nonValues.includes(value)) {
+        if (undefined === collectedUnits[units]) {
+          collectedUnits[units] = 0;
+        } else {
+          collectedUnits[units] += 1;
+        }
+      }
+
+      return {
+        ...acc,
+        [key]: {
+          raw,
+          value: this.nonValues.includes(value) ? 0 : value,
+          units,
+          each: undefined,
+        },
+      };
+    }, { hasCustomProperty: false });
+
+    const {
+      columns: {
+        raw: columns,
+      },
+      siteMax,
+      edge,
+      gap,
+    } = parsedConfig;
+
+    // Get the per-column value for `siteMax`.
+    if (undefined !== siteMax) {
+      const { value, units } = siteMax;
+      const product = this.constructor.roundToPrecision((value / columns));
+      siteMax.each = `${product}${units}`;
+    }
+
+    // Get the per-column value for `edge`.
+    if (undefined !== edge) {
+      const { value, units } = edge;
+      const product = this.constructor.roundToPrecision(((value * 2) / columns));
+      edge.each = `${product}${units}`;
+    }
+
+    // Get the per-column value for `gap`.
+    if (undefined !== gap) {
+      const { value, units } = gap;
+      const product = this.constructor.roundToPrecision((value / columns) * (columns - 1));
+      gap.each = `${product}${units}`;
+    }
+
+    // Get collectUnits values of items with more than on instance of the unit.
+    let canReduce = false;
+    const filteredUnits = Object.keys(collectedUnits).filter(key => 0 < collectedUnits[key]);
+
+    /*
+     * If there are no Custom Properties and no `vw` units, check for unit
+     * value(s) used more than once.
+     */
+    if (
+      !parsedConfig.hasCustomProperty
+      && (undefined === collectedUnits.vw)
+      && (0 < filteredUnits.length)
+    ) {
+      canReduce = filteredUnits;
+    }
+
+    return {
+      canReduce,
+      ...parsedConfig,
+      siteMax,
+      edge,
+      gap,
+    };
   }
 
   /**
