@@ -193,6 +193,47 @@ testColumnsMethod({
 });
 
 /**
+ * Test parsing option values.
+ */
+testColumnsMethod({
+  description: 'Parse options for expressions',
+  tests: [
+    {
+      description: 'Parse options: allValues',
+      actual: new Columns(allValues).parseDeclarationOptions(),
+      expected: {
+        hasCustomProperty: false,
+        canReduce: ['rem'],
+        siteMax: {
+          raw: '75rem',
+          value: 75,
+          units: 'rem',
+          each: '4.6875rem', // (value / columns)
+        },
+        gap: {
+          raw: '0.625rem',
+          value: 0.625,
+          units: 'rem',
+          each: '0.5859rem', // (value / columns) * (columns - 1),
+        },
+        edge: {
+          raw: '32px',
+          value: 32,
+          units: 'px',
+          each: '4px', // ((value * 2) / columns)
+        },
+        columns: {
+          raw: 16,
+          value: 16,
+          units: undefined,
+          each: undefined,
+        },
+      },
+    },
+  ],
+});
+
+/**
  * Test reducing calc functions.
  */
 testColumnsMethod({
