@@ -224,21 +224,21 @@ class Columns {
        * function.
        */
       if (undefined !== siteMax) {
-        const { value, units } = siteMax;
+        const { value } = siteMax;
         const product = this.constructor.roundToPrecision((value / columns));
-        siteMax.each = `${product}${units}`;
+        siteMax.each = `${product}`;
       }
 
       if (undefined !== edge) {
-        const { value, units } = edge;
+        const { value } = edge;
         const product = this.constructor.roundToPrecision(((value * 2) / columns));
-        edge.each = `${product}${units}`;
+        edge.each = `${product}`;
       }
 
       if (undefined !== gap) {
-        const { value, units } = gap;
+        const { value } = gap;
         const product = this.constructor.roundToPrecision((value / columns) * (columns - 1));
-        gap.each = `${product}${units}`;
+        gap.each = `${product}`;
       }
     }
 

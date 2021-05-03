@@ -208,19 +208,19 @@ testColumnsMethod({
           raw: '75rem',
           value: 75,
           units: 'rem',
-          each: '4.6875rem', // (value / columns)
+          each: '4.6875', // (value / columns)
         },
         gap: {
           raw: '0.625rem',
           value: 0.625,
           units: 'rem',
-          each: '0.5859rem', // (value / columns) * (columns - 1),
+          each: '0.5859', // (value / columns) * (columns - 1),
         },
         edge: {
           raw: '32px',
           value: 32,
           units: 'px',
-          each: '4px', // ((value * 2) / columns)
+          each: '4', // ((value * 2) / columns)
         },
         columns: {
           raw: 16,
