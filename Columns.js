@@ -163,14 +163,18 @@ class Columns {
   /**
    * Parse and collect the current option values.
    *
+   * @todo Is there a way to parse out full and fluid siteMax by default and
+   * then use the siteMax passed in for property lookup.
+   *
    * @return {Object} Parsed options.
    */
-  parseDeclarationOptions() {
+  parseDeclarationOptions(siteMax) {
     const collectedUnits = {};
+    const options = { ...this.options, siteMax };
 
     // Get raw and parsed values for option properties.
-    const parsedConfig = Object.keys(this.options).reduce((acc, key) => {
-      const raw = this.options[key];
+    const parsedConfig = Object.keys(options).reduce((acc, key) => {
+      const raw = options[key];
 
       // Handle CSS Custom Preoperties.
       if (true === this.constructor.isCustomProperty(raw)) {
@@ -211,7 +215,7 @@ class Columns {
       columns: {
         raw: columns,
       },
-      siteMax,
+      siteMax: parsedSiteMax,
       edge,
       gap,
     } = parsedConfig;
@@ -219,14 +223,14 @@ class Columns {
     // Get per-column values.
     if (!hasCustomProperty) {
       /*
-       * Even though `siteMax` can't be a Custom Property, we skip doing the
+       * Even though `parsedSiteMax` can't be a Custom Property, we skip doing the
        * `each` math; Custom Properties output a differently-formatted `calc()`
        * function.
        */
-      if (undefined !== siteMax) {
-        const { value } = siteMax;
+      if (undefined !== parsedSiteMax) {
+        const { value } = parsedSiteMax;
         const product = this.constructor.roundToPrecision((value / columns));
-        siteMax.each = `${product}`;
+        parsedSiteMax.each = `${product}`;
       }
 
       if (undefined !== edge) {
@@ -261,7 +265,7 @@ class Columns {
     return {
       canReduce,
       ...parsedConfig,
-      siteMax,
+      siteMax: parsedSiteMax,
       edge,
       gap,
     };
@@ -277,12 +281,15 @@ class Columns {
    * @return {String}
    */
   buildCalcFunction(siteMax, colSpan, gapSpan) {
-    const { gap, edge, columns } = this.options;
+    const {
+      hasCustomProperty,
+      siteMax: parsedSiteMax,
+      edge,
+      gap,
+    } = this.parseDeclarationOptions(siteMax);
+
     const expressions = [];
     let cssCalcEquation = '';
-    const hasCustomProperty = this.constructor.isCustomProperty(gap)
-      || this.constructor.isCustomProperty(edge)
-      || this.constructor.isCustomProperty(columns);
 
     if (hasCustomProperty) {
       // The base calc() equation.
@@ -293,41 +300,43 @@ class Columns {
         cssCalcEquation = `(${cssCalcEquation}) * ${colSpan}`;
       }
     } else {
-      const theProduct = value => value * colSpan;
+      const theProduct = value => this.constructor.roundToPrecision(value * colSpan);
 
-      const [siteMaxValue, siteMaxUnits] = this.constructor.splitCssUnit(siteMax);
-      expressions.push(`${theProduct(siteMaxValue / columns)}${siteMaxUnits}`);
+      [parsedSiteMax, edge, gap].forEach((opt) => {
+        const {
+          raw,
+          units,
+          each,
+        } = opt;
 
-      if (!this.nonValues.includes(this.edges)) {
-        const [edgesValue, edgesUnits] = this.constructor.splitCssUnit(this.edges);
-        const edges = this.constructor.roundToPrecision(theProduct(edgesValue / columns));
-        expressions.push(`${edges}${edgesUnits}`);
-      }
-
-      if (this.sharedGap) {
-        const [sharedGapValue, sharedGapUnits] = this.constructor.splitCssUnit(this.sharedGap);
-        const gaps = this.constructor.roundToPrecision(theProduct(sharedGapValue));
-        expressions.push(`${gaps}${sharedGapUnits}`);
-      }
+        if (!this.nonValues.includes(raw)) {
+          expressions.push(`${theProduct(each)}${units}`);
+        }
+      });
 
       cssCalcEquation = expressions.join(' - ');
     }
 
+    const {
+      raw: gapRaw,
+      value: gapValue,
+      units: gapUnits,
+    } = gap;
+
     // Capture the array intersect.
-    const filteredArray = [gap, gapSpan].filter(value => this.nonValues.includes(value));
+    const filteredArray = [gapRaw, gapSpan].filter(theValue => this.nonValues.includes(theValue));
 
     // Check for gaps before adding the math for them.
     if (filteredArray.length < 1) {
-      let gapSpanCalc = gap;
+      let gapSpanCalc = gapRaw;
 
       // Only multiply gaps if there are more or fewer than one.
       if (1 !== gapSpan) {
-        if (this.constructor.isCustomProperty(gap)) {
+        if (this.constructor.isCustomProperty(gapRaw)) {
           // Don't reduce math for Custom Properties.
-          gapSpanCalc = `${gap} * ${gapSpan}`;
+          gapSpanCalc = `${gapRaw} * ${gapSpan}`;
         } else {
-          const [value, units] = this.constructor.splitCssUnit(gap);
-          gapSpanCalc = `${value * gapSpan}${units}`;
+          gapSpanCalc = `${gapValue * gapSpan}${gapUnits}`;
         }
       }
 

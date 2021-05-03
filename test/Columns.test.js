@@ -200,7 +200,7 @@ testColumnsMethod({
   tests: [
     {
       description: 'Parse options: allValues',
-      actual: new Columns(allValues).parseDeclarationOptions(),
+      actual: new Columns(allValues).parseDeclarationOptions('75rem'),
       expected: {
         hasCustomProperty: false,
         canReduce: ['rem'],
@@ -232,7 +232,7 @@ testColumnsMethod({
     },
     {
       description: 'Parse options: Custom properties',
-      actual: new Columns(customProperties).parseDeclarationOptions(),
+      actual: new Columns(customProperties).parseDeclarationOptions('90rem'),
       expected: {
         hasCustomProperty: true,
         canReduce: false,
