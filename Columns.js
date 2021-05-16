@@ -163,18 +163,41 @@ class Columns {
   /**
    * Parse and collect the current option values.
    *
-   * @todo Is there a way to parse out full and fluid siteMax by default and
-   * then use the siteMax passed in for property lookup.
-   *
    * @return {Object} Parsed options.
    */
-  parseDeclarationOptions(siteMax) {
+  parseDeclarationOptions() {
     const collectedUnits = {};
-    const options = { ...this.options, siteMax };
+    const [fluid, full] = this.siteMaxValues;
+    const options = { ...this.options, siteMax: { fluid, full } };
 
-    // Get raw and parsed values for option properties.
-    const parsedConfig = Object.keys(options).reduce((acc, key) => {
-      const raw = options[key];
+    /**
+     * Wrapper for reducing option values.
+     *
+     * @param  {Object} obj     The option values to reduce.
+     * @param  {Object} initial The reduce method's initial value.
+     * @return {Object}         The reduced options object.
+     */
+    const reducer = (obj, initial = {}) => Object.keys(obj).reduce((acc, key) => {
+      // Collect siteMax values separately.
+      if ('siteMax' === key) {
+        const { hasCustomProperty } = acc;
+
+        const {
+          fluid: _fluid,
+          full: _full,
+        } = reducer(obj[key], { hasCustomProperty });
+
+        return {
+          ...acc,
+          hasCustomProperty,
+          siteMax: [
+            _fluid,
+            _full,
+          ],
+        };
+      }
+
+      const raw = obj[key];
 
       // Handle CSS Custom Preoperties.
       if (true === this.constructor.isCustomProperty(raw)) {
@@ -190,8 +213,9 @@ class Columns {
 
       const [value, units] = this.constructor.splitCssUnit(raw);
 
-      // Track how many of each unit values are found.
-      if (!this.nonValues.includes(value)) {
+      // For now we ignore 'vw' units.
+      if (!this.nonValues.includes(value) && ![undefined, 'vw'].includes(units)) {
+        // Track how many of each unit values are found.
         if (undefined === collectedUnits[units]) {
           collectedUnits[units] = 0;
         } else {
@@ -208,17 +232,21 @@ class Columns {
           each: undefined,
         },
       };
-    }, { hasCustomProperty: false });
+    }, initial);
+
+    // Get raw and parsed values for option properties.
+    const parsedConfig = reducer(options, { hasCustomProperty: false });
 
     const {
       hasCustomProperty,
       columns: {
         raw: columns,
       },
-      siteMax: parsedSiteMax,
       edge,
       gap,
     } = parsedConfig;
+
+    let { siteMax } = parsedConfig;
 
     // Get per-column values.
     if (!hasCustomProperty) {
@@ -227,10 +255,15 @@ class Columns {
        * `each` math; Custom Properties output a differently-formatted `calc()`
        * function.
        */
-      if (undefined !== parsedSiteMax) {
-        const { value } = parsedSiteMax;
-        const product = this.constructor.roundToPrecision((value / columns));
-        parsedSiteMax.each = `${product}`;
+      if (Array.isArray(siteMax) && 0 < siteMax.length) {
+        siteMax = siteMax.map((option) => {
+          const { value } = option;
+          const product = this.constructor.roundToPrecision((value / columns));
+          return {
+            ...option,
+            each: `${product}`,
+          };
+        });
       }
 
       if (undefined !== edge) {
@@ -251,21 +284,17 @@ class Columns {
     const filteredUnits = Object.keys(collectedUnits).filter(key => 0 < collectedUnits[key]);
 
     /*
-     * If there are no Custom Properties and no `vw` units, check for unit
-     * value(s) used more than once.
+     * If there are no Custom Properties, check for unit value(s) used more than
+     * once.
      */
-    if (
-      !parsedConfig.hasCustomProperty
-      && (undefined === collectedUnits.vw)
-      && (0 < filteredUnits.length)
-    ) {
+    if (!parsedConfig.hasCustomProperty && (0 < filteredUnits.length)) {
       canReduce = filteredUnits;
     }
 
     return {
       canReduce,
       ...parsedConfig,
-      siteMax: parsedSiteMax,
+      siteMax,
       edge,
       gap,
     };

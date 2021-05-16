@@ -204,12 +204,20 @@ testColumnsMethod({
       expected: {
         hasCustomProperty: false,
         canReduce: ['rem'],
-        siteMax: {
-          raw: '75rem',
-          value: 75,
-          units: 'rem',
-          each: '4.6875', // (value / columns)
-        },
+        siteMax: [
+          {
+            raw: '100vw',
+            value: 100,
+            units: 'vw',
+            each: '6.25', // (value / columns)
+          },
+          {
+            raw: '75rem',
+            value: 75,
+            units: 'rem',
+            each: '4.6875', // (value / columns)
+          },
+        ],
         gap: {
           raw: '0.625rem',
           value: 0.625,
@@ -236,12 +244,20 @@ testColumnsMethod({
       expected: {
         hasCustomProperty: true,
         canReduce: false,
-        siteMax: {
-          raw: '90rem',
-          value: 90,
-          units: 'rem',
-          each: undefined,
-        },
+        siteMax: [
+          {
+            raw: '100vw',
+            value: 100,
+            units: 'vw',
+            each: undefined,
+          },
+          {
+            raw: '90rem',
+            value: 90,
+            units: 'rem',
+            each: undefined,
+          },
+        ],
         gap: {
           raw: 'var(--gap)',
           value: undefined,
