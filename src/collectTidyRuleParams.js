@@ -1,5 +1,5 @@
 const handleCustomProperties = require('./handleCustomProperties');
-const { CUSTOM_PROP_REGEX } = require('../lib/isCustomProperty');
+const { isCustomProperty } = require('../lib/isCustomProperty');
 
 /**
  * Collect @tidy params from the provided CSS root.
@@ -9,7 +9,7 @@ const { CUSTOM_PROP_REGEX } = require('../lib/isCustomProperty');
  *
  * @return {Array}
  */
-function collectTidyRuleParams(css, fromCssRoot) {
+module.exports = function collectTidyRuleParams(css, fromCssRoot) {
   // Collect CSS at-rule values.
   const atRuleParams = [];
 
@@ -19,7 +19,7 @@ function collectTidyRuleParams(css, fromCssRoot) {
 
     if (rootCheck) {
       // Reject `site-max` with CSS Custom Property.
-      if (CUSTOM_PROP_REGEX.test(params)) {
+      if (isCustomProperty(params)) {
         handleCustomProperties(atrule, params);
       }
 
@@ -30,8 +30,3 @@ function collectTidyRuleParams(css, fromCssRoot) {
 
   return atRuleParams;
 }
-
-module.exports = {
-  collectTidyRuleParams,
-  CUSTOM_PROP_REGEX,
-};

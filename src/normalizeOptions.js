@@ -1,4 +1,4 @@
-const { CUSTOM_PROP_REGEX } = require('../lib/isCustomProperty');
+const { isCustomProperty } = require('../lib/isCustomProperty');
 const { strings } = require('../lib/sort');
 const valuesHaveSameUnits = require('../lib/valuesHaveSameUnits');
 
@@ -71,7 +71,7 @@ function normalizeOptions(options) {
     .reduce((acc, key) => {
       const option = options[key];
 
-      if (CUSTOM_PROP_REGEX.test(option)) {
+      if (isCustomProperty(option)) {
         // Use the raw option value if it's a var() function.
         acc[key] = option;
       } else {
