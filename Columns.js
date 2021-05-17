@@ -39,6 +39,13 @@ class Columns {
      * @type {Boolean}
      */
     this.suppressCalc = false;
+
+    /**
+     * The declaration's options, parsed.
+     *
+     * @type {Object}
+     */
+    this.parsedOptions = this.parseDeclarationOptions();
   }
 
   /**
@@ -261,10 +268,10 @@ class Columns {
   buildCalcFunction(siteMax, colSpan, gapSpan) {
     const {
       hasCustomProperty,
-      siteMax: parsedSiteMax,
+      siteMax: siteMaxes,
       edge,
       gap,
-    } = this.parseDeclarationOptions(siteMax);
+    } = this.parsedOptions;
 
     const expressions = [];
     let cssCalcEquation = '';
@@ -280,7 +287,10 @@ class Columns {
     } else {
       const theProduct = value => roundToPrecision(value * colSpan);
 
-      [parsedSiteMax, edge, gap].forEach((opt) => {
+      // Get the siteMax value for this declaration.
+      const [theSiteMax] = siteMaxes.filter(max => siteMax === max.raw);
+
+      [theSiteMax, edge, gap].forEach((opt) => {
         const {
           raw,
           units,
