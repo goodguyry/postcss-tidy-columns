@@ -1,5 +1,6 @@
-const { CUSTOM_PROP_REGEX } = require('./src/collectTidyRuleParams');
-const ROUNDING_PRECISION = require('./lib/roundingPrecision');
+const { isCustomProperty } = require('./lib/isCustomProperty');
+const roundToPrecision = require('./lib/roundToPrecision');
+const splitCssUnit = require('./lib/splitCssUnit');
 
 /**
  * Columns class
@@ -8,58 +9,6 @@ const ROUNDING_PRECISION = require('./lib/roundingPrecision');
  * @param {Object} options The options for the current rule.
  */
 class Columns {
-  /**
-   * Round the given number to the specified number of decimal places.
-   *
-   * @param {Number} toRound       The number to round.
-   * @param {Number} decimalPlaces The number of decimal places to round `toRound` to.
-   *
-   * @return {Number}
-   */
-  static roundToPrecision(toRound, decimalPlaces = ROUNDING_PRECISION) {
-    const precision = `1${'0'.repeat(decimalPlaces)}`;
-
-    return (0 === toRound) ? 0 : Math.round((toRound + 0.00001) * precision) / precision;
-  }
-
-  /**
-   * Separate a CSS length value's number from its units.
-   *
-   * @param {String} value A CSS length value.
-   *
-   * @return {Array}
-   */
-  static splitCssUnit(value) {
-    return ('string' === typeof value)
-      ? [parseFloat(value), value.replace(/[\d.]/g, '')]
-      : [value, undefined];
-  }
-
-  /**
-   * Check for matching units.
-   *
-   * @param {Arguments} units Argument list of units to check.
-   *
-   * @return {String}
-   */
-  static haveSameValues(...units) {
-    const set = new Set(units);
-    const { value } = set.values().next();
-
-    return (1 === set.size && undefined !== value) ? value : false;
-  }
-
-  /**
-   * Returns true if the value is a CSS Custom Property.
-   *
-   * @param {String} value A CSS property value.
-   *
-   * @return {Boolean}
-   */
-  static isCustomProperty(value) {
-    return CUSTOM_PROP_REGEX.test(value);
-  }
-
   constructor(options = {}) {
     this.options = options;
 
@@ -100,15 +49,15 @@ class Columns {
   getSharedGap() {
     const { gap, columns } = this.options;
 
-    if (this.constructor.isCustomProperty(gap)) {
+    if (isCustomProperty(gap)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
     }
 
     if (!this.nonValues.includes(gap)) {
-      const [value, units] = this.constructor.splitCssUnit(gap);
+      const [value, units] = splitCssUnit(gap);
       const sharedGap = (value / columns) * (columns - 1);
 
-      return `${this.constructor.roundToPrecision(sharedGap)}${units}`;
+      return `${roundToPrecision(sharedGap)}${units}`;
     }
 
     return 0;
@@ -128,11 +77,11 @@ class Columns {
     }
 
     // Don't reduce math for Custom Properties.
-    if (this.constructor.isCustomProperty(edge)) {
+    if (isCustomProperty(edge)) {
       return `${edge} * 2`;
     }
 
-    const [value, units] = this.constructor.splitCssUnit(edge);
+    const [value, units] = splitCssUnit(edge);
     const product = (value * 2);
 
     return `${product}${units}`;
@@ -200,7 +149,7 @@ class Columns {
       const raw = obj[key];
 
       // Handle CSS Custom Preoperties.
-      if (true === this.constructor.isCustomProperty(raw)) {
+      if (true === isCustomProperty(raw)) {
         acc.hasCustomProperty = true;
 
         return {
@@ -211,7 +160,7 @@ class Columns {
         };
       }
 
-      const [value, units] = this.constructor.splitCssUnit(raw);
+      const [value, units] = splitCssUnit(raw);
 
       // For now we ignore 'vw' units.
       if (!this.nonValues.includes(value) && ![undefined, 'vw'].includes(units)) {
@@ -258,7 +207,7 @@ class Columns {
       if (Array.isArray(siteMax) && 0 < siteMax.length) {
         siteMax = siteMax.map((option) => {
           const { value } = option;
-          const product = this.constructor.roundToPrecision((value / columns));
+          const product = roundToPrecision((value / columns));
           return {
             ...option,
             each: `${product}`,
@@ -268,13 +217,13 @@ class Columns {
 
       if (undefined !== edge) {
         const { value } = edge;
-        const product = this.constructor.roundToPrecision(((value * 2) / columns));
+        const product = roundToPrecision(((value * 2) / columns));
         edge.each = `${product}`;
       }
 
       if (undefined !== gap) {
         const { value } = gap;
-        const product = this.constructor.roundToPrecision((value / columns) * (columns - 1));
+        const product = roundToPrecision((value / columns) * (columns - 1));
         gap.each = `${product}`;
       }
     }
@@ -329,7 +278,7 @@ class Columns {
         cssCalcEquation = `(${cssCalcEquation}) * ${colSpan}`;
       }
     } else {
-      const theProduct = value => this.constructor.roundToPrecision(value * colSpan);
+      const theProduct = value => roundToPrecision(value * colSpan);
 
       [parsedSiteMax, edge, gap].forEach((opt) => {
         const {
@@ -361,7 +310,7 @@ class Columns {
 
       // Only multiply gaps if there are more or fewer than one.
       if (1 !== gapSpan) {
-        if (this.constructor.isCustomProperty(gapRaw)) {
+        if (isCustomProperty(gapRaw)) {
           // Don't reduce math for Custom Properties.
           gapSpanCalc = `${gapRaw} * ${gapSpan}`;
         } else {

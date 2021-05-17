@@ -47,35 +47,6 @@ const testColumnsMethod = (testConfig) => {
 };
 
 /**
- * Separate a CSS length value's number from its units.
- */
-testColumnsMethod({
-  description: "Separate a CSS length value's number from its units",
-  tests: [
-    {
-      description: 'Separates a `px` value from its units',
-      actual: Columns.splitCssUnit('10px'),
-      expected: [10, 'px'],
-    },
-    {
-      description: 'Separates a `rem` value from its units',
-      actual: Columns.splitCssUnit('0.625rem'),
-      expected: [0.625, 'rem'],
-    },
-    {
-      description: 'Separates a `em` value from its units',
-      actual: Columns.splitCssUnit('2em'),
-      expected: [2, 'em'],
-    },
-    {
-      description: 'Ignores a unitless value',
-      actual: Columns.splitCssUnit(12),
-      expected: 12,
-    },
-  ],
-});
-
-/**
  * Calculate the shared gap amount to be removed from each column.
  */
 testColumnsMethod({
@@ -100,94 +71,6 @@ testColumnsMethod({
       description: 'Builds the shared gap calculation when `gap` is a CSS Custom Property',
       actual: new Columns(customProperties).getSharedGap(),
       expected: `(${customProperties.gap} / ${customProperties.columns} * (${customProperties.columns} - 1))`,
-    },
-  ],
-});
-
-/**
- * Round the given number to the specified number of decimal places.
- */
-testColumnsMethod({
-  description: 'Round the given number to the specified number of decimal places',
-  tests: [
-    {
-      description: 'Rounds to a single decimal place',
-      actual: Columns.roundToPrecision(1.2345, 1),
-      expected: 1.2,
-    },
-    {
-      description: 'Rounds to two decimal places',
-      actual: Columns.roundToPrecision(1.2345, 2),
-      expected: 1.23,
-    },
-    {
-      description: 'Rounds to three decimal places',
-      actual: Columns.roundToPrecision(1.2345, 3),
-      expected: 1.235,
-    },
-    {
-      description: 'Rounds to four decimal places',
-      actual: Columns.roundToPrecision(1.2345, 4),
-      expected: 1.2345,
-    },
-    {
-      description: 'Ignores rounding a number shorter than the precision',
-      actual: Columns.roundToPrecision(1.2, 4),
-      expected: 1.2,
-    },
-    {
-      description: 'Ignores a whole number',
-      actual: Columns.roundToPrecision(1, 3),
-      expected: 1,
-    },
-    {
-      description: 'Rounds to zero decimal places',
-      actual: Columns.roundToPrecision(1.234, 0),
-      expected: 1,
-    },
-    {
-      description: 'Ignores rounding a `0`',
-      actual: Columns.roundToPrecision(0, 4),
-      expected: 0,
-    },
-    {
-      description: 'Rounds a negative number as expected',
-      actual: Columns.roundToPrecision(-1.2345, 2),
-      expected: -1.23,
-    },
-  ],
-});
-
-/**
- * Check if the values have the same units.
- */
-testColumnsMethod({
-  description: 'Check if the values have the same units',
-  tests: [
-    {
-      description: 'vw & px',
-      actual: Columns.haveSameValues('vw', 'px'),
-      expected: false,
-    },
-    {
-      description: 'rem & rem',
-      actual: Columns.haveSameValues('rem', 'rem'),
-      expected: 'rem',
-    },
-    {
-      description: 'px & rem & vw',
-      actual: Columns.haveSameValues('px', 'rem', 'vw'),
-      expected: false,
-    },
-    {
-      description: 'rem & em',
-      actual: Columns.haveSameValues('rem', 'em'),
-      expected: false,
-    },
-    {
-      description: 'none & none',
-      actual: Columns.haveSameValues(undefined, undefined),
-      expected: false,
     },
   ],
 });

@@ -1,10 +1,8 @@
 const postcss = require('postcss');
 const runOptions = require('.');
 const run = require('../../test');
-const {
-  collectTidyRuleParams,
-  CUSTOM_PROP_REGEX,
-} = require('../collectTidyRuleParams');
+const { collectTidyRuleParams } = require('../collectTidyRuleParams');
+const { CUSTOM_PROP_REGEX } = require('../../lib/isCustomProperty');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin

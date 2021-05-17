@@ -1,4 +1,4 @@
-const { CUSTOM_PROP_REGEX } = require('./collectTidyRuleParams');
+const { CUSTOM_PROP_REGEX } = require('../lib/isCustomProperty');
 const { strings } = require('../lib/sort');
 const valuesHaveSameUnits = require('../lib/valuesHaveSameUnits');
 

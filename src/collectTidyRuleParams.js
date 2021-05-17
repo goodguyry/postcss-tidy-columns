@@ -1,11 +1,5 @@
 const handleCustomProperties = require('./handleCustomProperties');
-
-/**
- * Pattern to match CSS Custom Properties.
- *
- * @type {RegExp}
- */
-const CUSTOM_PROP_REGEX = /var\(\s?(--[\w-]+)\s?\)/;
+const { CUSTOM_PROP_REGEX } = require('../lib/isCustomProperty');
 
 /**
  * Collect @tidy params from the provided CSS root.
