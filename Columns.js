@@ -1,6 +1,7 @@
 const { isCustomProperty } = require('./lib/isCustomProperty');
 const roundToPrecision = require('./lib/roundToPrecision');
 const splitCssUnit = require('./lib/splitCssUnit');
+const hasEmptyValue = require('./lib/hasEmptyValue');
 
 /**
  * Columns class
@@ -17,9 +18,6 @@ class Columns {
     if (undefined !== this.options.siteMax) {
       this.siteMaxValues.push(this.options.siteMax);
     }
-
-    this.fullWidthRule = null;
-    this.nonValues = [undefined, 0, '0'];
 
     // Bind class methods.
     this.getSharedGap = this.getSharedGap.bind(this);
@@ -60,7 +58,7 @@ class Columns {
       return `(${gap} / ${columns} * (${columns} - 1))`;
     }
 
-    if (!this.nonValues.includes(gap)) {
+    if (!hasEmptyValue(gap)) {
       const [value, units] = splitCssUnit(gap);
       const sharedGap = (value / columns) * (columns - 1);
 
@@ -79,7 +77,7 @@ class Columns {
     const { edge } = this.options;
 
     // Force `0` for missing or invalid values.
-    if (this.nonValues.includes(edge)) {
+    if (hasEmptyValue(edge)) {
       return 0;
     }
 
@@ -104,7 +102,7 @@ class Columns {
   getSingleColumn(siteMax) {
     const { columns } = this.options;
     // 100vw : (100vw - 10px * 2)
-    const siteMaxSize = this.nonValues.includes(this.edges)
+    const siteMaxSize = hasEmptyValue(this.edges)
       ? siteMax
       : `(${siteMax} - ${this.edges})`;
 
@@ -170,7 +168,7 @@ class Columns {
       const [value, units] = splitCssUnit(raw);
 
       // For now we ignore 'vw' units.
-      if (!this.nonValues.includes(value) && ![undefined, 'vw'].includes(units)) {
+      if (!hasEmptyValue(value) && ![undefined, 'vw'].includes(units)) {
         // Track how many of each unit values are found.
         if (undefined === collectedUnits[units]) {
           collectedUnits[units] = 0;
@@ -183,7 +181,7 @@ class Columns {
         ...acc,
         [key]: {
           raw,
-          value: this.nonValues.includes(value) ? 0 : value,
+          value: hasEmptyValue(value) ? 0 : value,
           units,
           each: undefined,
         },
@@ -297,7 +295,7 @@ class Columns {
           each,
         } = opt;
 
-        if (!this.nonValues.includes(raw)) {
+        if (!hasEmptyValue(raw)) {
           expressions.push(`${theProduct(each)}${units}`);
         }
       });
@@ -312,7 +310,7 @@ class Columns {
     } = gap;
 
     // Capture the array intersect.
-    const filteredArray = [gapRaw, gapSpan].filter(theValue => this.nonValues.includes(theValue));
+    const filteredArray = [gapRaw, gapSpan].filter(theValue => hasEmptyValue(theValue));
 
     // Check for gaps before adding the math for them.
     if (filteredArray.length < 1) {
