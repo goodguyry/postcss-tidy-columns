@@ -1,6 +1,6 @@
 const breakpointMatch = require('./breakpointMatch');
 const parseOptions = require('./parseOptions');
-const { collectTidyRuleParams } = require('./collectTidyRuleParams');
+const collectTidyRuleParams = require('./collectTidyRuleParams');
 
 /**
  * Walk any `tidy` at-rules and collect locally-scoped options.

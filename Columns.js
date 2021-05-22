@@ -1,4 +1,7 @@
-const { CUSTOM_PROP_REGEX } = require('./src/collectTidyRuleParams');
+const { isCustomProperty } = require('./lib/isCustomProperty');
+const roundToPrecision = require('./lib/roundToPrecision');
+const splitCssUnit = require('./lib/splitCssUnit');
+const hasEmptyValue = require('./lib/hasEmptyValue');
 
 /**
  * Columns class
@@ -7,33 +10,6 @@ const { CUSTOM_PROP_REGEX } = require('./src/collectTidyRuleParams');
  * @param {Object} options The options for the current rule.
  */
 class Columns {
-  /**
-   * Round the given number to the specified number of decimal places.
-   *
-   * @param {Number} toRound       The number to round.
-   * @param {Number} decimalPlaces The number of decimal places to round `toRound` to.
-   *
-   * @return {Number}
-   */
-  static roundToPrecision(toRound, decimalPlaces) {
-    const precision = `1${'0'.repeat(decimalPlaces)}`;
-
-    return (0 === toRound) ? 0 : Math.round((toRound + 0.00001) * precision) / precision;
-  }
-
-  /**
-   * Separate a CSS length value's number from its units.
-   *
-   * @param {String} value A CSS length value.
-   *
-   * @return {Array}
-   */
-  static splitCssUnit(value) {
-    return ('string' === typeof value)
-      ? [parseFloat(value), value.replace(/[\d.]/g, '')]
-      : value;
-  }
-
   constructor(options = {}) {
     this.options = options;
 
@@ -44,7 +20,6 @@ class Columns {
     }
 
     this.fullWidthRule = null;
-    this.nonValues = [undefined, 0];
 
     // Bind class methods.
     this.getSharedGap = this.getSharedGap.bind(this);
@@ -73,15 +48,15 @@ class Columns {
   getSharedGap() {
     const { gap, columns } = this.options;
 
-    if (CUSTOM_PROP_REGEX.test(gap)) {
+    if (isCustomProperty(gap)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
     }
 
-    if (!this.nonValues.includes(gap)) {
-      const [value, units] = this.constructor.splitCssUnit(gap);
+    if (!hasEmptyValue(gap)) {
+      const [value, units] = splitCssUnit(gap);
       const sharedGap = (value / columns) * (columns - 1);
 
-      return `${this.constructor.roundToPrecision(sharedGap, 4)}${units}`;
+      return `${roundToPrecision(sharedGap, 4)}${units}`;
     }
 
     return 0;
@@ -95,7 +70,7 @@ class Columns {
   getEdges() {
     const { edge } = this.options;
 
-    return this.nonValues.includes(edge) ? 0 : `${edge} * 2`;
+    return hasEmptyValue(edge) ? 0 : `${edge} * 2`;
   }
 
   /**
@@ -108,7 +83,7 @@ class Columns {
   getSingleColumn(siteMax) {
     const { columns } = this.options;
     // 100vw : (100vw - 10px * 2)
-    const siteMaxSize = this.nonValues.includes(this.edges)
+    const siteMaxSize = hasEmptyValue(this.edges)
       ? siteMax
       : `(${siteMax} - ${this.edges})`;
 
@@ -144,7 +119,7 @@ class Columns {
      * Check for gaps before adding the math for them.
      * Only multiply gaps if there are more than one.
      */
-    if (!this.nonValues.includes(gap) && !this.nonValues.includes(gapSpan)) {
+    if (!hasEmptyValue(gap) && !hasEmptyValue(gapSpan)) {
       const gapSpanCalc = (1 === gapSpan) ? gap : `${gap} * ${gapSpan}`;
 
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
