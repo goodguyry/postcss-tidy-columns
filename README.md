@@ -36,9 +36,9 @@ div {
 ```scss
 /* Output example */
 div {
-  width: calc(25vw - 0.9375rem - 3.4374rem + 2.5rem);
+  width: calc(25vw - 1.8749rem);
   max-width: 18.1251rem;
-  margin-left: calc(16.6667vw - 0.625rem - 2.2916rem + 2.5rem);
+  margin-left: calc(16.6667vw - 0.4166rem);
 }
 
 @media (min-width: 80rem) {
@@ -259,7 +259,7 @@ Set `debug` to `true` to maintain the pre-processed CSS declaration as a comment
 ```scss
 div {
   /* tidy-span: 3 */
-  width: calc(25vw - 0.9375rem - 3.4374rem + 2.5rem);
+  width: calc(25vw - 1.8749rem);
   max-width: 18.1251rem;
 }
 ```

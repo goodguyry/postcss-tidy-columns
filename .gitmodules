@@ -1,4 +1,0 @@
-[submodule "lib/postcss-calc"]
-	path = lib/postcss-calc
-	url = git@github.com:postcss/postcss-calc.git
-	branch = 8.0.0

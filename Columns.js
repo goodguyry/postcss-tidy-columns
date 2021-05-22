@@ -2,6 +2,7 @@ const { isCustomProperty } = require('./lib/isCustomProperty');
 const roundToPrecision = require('./lib/roundToPrecision');
 const splitCssUnit = require('./lib/splitCssUnit');
 const hasEmptyValue = require('./lib/hasEmptyValue');
+const transformValue = require('./lib/transformValue');
 
 /**
  * Columns class
@@ -212,6 +213,15 @@ class Columns {
       if (Array.isArray(siteMax) && 0 < siteMax.length) {
         siteMax = siteMax.map((option) => {
           const { value } = option;
+
+          // Protect dividing by zero.
+          if (0 === value) {
+            return {
+              ...option,
+              each: value,
+            };
+          }
+
           const product = roundToPrecision((value / columns));
           return {
             ...option,
@@ -257,9 +267,9 @@ class Columns {
   /**
    * Complete the calc() function.
    *
-   * @param {String}  siteMax The current siteMax size.
-   * @param {Number}  colSpan The number of columns to span.
-   * @param {Number}  gapSpan The number of gaps to span.
+   * @param {String} siteMax The current siteMax size.
+   * @param {Number} colSpan The number of columns to span.
+   * @param {Number} gapSpan The number of gaps to span.
    *
    * @return {String}
    */
@@ -330,6 +340,10 @@ class Columns {
       cssCalcEquation = hasCustomProperty
         ? `(${cssCalcEquation}) + ${gapSpanCalc}`
         : `${cssCalcEquation} + ${gapSpanCalc}`;
+    }
+
+    if (!hasCustomProperty) {
+      cssCalcEquation = transformValue(`(${cssCalcEquation})`);
     }
 
     return `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
