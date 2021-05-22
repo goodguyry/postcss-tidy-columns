@@ -2,6 +2,7 @@ const { isCustomProperty } = require('./lib/isCustomProperty');
 const roundToPrecision = require('./lib/roundToPrecision');
 const splitCssUnit = require('./lib/splitCssUnit');
 const hasEmptyValue = require('./lib/hasEmptyValue');
+const transformValue = require('./lib/transformValue');
 
 /**
  * Columns class
@@ -124,6 +125,8 @@ class Columns {
 
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
     }
+
+    cssCalcEquation = transformValue(`(${cssCalcEquation})`);
 
     return `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
   }
