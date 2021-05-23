@@ -211,16 +211,16 @@ testColumnsMethod({
       description: 'Omits undeclared values from span ouput: `siteMax` only',
       actual: new Columns(siteMaxOnly).spanCalc(1),
       expected: {
-        fluid: 'calc(6.25vw)',
-        full: 'calc(75px)',
+        fluid: '6.25vw',
+        full: '75px',
       },
     },
     {
       description: 'Omits undeclared values from span ouput: `edge` only (multiple columns)',
       actual: new Columns(siteMaxOnly).spanCalc(5),
       expected: {
-        fluid: 'calc(31.25vw)',
-        full: 'calc(375px)',
+        fluid: '31.25vw',
+        full: '375px',
       },
     },
     // ---------- Columns only
@@ -228,14 +228,14 @@ testColumnsMethod({
       description: 'Omits undeclared values from span ouput: `columns` only',
       actual: new Columns(columnsOnly).spanCalc(1),
       expected: {
-        fluid: 'calc(8.3333vw)',
+        fluid: '8.3333vw',
       },
     },
     {
       description: 'Omits undeclared values from span ouput: `columns` only (multiple columns)',
       actual: new Columns(columnsOnly).spanCalc(3),
       expected: {
-        fluid: 'calc(25vw)',
+        fluid: '25vw',
       },
     },
     // ---------- Custom Properties
@@ -400,8 +400,8 @@ testColumnsMethod({
       description: 'Omits undeclared values from span ouput: `siteMax` only',
       actual: new Columns(siteMaxOnly).offsetCalc(1),
       expected: {
-        fluid: 'calc(6.25vw)',
-        full: 'calc(75px)',
+        fluid: '6.25vw',
+        full: '75px',
       },
     },
     // ---------- Columns only
@@ -409,14 +409,14 @@ testColumnsMethod({
       description: 'Omits undeclared values from span ouput: `columns` only',
       actual: new Columns(columnsOnly).offsetCalc(1),
       expected: {
-        fluid: 'calc(8.3333vw)',
+        fluid: '8.3333vw',
       },
     },
     {
       description: 'Omits undeclared values from span ouput: `columns` only (multiple columns)',
       actual: new Columns(columnsOnly).offsetCalc(4),
       expected: {
-        fluid: 'calc(33.3333vw)',
+        fluid: '33.3333vw',
       },
     },
     // ---------- Custom Properties

@@ -126,9 +126,8 @@ class Columns {
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
     }
 
-    cssCalcEquation = transformValue(`(${cssCalcEquation})`);
-
-    return `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
+    // Reduce the expression.
+    return transformValue(`(${cssCalcEquation})`);
   }
 
   /**
