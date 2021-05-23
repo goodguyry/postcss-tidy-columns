@@ -50,6 +50,70 @@ const testColumnsMethod = (testConfig) => {
   });
 };
 
+describe('Checking values passed to Columns.buildCalcFunction()', () => {
+  describe('All options', () => {
+    const instance = new Columns(allValues);
+    jest.spyOn(instance, 'buildCalcFunction');
+
+    test('Single column', () => {
+      instance.spanCalc(1);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith('100vw', 1, 0);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith('75rem', 1, 0);
+    });
+
+    test('Fractional columns (greater than 2)', () => {
+      instance.spanCalc(2.5);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith('100vw', 2.5, 2);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith('75rem', 2.5, 2);
+    });
+  });
+
+  test('Omits a `full` value with no `siteMax` option', () => {
+    const instance = new Columns(edgeGap);
+    jest.spyOn(instance, 'buildCalcFunction');
+
+    instance.spanCalc(2.5);
+    expect(instance.buildCalcFunction).toHaveBeenCalledWith('100vw', 2.5, 2);
+  });
+});
+
+describe('Get calc functions from buildCalcFunction()', () => {
+  describe('All options', () => {
+    const instance = new Columns(allValues); // eslint-disable-line
+
+    test('Single column', () => {
+      const expected = {
+        fluid: 'calc(6.25vw - 4px - 0.5859rem)',
+        full: 'calc(4.1016rem - 4px)',
+      };
+
+      expect(instance.buildCalcFunction('100vw', 1, 0)).toEqual(expected.fluid);
+      expect(instance.buildCalcFunction('75rem', 1, 0)).toEqual(expected.full);
+    });
+
+    test('Fractional columns (greater than 2)', () => {
+      const expected = {
+        fluid: 'calc(15.625vw - 10px - 0.2148rem)',
+        full: 'calc(11.504rem - 10px)',
+      };
+
+      expect(instance.buildCalcFunction('100vw', 2.5, 2)).toEqual(expected.fluid);
+      expect(instance.buildCalcFunction('75rem', 2.5, 2)).toEqual(expected.full);
+    });
+  });
+
+  test('Omits a `full` value with no `siteMax` option', () => {
+    const instance = new Columns(edgeGap);
+
+    const expected = {
+      fluid: 'calc(8.3333vw - 0.1667rem - 9.1667px)',
+    };
+
+    expect(instance.buildCalcFunction('100vw', 1, 0)).toEqual(expected.fluid);
+    expect(undefined).toEqual(expected.full);
+  });
+});
+
 /**
  * Calculate the shared gap amount to be removed from each column.
  */
