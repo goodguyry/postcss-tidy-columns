@@ -156,8 +156,7 @@ class Columns {
   /**
    * Create the offset `calc()` function declaration for each siteMax.
    *
-   * @param {String|Number} colSpan      The number of columns to offset.
-   * @param {Boolean}       suppressCalc Suppress the `calc` string in the output.
+   * @param {String|Number} colSpan The number of columns to offset.
    *
    * @return {Object}
    */
