@@ -319,12 +319,13 @@ testColumnsMethod({
     },
     // ---------- Custom Properties
     {
-      skip: true,
       description: 'Custom properties used in option values',
       actual: new Columns(customProperties).spanCalc(3),
       expected: {
-        fluid: 'calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)',
-        full: 'calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)',
+        // calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)
+        fluid: 'calc((100vw - var(--edge)*2)/var(--columns)*3 - var(--gap)/var(--columns)*(var(--columns) - 1)*3 + var(--gap)*2)',
+        // calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)
+        full: 'calc((90rem - var(--edge)*2)/var(--columns)*3 - var(--gap)/var(--columns)*(var(--columns) - 1)*3 + var(--gap)*2)',
       },
     },
   ],
@@ -504,12 +505,13 @@ testColumnsMethod({
     },
     // ---------- Custom Properties
     {
-      skip: true,
       description: 'Custom properties used in option values',
       actual: new Columns(customProperties).offsetCalc(3),
       expected: {
-        fluid: 'calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)',
-        full: 'calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)',
+        // calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)
+        fluid: 'calc((100vw - var(--edge)*2)/var(--columns)*3 - var(--gap)/var(--columns)*(var(--columns) - 1)*3 + var(--gap)*3)',
+        // calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)
+        full: 'calc((90rem - var(--edge)*2)/var(--columns)*3 - var(--gap)/var(--columns)*(var(--columns) - 1)*3 + var(--gap)*3)',
       },
     },
   ],
