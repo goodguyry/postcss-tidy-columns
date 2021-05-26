@@ -127,7 +127,7 @@ class Columns {
     }
 
     // Reduce the expression.
-    return transformValue(`(${cssCalcEquation})`);
+    return transformValue(`(${cssCalcEquation})`, this.suppressCalc);
   }
 
   /**

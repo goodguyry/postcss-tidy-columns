@@ -82,7 +82,7 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
       // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)
       // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)
       'div { margin-left: calc(tidy-offset(10) + tidy-var(edge)); tidy-span: 2; }',
-      'div { margin-left: calc(calc(62.5vw - 40px + 0.391rem) + 32px); width: calc(12.5vw - 8px - 0.5468rem); max-width: calc(8.8282rem - 8px); }',
+      'div { margin-left: calc((62.5vw - 40px + 0.391rem) + 32px); width: calc(12.5vw - 8px - 0.5468rem); max-width: calc(8.8282rem - 8px); }',
       allValues,
     ),
   );
