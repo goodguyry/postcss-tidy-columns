@@ -56,7 +56,8 @@ describe('The `tidy-var()` function is replaced with the expected option value',
     'Replaces `tidy-var` when used as a `tidy-*` property value',
     () => run(
       'div { tidy-span: tidy-var(columns); }',
-      'div { width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11); }',
+      // calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11)
+      'div { width: calc(100vw - 1.2496rem); }',
       typicalWithBreakpoints,
     ),
   );
@@ -65,7 +66,8 @@ describe('The `tidy-var()` function is replaced with the expected option value',
     'Replaces `tidy-var` when used as a `tidy-*` function value',
     () => run(
       'div { width: tidy-span(tidy-var(columns)); }',
-      'div { width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11); }',
+      // calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11)
+      'div { width: calc(100vw - 1.2496rem); }',
       typicalWithBreakpoints,
     ),
   );

@@ -12,7 +12,7 @@ module.exports = [
         'offset-left.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,uEAAoB;CACpB;AAFD;CAAA;EACC,uEAAoB;EACpB;CAAA',
+      mappings: 'AAAA;CACC,mCAAoB;CACpB;AAFD;CAAA;EACC,oBAAoB;EACpB;CAAA',
       file: 'offset-left.generated.css',
       sourcesContent: [
         'div {\n\ttidy-offset-left: 1;\n}\n',
@@ -32,7 +32,7 @@ module.exports = [
         'span.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,uEAAa;CAAb,2EAAa;CACb',
+      mappings: 'AAAA;CACC,mCAAa;CAAb,sBAAa;CACb',
       file: 'span.generated.css',
       sourcesContent: [
         'div {\n\ttidy-span: 2;\n}\n',
@@ -52,7 +52,7 @@ module.exports = [
         'column.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,2EAA4B;CAA5B,+EAA4B;CAA5B,iFAA4B;CAA5B,wEAA4B;CAC5B;AAFD;CAAA;EACC,iFAA4B;EAA5B,wEAA4B;EAC5B;CAAA',
+      mappings: 'AAAA;CACC,8BAA4B;CAA5B,sBAA4B;CAA5B,yCAA4B;CAA5B,oCAA4B;CAC5B;AAFD;CAAA;EACC,wBAA4B;EAA5B,qBAA4B;EAC5B;CAAA',
       file: 'column.generated.css',
       sourcesContent: [
         'div {\n\ttidy-column: 2 / span 3 / 1;\n}\n',
@@ -72,7 +72,7 @@ module.exports = [
         'offset.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,iFAAmB;CAAnB,kFAAmB;CACnB;AAFD;CAAA;EACC,iFAAmB;EAAnB,kFAAmB;EACnB;CAAA',
+      mappings: 'AAAA;CACC,oCAAmB;CAAnB,0CAAmB;CACnB;AAFD;CAAA;EACC,wBAAmB;EAAnB,yBAAmB;EACnB;CAAA',
       file: 'offset.generated.css',
       sourcesContent: [
         'div {\n\ttidy-offset: 3 / 4;\n}\n',
@@ -92,7 +92,7 @@ module.exports = [
         'function-span.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,uEAAoB;CACpB,2EAA6B;CAC7B',
+      mappings: 'AAAA;CACC,mCAAoB;CACpB,sBAA6B;CAC7B',
       file: 'function-span.generated.css',
       sourcesContent: [
         'div {\n\twidth: tidy-span(2);\n\tmax-width: tidy-span-full(2);\n}\n',

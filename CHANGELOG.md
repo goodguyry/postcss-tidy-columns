@@ -1,6 +1,12 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Next
+
+**Changed**
+
+- Uses [postcss-calc](https://github.com/postcss/postcss-calc/) to reduce output (#70)
+
 ## 0.4.0
 
 **Added**

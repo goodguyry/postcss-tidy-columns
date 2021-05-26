@@ -29,9 +29,12 @@ module.exports = postcss.plugin(
       // Set up rule-specific properties.
       tidy.initRule();
 
+      // Replace `tidy-var()` functions throughout.
       rule.walkDecls((declaration) => {
-        // Replace `tidy-var()` functions.
         tidyVar(declaration, tidy);
+      });
+
+      rule.walkDecls((declaration) => {
         // Replace `tidy-*` properties.
         tidyProperty(declaration, tidy);
         // Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.

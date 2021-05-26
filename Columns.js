@@ -2,6 +2,7 @@ const { isCustomProperty } = require('./lib/isCustomProperty');
 const roundToPrecision = require('./lib/roundToPrecision');
 const splitCssUnit = require('./lib/splitCssUnit');
 const hasEmptyValue = require('./lib/hasEmptyValue');
+const transformValue = require('./lib/transformValue');
 
 /**
  * Columns class
@@ -125,7 +126,8 @@ class Columns {
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
     }
 
-    return `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
+    // Reduce the expression.
+    return transformValue(`(${cssCalcEquation})`, this.suppressCalc);
   }
 
   /**
@@ -154,8 +156,7 @@ class Columns {
   /**
    * Create the offset `calc()` function declaration for each siteMax.
    *
-   * @param {String|Number} colSpan      The number of columns to offset.
-   * @param {Boolean}       suppressCalc Suppress the `calc` string in the output.
+   * @param {String|Number} colSpan The number of columns to offset.
    *
    * @return {Object}
    */
