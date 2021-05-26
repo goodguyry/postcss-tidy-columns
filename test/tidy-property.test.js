@@ -11,9 +11,11 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'The `tidy-offset-left` property is replaced.',
     () => run(
       'div { tidy-offset-left: 1; }',
-      `div { margin-left: calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }
+      // calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
+      // calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
+      `div { margin-left: calc(8.3333vw + 0rem); }
 @media (min-width: 90rem) {
- div { margin-left: calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); } }`,
+ div { margin-left: 7.5rem; } }`,
       typical,
     ),
   );
@@ -22,9 +24,11 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'The `tidy-offset-right` property is replaced.',
     () => run(
       'div { tidy-offset-right: 2; }',
-      `div { margin-right: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2); }
+      // calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2)
+      // calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2)
+      `div { margin-right: calc(16.6667vw + 0.0001rem); }
 @media (min-width: 90rem) {
- div { margin-right: calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2); } }`,
+ div { margin-right: 15.0001rem; } }`,
       typical,
     ),
   );
@@ -33,7 +37,8 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'Offsets without a `siteMax` do not output a media query',
     () => run(
       'div { tidy-offset-right: 2; }',
-      'div { margin-right: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px * 2); }',
+      // calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px * 2)
+      'div { margin-right: calc(16.6667vw - 0.3333rem + 1.6666px); }',
       edgeGap,
     ),
   );
@@ -42,7 +47,7 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
     'Maintains `tidy-offset-right` input as a /* comment */',
     () => run(
       'div { tidy-offset-right: 2; }',
-      'div { /* tidy-offset-right: 2 */ margin-right: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px * 2); }',
+      'div { /* tidy-offset-right: 2 */ margin-right: calc(16.6667vw - 0.3333rem + 1.6666px); }',
       { ...edgeGap, debug: true },
     ),
   );
@@ -53,7 +58,9 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'The `tidy-span` property is replaced.',
     () => run(
       'div { tidy-span: 2; }',
-      'div { width: calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem); max-width: calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem); }',
+      // calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem)
+      // calc((((90rem - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem)
+      'div { width: calc(16.6667vw - 1.2499rem); max-width: 13.7501rem; }',
       typical,
     ),
   );
@@ -62,7 +69,8 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'Spans without a `siteMax` do not output a `max-width` declaration',
     () => run(
       'div { tidy-span: 2; }',
-      'div { width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
+      // calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px)
+      'div { width: calc(16.6667vw - 0.3333rem - 8.3334px); }',
       edgeGap,
     ),
   );
@@ -70,8 +78,11 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
   test(
     'The `tidy-span` property is not influenced by other declarations',
     () => run(
+      // calc(((((100vw - 32px * 2) / 16 - 0.5859rem) * 10) + 0.625rem * 10) + 32px)
+      // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)
+      // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)
       'div { margin-left: calc(tidy-offset(10) + tidy-var(edge)); tidy-span: 2; }',
-      'div { margin-left: calc(((((100vw - 32px * 2) / 16 - 0.5859rem) * 10) + 0.625rem * 10) + 32px); width: calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem); max-width: calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem); }',
+      'div { margin-left: calc(calc(62.5vw - 40px + 0.391rem) + 32px); width: calc(12.5vw - 8px - 0.5468rem); max-width: calc(8.8282rem - 8px); }',
       allValues,
     ),
   );
@@ -80,7 +91,8 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'Maintains `tidy-span` input as a /* comment */',
     () => run(
       'div { tidy-span: 2; }',
-      'div { /* tidy-span: 2 */ width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
+      // calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px)
+      'div { /* tidy-span: 2 */ width: calc(16.6667vw - 0.3333rem - 8.3334px); }',
       { ...edgeGap, debug: true },
     ),
   );
@@ -89,7 +101,8 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
     'Maintains `tidy-span` input as a /* comment */ via `@tidy debug` atRule',
     () => run(
       'div { @tidy debug true; tidy-span: 2; }',
-      'div { /* tidy-span: 2 */ width: calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px); }',
+      // calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px)
+      'div { /* tidy-span: 2 */ width: calc(16.6667vw - 0.3333rem - 8.3334px); }',
       edgeGap,
     ),
   );

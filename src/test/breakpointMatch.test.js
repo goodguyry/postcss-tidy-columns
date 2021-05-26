@@ -83,7 +83,8 @@ describe('The functions and properties values are replaced according a breakpoin
     'Has no matching breakpoints',
     () => run(
       'div { margin-left: tidy-offset(2); width: 100vw; max-width: calc(100vw - tidy-var(edge) * 2); }',
-      'div { margin-left: calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 2) + 0.625rem * 2); width: 100vw; max-width: calc(100vw - 1rem * 2); }',
+      // calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 2) + 0.625rem * 2)
+      'div { margin-left: calc(22.2222vw - 0.3056rem); width: 100vw; max-width: calc(100vw - 1rem * 2); }',
       options,
     ),
   );
@@ -92,7 +93,8 @@ describe('The functions and properties values are replaced according a breakpoin
     'Matches one breakpoint exactly',
     () => run(
       '@media (min-width: 48rem) { div { tidy-span: 2; margin-left: tidy-var(\'gap\'); } }',
-      '@media (min-width: 48rem) { div { width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem); margin-left: 1rem; } }',
+      // calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem)
+      '@media (min-width: 48rem) { div { width: calc(16.6667vw - 1.1667rem); margin-left: 1rem; } }',
       options,
     ),
   );
@@ -101,7 +103,8 @@ describe('The functions and properties values are replaced according a breakpoin
     'Matches a complex breakpoint',
     () => run(
       '@media (min-width: 48rem) and (max-width: 63.9375rem) { div { tidy-span: 3; } }',
-      '@media (min-width: 48rem) and (max-width: 63.9375rem) { div { width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 3) + 1rem * 2); } }',
+      // calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 3) + 1rem * 2)
+      '@media (min-width: 48rem) and (max-width: 63.9375rem) { div { width: calc(25vw - 1.2501rem); } }',
       options,
     ),
   );
@@ -110,7 +113,8 @@ describe('The functions and properties values are replaced according a breakpoin
     'Ignores matching more than one breakpoint',
     () => run(
       '@media (min-width: 48rem) and (max-width: 80rem) { div { tidy-span: 3; } }',
-      '@media (min-width: 48rem) and (max-width: 80rem) { div { width: calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 3) + 0.625rem * 2); } }',
+      // calc((((100vw - 1rem * 2) / 9 - 0.5556rem) * 3) + 0.625rem * 2)
+      '@media (min-width: 48rem) and (max-width: 80rem) { div { width: calc(33.3333vw - 1.0835rem); } }',
       options,
     ),
   );
@@ -119,7 +123,9 @@ describe('The functions and properties values are replaced according a breakpoin
     'Matches a breakpoint and correctly scopes the declaration\'s @tidy option',
     () => run(
       '@media (max-width: 80rem) { div { @tidy edge 1rem; tidy-span: 2; paddding-left: tidy-var(edge); } }',
-      '@media (max-width: 80rem) { div { width: calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem); max-width: calc((((90rem - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem); paddding-left: 1rem; } }',
+      // calc((((100vw - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem)
+      // calc((((90rem - 1rem * 2) / 12 - 0.9167rem) * 2) + 1rem)
+      '@media (max-width: 80rem) { div { width: calc(16.6667vw - 1.1667rem); max-width: 13.8333rem; paddding-left: 1rem; } }',
       options,
     ),
   );

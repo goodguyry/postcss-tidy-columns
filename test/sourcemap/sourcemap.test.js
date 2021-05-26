@@ -1,7 +1,7 @@
 const postcss = require('postcss');
 const fs = require('fs');
 const tidyColumns = require('../../');
-const sourceMapTests = require('./sourcemap.js');
+const sourceMapTests = require('./sourcemap');
 
 /**
  * Test sourcemaps
