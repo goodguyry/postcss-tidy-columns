@@ -21,7 +21,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Replaces the `tidy-offset-full()` function',
     () => run(
       'div { margin-left: tidy-offset-full(1); }',
-      // calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)ffset-full(1); }',
+      // calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
       'div { margin-left: 7.5rem; }',
       typical,
     ),
