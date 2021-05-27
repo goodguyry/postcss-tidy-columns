@@ -1,4 +1,3 @@
-const postcss = require('postcss');
 const runOptions = require('.');
 const { typical } = require('../../test/sharedConfigs');
 const getGlobalOptions = require('../getGlobalOptions');
@@ -8,12 +7,12 @@ const getGlobalOptions = require('../getGlobalOptions');
  * limits the scope, which prevents any other features of the plugin from running.
  */
 const runGlobalOptionsPlugin = (output, opts) => (
-  runOptions('', output, opts, postcss.plugin(
-    'global-options-test',
-    () => function process(root, result) {
+  runOptions('', output, opts, () => ({
+    postcssPlugin: 'global-options-test',
+    Once(root, { result }) {
       result.options = Object.freeze(getGlobalOptions(root, opts)); // eslint-disable-line no-param-reassign
     },
-  ))
+  }))
 );
 
 /**

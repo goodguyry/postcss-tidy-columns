@@ -1,4 +1,3 @@
-const postcss = require('postcss');
 const runOptions = require('.');
 const { typical, typicalWithBreakpoints, columnsOnly } = require('../../test/sharedConfigs');
 const getLocalOptions = require('../getLocalOptions');
@@ -8,14 +7,14 @@ const getLocalOptions = require('../getLocalOptions');
  * limits the scope, which prevents any other features of the plugin from running.
  */
 const runLocalOptionsPlugin = (input, output, opts) => (
-  runOptions(input, output, opts, postcss.plugin(
-    'local-options-test',
-    () => function process(root, result) {
+  runOptions(input, output, opts, () => ({
+    postcssPlugin: 'local-options-test',
+    Once(root, { result }) {
       root.walkRules((rule) => {
         result.options = getLocalOptions(rule, opts); // eslint-disable-line no-param-reassign
       });
     },
-  ))
+  }))
 );
 
 /**
