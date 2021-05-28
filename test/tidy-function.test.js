@@ -27,7 +27,6 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     ),
   );
 
-  // @todo This shouldn't have a nested `calc()`.
   test(
     'Replaces the `tidy-offset()` function when inside a `calc()`` function',
     () => run(
