@@ -36,9 +36,7 @@ const testColumnsMethod = (testConfig) => {
         return acc;
       }
 
-      // TODO: Use Object.values(test) once Node v6 support is dropped.
-      const testValues = Object.keys(test).map(key => test[key]);
-      return [...acc, testValues];
+      return [...acc, Object.values(test)];
     }, []);
 
     test.each(reducedTests)(
