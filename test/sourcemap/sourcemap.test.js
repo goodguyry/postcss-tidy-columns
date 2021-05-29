@@ -1,6 +1,6 @@
 const postcss = require('postcss');
 const fs = require('fs');
-const tidyColumns = require('../../');
+const tidyColumns = require('../..');
 const sourceMapTests = require('./sourcemap');
 
 /**
@@ -8,11 +8,7 @@ const sourceMapTests = require('./sourcemap');
  * Reads JSON file of test declarations.
  */
 describe('Sourcemaps are maintained after plugin processing', () => {
-  const reducedTests = sourceMapTests.reduce((acc, test) => {
-    // TODO: Use Object.values(test) once Node v6 support is dropped.
-    const testValues = Object.keys(test).map(key => test[key]);
-    return [...acc, testValues];
-  }, []);
+  const reducedTests = sourceMapTests.reduce((acc, test) => ([...acc, Object.values(test)]), []);
 
   test.each(reducedTests)(
     '%s',

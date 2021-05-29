@@ -11,9 +11,9 @@ const { tidyVar } = require('./tidy-var');
  *
  * @param {Object} root The root CSS object.
  */
-module.exports = postcss.plugin(
-  'postcss-tidy-columns',
-  (options = {}) => function postcssTidyColumns(root) {
+module.exports = (options = {}) => ({
+  postcssPlugin: 'postcss-tidy-columns',
+  Once(root) {
     // Collect the global options.
     const globalOptions = Object.freeze(getGlobalOptions(root, options));
 
@@ -68,6 +68,6 @@ module.exports = postcss.plugin(
       }
     });
   },
-);
+});
 
-// module.exports = postcss.plugin('postcss-tidy-columns', postcssTidyColumns);
+module.exports.postcss = true;

@@ -1,4 +1,3 @@
-const postcss = require('postcss');
 const runOptions = require('.');
 const run = require('../../test');
 const collectTidyRuleParams = require('../collectTidyRuleParams');
@@ -8,12 +7,12 @@ const collectTidyRuleParams = require('../collectTidyRuleParams');
  * limits the scope, which prevents any other features of the plugin from running.
  */
 const runTidyRuleParamsPlugin = (input, output, opts) => (
-  runOptions(input, output, opts, postcss.plugin(
-    'tidy-rule-test',
-    () => function process(root, result) {
+  runOptions(input, output, opts, () => ({
+    postcssPlugin: 'tidy-rule-test',
+    Once(root, { result }) {
       result.options = collectTidyRuleParams(root, opts); // eslint-disable-line no-param-reassign
     },
-  ))
+  }))
 );
 
 /**

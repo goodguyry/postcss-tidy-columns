@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-const postcss = require('postcss');
 const run = require('.');
 const {
   tidyShorthandProperty,
@@ -12,15 +11,15 @@ const {
  * limits the scope, which prevents any other features of the plugin from running.
  */
 const runShorthandTest = (input, output, options = {}) => (
-  run(input, output, options, postcss.plugin(
-    'shorthand-props-test',
-    () => function process(root) {
+  run(input, output, options, () => ({
+    postcssPlugin: 'shorthand-props-test',
+    Once(root) {
       root.walkDecls((declaration) => {
         // Pass in a mock Tidy object.
         tidyShorthandProperty(declaration, { columns: { options } });
       });
     },
-  ))
+  }))
 );
 
 /**

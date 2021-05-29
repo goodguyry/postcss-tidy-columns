@@ -11,7 +11,7 @@ See the [demo page][demo] to see it in action, and check out the [Wiki][wiki] fo
 ## Install
 
 ```shell
-npm install postcss-tidy-columns
+npm install --save-dev postcss postcss-tidy-columns
 ```
 
 ## Example
