@@ -25,7 +25,8 @@
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "jest": "^27.0.1",
-    "jest-cli": "^27.0.1"
+    "jest-cli": "^27.0.1",
+    "postcss": "^8.3.0"
   },
   "peerDependencies": {
     "postcss": "^8.3.0"
