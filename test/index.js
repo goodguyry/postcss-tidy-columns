@@ -1,5 +1,5 @@
 const postcss = require('postcss');
-const tidyColumns = require('../');
+const tidyColumns = require('..');
 
 /**
  * Basic test runner.
