@@ -28,7 +28,6 @@
     "eslint-plugin-import": "^2.23.3",
     "jest": "^27.0.1",
     "jest-cli": "^27.0.1",
-    "node-sass": "^6.0.0",
     "nodemon": "^1.19.1",
     "postcss-units": "^1.2.1"
   },
