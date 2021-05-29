@@ -39,6 +39,7 @@ sass.render({
         if (result.map) {
           fs.writeFile('docs/css/main.css.map', result.map, () => true);
         }
+        console.log('\nbuild.js: docs/css/main.css written from docs/_scss/index.scss');
       });
   }
 });
