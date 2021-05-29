@@ -22,15 +22,10 @@
     "postcss-value-parser": "^4.1.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.6",
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.3",
     "jest": "^27.0.1",
-    "jest-cli": "^27.0.1",
-    "nodemon": "^2.0.7",
-    "postcss": "^8.3.0",
-    "postcss-units": "^1.2.1"
+    "jest-cli": "^27.0.1"
   },
   "peerDependencies": {
     "postcss": "^8.3.0"
@@ -39,8 +34,7 @@
     "test": "jest",
     "watch": "jest --watchAll",
     "watch:verbose": "jest --watchAll  --verbose",
-    "build:css": "npm test && node docs/_bin/build.js",
-    "watch:css": "nodemon -e scss -x node docs/_bin/build.js"
+    "build": "npm run build --prefix docs"
   },
   "jest": {
     "testEnvironment": "node"

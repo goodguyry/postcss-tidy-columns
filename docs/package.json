@@ -1,0 +1,20 @@
+{
+  "name": "postcss-tidy-columns-homepage",
+  "version": "1.0.0",
+  "description": "The Tidy Columns homepage",
+  "main": "index.js",
+  "scripts": {
+    "build": "node _bin/build.js",
+    "start": "nodemon -e scss -x node _bin/build.js"
+  },
+  "author": "Ryan Domingue <ryan@ryandomingue.com>",
+  "license": "MIT",
+  "repository": "goodguyry/postcss-tidy-columns",
+  "dependencies": {
+    "autoprefixer": "^10.2.6",
+    "node-sass": "^6.0.0",
+    "nodemon": "^2.0.7",
+    "postcss": "^8.3.0",
+    "postcss-units": "^1.2.1"
+  }
+}
