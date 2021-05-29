@@ -32,10 +32,11 @@
     "postcss": "^8.3.0"
   },
   "scripts": {
-    "test": "jest",
+    "test": "npm run lint && jest",
     "watch": "jest --watchAll",
     "watch:verbose": "jest --watchAll  --verbose",
-    "build": "npm run build --prefix docs"
+    "build": "npm run build --prefix docs",
+    "lint": "eslint *.js src/**/*.js lib/**/*.js test/**/*.js"
   },
   "jest": {
     "testEnvironment": "node"
