@@ -21,24 +21,46 @@ module.exports = (options = {}) => ({
     root.walkRules((rule) => {
       const tidy = new Tidy(rule, globalOptions);
 
-      // Replace shorthand declarations with their long-form equivalents.
-      rule.walkDecls(/^tidy-(column|offset)$/, (declaration) => {
-        tidyShorthandProperty(declaration, tidy);
-      });
-
       // Set up rule-specific properties.
       tidy.initRule();
 
-      // Replace `tidy-var()` functions throughout.
+      /*
+       * Replace shorthand properties and option value references first
+       */
       rule.walkDecls((declaration) => {
-        tidyVar(declaration, tidy);
+        // Replace shorthand declarations with their long-form equivalents.
+        if (
+          declaration.prop.includes('tidy-column')
+          || declaration.prop.includes('tidy-offset')
+        ) {
+          tidyShorthandProperty(declaration, tidy);
+        }
+
+        // Replace `tidy-var()` functions throughout.
+        if (declaration.value.includes('tidy-var')) {
+          tidyVar(declaration, tidy);
+        }
       });
 
+      /*
+       * Replace property and function values with columns expressions.
+       */
       rule.walkDecls((declaration) => {
         // Replace `tidy-*` properties.
-        tidyProperty(declaration, tidy);
+        if (
+          declaration.prop.includes('tidy-span')
+          || declaration.prop.includes('tidy-offset')
+        ) {
+          tidyProperty(declaration, tidy);
+        }
+
         // Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
-        tidyFunction(declaration, tidy);
+        if (
+          declaration.value.includes('tidy-span')
+          || declaration.value.includes('tidy-offset')
+        ) {
+          tidyFunction(declaration, tidy);
+        }
       });
 
       const { fullWidthRule } = tidy;

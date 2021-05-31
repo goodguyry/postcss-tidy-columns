@@ -22,10 +22,10 @@ function tidyVar(declaration, tidy) {
   const globalRegExp = new RegExp(VAR_FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(VAR_FUNCTION_REGEX);
 
-  if (localRegExp.test(declaration.value)) {
-    const { columns, columns: { options } } = tidy;
-    const fullMatch = declaration.value.match(globalRegExp);
+  const { columns, columns: { options } } = tidy;
+  const fullMatch = declaration.value.match(globalRegExp);
 
+  if (Array.isArray(fullMatch)) {
     /**
      * Find all matches in the declaration value.
      *
