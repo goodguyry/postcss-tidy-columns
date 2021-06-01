@@ -67,7 +67,7 @@ function tidyProperty(declaration, tidy) {
   }
 
   // Replace`tidy-offset-left|right` declaration with `margin-left|right`.
-  if (OFFSET_REGEX.test(declaration.prop)) {
+  if (declaration.prop.includes('tidy-offset-')) {
     /**
      * {undefined} The full property name.
      * direction:  The side upon which the offset will be applied.

@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 **Changed**
 
 - Uses [postcss-calc](https://github.com/postcss/postcss-calc/) to reduce output (#70)
+- Drops support for PostCSS < 8 (#73)
 - Updates dependencies (#72)
 
 ## 0.4.0

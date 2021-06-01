@@ -35,7 +35,7 @@
   "scripts": {
     "test": "npm run lint && jest",
     "watch": "jest --watchAll",
-    "watch:verbose": "jest --watchAll  --verbose",
+    "watch:verbose": "jest --watchAll  --verbose --detectOpenHandles",
     "build": "npm run build --prefix docs",
     "lint": "eslint *.js src/**/*.js lib/**/*.js test/**/*.js"
   },
