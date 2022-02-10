@@ -19,7 +19,7 @@
   "homepage": "https://github.com/goodguyry/postcss-tidy-columns",
   "dependencies": {
     "autoprefixer": "^9.5.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "nodemon": "^1.19.1",
     "postcss": "^6.0.22",
     "postcss-units": "^1.2.1"
