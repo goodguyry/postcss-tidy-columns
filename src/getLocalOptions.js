@@ -1,4 +1,3 @@
-const breakpointMatch = require('./breakpointMatch');
 const parseOptions = require('./parseOptions');
 const collectTidyRuleParams = require('./collectTidyRuleParams');
 
@@ -11,17 +10,13 @@ const collectTidyRuleParams = require('./collectTidyRuleParams');
  * @return {Object} The merged local options.
  */
 function getLocalOptions(rule, global) {
-  const breakpointConfig = ('atrule' === rule.parent.type)
-    ? breakpointMatch(rule.parent.params, global)
-    : {};
-
   // Collect this rule's at-rule values.
   const atRuleParams = collectTidyRuleParams(rule, false);
 
   // Parse the rule's CSS option values.
   const atRuleOpts = parseOptions(atRuleParams);
 
-  return Object.assign({}, global, breakpointConfig, atRuleOpts);
+  return Object.assign({}, global, atRuleOpts);
 }
 
 module.exports = getLocalOptions;

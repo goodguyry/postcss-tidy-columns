@@ -22,7 +22,6 @@ function getGlobalOptions(root, options) {
     // JavaScript options.
     debug: false,
     reduce: false,
-    breakpoints: [], // @todo To be removed.
   };
 
   // Normalize plugin options.

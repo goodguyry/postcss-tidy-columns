@@ -28,7 +28,6 @@ describe('Collect and merge global plugin options', () => {
         gap: '1.25rem',
         siteMax: '90rem',
         debug: false,
-        breakpoints: [],
         reduce: false,
         base: 'vw',
       },
@@ -45,7 +44,6 @@ describe('Collect and merge global plugin options', () => {
         gap: '1.25rem',
         siteMax: '90rem',
         debug: true,
-        breakpoints: [],
         reduce: false,
         base: 'vw',
       },
@@ -58,7 +56,6 @@ describe('Collect and merge global plugin options', () => {
     () => runGlobalOptionsPlugin(
       {
         columns: undefined,
-        breakpoints: [],
         edge: undefined,
         gap: undefined,
         siteMax: undefined,

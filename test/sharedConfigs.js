@@ -62,17 +62,4 @@ module.exports = {
     edge: '0.625rem',
     siteMax: '90rem',
   },
-  typicalWithBreakpoints: {
-    columns: 12,
-    gap: '1.25rem',
-    edge: '0.625rem',
-    breakpoints: {
-      '768px': {
-        gap: '0.625rem',
-      },
-      '1024px': {
-        siteMax: '90rem',
-      },
-    },
-  },
 };

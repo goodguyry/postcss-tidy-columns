@@ -19,11 +19,6 @@ class Tidy {
     // Merge global and local options.
     const currentOptions = getLocalOptions(this.rule, globalOptions);
 
-    // Remove the `breakpoint` property that results from merging in the breakpoint config.
-    if (Object.prototype.hasOwnProperty.call(currentOptions, 'breakpoint')) {
-      delete currentOptions.breakpoint;
-    }
-
     // Instantiate Columns based on the merged options.
     this.columns = new Columns(currentOptions);
   }
