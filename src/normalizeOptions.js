@@ -80,8 +80,8 @@ function normalizeOptions(options) {
           acc[key] = Number(option);
         }
 
-        // `debug` should be a Boolean value.
-        if ('debug' === key && ['true', 'false'].includes(String(option))) {
+        // `debug` and `reduce` should be a Boolean value.
+        if (['debug', 'reduce'].includes(key) && ['true', 'false'].includes(String(option))) {
           acc[key] = ('true' === String(option));
         }
 

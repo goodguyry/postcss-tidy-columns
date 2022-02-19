@@ -11,14 +11,18 @@ const collectTidyRuleParams = require('./collectTidyRuleParams');
   * @return {Object} The merged global options.
   */
 function getGlobalOptions(root, options) {
-  // Default column options.
   const defaultOpts = {
+    // @tidy options.
     columns: undefined,
     gap: undefined,
-    siteMax: undefined,
     edge: undefined,
+    base: 'vw',
+    siteMax: undefined,
+
+    // JavaScript options.
     debug: false,
-    breakpoints: [],
+    reduce: false,
+    breakpoints: [], // @todo To be removed.
   };
 
   // Normalize plugin options.

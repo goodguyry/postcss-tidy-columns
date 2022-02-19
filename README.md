@@ -132,7 +132,7 @@ The number of grid columns in the design.
 
 The width of the gap between each column.
 
-> **Default**: `0`
+> **Default**: `undefined`
 >
 > #### CSS Syntax
 >
@@ -144,7 +144,7 @@ The width of the gap between each column.
 
 The minimum width of the flexible space between the content and the edge of the page.
 
-> **Default**: `0`
+> **Default**: `undefined`
 >
 > #### CSS Syntax
 >
@@ -156,7 +156,7 @@ The minimum width of the flexible space between the content and the edge of the 
 
 The max-width of the site, including [`edge`](#edge) spacing; the point at which the site transitions from fluid width to static width. Setting a `max` value ensures the column and margin widths are correct once the site width is static.
 
-> **Default**: `null`
+> **Default**: `undefined`
 >
 > #### CSS Syntax
 >

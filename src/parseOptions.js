@@ -15,7 +15,7 @@ function parseOptions(optionsArray) {
      * value:    The option value.
      */
     const [prop, value] = setting.match(/^(\S+)\s(.*)/).slice(1);
-    const property = camelCaseString(prop);
+    const property = camelCaseString(prop); // @todo Remove after updating `siteMax` to `max`.
 
     acc[property] = value.trim();
 
