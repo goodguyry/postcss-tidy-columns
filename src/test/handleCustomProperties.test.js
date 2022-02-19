@@ -5,13 +5,14 @@ const rule = {
 };
 
 /**
- * Reject usage of CSS Custom Properties in `@tidy site-max` rules.
+ * Reject usage of CSS Custom Properties in `@tidy max` rules.
  */
-describe('Reject usage of CSS Custom Properties in `@tidy site-max` rules', () => {
+describe('Reject usage of CSS Custom Properties in `@tidy max` rules', () => {
+  // @todo Make sure this doesn't fail.
   test(
-    'Using a CSS Custom Property value for `site-max` throws an error',
+    'Using a CSS Custom Property value for `max` throws an error',
     () => expect(() => {
-      handleCustomProperties(rule, 'site-max var(--siteMax)');
+      handleCustomProperties(rule, 'max var(--site-max)');
     }).toThrow(),
   );
 

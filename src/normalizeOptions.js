@@ -35,7 +35,7 @@ function normalizeOptions(options) {
         }
 
         // These should all be valid, positive CSS length values.
-        if (['gap', 'edge', 'siteMax'].includes(key) && LENGTH_REGEX.test(option)) {
+        if (['gap', 'edge', 'max'].includes(key) && LENGTH_REGEX.test(option)) {
           // Force `undefined` in place of unitless non-zero value.
           const fallback = 0 === Number(option) ? 0 : undefined;
           acc[key] = (/(px|r?em)$/.test(option)) ? option : fallback;

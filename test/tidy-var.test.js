@@ -85,8 +85,8 @@ describe('Matches tidy-var() functions', () => {
       ['tidy-var(edge)', 'edge'],
     ],
     [
-      'tidy-var(siteMax)',
-      ['tidy-var(siteMax)', 'siteMax'],
+      'tidy-var(max)',
+      ['tidy-var(max)', 'max'],
     ],
     [
       'tidy-var(columns)',

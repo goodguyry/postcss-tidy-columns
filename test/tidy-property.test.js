@@ -34,7 +34,7 @@ describe('The `tidy-offset-*` properties are replaced and their values reflect t
   );
 
   test(
-    'Offsets without a `siteMax` do not output a media query',
+    'Offsets without a `max` do not output a media query',
     () => run(
       'div { tidy-offset-right: 2; }',
       // calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px * 2)
@@ -66,7 +66,7 @@ describe('The `tidy-span` property is replaced and its values reflect the expect
   );
 
   test(
-    'Spans without a `siteMax` do not output a `max-width` declaration',
+    'Spans without a `max` do not output a `max-width` declaration',
     () => run(
       'div { tidy-span: 2; }',
       // calc((((100vw - 1rem * 2) / 12 - 9.1667px) * 2) + 10px)

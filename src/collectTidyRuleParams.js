@@ -18,7 +18,7 @@ module.exports = function collectTidyRuleParams(css, fromCssRoot) {
     const rootCheck = (fromCssRoot ? 'root' === parentType : 'root' !== parentType);
 
     if (rootCheck) {
-      // Reject `site-max` with CSS Custom Property.
+      // Reject `max` with CSS Custom Property.
       if (isCustomProperty(params)) {
         handleCustomProperties(atrule, params);
       }

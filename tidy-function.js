@@ -53,7 +53,7 @@ function tidyFunction(declaration, tidy) {
        * Use the object's `isNested` value to suppress the `calc` from the output.
        *
        * fluid: calc() function based on 100vw base.
-       * full:  calc() function based on `siteMax` base.
+       * full:  calc() function based on `max` base.
        */
       const { fluid, full } = ('span' === slug)
         ? columns.spanCalc(value)

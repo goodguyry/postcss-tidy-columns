@@ -29,7 +29,7 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
         columns: 8,
         edge: '0.625rem',
         gap: '1.25rem',
-        siteMax: '90rem',
+        max: '90rem',
       },
       typical,
     ),
@@ -38,10 +38,10 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
   test(
     '@tidy value adds a global option',
     () => runLocalOptionsPlugin(
-      'div { @tidy site-max 90rem; @tidy debug true; }',
+      'div { @tidy max 90rem; @tidy debug true; }',
       {
         columns: 12,
-        siteMax: '90rem',
+        max: '90rem',
         debug: true,
       },
       columnsOnly,

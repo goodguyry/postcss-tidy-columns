@@ -29,7 +29,7 @@ function tidyProperty(declaration, tidy) {
   if ('tidy-span' === declaration.prop) {
     /**
      * fluid: calc() function based on 100vw base.
-     * full:  calc() function based on `siteMax` base.
+     * full:  calc() function based on `max` base.
      */
     const { fluid, full } = columns.spanCalc(declaration.value);
 
@@ -75,7 +75,7 @@ function tidyProperty(declaration, tidy) {
     const [, direction] = declaration.prop.match(OFFSET_REGEX);
     /**
      * fluid: calc() function based on 100vw base.
-     * full:  calc() function based on `siteMax` base.
+     * full:  calc() function based on `max` base.
      */
     const { fluid, full } = columns.offsetCalc(declaration.value);
 

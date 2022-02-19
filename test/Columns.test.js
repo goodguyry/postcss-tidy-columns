@@ -2,11 +2,11 @@
 const {
   allValues,
   edgeGap,
-  edgeSiteMax,
-  gapSiteMax,
+  edgeMax,
+  gapMax,
   edgeOnly,
   gapOnly,
-  siteMaxOnly,
+  maxOnly,
   columnsOnly,
   customProperties,
 } = require('./sharedConfigs');
@@ -66,7 +66,7 @@ describe('Checking values passed to Columns.buildCalcFunction()', () => {
     });
   });
 
-  test('Omits a `full` value with no `siteMax` option', () => {
+  test('Omits a `full` value with no `max` option', () => {
     const instance = new Columns(edgeGap);
     jest.spyOn(instance, 'buildCalcFunction');
 
@@ -100,7 +100,7 @@ describe('Get calc functions from buildCalcFunction()', () => {
     });
   });
 
-  test('Omits a `full` value with no `siteMax` option', () => {
+  test('Omits a `full` value with no `max` option', () => {
     const instance = new Columns(edgeGap);
 
     const expected = {
@@ -130,7 +130,7 @@ testColumnsMethod({
     },
     {
       description: 'Calculates a `0` shared gap if a gap option is not declared',
-      actual: new Columns(edgeSiteMax).getSharedGap(),
+      actual: new Columns(edgeMax).getSharedGap(),
       expected: 0,
     },
     {
@@ -142,10 +142,10 @@ testColumnsMethod({
 });
 
 /**
- * Create the column `calc()` function declaration for each siteMax.
+ * Create the column `calc()` function declaration for each base value.
  */
 testColumnsMethod({
-  description: 'Create the column `calc()` function declaration for each siteMax',
+  description: 'Create the column `calc()` function declaration for each base value',
   tests: [
     // ---------- All options
     {
@@ -218,9 +218,9 @@ testColumnsMethod({
         full: 'calc(11.504rem - 10px)',
       },
     },
-    // ---------- No siteMax
+    // ---------- No max
     {
-      description: 'Omits a `full` value with no `siteMax` option',
+      description: 'Omits a `full` value with no `max` option',
       actual: new Columns(edgeGap).spanCalc(1),
       expected: {
         // calc((100vw - 1rem * 2) / 12 - 9.1667px)
@@ -230,7 +230,7 @@ testColumnsMethod({
     // ---------- No gap
     {
       description: 'Omits shared gap for single column with no `gap` option',
-      actual: new Columns(edgeSiteMax).spanCalc(1),
+      actual: new Columns(edgeMax).spanCalc(1),
       expected: {
         // calc((100vw - 1.25rem * 2) / 16)
         fluid: 'calc(6.25vw - 0.1563rem)',
@@ -240,7 +240,7 @@ testColumnsMethod({
     },
     {
       description: 'Omits the gap addition wtih no `gap` option',
-      actual: new Columns(edgeSiteMax).spanCalc(2),
+      actual: new Columns(edgeMax).spanCalc(2),
       expected: {
         // calc(((100vw - 1.25rem * 2) / 16) * 2)
         fluid: 'calc(12.5vw - 0.3125rem)',
@@ -251,7 +251,7 @@ testColumnsMethod({
     // ---------- No edge
     {
       description: 'Omits the edge subtraction with no `edge` option',
-      actual: new Columns(gapSiteMax).spanCalc(1),
+      actual: new Columns(gapMax).spanCalc(1),
       expected: {
         // calc(100vw / 16 - 14.0625px)
         fluid: 'calc(6.25vw - 14.0625px)',
@@ -277,10 +277,10 @@ testColumnsMethod({
         fluid: 'calc(8.3333vw - 0.8594rem)',
       },
     },
-    // ---------- siteMax only
+    // ---------- max only
     {
-      description: 'Omits undeclared values from span ouput: `siteMax` only',
-      actual: new Columns(siteMaxOnly).spanCalc(1),
+      description: 'Omits undeclared values from span ouput: `max` only',
+      actual: new Columns(maxOnly).spanCalc(1),
       expected: {
         // calc(100vw / 16)
         fluid: '6.25vw',
@@ -290,7 +290,7 @@ testColumnsMethod({
     },
     {
       description: 'Omits undeclared values from span ouput: `edge` only (multiple columns)',
-      actual: new Columns(siteMaxOnly).spanCalc(5),
+      actual: new Columns(maxOnly).spanCalc(5),
       expected: {
         // calc((100vw / 16) * 5)
         fluid: '31.25vw',
@@ -330,10 +330,10 @@ testColumnsMethod({
 });
 
 /**
- * Create the offset `calc()` function declaration for each siteMax.
+ * Create the offset `calc()` function declaration for each base value.
  */
 testColumnsMethod({
-  description: 'Create the offset `calc()` function declaration for each siteMax',
+  description: 'Create the offset `calc()` function declaration for each base value',
   tests: [
     // ---------- All options
     {
@@ -406,9 +406,9 @@ testColumnsMethod({
         full: 'calc(9.7608rem - 8.3px)',
       },
     },
-    // ---------- No siteMax
+    // ---------- No max
     {
-      description: 'Omits a `full` value with no `siteMax` option',
+      description: 'Omits a `full` value with no `max` option',
       actual: new Columns(edgeGap).offsetCalc(1),
       expected: {
         // calc(((100vw - 1rem * 2) / 12 - 9.1667px) + 10px)
@@ -418,7 +418,7 @@ testColumnsMethod({
     // ---------- No gap
     {
       description: 'Omits shared gap for single column with no `gap` option',
-      actual: new Columns(edgeSiteMax).offsetCalc(1),
+      actual: new Columns(edgeMax).offsetCalc(1),
       expected: {
         // calc((100vw - 1.25rem * 2) / 16)
         fluid: 'calc(6.25vw - 0.1563rem)',
@@ -428,7 +428,7 @@ testColumnsMethod({
     },
     {
       description: 'Omits the gap addition wtih no `gap` option',
-      actual: new Columns(edgeSiteMax).offsetCalc(2),
+      actual: new Columns(edgeMax).offsetCalc(2),
       expected: {
         // calc(((100vw - 1.25rem * 2) / 16) * 2)
         fluid: 'calc(12.5vw - 0.3125rem)',
@@ -439,7 +439,7 @@ testColumnsMethod({
     // ---------- No edge
     {
       description: 'Omits the edge subtraction with no `edge` option',
-      actual: new Columns(gapSiteMax).offsetCalc(1),
+      actual: new Columns(gapMax).offsetCalc(1),
       expected: {
         // calc((100vw / 16 - 14.0625px) + 15px)
         fluid: 'calc(6.25vw + 0.9375px)',
@@ -473,10 +473,10 @@ testColumnsMethod({
         fluid: 'calc(8.3333vw + 0.0781rem)',
       },
     },
-    // ---------- siteMax only
+    // ---------- max only
     {
-      description: 'Omits undeclared values from span ouput: `siteMax` only',
-      actual: new Columns(siteMaxOnly).offsetCalc(1),
+      description: 'Omits undeclared values from span ouput: `max` only',
+      actual: new Columns(maxOnly).offsetCalc(1),
       expected: {
         // calc(100vw / 16)
         fluid: '6.25vw',
