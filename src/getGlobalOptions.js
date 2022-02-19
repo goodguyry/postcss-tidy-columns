@@ -21,7 +21,7 @@ function getGlobalOptions(root, options) {
 
     // JavaScript options.
     debug: false,
-    reduce: false,
+    reduce: false, // @todo Reduce only when this is true,
   };
 
   // Normalize plugin options.
