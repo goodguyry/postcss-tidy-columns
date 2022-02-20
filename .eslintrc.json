@@ -19,5 +19,6 @@
         "ignoreComments": true
       }
     ]
-  }
+  },
+  "ignorePatterns": ["**/*.md"]
 }
