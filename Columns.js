@@ -15,10 +15,10 @@ class Columns {
     this.options = options;
 
     // Collect baseValues to be used in column and offset calc() functions.
-    this.baseValues = ['100vw'];
-    if (undefined !== this.options.max) {
-      this.baseValues.push(this.options.max);
-    }
+    const fluidBase = '100vw';
+    this.baseValue = (undefined !== this.options.max)
+      ? `min(${fluidBase}, ${this.options.max})`
+      : fluidBase;
 
     this.fullWidthRule = null;
 
@@ -81,12 +81,12 @@ class Columns {
    *
    * @return {String}
    */
-  getSingleColumn(base) {
+  getSingleColumn() {
     const { columns } = this.options;
     // 100vw : (100vw - 10px * 2)
     const baseValue = hasEmptyValue(this.edges)
-      ? base
-      : `(${base} - ${this.edges})`;
+      ? this.baseValue
+      : `(${this.baseValue} - ${this.edges})`;
 
     // 12 - 9.1667px : 12
     const columnReduction = (this.sharedGap)
@@ -99,17 +99,16 @@ class Columns {
   /**
    * Complete the calc() function.
    *
-   * @param {String}  base The current base value size.
-   * @param {Number}  colSpan The number of columns to span.
-   * @param {Number}  gapSpan The number of gaps to span.
+   * @param {Number} colSpan The number of columns to span.
+   * @param {Number} gapSpan The number of gaps to span.
    *
    * @return {String}
    */
-  buildCalcFunction(base, colSpan, gapSpan) {
+  buildCalcFunction(colSpan, gapSpan) {
     const { gap, reduce } = this.options;
 
     // The base calc() equation.
-    let cssCalcEquation = this.getSingleColumn(base);
+    let cssCalcEquation = this.getSingleColumn();
 
     // Only multiply columns if there are more than one.
     if (1 !== colSpan) {
@@ -141,18 +140,15 @@ class Columns {
    */
   spanCalc(colSpan) {
     const columnSpan = parseFloat(colSpan, 10);
-    const [fluid, full] = this.baseValues.map((base) => {
-      /**
-       * Subtract from columnSpan, then round up to account for fractional columns.
-       * We are *always* spanning one more column than gap.
-       * Ensure we maintain the sign of the columnSpan value.
-       */
-      const gapSpan = Math.ceil(columnSpan + (Math.sign(columnSpan) * -1));
 
-      return this.buildCalcFunction(base, columnSpan, gapSpan);
-    });
+    /**
+     * Subtract from columnSpan, then round up to account for fractional columns.
+     * We are *always* spanning one more column than gap.
+     * Ensure we maintain the sign of the columnSpan value.
+     */
+    const gapSpan = Math.ceil(columnSpan + (Math.sign(columnSpan) * -1));
 
-    return { fluid, full };
+    return this.buildCalcFunction(columnSpan, gapSpan);
   }
 
   /**
@@ -164,14 +160,11 @@ class Columns {
    */
   offsetCalc(colSpan) {
     const columnSpan = parseFloat(colSpan, 10);
-    const [fluid, full] = this.baseValues.map((base) => {
-      // Round columnSpan down to account for fractional columns.
-      const gapSpan = Math.floor(columnSpan);
 
-      return this.buildCalcFunction(base, columnSpan, gapSpan);
-    });
+    // Round columnSpan down to account for fractional columns.
+    const gapSpan = Math.floor(columnSpan);
 
-    return { fluid, full };
+    return this.buildCalcFunction(columnSpan, gapSpan);
   }
 }
 

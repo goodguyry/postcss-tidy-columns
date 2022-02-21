@@ -55,14 +55,14 @@ describe('Checking values passed to Columns.buildCalcFunction()', () => {
 
     test('Single column', () => {
       instance.spanCalc(1);
-      expect(instance.buildCalcFunction).toHaveBeenCalledWith('100vw', 1, 0);
-      expect(instance.buildCalcFunction).toHaveBeenCalledWith('75rem', 1, 0);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith(1, 0);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith(1, 0);
     });
 
     test('Fractional columns (greater than 2)', () => {
       instance.spanCalc(2.5);
-      expect(instance.buildCalcFunction).toHaveBeenCalledWith('100vw', 2.5, 2);
-      expect(instance.buildCalcFunction).toHaveBeenCalledWith('75rem', 2.5, 2);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith(2.5, 2);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith(2.5, 2);
     });
   });
 
@@ -71,7 +71,7 @@ describe('Checking values passed to Columns.buildCalcFunction()', () => {
     jest.spyOn(instance, 'buildCalcFunction');
 
     instance.spanCalc(2.5);
-    expect(instance.buildCalcFunction).toHaveBeenCalledWith('100vw', 2.5, 2);
+    expect(instance.buildCalcFunction).toHaveBeenCalledWith(2.5, 2);
   });
 });
 
@@ -80,35 +80,24 @@ describe('Get calc functions from buildCalcFunction()', () => {
     const instance = new Columns(allValues); // eslint-disable-line
 
     test('Single column', () => {
-      const expected = {
-        fluid: 'calc(6.25vw - 4px - 0.5859rem)',
-        full: 'calc(4.1016rem - 4px)',
-      };
+      const expected = 'calc((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem)';
 
-      expect(instance.buildCalcFunction('100vw', 1, 0)).toEqual(expected.fluid);
-      expect(instance.buildCalcFunction('75rem', 1, 0)).toEqual(expected.full);
+      expect(instance.buildCalcFunction(1, 0)).toEqual(expected);
     });
 
     test('Fractional columns (greater than 2)', () => {
-      const expected = {
-        fluid: 'calc(15.625vw - 10px - 0.2148rem)',
-        full: 'calc(11.504rem - 10px)',
-      };
+      const expected = 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)';
 
-      expect(instance.buildCalcFunction('100vw', 2.5, 2)).toEqual(expected.fluid);
-      expect(instance.buildCalcFunction('75rem', 2.5, 2)).toEqual(expected.full);
+      expect(instance.buildCalcFunction(2.5, 2)).toEqual(expected);
     });
   });
 
   test('Omits a `full` value with no `max` option', () => {
     const instance = new Columns(edgeGap);
 
-    const expected = {
-      fluid: 'calc(8.3333vw - 0.1667rem - 9.1667px)',
-    };
+    const expected = 'calc((100vw - 1rem * 2) / 12 - 9.1667px)';
 
-    expect(instance.buildCalcFunction('100vw', 1, 0)).toEqual(expected.fluid);
-    expect(undefined).toEqual(expected.full);
+    expect(instance.buildCalcFunction(1, 0)).toEqual(expected);
   });
 });
 
@@ -151,180 +140,100 @@ testColumnsMethod({
     {
       description: 'All options: single column',
       actual: new Columns(allValues).spanCalc(1),
-      expected: {
-        // calc((100vw - 32px * 2) / 16 - 0.5859rem)
-        fluid: 'calc(6.25vw - 4px - 0.5859rem)',
-        // calc((75rem - 32px * 2) / 16 - 0.5859rem)
-        full: 'calc(4.1016rem - 4px)',
-      },
+      expected: 'calc((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem)',
     },
     {
       description: 'All options: two columns',
       actual: new Columns(allValues).spanCalc(2),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)
-        fluid: 'calc(12.5vw - 8px - 0.5468rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)
-        full: 'calc(8.8282rem - 8px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)',
     },
     {
       description: 'All options: three columns',
       actual: new Columns(allValues).spanCalc(4),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 4) + 0.625rem * 3)
-        fluid: 'calc(25vw - 16px - 0.4686rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 4) + 0.625rem * 3)
-        full: 'calc(18.2814rem - 16px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 4) + 0.625rem * 3)',
     },
     {
       description: 'All options: negative columns',
       actual: new Columns(allValues).spanCalc(-4),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -3)
-        fluid: 'calc(-25vw + 16px + 0.4686rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -3)
-        full: 'calc(-18.2814rem + 16px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -3)',
     },
     {
       description: 'All options: fractional columns (less than 1)',
       actual: new Columns(allValues).spanCalc(0.5),
-      expected: {
-        // calc(((100vw - 32px * 2) / 16 - 0.5859rem) * 0.5)
-        fluid: 'calc(3.125vw - 2px - 0.293rem)',
-        // calc(((75rem - 32px * 2) / 16 - 0.5859rem) * 0.5)
-        full: 'calc(2.0508rem - 2px)',
-      },
+      expected: 'calc(((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 0.5)',
     },
     {
       description: 'All options: fractional columns (greater than 1)',
       actual: new Columns(allValues).spanCalc(1.75),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 1.75) + 0.625rem)
-        fluid: 'calc(10.9375vw - 7px - 0.4003rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 1.75) + 0.625rem)
-        full: 'calc(7.8028rem - 7px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 1.75) + 0.625rem)',
     },
     {
       description: 'All options: fractional columns (greater than 2)',
       actual: new Columns(allValues).spanCalc(2.5),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)
-        fluid: 'calc(15.625vw - 10px - 0.2148rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)
-        full: 'calc(11.504rem - 10px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 2.5) + 0.625rem * 2)',
     },
     // ---------- No max
     {
       description: 'Omits a `full` value with no `max` option',
       actual: new Columns(edgeGap).spanCalc(1),
-      expected: {
-        // calc((100vw - 1rem * 2) / 12 - 9.1667px)
-        fluid: 'calc(8.3333vw - 0.1667rem - 9.1667px)',
-      },
+      expected: 'calc((100vw - 1rem * 2) / 12 - 9.1667px)',
     },
     // ---------- No gap
     {
       description: 'Omits shared gap for single column with no `gap` option',
       actual: new Columns(edgeMax).spanCalc(1),
-      expected: {
-        // calc((100vw - 1.25rem * 2) / 16)
-        fluid: 'calc(6.25vw - 0.1563rem)',
-        // calc((1024px - 1.25rem * 2) / 16)
-        full: 'calc(64px - 0.1563rem)',
-      },
+      expected: 'calc((min(100vw, 1024px) - 1.25rem * 2) / 16)',
     },
     {
       description: 'Omits the gap addition wtih no `gap` option',
       actual: new Columns(edgeMax).spanCalc(2),
-      expected: {
-        // calc(((100vw - 1.25rem * 2) / 16) * 2)
-        fluid: 'calc(12.5vw - 0.3125rem)',
-        // calc(((1024px - 1.25rem * 2) / 16) * 2)
-        full: 'calc(128px - 0.3125rem)',
-      },
+      expected: 'calc(((min(100vw, 1024px) - 1.25rem * 2) / 16) * 2)',
     },
     // ---------- No edge
     {
       description: 'Omits the edge subtraction with no `edge` option',
       actual: new Columns(gapMax).spanCalc(1),
-      expected: {
-        // calc(100vw / 16 - 14.0625px)
-        fluid: 'calc(6.25vw - 14.0625px)',
-        // calc(60rem / 16 - 14.0625px)
-        full: 'calc(3.75rem - 14.0625px)',
-      },
+      expected: 'calc(min(100vw, 60rem) / 16 - 14.0625px)',
     },
     // ---------- Edges only
     {
       description: 'Omits undeclared values from span ouput: `edge` only',
       actual: new Columns(edgeOnly).spanCalc(1),
-      expected: {
-        // calc((100vw - 20px * 2) / 12)
-        fluid: 'calc(8.3333vw - 3.3333px)',
-      },
+      expected: 'calc((100vw - 20px * 2) / 12)',
     },
     // ---------- Gap only
     {
       description: 'Omits undeclared values from span ouput: `gap` only',
       actual: new Columns(gapOnly).spanCalc(1),
-      expected: {
-        // calc(100vw / 12 - 0.8594rem)
-        fluid: 'calc(8.3333vw - 0.8594rem)',
-      },
+      expected: 'calc(100vw / 12 - 0.8594rem)',
     },
     // ---------- max only
     {
       description: 'Omits undeclared values from span ouput: `max` only',
       actual: new Columns(maxOnly).spanCalc(1),
-      expected: {
-        // calc(100vw / 16)
-        fluid: '6.25vw',
-        // calc(1200px / 16)
-        full: '75px',
-      },
+      expected: 'calc(min(100vw, 1200px) / 16)',
     },
     {
       description: 'Omits undeclared values from span ouput: `edge` only (multiple columns)',
       actual: new Columns(maxOnly).spanCalc(5),
-      expected: {
-        // calc((100vw / 16) * 5)
-        fluid: '31.25vw',
-        // calc((1200px / 16) * 5)
-        full: '375px',
-      },
+      expected: 'calc((min(100vw, 1200px) / 16) * 5)',
     },
     // ---------- Columns only
     {
       description: 'Omits undeclared values from span ouput: `columns` only',
       actual: new Columns(columnsOnly).spanCalc(1),
-      expected: {
-        // calc(100vw / 12)
-        fluid: '8.3333vw',
-      },
+      expected: 'calc(100vw / 12)',
     },
     {
       description: 'Omits undeclared values from span ouput: `columns` only (multiple columns)',
       actual: new Columns(columnsOnly).spanCalc(3),
-      expected: {
-        // calc((100vw / 12) * 3)
-        fluid: '25vw',
-      },
+      expected: 'calc((100vw / 12) * 3)',
     },
     // ---------- Custom Properties
     {
       description: 'Custom properties used in option values',
       actual: new Columns(customProperties).spanCalc(3),
-      expected: {
-        // calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)
-        fluid: 'calc((100vw - var(--edge)*2)/var(--columns)*3 - var(--gap)/var(--columns)*(var(--columns) - 1)*3 + var(--gap)*2)',
-        // calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)
-        full: 'calc((90rem - var(--edge)*2)/var(--columns)*3 - var(--gap)/var(--columns)*(var(--columns) - 1)*3 + var(--gap)*2)',
-      },
+      expected: 'calc((((min(100vw, 90rem) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)',
     },
   ],
 });
@@ -339,178 +248,100 @@ testColumnsMethod({
     {
       description: 'All options: single column',
       actual: new Columns(allValues).offsetCalc(1),
-      expected: {
-        // calc(((100vw - 32px * 2) / 16 - 0.5859rem) + 0.625rem)
-        fluid: 'calc(6.25vw - 4px + 0.0391rem)',
-        // calc(((75rem - 32px * 2) / 16 - 0.5859rem) + 0.625rem)
-        full: 'calc(4.7266rem - 4px)',
-      },
+      expected: 'calc(((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) + 0.625rem)',
     },
     {
       description: 'All options: two columns',
       actual: new Columns(allValues).offsetCalc(2),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem * 2)
-        fluid: 'calc(12.5vw - 8px + 0.0782rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem * 2)
-        full: 'calc(9.4532rem - 8px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem * 2)',
     },
     {
       description: 'All options: three columns',
       actual: new Columns(allValues).offsetCalc(3),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 3)
-        fluid: 'calc(18.75vw - 12px + 0.1173rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 3)
-        full: 'calc(14.1798rem - 12px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 3)',
     },
     {
       description: 'All options: negative columns',
       actual: new Columns(allValues).offsetCalc(-4),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -4)
-        fluid: 'calc(-25vw + 16px - 0.1564rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -4)
-        full: 'calc(-18.9064rem + 16px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * -4) + 0.625rem * -4)',
     },
     {
       description: 'All options: fractional columns (less than 1)',
       actual: new Columns(allValues).offsetCalc(0.75),
-      expected: {
-        // calc(((100vw - 32px * 2) / 16 - 0.5859rem) * 0.75)
-        fluid: 'calc(4.6875vw - 3px - 0.4394rem)',
-        // calc(((75rem - 32px * 2) / 16 - 0.5859rem) * 0.75)
-        full: 'calc(3.0762rem - 3px)',
-      },
+      expected: 'calc(((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 0.75)',
     },
     {
       description: 'All options: fractional columns (greater than 1)',
       actual: new Columns(allValues).offsetCalc(1.5),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 1.5) + 0.625rem)
-        fluid: 'calc(9.375vw - 6px - 0.2538rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 1.5) + 0.625rem)
-        full: 'calc(6.7774rem - 6px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 1.5) + 0.625rem)',
     },
     {
       description: 'All options: fractional columns (greater than 2)',
       actual: new Columns(allValues).offsetCalc(2.075),
-      expected: {
-        // calc((((100vw - 32px * 2) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)
-        fluid: 'calc(12.9688vw - 8.3px + 0.0343rem)',
-        // calc((((75rem - 32px * 2) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)
-        full: 'calc(9.7608rem - 8.3px)',
-      },
+      expected: 'calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 2.075) + 0.625rem * 2)',
     },
     // ---------- No max
     {
       description: 'Omits a `full` value with no `max` option',
       actual: new Columns(edgeGap).offsetCalc(1),
-      expected: {
-        // calc(((100vw - 1rem * 2) / 12 - 9.1667px) + 10px)
-        fluid: 'calc(8.3333vw - 0.1667rem + 0.8333px)',
-      },
+      expected: 'calc(((100vw - 1rem * 2) / 12 - 9.1667px) + 10px)',
     },
     // ---------- No gap
     {
       description: 'Omits shared gap for single column with no `gap` option',
       actual: new Columns(edgeMax).offsetCalc(1),
-      expected: {
-        // calc((100vw - 1.25rem * 2) / 16)
-        fluid: 'calc(6.25vw - 0.1563rem)',
-        // calc((1024px - 1.25rem * 2) / 16)
-        full: 'calc(64px - 0.1563rem)',
-      },
+      expected: 'calc((min(100vw, 1024px) - 1.25rem * 2) / 16)',
     },
     {
       description: 'Omits the gap addition wtih no `gap` option',
       actual: new Columns(edgeMax).offsetCalc(2),
-      expected: {
-        // calc(((100vw - 1.25rem * 2) / 16) * 2)
-        fluid: 'calc(12.5vw - 0.3125rem)',
-        // calc(((1024px - 1.25rem * 2) / 16) * 2)
-        full: 'calc(128px - 0.3125rem)',
-      },
+      expected: 'calc(((min(100vw, 1024px) - 1.25rem * 2) / 16) * 2)',
     },
     // ---------- No edge
     {
       description: 'Omits the edge subtraction with no `edge` option',
       actual: new Columns(gapMax).offsetCalc(1),
-      expected: {
-        // calc((100vw / 16 - 14.0625px) + 15px)
-        fluid: 'calc(6.25vw + 0.9375px)',
-        // calc((60rem / 16 - 14.0625px) + 15px)
-        full: 'calc(3.75rem + 0.9375px)',
-      },
+      expected: 'calc((min(100vw, 60rem) / 16 - 14.0625px) + 15px)',
     },
     // ---------- Edges only
     {
       description: 'Omits undeclared values from span ouput: `edge` only',
       actual: new Columns(edgeOnly).offsetCalc(1),
-      expected: {
-        // calc((100vw - 20px * 2) / 12)
-        fluid: 'calc(8.3333vw - 3.3333px)',
-      },
+      expected: 'calc((100vw - 20px * 2) / 12)',
     },
     {
       description: 'Omits undeclared values from span ouput: `edge` only (multiple columns)',
       actual: new Columns(edgeOnly).offsetCalc(2),
-      expected: {
-        // calc(((100vw - 20px * 2) / 12) * 2)
-        fluid: 'calc(16.6667vw - 6.6667px)',
-      },
+      expected: 'calc(((100vw - 20px * 2) / 12) * 2)',
     },
     // ---------- Gap only
     {
       description: 'Omits undeclared values from span ouput: `gap` only',
       actual: new Columns(gapOnly).offsetCalc(1),
-      expected: {
-        // calc((100vw / 12 - 0.8594rem) + 0.9375rem)
-        fluid: 'calc(8.3333vw + 0.0781rem)',
-      },
+      expected: 'calc((100vw / 12 - 0.8594rem) + 0.9375rem)',
     },
     // ---------- max only
     {
       description: 'Omits undeclared values from span ouput: `max` only',
       actual: new Columns(maxOnly).offsetCalc(1),
-      expected: {
-        // calc(100vw / 16)
-        fluid: '6.25vw',
-        // calc(1200px / 16)
-        full: '75px',
-      },
+      expected: 'calc(min(100vw, 1200px) / 16)',
     },
     // ---------- Columns only
     {
       description: 'Omits undeclared values from span ouput: `columns` only',
       actual: new Columns(columnsOnly).offsetCalc(1),
-      expected: {
-        // calc(100vw / 12)
-        fluid: '8.3333vw',
-      },
+      expected: 'calc(100vw / 12)',
     },
     {
       description: 'Omits undeclared values from span ouput: `columns` only (multiple columns)',
       actual: new Columns(columnsOnly).offsetCalc(4),
-      expected: {
-        // calc((100vw / 12) * 4)
-        fluid: '33.3333vw',
-      },
+      expected: 'calc((100vw / 12) * 4)',
     },
     // ---------- Custom Properties
     {
       description: 'Custom properties used in option values',
       actual: new Columns(customProperties).offsetCalc(3),
-      expected: {
-        // calc((((100vw - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)
-        fluid: 'calc((100vw - var(--edge)*2)/var(--columns)*3 - var(--gap)/var(--columns)*(var(--columns) - 1)*3 + var(--gap)*3)',
-        // calc((((90rem - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)
-        full: 'calc((90rem - var(--edge)*2)/var(--columns)*3 - var(--gap)/var(--columns)*(var(--columns) - 1)*3 + var(--gap)*3)',
-      },
+      expected: 'calc((((min(100vw, 90rem) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 3)',
     },
   ],
 });
