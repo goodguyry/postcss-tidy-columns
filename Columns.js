@@ -106,7 +106,7 @@ class Columns {
    * @return {String}
    */
   buildCalcFunction(base, colSpan, gapSpan) {
-    const { gap } = this.options;
+    const { gap, reduce } = this.options;
 
     // The base calc() equation.
     let cssCalcEquation = this.getSingleColumn(base);
@@ -126,8 +126,10 @@ class Columns {
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
     }
 
-    // Reduce the expression.
-    return transformValue(`(${cssCalcEquation})`, this.suppressCalc);
+    // Conditionally educe the expression.
+    return reduce
+      ? transformValue(`(${cssCalcEquation})`, this.suppressCalc)
+      : `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
   }
 
   /**
