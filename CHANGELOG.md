@@ -3,11 +3,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Next
 
+**Added**
+
+- `reduce` option conditionally reduces output using [postcss-calc](https://github.com/postcss/postcss-calc/) (#70, #79)
+
 **Changed**
 
-- Uses [postcss-calc](https://github.com/postcss/postcss-calc/) to reduce output (#70)
 - Drops support for PostCSS < 8 (#73)
 - Updates dependencies (#72)
+- Updates option name: `site-max` and `siteMax` are now `max` (#79)
+- Initial support for outputting a single value using a `min()` function, rather than a media query (#79)
+- The `max` option can now be set to a `var()` function (#79)
+
+**Removed**
+
+- The `breakpoints` option is no longer suppoerted (#79)
 
 ## 0.4.0
 
