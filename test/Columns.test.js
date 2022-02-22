@@ -211,12 +211,12 @@ testColumnsMethod({
     {
       description: 'Omits undeclared values from span ouput: `max` only',
       actual: new Columns(maxOnly).spanCalc(1),
-      expected: 'calc(min(100vw, 1200px) / 16)',
+      expected: 'calc(min(100vw, var(--tmax)) / 16)',
     },
     {
       description: 'Omits undeclared values from span ouput: `edge` only (multiple columns)',
       actual: new Columns(maxOnly).spanCalc(5),
-      expected: 'calc((min(100vw, 1200px) / 16) * 5)',
+      expected: 'calc((min(100vw, var(--tmax)) / 16) * 5)',
     },
     // ---------- Columns only
     {
@@ -324,7 +324,7 @@ testColumnsMethod({
     {
       description: 'Omits undeclared values from span ouput: `max` only',
       actual: new Columns(maxOnly).offsetCalc(1),
-      expected: 'calc(min(100vw, 1200px) / 16)',
+      expected: 'calc(min(100vw, var(--tmax)) / 16)',
     },
     // ---------- Columns only
     {

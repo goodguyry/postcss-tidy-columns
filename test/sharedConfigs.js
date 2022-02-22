@@ -40,7 +40,7 @@ module.exports = {
   },
   maxOnly: {
     columns: 16,
-    max: '1200px',
+    max: 'var(--tmax)',
     edge: undefined,
     gap: undefined,
   },
