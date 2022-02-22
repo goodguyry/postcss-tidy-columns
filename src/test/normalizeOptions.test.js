@@ -6,7 +6,11 @@ const { normalizeOptions, LENGTH_REGEX } = require('../normalizeOptions');
 describe('Normalize option value types', () => {
   test('Omits invalid option values', () => {
     expect(normalizeOptions({
-      columns: 'none', gap: '10vw', edge: 2, max: '90',
+      columns: 'none',
+      gap: '10vw',
+      edge: 2,
+      max: '90',
+      base: 'px',
     }))
       .toEqual({});
   });

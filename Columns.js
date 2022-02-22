@@ -3,6 +3,7 @@ const roundToPrecision = require('./lib/roundToPrecision');
 const splitCssUnit = require('./lib/splitCssUnit');
 const hasEmptyValue = require('./lib/hasEmptyValue');
 const transformValue = require('./lib/transformValue');
+const { normalizeOptions } = require('./src/normalizeOptions');
 
 /**
  * Columns class
@@ -12,12 +13,14 @@ const transformValue = require('./lib/transformValue');
  */
 class Columns {
   constructor(options = {}) {
-    this.options = options;
+    this.options = normalizeOptions(options);
+
+    const { base = 'vw', max } = this.options;
+    const fluidBase = `100${base}`;
 
     // Collect baseValues to be used in column and offset calc() functions.
-    const fluidBase = '100vw';
-    this.baseValue = (undefined !== this.options.max)
-      ? `min(${fluidBase}, ${this.options.max})`
+    this.baseValue = (undefined !== max)
+      ? `min(${fluidBase}, ${max})`
       : fluidBase;
 
     this.fullWidthRule = null;

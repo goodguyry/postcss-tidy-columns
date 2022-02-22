@@ -92,10 +92,18 @@ describe('Get calc functions from buildCalcFunction()', () => {
     });
   });
 
-  test('Omits a `full` value with no `max` option', () => {
-    const instance = new Columns(edgeGap);
+  test('Uses 100% as the fluid base', () => {
+    const instance = new Columns({ ...columnsOnly, base: '%' });
 
-    const expected = 'calc((100vw - 1rem * 2) / 12 - 9.1667px)';
+    const expected = 'calc(100% / 12)';
+
+    expect(instance.buildCalcFunction(1, 0)).toEqual(expected);
+  });
+
+  test('Ignores invalid base option value', () => {
+    const instance = new Columns({ ...columnsOnly, base: 'px' });
+
+    const expected = 'calc(100vw / 12)';
 
     expect(instance.buildCalcFunction(1, 0)).toEqual(expected);
   });

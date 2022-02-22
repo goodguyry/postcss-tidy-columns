@@ -29,6 +29,11 @@ function normalizeOptions(options) {
           acc[key] = Number(option);
         }
 
+        // Base should be 'vw' or '%'.
+        if ('base' === key && ['vw', '%'].includes(option)) {
+          acc[key] = ('%' === option) ? option : 'vw';
+        }
+
         // `debug` and `reduce` should be a Boolean value.
         if (['debug', 'reduce'].includes(key) && ['true', 'false'].includes(String(option))) {
           acc[key] = ('true' === String(option));

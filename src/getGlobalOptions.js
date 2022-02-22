@@ -1,5 +1,4 @@
 const parseOptions = require('./parseOptions');
-const { normalizeOptions } = require('./normalizeOptions');
 const collectTidyRuleParams = require('./collectTidyRuleParams');
 
 /**
@@ -24,16 +23,13 @@ function getGlobalOptions(root, options) {
     reduce: false, // @todo Reduce only when this is true,
   };
 
-  // Normalize plugin options.
-  const pluginOptions = normalizeOptions(options);
-
   // Collect root at-rule values.
   const atRuleParams = collectTidyRuleParams(root, true);
 
   // Parse the CSS option values.
   const atRuleOpts = parseOptions(atRuleParams);
 
-  return Object.assign(defaultOpts, pluginOptions, atRuleOpts);
+  return Object.assign(defaultOpts, options, atRuleOpts);
 }
 
 module.exports = getGlobalOptions;

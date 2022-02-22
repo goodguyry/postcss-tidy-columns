@@ -29,9 +29,9 @@ describe('Collect and merge global plugin options', () => {
         max: '90rem',
         debug: false,
         reduce: false,
-        base: 'vw',
+        base: '%',
       },
-      typical,
+      { ...typical, base: '%' },
     ),
   );
 
