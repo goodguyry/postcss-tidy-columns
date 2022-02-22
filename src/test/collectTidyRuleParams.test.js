@@ -22,8 +22,8 @@ describe('Collect @tidy params from the provided CSS root', () => {
   test(
     'Collects options with/without colons, CSS custom Properties',
     () => runTidyRuleParamsPlugin(
-      '@tidy columns 12; @tidy gap var(--gap); @tidy max: 90rem;',
-      ['columns 12', 'gap var(--gap)', 'max: 90rem'],
+      '@tidy columns 12; @tidy gap var(--gap); @tidy max: var(--tmax);',
+      ['columns 12', 'gap var(--gap)', 'max: var(--tmax)'],
       true,
     ),
   );
