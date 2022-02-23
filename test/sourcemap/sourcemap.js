@@ -12,7 +12,7 @@ module.exports = [
         'offset-left.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,kCAAmB;AACpB;AAFA;CAAA;EACC,mBAAmB;CACpB;AAAA',
+      mappings: 'AAAA;CACC,kFAAmB;AACpB',
       file: 'offset-left.generated.css',
       sourcesContent: [
         'div {\n\ttidy-offset-left: 1;\n}\n',
@@ -32,7 +32,7 @@ module.exports = [
         'span.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,kCAAY;CAAZ,qBAAY;AACb',
+      mappings: 'AAAA;CACC,kFAAY;AACb',
       file: 'span.generated.css',
       sourcesContent: [
         'div {\n\ttidy-span: 2;\n}\n',
@@ -52,7 +52,7 @@ module.exports = [
         'column.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,6BAA2B;CAA3B,qBAA2B;CAA3B,wCAA2B;CAA3B,mCAA2B;AAC5B;AAFA;CAAA;EACC,uBAA2B;EAA3B,oBAA2B;CAC5B;AAAA',
+      mappings: 'AAAA;CACC,sFAA2B;CAA3B,4FAA2B;CAA3B,mFAA2B;AAC5B',
       file: 'column.generated.css',
       sourcesContent: [
         'div {\n\ttidy-column: 2 / span 3 / 1;\n}\n',
@@ -72,7 +72,7 @@ module.exports = [
         'offset.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,mCAAkB;CAAlB,yCAAkB;AACnB;AAFA;CAAA;EACC,uBAAkB;EAAlB,wBAAkB;CACnB;AAAA',
+      mappings: 'AAAA;CACC,4FAAkB;CAAlB,6FAAkB;AACnB',
       file: 'offset.generated.css',
       sourcesContent: [
         'div {\n\ttidy-offset: 3 / 4;\n}\n',
@@ -92,7 +92,7 @@ module.exports = [
         'function-span.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,kCAAmB;CACnB,qBAA4B;AAC7B',
+      mappings: 'AAAA;CACC,kFAAmB;CACnB,sFAA4B;AAC7B',
       file: 'function-span.generated.css',
       sourcesContent: [
         'div {\n\twidth: tidy-span(2);\n\tmax-width: tidy-span-full(2);\n}\n',

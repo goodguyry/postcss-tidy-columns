@@ -75,18 +75,18 @@ module.exports = (options = {}) => ({
         });
 
         const { fullWidthRule } = tidy;
-        const { siteMax } = tidy.columns.options;
+        const { max } = tidy.columns.options;
         const { root } = result;
 
-        // Add the media query if a siteMax is declared and the `fullWidthRule` has children.
-        if (undefined !== siteMax && fullWidthRule.nodes.length > 0) {
+        // Add the media query if a max is declared and the `fullWidthRule` has children.
+        if (undefined !== max && fullWidthRule.nodes.length > 0) {
           /**
-           * The siteMax-width atRule.
+           * The max-width atRule.
            * Contains full-width margin offset declarations.
            */
           const fullWidthAtRule = atRule({
             name: 'media',
-            params: `(min-width: ${siteMax})`,
+            params: `(min-width: ${max})`,
             nodes: [],
             source: rule.source,
           }).append(fullWidthRule);

@@ -26,9 +26,9 @@ See [PostCSS] docs for examples for your environment.
 
 ```scss
 /* Input example */
-@tidy columns --site-columns;
+@tidy columns var(--site-columns);
 @tidy gap 1.25rem;
-@tidy edge --site-edge;
+@tidy edge var(--site-edge);
 @tidy max 80rem;
 
 :root {
@@ -87,7 +87,7 @@ The `tidy-offset()` function returns a `calc()` declaration for use in positioni
 
 ### Var Function
 
-`tidy-var()` functions are replaced by the specified option's value, or `var()` function if it is a Custom Property.
+`tidy-var()` functions are replaced by the specified option's value.
 
 > #### Syntax
 >
@@ -106,11 +106,11 @@ See the [Tips and Tricks](https://github.com/goodguyry/postcss-tidy-columns/wiki
 
 ## Options
 
-Tidy Columns uses `@tidy` at-rules to configure grid options. These options can be set to either a static value or a CSS Custom Property name to use for that value.
+Tidy Columns uses `@tidy` at-rules to configure grid options. These options can be set to either a static value or a `var()` function.
 
 **Static Values** will reduce the size of the output, but should only be used if the option's value **does not** change.
 
-**CSS Custom Property names** offer much more flexibility, as they'll dynamically update during runtime. Authors can use their own naming convention for the Custom Properties.
+**CSS Custom Properties** offer much more flexibility, as they'll dynamically update during runtime.
 
 Override an option by redeclaring it in a rule; disable it altogether with `@tidy <option> false`.
 
@@ -125,43 +125,43 @@ The number of grid columns in the design.
 > #### CSS Syntax
 >
 > ```
-> @tidy columns [<number>|<custom-property-name>];
+> @tidy columns [<number>|<var-function>];
 > ```
 
 ### `gap`
 
 The width of the gap between each column.
 
-> **Default**: `0`
+> **Default**: `undefined`
 >
 > #### CSS Syntax
 >
 > ```
-> @tidy gap [<length>|<custom-property-name>];
+> @tidy gap [<length>|<var-function>];
 > ```
 
 ### `edge`
 
 The minimum width of the flexible space between the content and the edge of the page.
 
-> **Default**: `0`
+> **Default**: `undefined`
 >
 > #### CSS Syntax
 >
 > ```
-> @tidy edge [<length>|<custom-property-name>];
+> @tidy edge [<length>|<var-function>];
 > ```
 
 ### `max`
 
 The max-width of the site, including [`edge`](#edge) spacing; the point at which the site transitions from fluid width to static width. Setting a `max` value ensures the column and margin widths are correct once the site width is static.
 
-> **Default**: `null`
+> **Default**: `undefined`
 >
 > #### CSS Syntax
 >
 > ```
-> @tidy max [<length>|<custom-property-name>];
+> @tidy max [<length>|<var-function>];
 > ```
 
 ### `base`

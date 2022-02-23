@@ -1,5 +1,5 @@
 const runOptions = require('.');
-const { typical, typicalWithBreakpoints, columnsOnly } = require('../../test/sharedConfigs');
+const { typical, columnsOnly } = require('../../test/sharedConfigs');
 const getLocalOptions = require('../getLocalOptions');
 
 /**
@@ -29,7 +29,7 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
         columns: 8,
         edge: '0.625rem',
         gap: '1.25rem',
-        siteMax: '90rem',
+        max: '90rem',
       },
       typical,
     ),
@@ -38,57 +38,13 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
   test(
     '@tidy value adds a global option',
     () => runLocalOptionsPlugin(
-      'div { @tidy site-max 90rem; @tidy debug true; }',
+      'div { @tidy max 90rem; @tidy debug true; }',
       {
         columns: 12,
-        siteMax: '90rem',
+        max: '90rem',
         debug: true,
       },
       columnsOnly,
-    ),
-  );
-});
-
-describe('Declarations use the correct option values', () => {
-  test(
-    'The corrrect options are used when a matching breakpoint is found',
-    () => runLocalOptionsPlugin(
-      '@media (min-width: 768px) { div { } }',
-      {
-        columns: 12,
-        edge: '0.625rem',
-        gap: '0.625rem',
-        breakpoints: {
-          '768px': {
-            gap: '0.625rem',
-          },
-          '1024px': {
-            siteMax: '90rem',
-          },
-        },
-      },
-      typicalWithBreakpoints,
-    ),
-  );
-
-  test(
-    'Global options are used when there is no matching breakpoint',
-    () => runLocalOptionsPlugin(
-      '@media (min-width: 600px) { div { } }',
-      {
-        columns: 12,
-        edge: '0.625rem',
-        gap: '1.25rem',
-        breakpoints: {
-          '768px': {
-            gap: '0.625rem',
-          },
-          '1024px': {
-            siteMax: '90rem',
-          },
-        },
-      },
-      typicalWithBreakpoints,
     ),
   );
 });

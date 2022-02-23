@@ -1,5 +1,4 @@
 const { normalizeOptions } = require('./normalizeOptions');
-const camelCaseString = require('../lib/camelCaseString');
 
 /**
  * Parse and compile CSS @tidy at-rule parameters.
@@ -15,9 +14,8 @@ function parseOptions(optionsArray) {
      * value:    The option value.
      */
     const [prop, value] = setting.match(/^(\S+)\s(.*)/).slice(1);
-    const property = camelCaseString(prop);
 
-    acc[property] = value.trim();
+    acc[prop] = value.trim();
 
     return acc;
   }, {});

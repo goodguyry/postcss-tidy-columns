@@ -51,19 +51,16 @@ function tidyFunction(declaration, tidy) {
       /**
        * Get the span or offset `calc()` value(s).
        * Use the object's `isNested` value to suppress the `calc` from the output.
-       *
-       * fluid: calc() function based on 100vw base.
-       * full:  calc() function based on `siteMax` base.
        */
-      const { fluid, full } = ('span' === slug)
+      const calcValue = ('span' === slug)
         ? columns.spanCalc(value)
         : columns.offsetCalc(value);
 
       return ('-full' === modifier)
         // tidy-[span|offset]-full()
-        ? acc.replace(match, full)
+        ? acc.replace(match, calcValue)
         // tidy-[span|offset] ()
-        : acc.replace(match, fluid);
+        : acc.replace(match, calcValue);
     }, declaration.value);
 
     // Save the original declaration in a comment for debugging.

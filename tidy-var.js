@@ -8,7 +8,7 @@ const hasComment = require('./lib/hasComment');
  *
  * @type {RegExp}
  */
-const VAR_FUNCTION_REGEX = /tidy-var\(["']?(columns|edge|gap|siteMax)["']?\)/i;
+const VAR_FUNCTION_REGEX = /tidy-var\(["']?(columns|edge|gap|max)["']?\)/i;
 
 /**
  * Replace `tidy-var()` functions within property values.

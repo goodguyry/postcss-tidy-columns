@@ -3,6 +3,7 @@ const roundToPrecision = require('./lib/roundToPrecision');
 const splitCssUnit = require('./lib/splitCssUnit');
 const hasEmptyValue = require('./lib/hasEmptyValue');
 const transformValue = require('./lib/transformValue');
+const { normalizeOptions } = require('./src/normalizeOptions');
 
 /**
  * Columns class
@@ -12,13 +13,15 @@ const transformValue = require('./lib/transformValue');
  */
 class Columns {
   constructor(options = {}) {
-    this.options = options;
+    this.options = normalizeOptions(options);
 
-    // Collect siteMaxValues to be used in column and offset calc() functions.
-    this.siteMaxValues = ['100vw'];
-    if (undefined !== this.options.siteMax) {
-      this.siteMaxValues.push(this.options.siteMax);
-    }
+    const { base = 'vw', max } = this.options;
+    const fluidBase = `100${base}`;
+
+    // Collect baseValues to be used in column and offset calc() functions.
+    this.baseValue = (undefined !== max)
+      ? `min(${fluidBase}, ${max})`
+      : fluidBase;
 
     this.fullWidthRule = null;
 
@@ -75,41 +78,40 @@ class Columns {
   }
 
   /**
-   * Build the column division for the appropriate siteMax and gaps.
+   * Build the column division for the appropriate base value and gaps.
    *
-   * @param {String} siteMax The current siteMax size.
+   * @param {String} base The current base value size.
    *
    * @return {String}
    */
-  getSingleColumn(siteMax) {
+  getSingleColumn() {
     const { columns } = this.options;
     // 100vw : (100vw - 10px * 2)
-    const siteMaxSize = hasEmptyValue(this.edges)
-      ? siteMax
-      : `(${siteMax} - ${this.edges})`;
+    const baseValue = hasEmptyValue(this.edges)
+      ? this.baseValue
+      : `(${this.baseValue} - ${this.edges})`;
 
     // 12 - 9.1667px : 12
     const columnReduction = (this.sharedGap)
       ? `${columns} - ${this.sharedGap}`
       : `${columns}`;
 
-    return `${siteMaxSize} / ${columnReduction}`;
+    return `${baseValue} / ${columnReduction}`;
   }
 
   /**
    * Complete the calc() function.
    *
-   * @param {String}  siteMax The current siteMax size.
-   * @param {Number}  colSpan The number of columns to span.
-   * @param {Number}  gapSpan The number of gaps to span.
+   * @param {Number} colSpan The number of columns to span.
+   * @param {Number} gapSpan The number of gaps to span.
    *
    * @return {String}
    */
-  buildCalcFunction(siteMax, colSpan, gapSpan) {
-    const { gap } = this.options;
+  buildCalcFunction(colSpan, gapSpan) {
+    const { gap, reduce } = this.options;
 
     // The base calc() equation.
-    let cssCalcEquation = this.getSingleColumn(siteMax);
+    let cssCalcEquation = this.getSingleColumn();
 
     // Only multiply columns if there are more than one.
     if (1 !== colSpan) {
@@ -126,12 +128,14 @@ class Columns {
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
     }
 
-    // Reduce the expression.
-    return transformValue(`(${cssCalcEquation})`, this.suppressCalc);
+    // Conditionally educe the expression.
+    return reduce
+      ? transformValue(`(${cssCalcEquation})`, this.suppressCalc)
+      : `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
   }
 
   /**
-   * Create the column `calc()` function declaration for each siteMax.
+   * Create the column `calc()` function declaration for each base value.
    *
    * @param {String|Number} colSpan The number of columns to span.
    *
@@ -139,22 +143,19 @@ class Columns {
    */
   spanCalc(colSpan) {
     const columnSpan = parseFloat(colSpan, 10);
-    const [fluid, full] = this.siteMaxValues.map((siteMax) => {
-      /**
-       * Subtract from columnSpan, then round up to account for fractional columns.
-       * We are *always* spanning one more column than gap.
-       * Ensure we maintain the sign of the columnSpan value.
-       */
-      const gapSpan = Math.ceil(columnSpan + (Math.sign(columnSpan) * -1));
 
-      return this.buildCalcFunction(siteMax, columnSpan, gapSpan);
-    });
+    /**
+     * Subtract from columnSpan, then round up to account for fractional columns.
+     * We are *always* spanning one more column than gap.
+     * Ensure we maintain the sign of the columnSpan value.
+     */
+    const gapSpan = Math.ceil(columnSpan + (Math.sign(columnSpan) * -1));
 
-    return { fluid, full };
+    return this.buildCalcFunction(columnSpan, gapSpan);
   }
 
   /**
-   * Create the offset `calc()` function declaration for each siteMax.
+   * Create the offset `calc()` function declaration for each base value.
    *
    * @param {String|Number} colSpan The number of columns to offset.
    *
@@ -162,14 +163,11 @@ class Columns {
    */
   offsetCalc(colSpan) {
     const columnSpan = parseFloat(colSpan, 10);
-    const [fluid, full] = this.siteMaxValues.map((siteMax) => {
-      // Round columnSpan down to account for fractional columns.
-      const gapSpan = Math.floor(columnSpan);
 
-      return this.buildCalcFunction(siteMax, columnSpan, gapSpan);
-    });
+    // Round columnSpan down to account for fractional columns.
+    const gapSpan = Math.floor(columnSpan);
 
-    return { fluid, full };
+    return this.buildCalcFunction(columnSpan, gapSpan);
   }
 }
 

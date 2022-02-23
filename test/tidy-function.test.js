@@ -11,8 +11,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Replaces the `tidy-offset()` function',
     () => run(
       'div { margin-left: tidy-offset(1); }',
-      // calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
-      'div { margin-left: calc(8.3333vw + 0rem); }',
+      'div { margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
       typical,
     ),
   );
@@ -21,8 +20,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Replaces the `tidy-offset-full()` function',
     () => run(
       'div { margin-left: tidy-offset-full(1); }',
-      // calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
-      'div { margin-left: 7.5rem; }',
+      'div { margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
       typical,
     ),
   );
@@ -31,8 +29,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Replaces the `tidy-offset()` function when inside a `calc()`` function',
     () => run(
       'div { margin-left: calc(tidy-offset(3) + 20px); }',
-      // calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3)
-      'div { margin-left: calc((25vw + 0.0001rem) + 20px); }',
+      'div { margin-left: calc(((((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3) + 20px); }',
       typical,
     ),
   );
@@ -41,8 +38,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Replaces the `tidy-offset()` function when inside a `calc()`` function',
     () => run(
       'div { margin-left: calc(20px + tidy-offset(3)); }',
-      // calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3)
-      'div { margin-left: calc(20px + (25vw + 0.0001rem)); }',
+      'div { margin-left: calc(20px + ((((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3)); }',
       typical,
     ),
   );
@@ -51,9 +47,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Replaces multiple `tidy-offset()`s in the same property value',
     () => run(
       'div { margin: 0 tidy-offset(3) 0 tidy-offset(1); }',
-      // calc((((100vw - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3)
-      // calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
-      'div { margin: 0 calc(25vw + 0.0001rem) 0 calc(8.3333vw + 0rem); }',
+      'div { margin: 0 calc((((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 3) 0 calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
       typical,
     ),
   );
@@ -62,8 +56,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Maintains `tidy-offset` input as a /* comment */',
     () => run(
       'div { margin-left: tidy-offset(1); }',
-      // calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
-      'div { /* margin-left: tidy-offset(1) */ margin-left: calc(8.3333vw + 0rem); }',
+      'div { /* margin-left: tidy-offset(1) */ margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
       { ...typical, debug: true },
     ),
   );
@@ -72,8 +65,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Maintains `tidy-offset-full` input as a /* comment */',
     () => run(
       'div { margin-left: tidy-offset-full(1); }',
-      // calc(((90rem - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
-      'div { /* margin-left: tidy-offset-full(1) */ margin-left: 7.5rem; }',
+      'div { /* margin-left: tidy-offset-full(1) */ margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
       { ...typical, debug: true },
     ),
   );
@@ -82,8 +74,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     'Maintains input as a /* comment */ with multiple functions in the same declaration',
     () => run(
       'div { margin: tidy-offset(1) 0 0 tidy-var(gap); }',
-      // calc(((100vw - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem)
-      'div { /* margin: tidy-offset(1) 0 0 tidy-var(gap) */ margin: calc(8.3333vw + 0rem) 0 0 1.25rem; }',
+      'div { /* margin: tidy-offset(1) 0 0 tidy-var(gap) */ margin: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem) 0 0 1.25rem; }',
       { ...typical, debug: true },
     ),
   );
@@ -94,8 +85,7 @@ describe('The `tidy-span()` functions are replaced and their values reflect the 
     'Replaces the `tidy-span()` function',
     () => run(
       'div { width: tidy-span(1); }',
-      // calc((100vw - 0.625rem * 2) / 12 - 1.1458rem)
-      'div { width: calc(8.3333vw - 1.25rem); }',
+      'div { width: calc((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem); }',
       typical,
     ),
   );
@@ -104,8 +94,7 @@ describe('The `tidy-span()` functions are replaced and their values reflect the 
     'Replaces the `tidy-span-full()` function',
     () => run(
       'div { max-width: tidy-span-full(1); }',
-      // calc((90rem - 0.625rem * 2) / 12 - 1.1458rem)
-      'div { max-width: 6.25rem; }',
+      'div { max-width: calc((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem); }',
       typical,
     ),
   );

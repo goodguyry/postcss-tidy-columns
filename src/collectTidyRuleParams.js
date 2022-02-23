@@ -1,6 +1,3 @@
-const handleCustomProperties = require('./handleCustomProperties');
-const { isCustomProperty } = require('../lib/isCustomProperty');
-
 /**
  * Collect @tidy params from the provided CSS root.
  *
@@ -18,11 +15,6 @@ module.exports = function collectTidyRuleParams(css, fromCssRoot) {
     const rootCheck = (fromCssRoot ? 'root' === parentType : 'root' !== parentType);
 
     if (rootCheck) {
-      // Reject `site-max` with CSS Custom Property.
-      if (isCustomProperty(params)) {
-        handleCustomProperties(atrule, params);
-      }
-
       atRuleParams.push(params);
       atrule.remove();
     }

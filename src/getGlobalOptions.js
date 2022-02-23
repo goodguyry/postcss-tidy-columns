@@ -1,5 +1,4 @@
 const parseOptions = require('./parseOptions');
-const { normalizeOptions } = require('./normalizeOptions');
 const collectTidyRuleParams = require('./collectTidyRuleParams');
 
 /**
@@ -11,18 +10,18 @@ const collectTidyRuleParams = require('./collectTidyRuleParams');
   * @return {Object} The merged global options.
   */
 function getGlobalOptions(root, options) {
-  // Default column options.
   const defaultOpts = {
+    // @tidy options.
     columns: undefined,
     gap: undefined,
-    siteMax: undefined,
     edge: undefined,
-    debug: false,
-    breakpoints: [],
-  };
+    base: 'vw',
+    max: undefined,
 
-  // Normalize plugin options.
-  const pluginOptions = normalizeOptions(options);
+    // JavaScript options.
+    debug: false,
+    reduce: false, // @todo Reduce only when this is true,
+  };
 
   // Collect root at-rule values.
   const atRuleParams = collectTidyRuleParams(root, true);
@@ -30,7 +29,7 @@ function getGlobalOptions(root, options) {
   // Parse the CSS option values.
   const atRuleOpts = parseOptions(atRuleParams);
 
-  return Object.assign(defaultOpts, pluginOptions, atRuleOpts);
+  return Object.assign(defaultOpts, options, atRuleOpts);
 }
 
 module.exports = getGlobalOptions;
