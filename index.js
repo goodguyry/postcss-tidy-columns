@@ -65,7 +65,7 @@ module.exports = (options = {}) => ({
             tidyProperty(declaration, tidy);
           }
 
-          // Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
+          // Replace `tidy-[span|offset]()` functions.
           if (
             declaration.value.includes('tidy-span')
             || declaration.value.includes('tidy-offset')

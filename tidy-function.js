@@ -8,10 +8,10 @@ const hasComment = require('./lib/hasComment');
  *
  * @type {RegExp}
  */
-const FUNCTION_REGEX = /tidy-(span|offset)(-full)?\(([\d.-]+)\)/;
+const FUNCTION_REGEX = /tidy-(span|offset)\(([\d.-]+)\)/;
 
 /**
- * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
+ * Replace `tidy-[span|offset]()` functions.
  *
  * @see https://github.com/goodguyry/postcss-tidy-columns#span-function
  * @see https://github.com/goodguyry/postcss-tidy-columns#offset-function
@@ -41,12 +41,11 @@ function tidyFunction(declaration, tidy) {
       columns.suppressCalc = isNested;
 
       /**
-       * match:    The full function expression.
-       * slug:     One of either `span` or `offset`.
-       * modifier: One of either `undefined` or `-full`.
-       * value:    The function's argument.
+       * match: The full function expression.
+       * slug:  One of either `span` or `offset`.
+       * value: The function's argument.
        */
-      const [match, slug, modifier, value] = tidyFunctionMatch.match(FUNCTION_REGEX);
+      const [match, slug, value] = tidyFunctionMatch.match(FUNCTION_REGEX);
 
       /**
        * Get the span or offset `calc()` value(s).
@@ -56,11 +55,7 @@ function tidyFunction(declaration, tidy) {
         ? columns.spanCalc(value)
         : columns.offsetCalc(value);
 
-      return ('-full' === modifier)
-        // tidy-[span|offset]-full()
-        ? acc.replace(match, calcValue)
-        // tidy-[span|offset] ()
-        : acc.replace(match, calcValue);
+      return acc.replace(match, calcValue);
     }, declaration.value);
 
     // Save the original declaration in a comment for debugging.

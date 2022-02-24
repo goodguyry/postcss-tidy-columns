@@ -111,7 +111,7 @@ describe('Pattern to match the `tidy-offset-*` property', () => {
     'tidy-span',
     'tidy-offset',
     'tidy-column',
-    'tidy-offset-full(6)',
+    'tidy-offset(6)',
   ])(
     'Ignores %s',
     (input) => {
