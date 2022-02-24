@@ -70,7 +70,7 @@ class Columns {
   getSharedGap() {
     const { gap, columns } = this.options;
 
-    // Can't divide a string representing an unknown value..
+    // Can't divide a string representing an unknown value.
     if (isCustomProperty(gap) || isCustomProperty(columns)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
     }
