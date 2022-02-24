@@ -4,27 +4,9 @@ const { typical } = require('./sharedConfigs');
 const { FUNCTION_REGEX } = require('../tidy-function');
 
 /**
- * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
+ * Replace `tidy-[span|offset]()` functions.
  */
 describe('The `tidy-offset` functions are replaced and their values reflect the expected options', () => {
-  test(
-    'Replaces the `tidy-offset()` function',
-    () => run(
-      'div { margin-left: tidy-offset(1); }',
-      'div { margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
-      typical,
-    ),
-  );
-
-  test(
-    'Replaces the `tidy-offset-full()` function',
-    () => run(
-      'div { margin-left: tidy-offset-full(1); }',
-      'div { margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
-      typical,
-    ),
-  );
-
   test(
     'Replaces the `tidy-offset()` function when inside a `calc()`` function',
     () => run(
@@ -62,15 +44,6 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
   );
 
   test(
-    'Maintains `tidy-offset-full` input as a /* comment */',
-    () => run(
-      'div { margin-left: tidy-offset-full(1); }',
-      'div { /* margin-left: tidy-offset-full(1) */ margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
-      { ...typical, debug: true },
-    ),
-  );
-
-  test(
     'Maintains input as a /* comment */ with multiple functions in the same declaration',
     () => run(
       'div { margin: tidy-offset(1) 0 0 tidy-var(gap); }',
@@ -84,18 +57,19 @@ describe('The `tidy-span()` functions are replaced and their values reflect the 
   test(
     'Replaces the `tidy-span()` function',
     () => run(
-      'div { width: tidy-span(1); }',
-      'div { width: calc((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem); }',
+      'div { width: tidy-span(tidy-var(columns)); }',
+      'div { width: calc((((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11); }',
       typical,
     ),
   );
 
-  test(
-    'Replaces the `tidy-span-full()` function',
+  // @todo Make this pass.
+  test.skip(
+    'Replaces the `tidy-span()` function',
     () => run(
-      'div { max-width: tidy-span-full(1); }',
-      'div { max-width: calc((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem); }',
-      typical,
+      'div { width: tidy-span(tidy-var(columns)); }',
+      'div { width: calc((((min(100vw, 90rem) - 0.625rem * 2) / var(--tcol) - (1.25rem * var(--tcol) - (var(--tcol) - 1))) * var(--tcol)) + 1.25rem * (var(--tcol) - 1)); }',
+      { ...typical, columns: 'var(--tcol)' },
     ),
   );
 });
@@ -107,23 +81,11 @@ describe('Pattern to match `tidy-*` functions in declaration values', () => {
   test.each([
     [
       'tidy-span(3)',
-      ['tidy-span(3)', 'span', null, '3'],
+      ['tidy-span(3)', 'span', '3'],
     ],
     [
       'tidy-offset(2)',
-      ['tidy-offset(2)', 'offset', null, '2'],
-    ],
-    [
-      'tidy-span-full(1)',
-      ['tidy-span-full(1)', 'span', '-full', '1'],
-    ],
-    [
-      'tidy-offset-full(4)',
-      ['tidy-offset-full(4)', 'offset', '-full', '4'],
-    ],
-    [
-      'calc(tidy-span-full(1) + 20px)',
-      ['tidy-span-full(1)', 'span', '-full', '1'],
+      ['tidy-offset(2)', 'offset', '2'],
     ],
   ])(
     'Matches %s',

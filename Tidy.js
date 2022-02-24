@@ -1,6 +1,5 @@
 const Columns = require('./Columns');
 const getLocalOptions = require('./src/getLocalOptions');
-const cleanClone = require('./lib/cleanClone');
 
 /**
  * Tidy class
@@ -12,23 +11,21 @@ const cleanClone = require('./lib/cleanClone');
 class Tidy {
   constructor(rule, globalOptions) {
     this.rule = rule;
+    this.globalOptions = globalOptions;
 
     // Bind class methods.
     this.initRule = this.initRule.bind(this);
-
-    // Merge global and local options.
-    const currentOptions = getLocalOptions(this.rule, globalOptions);
-
-    // Instantiate Columns based on the merged options.
-    this.columns = new Columns(currentOptions);
   }
 
   /**
   * Set up rule-specific properties.
   */
   initRule() {
-    // The media query's selector to which conditional declarations will be appended.
-    this.fullWidthRule = cleanClone(this.rule);
+    // Merge global and local options.
+    const ruleOptions = getLocalOptions(this.rule, this.globalOptions);
+
+    // Instantiate Columns based on the merged options.
+    this.columns = new Columns(ruleOptions);
   }
 
   /**

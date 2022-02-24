@@ -47,4 +47,18 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
       columnsOnly,
     ),
   );
+
+  test(
+    '@tidy value set to false removes the global option',
+    () => runLocalOptionsPlugin(
+      'div { @tidy edge false; @tidy gap false; }',
+      {
+        columns: 12,
+        edge: undefined,
+        gap: undefined,
+        max: '90rem',
+      },
+      typical,
+    ),
+  );
 });

@@ -16,7 +16,7 @@ function getLocalOptions(rule, global) {
   // Parse the rule's CSS option values.
   const atRuleOpts = parseOptions(atRuleParams);
 
-  return Object.assign({}, global, atRuleOpts);
+  return { ...global, ...atRuleOpts };
 }
 
 module.exports = getLocalOptions;

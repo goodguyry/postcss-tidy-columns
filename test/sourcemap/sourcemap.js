@@ -92,10 +92,10 @@ module.exports = [
         'function-span.css',
       ],
       names: [],
-      mappings: 'AAAA;CACC,kFAAmB;CACnB,sFAA4B;AAC7B',
+      mappings: 'AAAA;CACC,kFAAmB;AACpB',
       file: 'function-span.generated.css',
       sourcesContent: [
-        'div {\n\twidth: tidy-span(2);\n\tmax-width: tidy-span-full(2);\n}\n',
+        'div {\n\twidth: tidy-span(2);\n}\n',
       ],
     },
     fixtures: {

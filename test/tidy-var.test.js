@@ -17,6 +17,15 @@ describe('The `tidy-var()` function is replaced with the expected option value',
   );
 
   test(
+    'Replaces `tidy-var()` with var() function',
+    () => run(
+      'div { margin-left: tidy-var(gap); }',
+      'div { margin-left: var(--tgap); }',
+      { ...typical, gap: 'var(--tgap)' },
+    ),
+  );
+
+  test(
     'Replaces a multiple instances of `tidy-var()` in a declaration',
     () => run(
       'div { padding: 0 tidy-var(edge) 0 tidy-var(gap); }',
