@@ -15,26 +15,15 @@ class Columns {
   constructor(options = {}) {
     this.options = normalizeOptions(options);
 
-    const { base = 'vw', max } = this.options;
-    const fluidBase = `100${base}`;
-
-    // Collect baseValues to be used in column and offset calc() functions.
-    this.baseValue = (undefined !== max)
-      ? `min(${fluidBase}, ${max})`
-      : fluidBase;
-
     this.fullWidthRule = null;
 
     // Bind class methods.
+    this.init = this.init.bind(this);
     this.getSharedGap = this.getSharedGap.bind(this);
-    this.getEdges = this.getEdges.bind(this);
     this.getSingleColumn = this.getSingleColumn.bind(this);
     this.buildCalcFunction = this.buildCalcFunction.bind(this);
     this.spanCalc = this.spanCalc.bind(this);
     this.offsetCalc = this.offsetCalc.bind(this);
-
-    this.edges = this.getEdges();
-    this.sharedGap = this.getSharedGap();
 
     /**
      * Suppress the `calc` string in the column output.
@@ -42,6 +31,37 @@ class Columns {
      * @type {Boolean}
      */
     this.suppressCalc = false;
+
+    this.init();
+  }
+
+  /**
+   * Initialize base values.
+   */
+  init() {
+    const { edge, base = 'vw', max } = this.options;
+    const fluidBase = `100${base}`;
+
+    /**
+     * The `baseValue` used in column and offset expressions.
+     *
+     * @type {String}
+     */
+    this.baseValue = (undefined !== max) ? `min(${fluidBase}, ${max})` : fluidBase;
+
+    /**
+     * The `edges` expression.
+     *
+     * @type {Number|String}
+     */
+    this.edges = hasEmptyValue(edge) ? 0 : `${edge} * 2`;
+
+    /**
+     * The `sharedGap` expression.
+     *
+     * @type {Number|String}
+     */
+    this.sharedGap = this.getSharedGap();
   }
 
   /**
@@ -52,51 +72,41 @@ class Columns {
   getSharedGap() {
     const { gap, columns } = this.options;
 
-    if (isCustomProperty(gap)) {
+    // Can't divide a string representing an unknown value..
+    if (isCustomProperty(gap) || isCustomProperty(columns)) {
       return `(${gap} / ${columns} * (${columns} - 1))`;
     }
 
-    if (!hasEmptyValue(gap)) {
-      const [value, units] = splitCssUnit(gap);
-      const sharedGap = (value / columns) * (columns - 1);
-
-      return `${roundToPrecision(sharedGap, 4)}${units}`;
+    if (hasEmptyValue(gap)) {
+      return 0;
     }
 
-    return 0;
-  }
+    const [value, units] = splitCssUnit(gap);
+    const sharedGap = (value / columns) * (columns - 1);
 
-  /**
-   * Calculate the total edge spacing.
-   *
-   * @return {String|Number}
-   */
-  getEdges() {
-    const { edge } = this.options;
-
-    return hasEmptyValue(edge) ? 0 : `${edge} * 2`;
+    return `${roundToPrecision(sharedGap, 4)}${units}`;
   }
 
   /**
    * Build the column division for the appropriate base value and gaps.
    *
    * @param {String} base The current base value size.
-   *
    * @return {String}
    */
   getSingleColumn() {
     const { columns } = this.options;
-    // 100vw : (100vw - 10px * 2)
-    const baseValue = hasEmptyValue(this.edges)
+
+    // The expression for the container without edges.
+    const container = hasEmptyValue(this.edges)
       ? this.baseValue
       : `(${this.baseValue} - ${this.edges})`;
 
-    // 12 - 9.1667px : 12
-    const columnReduction = (this.sharedGap)
+    // The expression for reducing the column by a shared gap amount.
+    const columnDenominator = (this.sharedGap)
       ? `${columns} - ${this.sharedGap}`
       : `${columns}`;
 
-    return `${baseValue} / ${columnReduction}`;
+    return `${container} / ${columnDenominator}`;
   }
 
   /**
@@ -104,7 +114,6 @@ class Columns {
    *
    * @param {Number} colSpan The number of columns to span.
    * @param {Number} gapSpan The number of gaps to span.
-   *
    * @return {String}
    */
   buildCalcFunction(colSpan, gapSpan) {
@@ -128,7 +137,7 @@ class Columns {
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
     }
 
-    // Conditionally educe the expression.
+    // Conditionally reduce the expression.
     return reduce
       ? transformValue(`(${cssCalcEquation})`, this.suppressCalc)
       : `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
@@ -138,7 +147,6 @@ class Columns {
    * Create the column `calc()` function declaration for each base value.
    *
    * @param {String|Number} colSpan The number of columns to span.
-   *
    * @return {Object}
    */
   spanCalc(colSpan) {
@@ -158,7 +166,6 @@ class Columns {
    * Create the offset `calc()` function declaration for each base value.
    *
    * @param {String|Number} colSpan The number of columns to offset.
-   *
    * @return {Object}
    */
   offsetCalc(colSpan) {
