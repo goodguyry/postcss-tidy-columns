@@ -5,8 +5,6 @@ const { FUNCTION_REGEX } = require('../tidy-function');
 
 /**
  * Replace `tidy-[span|offset]()` functions.
- *
- * @todo Add tests for `tidy-span(tidy-var(columns))`.
  */
 describe('The `tidy-offset` functions are replaced and their values reflect the expected options', () => {
   test(
