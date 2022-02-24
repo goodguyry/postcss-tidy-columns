@@ -185,6 +185,11 @@ describe('Get calc functions from spanCalc()', () => {
     const pixel = new Columns({ ...columnsOnly, base: 'px' });
     expect(pixel.spanCalc(1)).toBe('calc(100vw / 12)');
   });
+
+  test('`reduce` option changes output', () => {
+    expect(new Columns({ ...allValues, reduce: true }).spanCalc(2))
+      .not.toBe('calc((((min(100vw, 75rem) - 32px * 2) / 16 - 0.5859rem) * 2) + 0.625rem)');
+  });
 });
 
 describe('Get calc functions from offsetCalc()', () => {
