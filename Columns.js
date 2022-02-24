@@ -15,8 +15,6 @@ class Columns {
   constructor(options = {}) {
     this.options = normalizeOptions(options);
 
-    this.fullWidthRule = null;
-
     // Bind class methods.
     this.init = this.init.bind(this);
     this.getSharedGap = this.getSharedGap.bind(this);

@@ -55,7 +55,7 @@ module.exports = (options = {}) => ({
       /**
        * Replace property and function values with columns expressions.
        */
-      RuleExit(rule, { result, atRule }) {
+      RuleExit(rule) {
         rule.walkDecls((declaration) => {
           // Replace `tidy-*` properties.
           if (
@@ -73,33 +73,6 @@ module.exports = (options = {}) => ({
             tidyFunction(declaration, tidy);
           }
         });
-
-        const { fullWidthRule } = tidy;
-        const { max } = tidy.columns.options;
-        const { root } = result;
-
-        // Add the media query if a max is declared and the `fullWidthRule` has children.
-        if (undefined !== max && fullWidthRule.nodes.length > 0) {
-          /**
-           * The max-width atRule.
-           * Contains full-width margin offset declarations.
-           */
-          const fullWidthAtRule = atRule({
-            name: 'media',
-            params: `(min-width: ${max})`,
-            nodes: [],
-            source: rule.source,
-          }).append(fullWidthRule);
-
-          // Insert the media query
-          if ('atrule' === rule.parent.type) {
-            // Insert after the parent at-rule.
-            root.insertAfter(rule.parent, fullWidthAtRule);
-          } else {
-            // Insert after the current rule.
-            root.insertAfter(rule, fullWidthAtRule);
-          }
-        }
       },
     };
   },
