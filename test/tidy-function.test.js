@@ -5,8 +5,11 @@ const { FUNCTION_REGEX } = require('../tidy-function');
 
 /**
  * Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
+ *
+ * @todo Add tests for `tidy-span(tidy-var(columns))`.
  */
 describe('The `tidy-offset` functions are replaced and their values reflect the expected options', () => {
+  // @todo delete this.
   test(
     'Replaces the `tidy-offset()` function',
     () => run(
@@ -16,6 +19,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     ),
   );
 
+  // @todo delete this.
   test(
     'Replaces the `tidy-offset-full()` function',
     () => run(
@@ -52,6 +56,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     ),
   );
 
+  // @todo delete this.
   test(
     'Maintains `tidy-offset` input as a /* comment */',
     () => run(
@@ -61,6 +66,7 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
     ),
   );
 
+  // @todo delete this.
   test(
     'Maintains `tidy-offset-full` input as a /* comment */',
     () => run(
@@ -84,12 +90,23 @@ describe('The `tidy-span()` functions are replaced and their values reflect the 
   test(
     'Replaces the `tidy-span()` function',
     () => run(
-      'div { width: tidy-span(1); }',
-      'div { width: calc((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem); }',
+      'div { width: tidy-span(tidy-var(columns)); }',
+      'div { width: calc((((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11); }',
       typical,
     ),
   );
 
+  // @todo Make this pass.
+  test.skip(
+    'Replaces the `tidy-span()` function',
+    () => run(
+      'div { width: tidy-span(tidy-var(columns)); }',
+      'div { width: calc((((min(100vw, 90rem) - 0.625rem * 2) / var(--tcol) - (1.25rem * var(--tcol) - (var(--tcol) - 1))) * var(--tcol)) + 1.25rem * (var(--tcol) - 1)); }',
+      { ...typical, columns: 'var(--tcol)' },
+    ),
+  );
+
+  // @todo delete this.
   test(
     'Replaces the `tidy-span-full()` function',
     () => run(

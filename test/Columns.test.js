@@ -37,8 +37,8 @@ describe('Checking values passed to Columns.buildCalcFunction()', () => {
   describe('From spanCalc', () => {
     test('Fractional columns (lower than 1)', () => {
       instance.spanCalc(0.5);
-      expect(instance.buildCalcFunction).toHaveBeenCalledWith(0.5, -0); // @todo These should be 0.
-      expect(instance.buildCalcFunction).toHaveBeenCalledWith(0.5, -0); // @todo These should be 0.
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith(0.5, -0);
+      expect(instance.buildCalcFunction).toHaveBeenCalledWith(0.5, -0);
     });
 
     test('Single column', () => {
@@ -160,6 +160,22 @@ describe('Get calc functions from spanCalc()', () => {
     // Custom properties used in option values.
     expect(new Columns(customProperties).spanCalc(3))
       .toBe('calc((((min(100vw, 90rem) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)');
+
+    // var() function for `max` value.
+    expect(new Columns({ ...allValues, max: 'var(--tmax)' }).spanCalc(3))
+      .toBe('calc((((min(100vw, var(--tmax)) - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 2)');
+
+    // var() function for `edge` value.
+    expect(new Columns({ ...allValues, edge: 'var(--tedge)' }).spanCalc(3))
+      .toBe('calc((((min(100vw, 75rem) - var(--tedge) * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 2)');
+
+    // var() function for `gap` value.
+    expect(new Columns({ ...allValues, gap: 'var(--tgap)' }).spanCalc(3))
+      .toBe('calc((((min(100vw, 75rem) - 32px * 2) / 16 - (var(--tgap) / 16 * (16 - 1))) * 3) + var(--tgap) * 2)');
+
+    // var() function for `columns` value.
+    expect(new Columns({ ...allValues, columns: 'var(--tcolumns)' }).spanCalc(3))
+      .toBe('calc((((min(100vw, 75rem) - 32px * 2) / var(--tcolumns) - (0.625rem / var(--tcolumns) * (var(--tcolumns) - 1))) * 3) + 0.625rem * 2)');
   });
 
   test('`base` option applied as expected', () => {
