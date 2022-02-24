@@ -20,6 +20,12 @@ function normalizeOptions(options) {
     .reduce((acc, key) => {
       const option = options[key];
 
+      // Short circuit if the value is false.
+      if ('false' === String(option)) {
+        acc[key] = undefined;
+        return acc;
+      }
+
       if (isCustomProperty(option)) {
         // Use the raw option value if it's a var() function.
         acc[key] = option;
@@ -35,8 +41,8 @@ function normalizeOptions(options) {
         }
 
         // `debug` and `reduce` should be a Boolean value.
-        if (['debug', 'reduce'].includes(key) && ['true', 'false'].includes(String(option))) {
-          acc[key] = ('true' === String(option));
+        if (['debug', 'reduce'].includes(key) && 'true' === String(option)) {
+          acc[key] = true;
         }
 
         // These should all be valid, positive CSS length values.
