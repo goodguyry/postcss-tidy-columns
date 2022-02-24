@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - `reduce` option for conditionally reducing the `calc()` output using [postcss-calc](https://github.com/postcss/postcss-calc/) (#70, #79)
 - `base` option for updating the fluid base value's units – `vw` or `%` (#79)
+- Disable an option by setting it to `false` (#80)
 
 **Changed**
 
@@ -19,6 +20,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 **Removed**
 
 - The `breakpoints` option is no longer suppoerted (#79)
+- `tidy-span-full()` and `tidy-offset-full()` are no longer supported (#80)
+- The plugin will no longer create a full-width media query, since it now outputs a single value (#80)
 
 ## 0.4.0
 
