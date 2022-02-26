@@ -27,15 +27,6 @@ class Tidy {
     // Instantiate Columns based on the merged options.
     this.columns = new Columns(ruleOptions);
   }
-
-  /**
-   * Save the declaration's source value for use in other scripts.
-   *
-   * @param {Object} decl The current declaration.
-   */
-  captureDeclarationSource(decl) {
-    this.declarationSource = decl.source;
-  }
 }
 
 module.exports = Tidy;
