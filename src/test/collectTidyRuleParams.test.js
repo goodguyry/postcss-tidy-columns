@@ -1,5 +1,5 @@
 const runOptions = require('.');
-const run = require('../../test');
+const { run } = require('../../test');
 const collectTidyRuleParams = require('../collectTidyRuleParams');
 
 /**

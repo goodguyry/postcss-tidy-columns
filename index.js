@@ -1,9 +1,10 @@
 const Tidy = require('./Tidy');
 const getGlobalOptions = require('./src/getGlobalOptions');
-const { tidyShorthandProperty } = require('./tidy-shorthand-property');
-const { tidyProperty } = require('./tidy-property');
 const { tidyFunction } = require('./tidy-function');
 const { tidyVar } = require('./tidy-var');
+const tidyDeprecated = require('./tidy-deprecated');
+
+const deprecatedProperties = ['tidy-span', 'tidy-column', 'tidy-offset'];
 
 /**
  * Parse rules and insert span and offset values.
@@ -37,13 +38,9 @@ module.exports = (options = {}) => ({
       /**
        * Replace shorthand properties and option value references first
        */
-      Declaration(declaration) {
-        // Replace shorthand declarations with their long-form equivalents.
-        if (
-          declaration.prop.includes('tidy-column')
-          || declaration.prop.includes('tidy-offset')
-        ) {
-          tidyShorthandProperty(declaration, tidy);
+      Declaration(declaration, { result }) {
+        if (deprecatedProperties.includes(declaration.prop)) {
+          tidyDeprecated(declaration, result);
         }
 
         // Replace `tidy-var()` functions throughout.
@@ -57,14 +54,6 @@ module.exports = (options = {}) => ({
        */
       RuleExit(rule) {
         rule.walkDecls((declaration) => {
-          // Replace `tidy-*` properties.
-          if (
-            declaration.prop.includes('tidy-span')
-            || declaration.prop.includes('tidy-offset')
-          ) {
-            tidyProperty(declaration, tidy);
-          }
-
           // Replace `tidy-[span|offset]()` functions.
           if (
             declaration.value.includes('tidy-span')
