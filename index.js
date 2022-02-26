@@ -4,8 +4,6 @@ const { tidyFunction } = require('./tidy-function');
 const { tidyVar } = require('./tidy-var');
 const tidyDeprecated = require('./tidy-deprecated');
 
-const deprecatedProperties = ['tidy-span', 'tidy-column', 'tidy-offset'];
-
 /**
  * Parse rules and insert span and offset values.
  *
@@ -36,32 +34,17 @@ module.exports = (options = {}) => ({
       },
 
       /**
-       * Replace shorthand properties and option value references first
+       * Replace tidy functions.
        */
       Declaration(declaration, { result }) {
-        if (deprecatedProperties.includes(declaration.prop)) {
-          tidyDeprecated(declaration, result);
-        }
+        // Handle deprecated properties.
+        tidyDeprecated(declaration, result);
 
-        // Replace `tidy-var()` functions throughout.
-        if (declaration.value.includes('tidy-var')) {
-          tidyVar(declaration, tidy);
-        }
-      },
+        // Replace `tidy-var()` functions.
+        tidyVar(declaration, tidy);
 
-      /**
-       * Replace property and function values with columns expressions.
-       */
-      RuleExit(rule) {
-        rule.walkDecls((declaration) => {
-          // Replace `tidy-[span|offset]()` functions.
-          if (
-            declaration.value.includes('tidy-span')
-            || declaration.value.includes('tidy-offset')
-          ) {
-            tidyFunction(declaration, tidy);
-          }
-        });
+        // Replace `tidy-[span|offset]()` functions.
+        tidyFunction(declaration, tidy);
       },
     };
   },
