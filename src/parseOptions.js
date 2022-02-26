@@ -6,7 +6,7 @@ const { normalizeOptions } = require('./normalizeOptions');
  * @param  {Array} optionsArray An array of at-rule params.
  * @return {Object}
  */
-function parseOptions(optionsArray) {
+const parseOptions = (optionsArray) => {
   const options = optionsArray.reduce((acc, setting) => {
     /**
      * property: The option name.
@@ -20,6 +20,6 @@ function parseOptions(optionsArray) {
   }, {});
 
   return normalizeOptions(options);
-}
+};
 
 module.exports = parseOptions;

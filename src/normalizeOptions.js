@@ -5,7 +5,7 @@ const { isEmpty, isCustomProperty } = require('../lib/values');
  *
  * @type {RegExp}
  */
-const LENGTH_REGEX = /^[0]$|[0-9.]+(px|r?em)+$/;
+const LENGTH_REGEX = /[0-9.]+(px|r?em)+$/;
 
 /**
  * Normalize option value types.
@@ -14,7 +14,7 @@ const LENGTH_REGEX = /^[0]$|[0-9.]+(px|r?em)+$/;
  * @param  {Object} options The options object.
  * @return {Object}
  */
-function normalizeOptions(options) {
+const normalizeOptions = (options) => {
   const validateOptions = Object.keys(options)
     .reduce((acc, key) => {
       const option = options[key];
@@ -31,12 +31,12 @@ function normalizeOptions(options) {
       } else {
         // `columns` should be a number.
         if ('columns' === key && !Number.isNaN(Number(option))) {
-          acc[key] = Number(option);
+          acc.columns = Number(option);
         }
 
         // Base should be 'vw' or '%'.
         if ('base' === key && ['vw', '%'].includes(option)) {
-          acc[key] = ('%' === option) ? option : 'vw';
+          acc.base = ('%' === option) ? option : 'vw';
         }
 
         // `debug` and `reduce` should be a Boolean value.
@@ -46,9 +46,7 @@ function normalizeOptions(options) {
 
         // These should all be valid, positive CSS length values.
         if (['gap', 'edge', 'max'].includes(key) && LENGTH_REGEX.test(option)) {
-          // Force `undefined` in place of unitless non-zero value.
-          const fallback = 0 === Number(option) ? 0 : undefined;
-          acc[key] = (/(px|r?em)$/.test(option)) ? option : fallback;
+          acc[key] = option;
         }
       }
 
@@ -56,7 +54,7 @@ function normalizeOptions(options) {
     }, {});
 
   return validateOptions;
-}
+};
 
 module.exports = {
   normalizeOptions,

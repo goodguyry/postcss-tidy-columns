@@ -44,10 +44,6 @@ describe('Matches CSS length values of the supported unit values (px, em, rem)',
       '0.625rem',
       ['0.625rem', 'rem'],
     ],
-    [
-      '0',
-      ['0', null],
-    ],
   ])(
     'Correctly matches length values with supported units: %s',
     (input, expected) => {

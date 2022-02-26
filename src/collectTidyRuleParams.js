@@ -5,7 +5,7 @@
  * @param  {Boolean} fromCssRoot Options collected from CSS Root.
  * @return {Array}
  */
-module.exports = function collectTidyRuleParams(css, fromCssRoot) {
+const collectTidyRuleParams = (css, fromCssRoot) => {
   // Collect CSS at-rule values.
   const atRuleParams = [];
 
@@ -21,3 +21,5 @@ module.exports = function collectTidyRuleParams(css, fromCssRoot) {
 
   return atRuleParams;
 };
+
+module.exports = collectTidyRuleParams;

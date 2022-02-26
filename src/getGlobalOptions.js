@@ -8,7 +8,7 @@ const collectTidyRuleParams = require('./collectTidyRuleParams');
   * @param  {Object} options The plugin options.
   * @return {Object} The merged global options.
   */
-function getGlobalOptions(root, options) {
+const getGlobalOptions = (root, options) => {
   const defaultOpts = {
     // @tidy options.
     columns: undefined,
@@ -29,6 +29,6 @@ function getGlobalOptions(root, options) {
   const atRuleOpts = parseOptions(atRuleParams);
 
   return Object.assign(defaultOpts, options, atRuleOpts);
-}
+};
 
 module.exports = getGlobalOptions;

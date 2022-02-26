@@ -8,7 +8,7 @@ const collectTidyRuleParams = require('./collectTidyRuleParams');
  * @param  {Object} global The global options.
  * @return {Object} The merged local options.
  */
-function getLocalOptions(rule, global) {
+const getLocalOptions = (rule, global) => {
   // Collect this rule's at-rule values.
   const atRuleParams = collectTidyRuleParams(rule, false);
 
@@ -16,6 +16,6 @@ function getLocalOptions(rule, global) {
   const atRuleOpts = parseOptions(atRuleParams);
 
   return { ...global, ...atRuleOpts };
-}
+};
 
 module.exports = getLocalOptions;
