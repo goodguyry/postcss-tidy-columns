@@ -1,9 +1,8 @@
 const Tidy = require('./Tidy');
 const getGlobalOptions = require('./src/getGlobalOptions');
-const { tidyShorthandProperty } = require('./tidy-shorthand-property');
-const { tidyProperty } = require('./tidy-property');
 const { tidyFunction } = require('./tidy-function');
 const { tidyVar } = require('./tidy-var');
+const tidyDeprecated = require('./tidy-deprecated');
 
 /**
  * Parse rules and insert span and offset values.
@@ -35,44 +34,17 @@ module.exports = (options = {}) => ({
       },
 
       /**
-       * Replace shorthand properties and option value references first
+       * Replace tidy functions.
        */
-      Declaration(declaration) {
-        // Replace shorthand declarations with their long-form equivalents.
-        if (
-          declaration.prop.includes('tidy-column')
-          || declaration.prop.includes('tidy-offset')
-        ) {
-          tidyShorthandProperty(declaration, tidy);
-        }
+      Declaration(declaration, { result }) {
+        // Handle deprecated properties.
+        tidyDeprecated(declaration, result);
 
-        // Replace `tidy-var()` functions throughout.
-        if (declaration.value.includes('tidy-var')) {
-          tidyVar(declaration, tidy);
-        }
-      },
+        // Replace `tidy-var()` functions.
+        tidyVar(declaration, tidy);
 
-      /**
-       * Replace property and function values with columns expressions.
-       */
-      RuleExit(rule) {
-        rule.walkDecls((declaration) => {
-          // Replace `tidy-*` properties.
-          if (
-            declaration.prop.includes('tidy-span')
-            || declaration.prop.includes('tidy-offset')
-          ) {
-            tidyProperty(declaration, tidy);
-          }
-
-          // Replace `tidy-[span|offset]()` functions.
-          if (
-            declaration.value.includes('tidy-span')
-            || declaration.value.includes('tidy-offset')
-          ) {
-            tidyFunction(declaration, tidy);
-          }
-        });
+        // Replace `tidy-[span|offset]()` functions.
+        tidyFunction(declaration, tidy);
       },
     };
   },

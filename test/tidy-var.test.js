@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const run = require('.');
+const { run } = require('.');
 const { typical } = require('./sharedConfigs');
 const { VAR_FUNCTION_REGEX } = require('../tidy-var');
 

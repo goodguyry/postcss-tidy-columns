@@ -5,7 +5,7 @@ const tidyColumns = require('..');
  * Basic test runner.
  * Runs the plugin and verifies the output.
  */
-const run = (input, output, opts, plugin = tidyColumns) => (
+exports.run = (input, output, opts, plugin = tidyColumns) => (
   postcss([plugin(opts)])
     .process(input, { from: undefined })
     .then((result) => {
@@ -14,4 +14,14 @@ const run = (input, output, opts, plugin = tidyColumns) => (
     })
 );
 
-module.exports = run;
+/**
+ * Special plugin runner for deprecated properties.
+ */
+exports.runWithWarnings = (input, output, opts, plugin = tidyColumns) => (
+  postcss([plugin(opts)])
+    .process(input, { from: undefined })
+    .then((result) => {
+      expect(result.css).toEqual(output);
+      expect(result.warnings().length).not.toBe(0);
+    })
+);
