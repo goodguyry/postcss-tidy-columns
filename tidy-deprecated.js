@@ -1,4 +1,3 @@
-const cleanShorthandValues = require('./lib/cleanShorthandValues');
 const cleanClone = require('./lib/cleanClone');
 
 /**
@@ -14,6 +13,36 @@ Deprecated: \`${old}\` will be removed in a future version.
 > Use \`${current}\` instead
 
 `);
+
+/**
+ * Clean and trim shorthand property values.
+ * Remove slashes, spaces, and invalid/unneeded values.
+ *
+ * @todo Remove this file and associated tests when tidy-deprecated is removed.
+ *
+ * @param {Object} values An object of matched shorthand property values.
+ *
+ * @return {Object}
+ */
+function cleanShorthandValues(values) {
+  const properties = Object.keys(values)
+    .reduce((acc, key) => {
+      const value = values[key];
+
+      if (undefined !== value) {
+        const cleanValue = value.replace(/\/|span/g, '').trim();
+
+        // Zero and `none` values are skipped.
+        if (0 !== Number(cleanValue, 10) && 'none' !== cleanValue) {
+          acc[key] = cleanValue;
+        }
+      }
+
+      return acc;
+    }, {});
+
+  return properties;
+}
 
 /**
  * Warn and replace deprecated properties.

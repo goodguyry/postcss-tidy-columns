@@ -4,9 +4,8 @@ const collectTidyRuleParams = require('./collectTidyRuleParams');
 /**
  * Walk any `tidy` at-rules and collect locally-scoped options.
  *
- * @param {Object} rule   The current rule.
- * @param {Object} global The global options.
- *
+ * @param  {Object} rule   The current rule.
+ * @param  {Object} global The global options.
  * @return {Object} The merged local options.
  */
 function getLocalOptions(rule, global) {

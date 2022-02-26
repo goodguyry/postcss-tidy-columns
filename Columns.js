@@ -1,7 +1,9 @@
-const { isCustomProperty } = require('./lib/isCustomProperty');
-const roundToPrecision = require('./lib/roundToPrecision');
-const splitCssUnit = require('./lib/splitCssUnit');
-const hasEmptyValue = require('./lib/hasEmptyValue');
+const {
+  isCustomProperty,
+  roundToPrecision,
+  splitCssUnit,
+  isEmpty,
+} = require('./lib/values');
 const transformValue = require('./lib/transformValue');
 const { normalizeOptions } = require('./src/normalizeOptions');
 
@@ -52,7 +54,7 @@ class Columns {
      *
      * @type {Number|String}
      */
-    this.edges = hasEmptyValue(edge) ? 0 : `${edge} * 2`;
+    this.edges = isEmpty(edge) ? 0 : `${edge} * 2`;
 
     /**
      * The `sharedGap` expression.
@@ -75,7 +77,7 @@ class Columns {
       return `(${gap} / ${columns} * (${columns} - 1))`;
     }
 
-    if (hasEmptyValue(gap)) {
+    if (isEmpty(gap)) {
       return 0;
     }
 
@@ -95,7 +97,7 @@ class Columns {
     const { columns } = this.options;
 
     // The expression for the container without edges.
-    const container = hasEmptyValue(this.edges)
+    const container = isEmpty(this.edges)
       ? this.baseValue
       : `(${this.baseValue} - ${this.edges})`;
 
@@ -129,7 +131,7 @@ class Columns {
      * Check for gaps before adding the math for them.
      * Only multiply gaps if there are more than one.
      */
-    if (!hasEmptyValue(gap) && !hasEmptyValue(gapSpan)) {
+    if (!isEmpty(gap) && !isEmpty(gapSpan)) {
       const gapSpanCalc = (1 === gapSpan) ? gap : `${gap} * ${gapSpan}`;
 
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;

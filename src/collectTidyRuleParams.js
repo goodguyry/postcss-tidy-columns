@@ -1,9 +1,8 @@
 /**
  * Collect @tidy params from the provided CSS root.
  *
- * @param {Object}  css         The CSS root/rule.
- * @param {Boolean} fromCssRoot Options collected from CSS Root.
- *
+ * @param  {Object}  css         The CSS root/rule.
+ * @param  {Boolean} fromCssRoot Options collected from CSS Root.
  * @return {Array}
  */
 module.exports = function collectTidyRuleParams(css, fromCssRoot) {

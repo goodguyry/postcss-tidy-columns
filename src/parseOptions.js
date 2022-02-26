@@ -3,8 +3,7 @@ const { normalizeOptions } = require('./normalizeOptions');
 /**
  * Parse and compile CSS @tidy at-rule parameters.
  *
- * @param {Array} optionsArray An array of at-rule params.
- *
+ * @param  {Array} optionsArray An array of at-rule params.
  * @return {Object}
  */
 function parseOptions(optionsArray) {
