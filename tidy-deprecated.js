@@ -18,11 +18,7 @@ Deprecated: \`${old}\` will be removed in a future version.
  * Clean and trim shorthand property values.
  * Remove slashes, spaces, and invalid/unneeded values.
  *
- * @todo Remove this file and associated tests when tidy-deprecated is removed.
- *
  * @param {Object} values An object of matched shorthand property values.
- *
- * @return {Object}
  */
 function cleanShorthandValues(values) {
   const properties = Object.keys(values)
