@@ -32,7 +32,7 @@ function tidyDeprecated(declaration, result) {
    *
    * Becomes:
    * > margin-left: tidy-offset(<left-offset>)
-   * > width: <span>
+   * > width: tidy-span(<span>)
    * > margin-right: tidy-offset(<right-offset>)
    */
   if ('tidy-column' === declaration.prop) {
