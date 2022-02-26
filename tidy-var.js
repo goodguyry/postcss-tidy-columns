@@ -1,7 +1,5 @@
 /* eslint-disable no-param-reassign */
-const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
-const hasComment = require('./lib/hasComment');
 
 /**
  * Matches tidy-var() functions.
@@ -17,8 +15,9 @@ const VAR_FUNCTION_REGEX = /tidy-var\(["']?(columns|edge|gap|max)["']?\)/i;
  *
  * @param {Object} declaration The current CSS declaration.
  * @param {Object} Tidy        An instance of the Tidy class.
+ * @param {Result} result      Provides the result of the PostCSS transformations.
  */
-function tidyVar(declaration, tidy) {
+function tidyVar(declaration, tidy, result) {
   const globalRegExp = new RegExp(VAR_FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(VAR_FUNCTION_REGEX);
 
@@ -50,13 +49,8 @@ function tidyVar(declaration, tidy) {
       return acc;
     }, declaration.value);
 
-    // Save the original declaration in a comment for debugging.
-    if (
-      options.debug
-      && undefined !== declaration.parent
-      && !hasComment(declaration)
-    ) {
-      declaration.cloneBefore(postcss.comment({ text: declaration.toString() }));
+    if (options.debug) {
+      result.warn(`Debug: ${result.opts.from} => ${declaration.toString()}`, { node: declaration });
     }
 
     // Clone after so the new declaration can be walked again.

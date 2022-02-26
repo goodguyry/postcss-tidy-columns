@@ -210,7 +210,7 @@ Set `reduce` to `true` to reduce the `calc()` output using [`postcss-calc`](http
 
 ### `debug`
 
-Set `debug` to `true` to maintain the pre-processed CSS declaration as a comment.
+Set `debug` to `true` print the pre-processed CSS declaration as a warning.
 
 > ```js
 > require('postcss-tidy-columns')({ 

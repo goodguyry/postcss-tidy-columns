@@ -41,10 +41,10 @@ module.exports = (options = {}) => ({
         tidyDeprecated(declaration, result);
 
         // Replace `tidy-var()` functions.
-        tidyVar(declaration, tidy);
+        tidyVar(declaration, tidy, result);
 
         // Replace `tidy-[span|offset]()` functions.
-        tidyFunction(declaration, tidy);
+        tidyFunction(declaration, tidy, result);
       },
     };
   },

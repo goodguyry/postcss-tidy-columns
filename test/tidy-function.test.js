@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const { run } = require('.');
+const { run, runWithWarnings } = require('.');
 const { typical } = require('./sharedConfigs');
 const { FUNCTION_REGEX } = require('../tidy-function');
 
@@ -36,18 +36,18 @@ describe('The `tidy-offset` functions are replaced and their values reflect the 
 
   test(
     'Maintains `tidy-offset` input as a /* comment */',
-    () => run(
+    () => runWithWarnings(
       'div { margin-left: tidy-offset(1); }',
-      'div { /* margin-left: tidy-offset(1) */ margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
+      'div { margin-left: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem); }',
       { ...typical, debug: true },
     ),
   );
 
   test(
     'Maintains input as a /* comment */ with multiple functions in the same declaration',
-    () => run(
+    () => runWithWarnings(
       'div { margin: tidy-offset(1) 0 0 tidy-var(gap); }',
-      'div { /* margin: tidy-offset(1) 0 0 tidy-var(gap) */ margin: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem) 0 0 1.25rem; }',
+      'div { margin: calc(((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) + 1.25rem) 0 0 1.25rem; }',
       { ...typical, debug: true },
     ),
   );
