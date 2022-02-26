@@ -1,4 +1,4 @@
-const { isCustomProperty } = require('../lib/isCustomProperty');
+const { isEmpty, isCustomProperty } = require('../lib/values');
 
 /**
  * Matches CSS length values of the supported unit values (px, em, rem).
@@ -20,8 +20,8 @@ function normalizeOptions(options) {
     .reduce((acc, key) => {
       const option = options[key];
 
-      // Short circuit if the value is false.
-      if ('false' === String(option)) {
+      // Short circuit if the value is falsy.
+      if (isEmpty(option)) {
         acc[key] = undefined;
         return acc;
       }
