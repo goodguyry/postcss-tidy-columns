@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const { run } = require('.');
+const { run, runWithWarnings } = require('.');
 const { typical } = require('./sharedConfigs');
 const { VAR_FUNCTION_REGEX } = require('../tidy-var');
 
@@ -63,9 +63,9 @@ describe('The `tidy-var()` function is replaced with the expected option value',
 
   test(
     'Maintains `tidy-var` input as a /* comment */',
-    () => run(
+    () => runWithWarnings(
       'div { margin-left: tidy-var(gap); }',
-      'div { /* margin-left: tidy-var(gap) */ margin-left: 1.25rem; }',
+      'div { margin-left: 1.25rem; }',
       { ...typical, debug: true },
     ),
   );

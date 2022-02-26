@@ -1,7 +1,5 @@
-const postcss = require('postcss');
 const cleanClone = require('./lib/cleanClone');
 const detectCalcWrapper = require('./lib/detectCalcWrapper');
-const hasComment = require('./lib/hasComment');
 
 /**
  * Pattern to match `tidy-*` functions in declaration values.
@@ -18,8 +16,9 @@ const FUNCTION_REGEX = /tidy-(span|offset)\(([\d.-]+)\)/;
  *
  * @param {Object} declaration The current CSS declaration.
  * @param {Object} Tidy        An instance of the Tidy class.
+ * @param {Result} result      Provides the result of the PostCSS transformations.
  */
-function tidyFunction(declaration, tidy) {
+function tidyFunction(declaration, tidy, result) {
   // Parse the tidy-* function matches.
   const tidyMatches = detectCalcWrapper(declaration.value);
 
@@ -58,13 +57,8 @@ function tidyFunction(declaration, tidy) {
       return acc.replace(match, calcValue);
     }, declaration.value);
 
-    // Save the original declaration in a comment for debugging.
-    if (
-      options.debug
-      && undefined !== declaration.parent
-      && !hasComment(declaration)
-    ) {
-      declaration.cloneBefore(postcss.comment({ text: declaration.toString() }));
+    if (options.debug) {
+      result.warn(`Debug: ${result.opts.from} => ${declaration.toString()}`, { node: declaration });
     }
 
     // Replace declaration(s) with cloned and updated declarations.
