@@ -11,8 +11,7 @@ const LENGTH_REGEX = /^[0]$|[0-9.]+(px|r?em)+$/;
  * Normalize option value types.
  * Since CSS values are always strings, we need to do some type checking.
  *
- * @param {Object} options The options object.
- *
+ * @param  {Object} options The options object.
  * @return {Object}
  */
 function normalizeOptions(options) {

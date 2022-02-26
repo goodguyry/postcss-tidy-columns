@@ -4,9 +4,8 @@ const collectTidyRuleParams = require('./collectTidyRuleParams');
 /**
   * Collect and merge global plugin options.
   *
-  * @param {Object} root    The PostCSS root object.
-  * @param {Object} options The plugin options.
-  *
+  * @param  {Object} root    The PostCSS root object.
+  * @param  {Object} options The plugin options.
   * @return {Object} The merged global options.
   */
 function getGlobalOptions(root, options) {
