@@ -7,7 +7,7 @@ const {
   LENGTH_REGEX,
   getOptions,
   collectTidyRuleParams,
-} = require('../../src/options');
+} = require('../../src/lib/options');
 const { typical, columnsOnly } = require('../sharedConfigs');
 
 /**

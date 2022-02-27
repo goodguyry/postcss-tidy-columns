@@ -1,5 +1,5 @@
 const Columns = require('./Columns');
-const { getOptions } = require('./src/options');
+const { getOptions } = require('./src/lib/options');
 
 /**
  * Tidy class

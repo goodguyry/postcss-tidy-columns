@@ -4,7 +4,7 @@ const {
   isEmpty,
 } = require('./src/lib/values');
 const transformValue = require('./src/transformValue');
-const { normalizeOptions } = require('./src/options');
+const { normalizeOptions } = require('./src/lib/options');
 
 /**
  * Columns class

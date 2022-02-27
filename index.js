@@ -1,5 +1,5 @@
 const Tidy = require('./Tidy');
-const { getOptions } = require('./src/options');
+const { getOptions } = require('./src/lib/options');
 const { tidyFunction } = require('./src/tidy-function');
 const { tidyVar } = require('./src/tidy-var');
 const tidyDeprecated = require('./src/tidy-deprecated');

@@ -1,4 +1,4 @@
-const { isEmpty, isCustomProperty } = require('./lib/values');
+const { isEmpty, isCustomProperty } = require('./values');
 
 /**
  * Matches CSS length values of the supported unit values (px, em, rem).
