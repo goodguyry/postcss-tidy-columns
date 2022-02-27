@@ -1,6 +1,6 @@
 const runOptions = require('.');
 const { typical, columnsOnly } = require('../../test/sharedConfigs');
-const { getLocalOptions } = require('../options');
+const { getOptions } = require('../options');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin
@@ -11,7 +11,7 @@ const runLocalOptionsPlugin = (input, output, opts) => (
     postcssPlugin: 'local-options-test',
     Once(root, { result }) {
       root.walkRules((rule) => {
-        result.options = getLocalOptions(rule, opts); // eslint-disable-line no-param-reassign
+        result.options = getOptions(rule, opts); // eslint-disable-line no-param-reassign
       });
     },
   }))

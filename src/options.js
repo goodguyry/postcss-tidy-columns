@@ -103,30 +103,13 @@ const collectTidyRuleParams = (css, fromCssRoot) => {
 };
 
 /**
- * Walk any `tidy` at-rules and collect locally-scoped options.
+ * Get options from a given node.
  *
- * @param  {Object} rule   The current rule.
- * @param  {Object} global The global options.
- * @return {Object} The merged local options.
+ * @param  {Root|Rule} node   The current node.
+ * @param  {Object}   options The current options.
+ * @return {Object}           The merged local options.
  */
-const getLocalOptions = (rule, global) => {
-  // Collect this rule's at-rule values.
-  const atRuleParams = collectTidyRuleParams(rule, false);
-
-  // Parse the rule's CSS option values.
-  const atRuleOpts = parseOptions(atRuleParams);
-
-  return { ...global, ...atRuleOpts };
-};
-
-/**
-  * Collect and merge global plugin options.
-  *
-  * @param  {Object} root    The PostCSS root object.
-  * @param  {Object} options The plugin options.
-  * @return {Object} The merged global options.
-  */
-const getGlobalOptions = (root, options) => {
+const getOptions = (node, options) => {
   const defaultOpts = {
     // @tidy options.
     columns: undefined,
@@ -140,13 +123,17 @@ const getGlobalOptions = (root, options) => {
     reduce: false, // @todo Reduce only when this is true,
   };
 
-  // Collect root at-rule values.
-  const atRuleParams = collectTidyRuleParams(root, true);
+  // Collect this node's at-rule values.
+  const atRuleParams = collectTidyRuleParams(node, ('root' === node.type));
 
   // Parse the CSS option values.
   const atRuleOpts = parseOptions(atRuleParams);
 
-  return Object.assign(defaultOpts, options, atRuleOpts);
+  if ('root' === node.type) {
+    return { ...defaultOpts, ...options, ...atRuleOpts };
+  }
+
+  return { ...options, ...atRuleOpts };
 };
 
 module.exports = {
@@ -154,6 +141,5 @@ module.exports = {
   normalizeOptions,
   parseOptions,
   collectTidyRuleParams,
-  getLocalOptions,
-  getGlobalOptions,
+  getOptions,
 };

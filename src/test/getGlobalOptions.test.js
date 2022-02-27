@@ -1,6 +1,6 @@
 const runOptions = require('.');
 const { typical } = require('../../test/sharedConfigs');
-const { getGlobalOptions } = require('../options');
+const { getOptions } = require('../options');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin
@@ -10,7 +10,7 @@ const runGlobalOptionsPlugin = (output, opts) => (
   runOptions('', output, opts, () => ({
     postcssPlugin: 'global-options-test',
     Once(root, { result }) {
-      result.options = Object.freeze(getGlobalOptions(root, opts)); // eslint-disable-line no-param-reassign
+      result.options = Object.freeze(getOptions(root, opts)); // eslint-disable-line no-param-reassign
     },
   }))
 );

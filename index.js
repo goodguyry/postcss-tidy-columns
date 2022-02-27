@@ -1,5 +1,5 @@
 const Tidy = require('./Tidy');
-const { getGlobalOptions } = require('./src/options');
+const { getOptions } = require('./src/options');
 const { tidyFunction } = require('./tidy-function');
 const { tidyVar } = require('./tidy-var');
 const tidyDeprecated = require('./tidy-deprecated');
@@ -20,7 +20,7 @@ module.exports = (options = {}) => ({
        * Collect the global options.
        */
       Once(root) {
-        globalOptions = Object.freeze(getGlobalOptions(root, options));
+        globalOptions = Object.freeze(getOptions(root, options));
       },
 
       /**
