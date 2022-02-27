@@ -81,17 +81,18 @@ const parseOptions = (optionsArray) => {
 /**
  * Collect @tidy params from the provided CSS root.
  *
- * @param  {Object}  css         The CSS root/rule.
- * @param  {Boolean} fromCssRoot Options collected from CSS Root.
+ * @param  {Root|Rul} node The current node.
  * @return {Array}
  */
-const collectTidyRuleParams = (css, fromCssRoot) => {
+const collectTidyRuleParams = (node) => {
   // Collect CSS at-rule values.
   const atRuleParams = [];
 
-  css.walkAtRules('tidy', (atrule) => {
+  node.walkAtRules('tidy', (atrule) => {
     const { params, parent: { type: parentType } } = atrule;
-    const rootCheck = (fromCssRoot ? 'root' === parentType : 'root' !== parentType);
+    const rootCheck = ('root' === node.type)
+      ? 'root' === parentType
+      : 'root' !== parentType;
 
     if (rootCheck) {
       atRuleParams.push(params);
@@ -124,7 +125,7 @@ const getOptions = (node, options) => {
   };
 
   // Collect this node's at-rule values.
-  const atRuleParams = collectTidyRuleParams(node, ('root' === node.type));
+  const atRuleParams = collectTidyRuleParams(node);
 
   // Parse the CSS option values.
   const atRuleOpts = parseOptions(atRuleParams);
