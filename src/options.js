@@ -15,7 +15,7 @@ const LENGTH_REGEX = /[0-9.]+(px|r?em)+$/;
  * @return {Object}
  */
 const normalizeOptions = (options) => {
-  const validateOptions = Object.keys(options)
+  const validatedOptions = Object.keys(options)
     .reduce((acc, key) => {
       const option = options[key];
 
@@ -53,7 +53,7 @@ const normalizeOptions = (options) => {
       return acc;
     }, {});
 
-  return validateOptions;
+  return validatedOptions;
 };
 
 /**
@@ -81,11 +81,10 @@ const parseOptions = (optionsArray) => {
 /**
  * Collect @tidy params from the provided CSS root.
  *
- * @param  {Root|Rul} node The current node.
+ * @param  {Root|Rule} node The current node.
  * @return {Array}
  */
 const collectTidyRuleParams = (node) => {
-  // Collect CSS at-rule values.
   const atRuleParams = [];
 
   node.walkAtRules('tidy', (atrule) => {
