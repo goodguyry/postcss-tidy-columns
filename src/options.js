@@ -89,12 +89,14 @@ const collectTidyRuleParams = (node) => {
   const atRuleParams = [];
 
   node.walkAtRules('tidy', (atrule) => {
-    const { params, parent: { type: parentType } } = atrule;
-    const rootCheck = ('root' === node.type)
-      ? 'root' === parentType
-      : 'root' !== parentType;
+    const { params, parent: atRuleParent } = atrule;
 
-    if (rootCheck) {
+    // Make sure the at-rule is the same scope as the node.
+    const scopeCheck = ('root' === node.type)
+      ? 'root' === atRuleParent.type
+      : 'root' !== atRuleParent.type;
+
+    if (scopeCheck) {
       atRuleParams.push(params);
       atrule.remove();
     }
