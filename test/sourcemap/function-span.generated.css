@@ -1,3 +1,0 @@
-div {
-	width: calc((((min(100vw, 90rem) - 0.625rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem);
-}

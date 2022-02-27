@@ -41,17 +41,3 @@ exports.roundToPrecision = (toRound, decimalPlaces = 4) => {
   const precision = (10 ** decimalPlaces);
   return (0 === toRound) ? 0 : Math.round(toRound * precision) / precision;
 };
-
-/**
- * Separate a CSS length value's number from its units.
- *
- * @todo Move this into Columns.js
- *
- * @param  {String} value A CSS length value.
- * @return {Array}
- */
-exports.splitCssUnit = (value) => (
-  ('string' === typeof value)
-    ? [parseFloat(value), value.replace(/[\d.]/g, '')]
-    : [value, undefined]
-);

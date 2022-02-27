@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
-const { run, runWithWarnings } = require('.');
-const { typical } = require('./sharedConfigs');
-const { VAR_FUNCTION_REGEX } = require('../tidy-var');
+const { run, runWithWarnings } = require('..');
+const { typical } = require('../sharedConfigs');
+const { VAR_FUNCTION_REGEX } = require('../../src/tidy-var');
 
 /**
  * Replace `tidy-var()` functions within property values.

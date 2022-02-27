@@ -1,5 +1,5 @@
 const Columns = require('./Columns');
-const getLocalOptions = require('./src/getLocalOptions');
+const { getOptions } = require('./src/options');
 
 /**
  * Tidy class
@@ -22,7 +22,7 @@ class Tidy {
   */
   initRule() {
     // Merge global and local options.
-    const ruleOptions = getLocalOptions(this.rule, this.globalOptions);
+    const ruleOptions = getOptions(this.rule, this.globalOptions);
 
     // Instantiate Columns based on the merged options.
     this.columns = new Columns(ruleOptions);

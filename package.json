@@ -37,7 +37,7 @@
     "watch": "jest --watchAll",
     "watch:verbose": "jest --watchAll  --verbose --detectOpenHandles",
     "build": "npm run build --prefix docs",
-    "lint": "eslint *.js src/**/*.js lib/**/*.js test/**/*.js"
+    "lint": "eslint *.js src/**/*.js"
   },
   "jest": {
     "testEnvironment": "node"

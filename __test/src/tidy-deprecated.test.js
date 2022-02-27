@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-const { runWithWarnings } = require('.');
-const tidyDeprecated = require('../tidy-deprecated');
+const { runWithWarnings } = require('..');
+const tidyDeprecated = require('../../src/tidy-deprecated');
 
 /**
  * A plugin to limit the scope to a single function: `tidyDeprecated`.

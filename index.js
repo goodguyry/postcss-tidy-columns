@@ -1,8 +1,8 @@
 const Tidy = require('./Tidy');
-const getGlobalOptions = require('./src/getGlobalOptions');
-const { tidyFunction } = require('./tidy-function');
-const { tidyVar } = require('./tidy-var');
-const tidyDeprecated = require('./tidy-deprecated');
+const { getOptions } = require('./src/options');
+const { tidyFunction } = require('./src/tidy-function');
+const { tidyVar } = require('./src/tidy-var');
+const tidyDeprecated = require('./src/tidy-deprecated');
 
 /**
  * Parse rules and insert span and offset values.
@@ -20,7 +20,7 @@ module.exports = (options = {}) => ({
        * Collect the global options.
        */
       Once(root) {
-        globalOptions = Object.freeze(getGlobalOptions(root, options));
+        globalOptions = Object.freeze(getOptions(root, options));
       },
 
       /**
