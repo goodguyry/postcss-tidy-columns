@@ -1,12 +1,94 @@
 const cleanClone = require('./lib/cleanClone');
-const detectCalcWrapper = require('./lib/detectCalcWrapper');
 
 /**
  * Pattern to match `tidy-*` functions in declaration values.
  *
  * @type {RegExp}
  */
-const FUNCTION_REGEX = /tidy-(span|offset)\(([\d.-]+)\)/;
+const FUNCTION_PATTERN = /tidy-(span|offset)\(([\d.-]+)\)/;
+
+/**
+ * Extract tidy-span|offset functions and note whether they're nested within a CSS unction.
+ *
+ * @param  {String} value The declaration value.
+ * @return {Array} [
+ *   @type {Object} {
+ *     An object describing any tidy-* functions found.
+ *
+ *     @type {Boolean} isNested Whether or not the tidy-* function is nested with a CSS function.
+ *     @type {String}  match    The tidy-* function to replace.
+ *   }
+ * ]
+ */
+function getFunctionMatches(declaration) {
+  const globalRegExp = new RegExp(FUNCTION_PATTERN, 'g');
+
+  if (/calc/.test(declaration)) {
+    // Split the declaration at the calc function(s).
+    const calcSplit = declaration.split('calc');
+
+    const calcResults = calcSplit
+      // Ensure there is a calc() function within the string.
+      .filter((split) => split.match(globalRegExp) && '' !== split)
+      // Extract the string within balanced parentheses.
+      .reduce((acc, piece) => {
+        let balanced = false;
+        let openingCount = 0;
+        let closingCount = 0;
+
+        let result = '';
+        const results = [];
+
+        [...piece].forEach((character) => {
+          // Add the current character to the accumulator until we have a balanced string.
+          result += character;
+
+          // Keep count of the opening and closing parentheses.
+          openingCount += Number('(' === character);
+          closingCount += Number(')' === character);
+
+          // The result string has balanced parentheses.
+          balanced = ((0 !== openingCount + closingCount) && openingCount === closingCount);
+
+          if (balanced) {
+            let isNested = false;
+
+            // Only work on strings containing a tidy-* function.
+            if (globalRegExp.test(result)) {
+              // Detect whether the balanced result is within a calc() function.
+              const newRegex = new RegExp(`calc${result.replace(/([)(+-/*])/g, '\\$1')}`);
+              isNested = newRegex.test(declaration);
+
+              // Extract the tidy-* function and whether it's inside a calc() function.
+              const [match] = piece.match(globalRegExp);
+              results.push({
+                match,
+                isNested,
+              });
+            }
+
+            // Reset values for next character.
+            balanced = false;
+            openingCount = 0;
+            closingCount = 0;
+            result = '';
+          }
+        });
+
+        // Add the results to the accumulator
+        return [...acc, ...results];
+      }, []);
+
+    return calcResults;
+  }
+
+  // Extract any tidy-* functions and note they are not nested.
+  const matches = declaration.match(globalRegExp) || [];
+  return matches
+    // Filter out any falsy values.
+    .filter((match) => match)
+    .map((match) => ({ match, isNested: false }));
+}
 
 /**
  * Replace `tidy-[span|offset]()` functions.
@@ -20,7 +102,7 @@ const FUNCTION_REGEX = /tidy-(span|offset)\(([\d.-]+)\)/;
  */
 function tidyFunction(declaration, tidy, result) {
   // Parse the tidy-* function matches.
-  const tidyMatches = detectCalcWrapper(declaration.value);
+  const tidyMatches = getFunctionMatches(declaration.value);
 
   if (0 < tidyMatches.length) {
     const { columns, columns: { options } } = tidy;
@@ -44,11 +126,10 @@ function tidyFunction(declaration, tidy, result) {
        * slug:  One of either `span` or `offset`.
        * value: The function's argument.
        */
-      const [match, slug, value] = tidyFunctionMatch.match(FUNCTION_REGEX);
+      const [match, slug, value] = tidyFunctionMatch.match(FUNCTION_PATTERN);
 
       /**
        * Get the span or offset `calc()` value(s).
-       * Use the object's `isNested` value to suppress the `calc` from the output.
        */
       const calcValue = ('span' === slug)
         ? columns.spanCalc(value)
@@ -77,5 +158,6 @@ function tidyFunction(declaration, tidy, result) {
 
 module.exports = {
   tidyFunction,
-  FUNCTION_REGEX,
+  getFunctionMatches,
+  FUNCTION_PATTERN,
 };
