@@ -1,7 +1,6 @@
 const {
   isCustomProperty,
   roundToPrecision,
-  splitCssUnit,
   isEmpty,
 } = require('./src/lib/values');
 const transformValue = require('./src/transformValue');
@@ -81,7 +80,11 @@ class Columns {
       return 0;
     }
 
-    const [value, units] = splitCssUnit(gap);
+    // Split the value from the units.
+    const [value, units] = ('string' === typeof gap)
+      ? [parseFloat(gap), gap.replace(/[\d.]/g, '')]
+      : [gap, undefined];
+
     const sharedGap = (value / columns) * (columns - 1);
 
     return `${roundToPrecision(sharedGap, 4)}${units}`;
