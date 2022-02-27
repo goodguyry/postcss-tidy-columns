@@ -1,8 +1,8 @@
 const Tidy = require('./Tidy');
 const { getOptions } = require('./src/options');
-const { tidyFunction } = require('./tidy-function');
-const { tidyVar } = require('./tidy-var');
-const tidyDeprecated = require('./tidy-deprecated');
+const { tidyFunction } = require('./src/tidy-function');
+const { tidyVar } = require('./src/tidy-var');
+const tidyDeprecated = require('./src/tidy-deprecated');
 
 /**
  * Parse rules and insert span and offset values.

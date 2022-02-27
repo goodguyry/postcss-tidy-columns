@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-const { run } = require('../../test');
-const cleanClone = require('../cleanClone');
+const { run } = require('..');
+const cleanClone = require('../../src/lib/cleanClone');
 
 /**
  * Create a test plugin for the `cleanClone` helper. Running a test plugin

@@ -1,14 +1,14 @@
 const postcss = require('postcss');
 const tidyColumns = require('../..');
-const { run } = require('../../test');
+const { run } = require('..');
 const {
   parseOptions,
   normalizeOptions,
   LENGTH_REGEX,
   getOptions,
   collectTidyRuleParams,
-} = require('../options');
-const { typical, columnsOnly } = require('../../test/sharedConfigs');
+} = require('../../src/options');
+const { typical, columnsOnly } = require('../sharedConfigs');
 
 /**
  * Options test runner.

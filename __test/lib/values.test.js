@@ -3,7 +3,7 @@ const {
   isCustomProperty,
   roundToPrecision,
   splitCssUnit,
-} = require('../values');
+} = require('../../src/lib/values');
 
 /**
  * Compare numerical strings.

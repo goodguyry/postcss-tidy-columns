@@ -1,7 +1,7 @@
 const valueParser = require('postcss-value-parser');
 const reducer = require('postcss-calc/dist/lib/reducer');
 const { parser } = require('postcss-calc/dist/parser');
-const { roundToPrecision } = require('./values');
+const { roundToPrecision } = require('./lib/values');
 
 /**
  * Stringify the reduced AST.

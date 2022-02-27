@@ -3,8 +3,8 @@ const {
   roundToPrecision,
   splitCssUnit,
   isEmpty,
-} = require('./lib/values');
-const transformValue = require('./lib/transformValue');
+} = require('./src/lib/values');
+const transformValue = require('./src/transformValue');
 const { normalizeOptions } = require('./src/options');
 
 /**

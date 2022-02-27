@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
-const { run, runWithWarnings } = require('.');
-const { typical } = require('./sharedConfigs');
-const { FUNCTION_REGEX } = require('../tidy-function');
+const { run, runWithWarnings } = require('..');
+const { typical } = require('../sharedConfigs');
+const { FUNCTION_REGEX } = require('../../src/tidy-function');
 
 /**
  * Replace `tidy-[span|offset]()` functions.

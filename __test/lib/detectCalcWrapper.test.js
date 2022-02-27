@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const detectCalcWrapper = require('../detectCalcWrapper');
+const detectCalcWrapper = require('../../src/lib/detectCalcWrapper');
 
 /**
  * Extract tidy-span|offset functions and note whether it is nested within a CSS calc() function.
