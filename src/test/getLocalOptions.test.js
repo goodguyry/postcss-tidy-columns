@@ -1,6 +1,6 @@
 const runOptions = require('.');
 const { typical, columnsOnly } = require('../../test/sharedConfigs');
-const getLocalOptions = require('../getLocalOptions');
+const { getLocalOptions } = require('../options');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin

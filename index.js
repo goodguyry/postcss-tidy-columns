@@ -1,5 +1,5 @@
 const Tidy = require('./Tidy');
-const getGlobalOptions = require('./src/getGlobalOptions');
+const { getGlobalOptions } = require('./src/options');
 const { tidyFunction } = require('./tidy-function');
 const { tidyVar } = require('./tidy-var');
 const tidyDeprecated = require('./tidy-deprecated');

@@ -1,4 +1,4 @@
-const { normalizeOptions, LENGTH_REGEX } = require('../normalizeOptions');
+const { normalizeOptions, LENGTH_REGEX } = require('../options');
 
 /**
  * Nomalize config.

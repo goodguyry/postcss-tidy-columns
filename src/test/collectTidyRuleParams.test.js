@@ -1,6 +1,6 @@
 const runOptions = require('.');
 const { run } = require('../../test');
-const collectTidyRuleParams = require('../collectTidyRuleParams');
+const { collectTidyRuleParams } = require('../options');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin

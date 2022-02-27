@@ -1,6 +1,6 @@
 const runOptions = require('.');
 const { typical } = require('../../test/sharedConfigs');
-const getGlobalOptions = require('../getGlobalOptions');
+const { getGlobalOptions } = require('../options');
 
 /**
  * Create a test plugin to collect local options. Running a test plugin
