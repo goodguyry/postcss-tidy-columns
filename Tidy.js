@@ -18,8 +18,8 @@ class Tidy {
   }
 
   /**
-  * Set up rule-specific properties.
-  */
+   * Set up rule-specific properties.
+   */
   initRule() {
     // Merge global and local options.
     const ruleOptions = getOptions(this.rule, this.globalOptions);

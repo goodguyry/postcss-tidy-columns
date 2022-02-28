@@ -20,7 +20,7 @@ function tidyVar(declaration, tidy, result) {
   const globalRegExp = new RegExp(VAR_FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(VAR_FUNCTION_REGEX);
 
-  const { columns: { options } } = tidy;
+  const { options } = tidy;
   const fullMatch = declaration.value.match(globalRegExp);
 
   if (Array.isArray(fullMatch)) {

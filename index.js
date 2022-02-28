@@ -1,5 +1,4 @@
-const Tidy = require('./Tidy');
-const { getOptions } = require('./src/lib/options');
+const TidyColumns = require('./TidyColumns');
 const { tidyFunction } = require('./src/tidy-function');
 const { tidyVar } = require('./src/tidy-var');
 const tidyDeprecated = require('./src/tidy-deprecated');
@@ -12,25 +11,21 @@ const tidyDeprecated = require('./src/tidy-deprecated');
 module.exports = (options = {}) => ({
   postcssPlugin: 'postcss-tidy-columns',
   prepare() {
-    let globalOptions = {};
-    let tidy = {};
+    const tidy = new TidyColumns();
 
     return {
       /**
        * Collect the global options.
        */
       Once(root) {
-        globalOptions = Object.freeze(getOptions(root, options));
+        tidy.initRoot(root, options);
       },
 
       /**
        * Set up rule-specific properties.
        */
       Rule(rule) {
-        tidy = new Tidy(rule, globalOptions);
-
-        // Set up rule-specific properties.
-        tidy.initRule();
+        tidy.initRule(rule);
       },
 
       /**

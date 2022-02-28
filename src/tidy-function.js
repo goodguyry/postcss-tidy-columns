@@ -105,7 +105,7 @@ function tidyFunction(declaration, tidy, result) {
   const tidyMatches = getFunctionMatches(declaration.value);
 
   if (0 < tidyMatches.length) {
-    const { columns, columns: { options } } = tidy;
+    const { options } = tidy;
 
     /**
      * Find all matches in the declaration value.
@@ -119,7 +119,7 @@ function tidyFunction(declaration, tidy, result) {
       const { match: tidyFunctionMatch, isNested } = tidyMatch;
 
       // Conditionally suppress 'calc' in the output.
-      columns.suppressCalc = isNested;
+      tidy.suppressCalc = isNested; // eslint-disable-line no-param-reassign
 
       /**
        * match: The full function expression.
@@ -132,8 +132,8 @@ function tidyFunction(declaration, tidy, result) {
        * Get the span or offset `calc()` value(s).
        */
       const calcValue = ('span' === slug)
-        ? columns.spanCalc(value)
-        : columns.offsetCalc(value);
+        ? tidy.spanCalc(value)
+        : tidy.offsetCalc(value);
 
       return acc.replace(match, calcValue);
     }, declaration.value);
@@ -152,7 +152,7 @@ function tidyFunction(declaration, tidy, result) {
     ));
 
     // Reset suppress 'calc' to default.
-    columns.suppressCalc = false;
+    tidy.suppressCalc = false; // eslint-disable-line no-param-reassign
   }
 }
 
