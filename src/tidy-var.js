@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const cleanClone = require('./lib/cleanClone');
 
 /**
@@ -21,7 +20,7 @@ function tidyVar(declaration, tidy, result) {
   const globalRegExp = new RegExp(VAR_FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(VAR_FUNCTION_REGEX);
 
-  const { columns, columns: { options } } = tidy;
+  const { columns: { options } } = tidy;
   const fullMatch = declaration.value.match(globalRegExp);
 
   if (Array.isArray(fullMatch)) {
@@ -31,7 +30,7 @@ function tidyVar(declaration, tidy, result) {
      * @param {String} acc      The accumulator, based on declaration.value
      * @param {String} varMatch The full tidy function match(es)
      *
-     * @return {String}          The replacement value for the declaration
+     * @return {String}         The replacement value for the declaration
      */
     const replaceWithValue = fullMatch.reduce((acc, varMatch) => {
       /**
@@ -41,8 +40,8 @@ function tidyVar(declaration, tidy, result) {
       const [match, value] = varMatch.match(localRegExp);
 
       // Replace the tidy-var() function with the real option value.
-      if (Object.keys(columns.options).includes(value)) {
-        return acc.replace(match, columns.options[value]);
+      if (Object.keys(options).includes(value)) {
+        return acc.replace(match, options[value]);
       }
 
       // There's no corresponding option value.
