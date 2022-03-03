@@ -20,7 +20,7 @@ function tidyVar(declaration, tidy, result) {
   const globalRegExp = new RegExp(VAR_FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(VAR_FUNCTION_REGEX);
 
-  const { options } = tidy;
+  const { ruleOptions } = tidy;
   const fullMatch = declaration.value.match(globalRegExp);
 
   if (Array.isArray(fullMatch)) {
@@ -40,15 +40,15 @@ function tidyVar(declaration, tidy, result) {
       const [match, value] = varMatch.match(localRegExp);
 
       // Replace the tidy-var() function with the real option value.
-      if (Object.keys(options).includes(value)) {
-        return acc.replace(match, options[value]);
+      if (Object.keys(ruleOptions).includes(value)) {
+        return acc.replace(match, ruleOptions[value]);
       }
 
       // There's no corresponding option value.
       return acc;
     }, declaration.value);
 
-    if (options.debug) {
+    if (ruleOptions.debug) {
       result.warn(`Debug: ${result.opts.from} => ${declaration.toString()}`, { node: declaration });
     }
 

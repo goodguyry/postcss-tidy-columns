@@ -11,14 +11,14 @@ const tidyDeprecated = require('./src/tidy-deprecated');
 module.exports = (options = {}) => ({
   postcssPlugin: 'postcss-tidy-columns',
   prepare() {
-    const tidy = new TidyColumns();
+    const tidy = new TidyColumns(options);
 
     return {
       /**
-       * Collect the global options.
+       * Collect the global at-rule options.
        */
       Once(root) {
-        tidy.initRoot(root, options);
+        tidy.initRoot(root);
       },
 
       /**

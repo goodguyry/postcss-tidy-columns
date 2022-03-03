@@ -14,7 +14,7 @@ const { normalizeOptions } = require('./src/lib/options');
  * @param {Object} options The plugin options.
  */
 class TidyColumns {
-  constructor() {
+  constructor(options = {}) {
     this.initRoot = this.initRoot.bind(this);
     this.initRule = this.initRule.bind(this);
     this.getSharedGap = this.getSharedGap.bind(this);
@@ -29,6 +29,13 @@ class TidyColumns {
      * @type {Boolean}
      */
     this.suppressCalc = false;
+
+    /**
+     * Options set via the PostCSS config.
+     *
+     * @type {Object}
+     */
+    this.pluginOptions = options;
   }
 
   /**
@@ -36,12 +43,12 @@ class TidyColumns {
    *
    * @param {Root} root The CSS root.
    */
-  initRoot(root, options) {
-    this.globalOptions = Object.freeze(getOptions(root, options));
+  initRoot(root) {
+    this.globalOptions = Object.freeze(getOptions(root, this.pluginOptions));
   }
 
   /**
-   * Set up rule-specific properties.
+   * Collect rule options and set up rule-specific properties.
    *
    * @param {Rule} rule The current rule.
    */

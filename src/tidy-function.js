@@ -105,7 +105,7 @@ function tidyFunction(declaration, tidy, result) {
   const tidyMatches = getFunctionMatches(declaration.value);
 
   if (0 < tidyMatches.length) {
-    const { options } = tidy;
+    const { ruleOptions } = tidy;
 
     /**
      * Find all matches in the declaration value.
@@ -138,7 +138,7 @@ function tidyFunction(declaration, tidy, result) {
       return acc.replace(match, calcValue);
     }, declaration.value);
 
-    if (options.debug) {
+    if (ruleOptions.debug) {
       result.warn(`Debug: ${result.opts.from} => ${declaration.toString()}`, { node: declaration });
     }
 
