@@ -18,25 +18,21 @@ const TidyColumns = require('../TidyColumns');
  */
 describe('Calculate the shared gap amount to be removed from each column', () => {
   test.each([
-
     [
       'Calculates a shared gap with `rem` value',
       allValues,
       '0.5859rem',
     ],
-
     [
       'Calculates a shared gap with `px` value',
       edgeGap,
       '9.1667px',
     ],
-
     [
       'Calculates a `0` shared gap if a gap option is not declared',
       edgeMax,
       0,
     ],
-
     ['Builds the shared gap calculation when `gap` is a CSS Custom Property',
       customProperties,
       `(${customProperties.gap} / ${customProperties.columns} * (${customProperties.columns} - 1))`,
@@ -156,98 +152,84 @@ describe('Get calc functions from spanCalc()', () => {
       'calc((100vw - 1rem * 2) / 12 - 9.1667px)',
       edgeGap,
     ],
-
     [
       'Omits shared gap for single column with no `gap` option',
       1,
       'calc((min(100vw, 1024px) - 1.25rem * 2) / 16)',
       edgeMax,
     ],
-
     [
       'Omits the gap addition wtih no `gap` option',
       2,
       'calc(((min(100vw, 1024px) - 1.25rem * 2) / 16) * 2)',
       edgeMax,
     ],
-
     [
       'Omits the edge subtraction with no `edge` option',
       1,
       'calc(min(100vw, 60rem) / 16 - 14.0625px)',
       gapMax,
     ],
-
     [
       'Omits undeclared values from span ouput: `edge` only',
       1,
       'calc((100vw - 20px * 2) / 12)',
       edgeOnly,
     ],
-
     [
       'Omits undeclared values from span ouput: `gap` only',
       1,
       'calc(100vw / 12 - 0.8594rem)',
       gapOnly,
     ],
-
     [
       'Omits undeclared values from span ouput: `max` only',
       1,
       'calc(min(100vw, var(--tmax)) / 16)',
       maxOnly,
     ],
-
     [
       'Omits undeclared values from span ouput: `edge` only (multiple columns)',
       5,
       'calc((min(100vw, var(--tmax)) / 16) * 5)',
       maxOnly,
     ],
-
     [
       'Omits undeclared values from span ouput: `columns` only',
       1,
       'calc(100vw / 12)',
       columnsOnly,
     ],
-
     [
       'Omits undeclared values from span ouput: `columns` only (multiple columns)',
       3,
       'calc((100vw / 12) * 3)',
       columnsOnly,
     ],
-
     [
       'Custom properties used in option values',
       3,
       'calc((((min(100vw, 90rem) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2)',
       customProperties,
     ],
-
     [
       'var() function for `max` value',
       3,
       'calc((((min(100vw, var(--tmax)) - 32px * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 2)',
       { ...allValues, max: 'var(--tmax)' },
     ],
-
     [
       'var() function for `edge` value',
       3,
       'calc((((min(100vw, 75rem) - var(--tedge) * 2) / 16 - 0.5859rem) * 3) + 0.625rem * 2)',
       { ...allValues, edge: 'var(--tedge)' },
     ],
-
     [
       'var() function for `gap` value',
       3,
       'calc((((min(100vw, 75rem) - 32px * 2) / 16 - (var(--tgap) / 16 * (16 - 1))) * 3) + var(--tgap) * 2)',
       { ...allValues, gap: 'var(--tgap)' },
     ],
-
     [
       'var() function for `columns` value',
       3,
