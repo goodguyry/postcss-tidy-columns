@@ -100,8 +100,6 @@ describe('Collect and merge global plugin options', () => {
         edge: '0.625rem',
         gap: '1.25rem',
         max: '90rem',
-        debug: false,
-        reduce: false,
         base: '%',
       },
       { ...typical, base: '%' },
@@ -117,7 +115,6 @@ describe('Collect and merge global plugin options', () => {
         gap: '1.25rem',
         max: '90rem',
         debug: true,
-        reduce: false,
         base: 'vw',
       },
       { ...typical, debug: true },
@@ -132,8 +129,8 @@ describe('Collect and merge global plugin options', () => {
         edge: undefined,
         gap: undefined,
         max: undefined,
-        debug: false,
-        reduce: false,
+        debug: undefined,
+        reduce: undefined,
         base: 'vw',
       },
       {},
@@ -278,7 +275,7 @@ describe('Parse and compile CSS @tidy at-rule parameters.', () => {
     [
       ['columns 12', 'gap 2rem', 'edge 2rem', 'max 90rem'],
       {
-        columns: 12,
+        columns: '12',
         gap: '2rem',
         edge: '2rem',
         max: '90rem',
@@ -286,7 +283,7 @@ describe('Parse and compile CSS @tidy at-rule parameters.', () => {
     ],
     [
       ['columns 12'],
-      { columns: 12 },
+      { columns: '12' },
     ],
     [
       ['max 90rem'],

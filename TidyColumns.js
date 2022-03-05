@@ -5,7 +5,6 @@ const {
   isEmpty,
 } = require('./src/lib/values');
 const transformValue = require('./src/transformValue');
-const { normalizeOptions } = require('./src/lib/options');
 
 /**
  * TidyColumns class
@@ -53,15 +52,12 @@ class TidyColumns {
    * @param {Rule} rule The current rule.
    */
   initRule(rule) {
-    // Merge global and local options.
-    const ruleOptions = getOptions(rule, this.globalOptions);
-
     /**
-     * Rule options.
+     * Rule options merged into global options.
      *
      * @type {Object}
      */
-    this.ruleOptions = normalizeOptions(ruleOptions);
+    this.ruleOptions = getOptions(rule, this.globalOptions);
 
     const { edge, base = 'vw', max } = this.ruleOptions;
     const fluidBase = `100${base}`;

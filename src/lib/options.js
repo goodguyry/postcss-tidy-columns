@@ -75,7 +75,7 @@ const parseOptions = (optionsArray) => {
     return acc;
   }, {});
 
-  return normalizeOptions(options);
+  return options;
 };
 
 /**
@@ -132,10 +132,10 @@ const getOptions = (node, options) => {
   const atRuleOpts = parseOptions(atRuleParams);
 
   if ('root' === node.type) {
-    return { ...defaultOpts, ...options, ...atRuleOpts };
+    return normalizeOptions({ ...defaultOpts, ...options, ...atRuleOpts });
   }
 
-  return { ...options, ...atRuleOpts };
+  return normalizeOptions({ ...options, ...atRuleOpts });
 };
 
 module.exports = {
