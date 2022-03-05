@@ -3,9 +3,9 @@ const cleanClone = require('./lib/cleanClone');
 /**
  * Returns a formatted deprecation notice.
  *
- * @param  {string} old     The deprecated property.
- * @param  {string} current The suggested update.
- * @return {string}         The deprecation notice and suggetsted fix.
+ * @param  {String} old     The deprecated property.
+ * @param  {String} current The suggested update.
+ * @return {String}         The deprecation notice and suggetsted fix.
  */
 const getDeprecatedMessage = (old, current) => (`
 
@@ -15,7 +15,7 @@ Deprecated: \`${old}\` will be removed in a future version.
 `);
 
 /**
- * Clean and trim shorthand property values.
+ * Cleans and trims shorthand property values.
  * Remove slashes, spaces, and invalid/unneeded values.
  *
  * @param {Object} values An object of matched shorthand property values.
@@ -41,10 +41,10 @@ function cleanShorthandValues(values) {
 }
 
 /**
- * Warn and replace deprecated properties.
+ * Warns and replaces deprecated properties.
  *
- * @param {Object} declaration The current CSS declaration.
- * @param {Result} result      Provides the result of the PostCSS transformations.
+ * @param {Declaration} declaration The current CSS declaration.
+ * @param {Result}      result      Provides the result of the PostCSS transformations.
  */
 function tidyDeprecated(declaration, result) {
   const suggestions = [];

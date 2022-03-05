@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const cleanClone = require('./lib/cleanClone');
 
 /**
@@ -9,19 +8,19 @@ const cleanClone = require('./lib/cleanClone');
 const VAR_FUNCTION_REGEX = /tidy-var\(["']?(columns|edge|gap|max)["']?\)/i;
 
 /**
- * Replace `tidy-var()` functions within property values.
+ * Replaces `tidy-var()` functions within property values.
  *
  * @see https://github.com/goodguyry/postcss-tidy-columns#var-function
  *
- * @param {Object} declaration The current CSS declaration.
- * @param {Object} Tidy        An instance of the Tidy class.
- * @param {Result} result      Provides the result of the PostCSS transformations.
+ * @param {Declaration} declaration The current CSS declaration.
+ * @param {Tidy}        tidy        An instance of the Tidy class.
+ * @param {Result}      result      Provides the result of the PostCSS transformations.
  */
 function tidyVar(declaration, tidy, result) {
   const globalRegExp = new RegExp(VAR_FUNCTION_REGEX, 'g');
   const localRegExp = new RegExp(VAR_FUNCTION_REGEX);
 
-  const { columns, columns: { options } } = tidy;
+  const { ruleOptions } = tidy;
   const fullMatch = declaration.value.match(globalRegExp);
 
   if (Array.isArray(fullMatch)) {
@@ -31,7 +30,7 @@ function tidyVar(declaration, tidy, result) {
      * @param {String} acc      The accumulator, based on declaration.value
      * @param {String} varMatch The full tidy function match(es)
      *
-     * @return {String}          The replacement value for the declaration
+     * @return {String}         The replacement value for the declaration
      */
     const replaceWithValue = fullMatch.reduce((acc, varMatch) => {
       /**
@@ -41,15 +40,15 @@ function tidyVar(declaration, tidy, result) {
       const [match, value] = varMatch.match(localRegExp);
 
       // Replace the tidy-var() function with the real option value.
-      if (Object.keys(columns.options).includes(value)) {
-        return acc.replace(match, columns.options[value]);
+      if (Object.keys(ruleOptions).includes(value)) {
+        return acc.replace(match, ruleOptions[value]);
       }
 
       // There's no corresponding option value.
       return acc;
     }, declaration.value);
 
-    if (options.debug) {
+    if (ruleOptions.debug) {
       result.warn(`Debug: ${result.opts.from} => ${declaration.toString()}`, { node: declaration });
     }
 

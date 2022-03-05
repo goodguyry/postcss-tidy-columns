@@ -1,4 +1,4 @@
-const { isEmpty, isCustomProperty } = require('./lib/values');
+const { isEmpty, isCustomProperty } = require('./values');
 
 /**
  * Matches CSS length values of the supported unit values (px, em, rem).
@@ -8,7 +8,7 @@ const { isEmpty, isCustomProperty } = require('./lib/values');
 const LENGTH_REGEX = /[0-9.]+(px|r?em)+$/;
 
 /**
- * Normalize option value types.
+ * Normalizes option value types.
  * Since CSS values are always strings, we need to do some type checking.
  *
  * @param  {Object} options The options object.
@@ -57,7 +57,7 @@ const normalizeOptions = (options) => {
 };
 
 /**
- * Parse and compile CSS @tidy at-rule parameters.
+ * Parses and compiles CSS @tidy at-rule parameters.
  *
  * @param  {Array} optionsArray An array of at-rule params.
  * @return {Object}
@@ -75,11 +75,11 @@ const parseOptions = (optionsArray) => {
     return acc;
   }, {});
 
-  return normalizeOptions(options);
+  return options;
 };
 
 /**
- * Collect @tidy params from the provided CSS root.
+ * Collects @tidy params from the provided CSS root.
  *
  * @param  {Root|Rule} node The current node.
  * @return {Array}
@@ -105,7 +105,7 @@ const collectTidyRuleParams = (node) => {
 };
 
 /**
- * Get options from a given node.
+ * Gets options from a given node.
  *
  * @param  {Root|Rule} node   The current node.
  * @param  {Object}   options The current options.
@@ -132,10 +132,10 @@ const getOptions = (node, options) => {
   const atRuleOpts = parseOptions(atRuleParams);
 
   if ('root' === node.type) {
-    return { ...defaultOpts, ...options, ...atRuleOpts };
+    return normalizeOptions({ ...defaultOpts, ...options, ...atRuleOpts });
   }
 
-  return { ...options, ...atRuleOpts };
+  return normalizeOptions({ ...options, ...atRuleOpts });
 };
 
 module.exports = {
