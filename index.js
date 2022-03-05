@@ -5,6 +5,8 @@ const tidyDeprecated = require('./src/tidy-deprecated');
 
 /**
  * Parse rules and insert span and offset values.
+ *
+ * @param {Object} options The plugin options.
  */
 module.exports = (options = {}) => ({
   postcssPlugin: 'postcss-tidy-columns',
