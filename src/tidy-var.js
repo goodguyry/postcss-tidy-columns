@@ -8,13 +8,13 @@ const cleanClone = require('./lib/cleanClone');
 const VAR_FUNCTION_REGEX = /tidy-var\(["']?(columns|edge|gap|max)["']?\)/i;
 
 /**
- * Replace `tidy-var()` functions within property values.
+ * Replaces `tidy-var()` functions within property values.
  *
  * @see https://github.com/goodguyry/postcss-tidy-columns#var-function
  *
- * @param {Object} declaration The current CSS declaration.
- * @param {Object} Tidy        An instance of the Tidy class.
- * @param {Result} result      Provides the result of the PostCSS transformations.
+ * @param {Declaration} declaration The current CSS declaration.
+ * @param {Tidy}        tidy        An instance of the Tidy class.
+ * @param {Result}      result      Provides the result of the PostCSS transformations.
  */
 function tidyVar(declaration, tidy, result) {
   const globalRegExp = new RegExp(VAR_FUNCTION_REGEX, 'g');

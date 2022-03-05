@@ -1,9 +1,9 @@
 /**
- * Clone a node and clean it's raw formatting.
+ * Clones a node and clean it's raw formatting.
  *
- * @param  {Object} node           The declaration or rule to be cloned.
- * @param  {Object} [overrides={}] The property overrides.
- * @return {Object}
+ * @param  {Declaration|Rule} node           The declaration or rule to be cloned.
+ * @param  {Object}           [overrides={}] The property overrides.
+ * @return {Declaration|Rule}
  */
 function cleanClone(node, overrides = {}) {
   const cleaner = (node.nodes) ? { nodes: [] } : {};

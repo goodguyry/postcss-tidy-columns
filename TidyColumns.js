@@ -8,12 +8,24 @@ const transformValue = require('./src/transformValue');
 
 /**
  * TidyColumns class
- * Initialize options, calculate column and offset values.
- *
- * @param {Object} options The plugin options.
+ * Calculates column and offset values.
  */
 class TidyColumns {
+  /**
+   * Creates a new TidyColumns.
+   *
+   * @constructor
+   * @param {Object} options The plugin options.
+   */
   constructor(options = {}) {
+    /**
+     * Options set via the PostCSS config.
+     *
+     * @type {Object}
+     */
+    this.pluginOptions = options;
+
+    // Bind class methods.
     this.initRoot = this.initRoot.bind(this);
     this.initRule = this.initRule.bind(this);
     this.getSharedGap = this.getSharedGap.bind(this);
@@ -23,22 +35,15 @@ class TidyColumns {
     this.offsetCalc = this.offsetCalc.bind(this);
 
     /**
-     * Suppress the `calc` string in the column output.
+     * Whether to suppress the `calc` string in the column output.
      *
      * @type {Boolean}
      */
     this.suppressCalc = false;
-
-    /**
-     * Options set via the PostCSS config.
-     *
-     * @type {Object}
-     */
-    this.pluginOptions = options;
   }
 
   /**
-   * Collect the global options.
+   * Collects global options from the CSS root.
    *
    * @param {Root} root The CSS root.
    */
@@ -47,7 +52,7 @@ class TidyColumns {
   }
 
   /**
-   * Collect rule options and set up rule-specific properties.
+   * Collects rule-specific options and initialize column properties and values.
    *
    * @param {Rule} rule The current rule.
    */
@@ -72,7 +77,7 @@ class TidyColumns {
     /**
      * The `edges` expression.
      *
-     * @type {Number|String}
+     * @type {String}
      */
     this.edges = isEmpty(edge) ? 0 : `${edge} * 2`;
 
@@ -85,9 +90,9 @@ class TidyColumns {
   }
 
   /**
-   * Calculate the shared gap amount to be removed from each column.
+   * Calculates the amount to be removed from each column.
    *
-   * @return {String|Number}
+   * @return {String} The shared gap expression or CSS length value.
    */
   getSharedGap() {
     const { gap, columns } = this.ruleOptions;
@@ -112,9 +117,8 @@ class TidyColumns {
   }
 
   /**
-   * Build the column division for the appropriate base value and gaps.
+   * Builds the column expression for the appropriate base value and gaps.
    *
-   * @param {String} base The current base value size.
    * @return {String}
    */
   getSingleColumn() {
@@ -130,11 +134,12 @@ class TidyColumns {
       ? `${columns} - ${this.sharedGap}`
       : `${columns}`;
 
+    // E.x., min(100vw, 80rem) - 1.25rem / 12 - 0.5859rem
     return `${container} / ${columnDenominator}`;
   }
 
   /**
-   * Complete the calc() function.
+   * Builds the calc() function.
    *
    * @param {Number} colSpan The number of columns to span.
    * @param {Number} gapSpan The number of gaps to span.
@@ -153,9 +158,9 @@ class TidyColumns {
 
     /**
      * Check for gaps before adding the math for them.
-     * Only multiply gaps if there are more than one.
      */
     if (!isEmpty(gap) && !isEmpty(gapSpan)) {
+      // Only multiply gaps if there are more than one.
       const gapSpanCalc = (1 === gapSpan) ? gap : `${gap} * ${gapSpan}`;
 
       cssCalcEquation = `(${cssCalcEquation}) + ${gapSpanCalc}`;
@@ -164,14 +169,15 @@ class TidyColumns {
     // Conditionally reduce the expression.
     return reduce
       ? transformValue(`(${cssCalcEquation})`, this.suppressCalc)
+      // Conditionally wrap in a calc() function
       : `${this.suppressCalc ? '' : 'calc'}(${cssCalcEquation})`;
   }
 
   /**
-   * Create the column `calc()` function declaration for each base value.
+   * Creates the column `calc()` function declaration for each base value.
    *
    * @param {String|Number} colSpan The number of columns to span.
-   * @return {Object}
+   * @return {String}
    */
   spanCalc(colSpan) {
     const columnSpan = parseFloat(colSpan, 10);
@@ -187,10 +193,10 @@ class TidyColumns {
   }
 
   /**
-   * Create the offset `calc()` function declaration for each base value.
+   * Creates the offset `calc()` function declaration for each base value.
    *
    * @param {String|Number} colSpan The number of columns to offset.
-   * @return {Object}
+   * @return {String}
    */
   offsetCalc(colSpan) {
     const columnSpan = parseFloat(colSpan, 10);

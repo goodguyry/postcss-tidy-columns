@@ -31,7 +31,7 @@ const CUSTOM_PROP_REGEX = /var\(\s?(--[\w-]+)\s?[^)]*\)/;
 exports.isCustomProperty = (value) => CUSTOM_PROP_REGEX.test(value);
 
 /**
- * Round the given number to the specified number of decimal places.
+ * Rounds the given number to the specified number of decimal places.
  *
  * @param  {Number} toRound       The number to round.
  * @param  {Number} decimalPlaces The number of decimal places to round `toRound` to.

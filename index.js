@@ -5,8 +5,6 @@ const tidyDeprecated = require('./src/tidy-deprecated');
 
 /**
  * Parse rules and insert span and offset values.
- *
- * @param {Object} root The root CSS object.
  */
 module.exports = (options = {}) => ({
   postcssPlugin: 'postcss-tidy-columns',
@@ -22,7 +20,7 @@ module.exports = (options = {}) => ({
       },
 
       /**
-       * Set up rule-specific properties.
+       * Set up rule-specific options and properties.
        */
       Rule(rule) {
         tidy.initRule(rule);

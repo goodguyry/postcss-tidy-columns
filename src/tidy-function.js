@@ -8,15 +8,15 @@ const cleanClone = require('./lib/cleanClone');
 const FUNCTION_PATTERN = /tidy-(span|offset)\(([\d.-]+)\)/;
 
 /**
- * Extract tidy-span|offset functions and note whether they're nested within a CSS unction.
+ * Extracts tidy-span|offset functions and note whether they're nested within a CSS function.
  *
  * @param  {String} value The declaration value.
  * @return {Array} [
- *   @type {Object} {
+ *   @param {Object} {
  *     An object describing any tidy-* functions found.
  *
- *     @type {Boolean} isNested Whether or not the tidy-* function is nested with a CSS function.
- *     @type {String}  match    The tidy-* function to replace.
+ *     @param {Boolean} isNested Whether or not the tidy-* function is nested with a CSS function.
+ *     @param {String}  match    The tidy-* function to replace.
  *   }
  * ]
  */
@@ -91,14 +91,14 @@ function getFunctionMatches(declaration) {
 }
 
 /**
- * Replace `tidy-[span|offset]()` functions.
+ * Replaces `tidy-[span|offset]()` functions.
  *
  * @see https://github.com/goodguyry/postcss-tidy-columns#span-function
  * @see https://github.com/goodguyry/postcss-tidy-columns#offset-function
  *
- * @param {Object} declaration The current CSS declaration.
- * @param {Object} Tidy        An instance of the Tidy class.
- * @param {Result} result      Provides the result of the PostCSS transformations.
+ * @param {Declaration} declaration The current CSS declaration.
+ * @param {Tidy}        tidy        An instance of the Tidy class.
+ * @param {Result}      result      Provides the result of the PostCSS transformations.
  */
 function tidyFunction(declaration, tidy, result) {
   // Parse the tidy-* function matches.
