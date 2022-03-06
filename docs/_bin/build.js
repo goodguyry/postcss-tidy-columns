@@ -1,5 +1,5 @@
 const fs = require('fs');
-const sass = require('node-sass');
+const sass = require('sass');
 const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
 const units = require('postcss-units');
