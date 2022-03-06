@@ -20,5 +20,9 @@
       }
     ]
   },
-  "ignorePatterns": ["**/*.md"]
+  "ignorePatterns": [
+    "**/*.md",
+    "docs/*",
+    "__test/*"
+  ]
 }
