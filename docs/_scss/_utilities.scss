@@ -20,7 +20,7 @@ $bp-values: (
 
 $media-queries: _create-breakpoints();
 
-@function min($key) {
+@function min-width($key) {
   @if (not map-has-key($media-queries, #{$key})) {
     @error "$media-queries[#{$key}] doesn't exist.";
     @return false;

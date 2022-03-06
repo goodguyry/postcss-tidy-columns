@@ -65,7 +65,7 @@ h1 {
   font-size: rem(24);
   margin-bottom: rem(12);
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     font-size: rem(36);
   }
 }
@@ -73,7 +73,7 @@ h1 {
 h2 {
   font-size: rem(18);
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     font-size: rem(30);
   }
 }

@@ -6,7 +6,7 @@
   @include auto-margins;
   margin-bottom: rem(75);
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     /**
      * Quick and dirty full-width container.
      *
@@ -25,7 +25,7 @@
   flex-direction: column;
   position: relative;
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     display: block;
   }
 }
@@ -34,7 +34,7 @@
   margin-bottom: rem(8);
   order: 2;
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     margin-bottom: rem(20);
     order: 0;
   }
@@ -50,7 +50,7 @@
    */
   tidy-span: 8;
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     order: 0;
     /**
      * Since `article-header__intro` is absolutely positioned, we'll use the
@@ -76,7 +76,7 @@
    */
   tidy-span: 8;
 
-  @media (min(md)) {
+  @media (min-width(md)) {
     /**
      * The header intro should span 6 columns on medium screens.
      *
@@ -85,7 +85,7 @@
     tidy-span: 6;
   }
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     bottom: 0;
     left: 0;
     margin-bottom: 0;

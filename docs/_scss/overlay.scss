@@ -9,7 +9,7 @@
   --siteMax: rem(1280);
   --overlay-column-color: #FBB294;
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     --columns: 12;
     --gap: rem(20);
     --edge: rem(30);
@@ -42,7 +42,7 @@
       &:nth-last-child(-n+4) {
         display: none;
 
-        @media (min(lg)) {
+        @media (min-width(lg)) {
           display: inline-block;
         }
       }

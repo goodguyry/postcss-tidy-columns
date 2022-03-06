@@ -8,7 +8,7 @@
   margin-bottom: rem(30);
   width: 100vw;
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     height: rem(80);
   }
 }
@@ -33,7 +33,7 @@
    */
   tidy-span: tidy-var(columns);
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     align-items: center;
     flex-wrap: nowrap;
     /**
@@ -58,7 +58,7 @@
   text-align: center;
   width: 100%;
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     margin-bottom: 0;
     margin-right: rem(50);
     text-align: left;
@@ -84,7 +84,7 @@
    */
   padding: 0 tidy-var(edge);
 
-  @media (min(lg)) {
+  @media (min-width(lg)) {
     font-size: rem(16);
     margin-bottom: 0;
     /**
@@ -111,7 +111,7 @@
   margin: 0;
   padding: 0;
 
-  @media (min(md)) {
+  @media (min-width(md)) {
     align-items: center;
     display: flex;
     font-size: rem(16);
@@ -121,7 +121,7 @@
 .menu__item {
   margin-bottom: rem(5);
 
-  @media (min(md)) {
+  @media (min-width(md)) {
     margin-bottom: 0;
 
     &:not(:last-of-type) {

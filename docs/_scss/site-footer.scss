@@ -13,7 +13,7 @@
    */
   tidy-span: tidy-var(columns);
 
-  @media(min(lg)) {
+  @media (min-width(lg)) {
     /**
      * Because I am using a breakpoint configuration to set up two distinct
      * Tidy Columns configurations, the declaration must be re-declared within
@@ -36,7 +36,7 @@
      */
     tidy-offset-left: 1.5;
 
-    @media(min(lg)) {
+    @media (min-width(lg)) {
       /**
        * Because I am using a breakpoint configuration to set up two distinct
        * Tidy Columns configurations, the declaration must be re-declared within
