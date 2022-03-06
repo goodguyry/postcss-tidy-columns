@@ -1,3 +1,21 @@
+@tidy columns var(--t-cols);
+@tidy gap var(--t-gap);
+@tidy edge var(--t-edge);
+@tidy max var(--t-max);
+
+:root {
+  --t-cols: 8;
+  --t-gap: 0.5rem;
+  --t-edge: 0.75rem;
+  --t-max: 80rem;
+
+  @media (min-width(lg)) {
+    --t-cols: 12;
+    --t-gap: 1.25rem;
+    --t-edge: 1.875rem;
+  }
+}
+
 @import 'utilities';
 @import 'colors';
 @import 'layout';
