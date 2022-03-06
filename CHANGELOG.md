@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - The `max` option can now be set to a `var()` function (#79)
 - Properties are deprecated and will be removed in a future version: `tidy-column`, `tidy-offset`, `tidy-span`, `tidy-offset-left`, `tidy-offset-right` (#81)
 - `debug` will now print a warning, rather than preserve the declaration as a comment (#83)
+- Updates to the `postcss-calc^8.2.4` (#86)
 
 **Removed**
 
