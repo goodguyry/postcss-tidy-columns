@@ -68,8 +68,8 @@ describe('The `tidy-span()` functions are replaced and their values reflect the 
     'Replaces the `tidy-span()` function',
     () => run(
       'div { width: tidy-span(tidy-var(columns)); }',
-      'div { width: calc((((min(100vw, 90rem) - 0.625rem * 2) / var(--tcol) - (1.25rem / var(--tcol) * (var(--tcol) - 1))) * var(--tcol)) + 1.25rem * (var(--tcol) - 1)); }',
-      { ...typical, columns: 'var(--tcol)' },
+      'div { width: calc((((min(100vw, 90rem) - 0.625rem * 2) / var(--tc-col) - (1.25rem / var(--tc-col) * (var(--tc-col) - 1))) * var(--tc-col)) + 1.25rem * (var(--tc-col) - 1)); }',
+      { ...typical, columns: 'var(--tc-col)' },
     ),
   );
 });

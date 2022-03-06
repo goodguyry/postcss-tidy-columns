@@ -5,7 +5,7 @@ const cleanClone = require('./lib/cleanClone');
  *
  * @type {RegExp}
  */
-const FUNCTION_PATTERN = /tidy-(span|offset)\(([\d.-]+|var\(--\w*\))\)/;
+const FUNCTION_PATTERN = /tidy-(span|offset)\(([\d.-]+|var\(--[\w-]*\))\)/;
 
 /**
  * Extracts tidy-span|offset functions and note whether they're nested within a CSS function.
