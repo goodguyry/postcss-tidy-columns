@@ -125,7 +125,7 @@ describe('Collect and merge global plugin options', () => {
     'Missing options default to `undefined`.',
     () => runGlobalOptionsPlugin(
       {
-        columns: undefined,
+        columns: 12,
         edge: undefined,
         gap: undefined,
         max: undefined,
@@ -133,7 +133,7 @@ describe('Collect and merge global plugin options', () => {
         reduce: undefined,
         base: 'vw',
       },
-      {},
+      { columns: 12 },
     ),
   );
 });
@@ -166,6 +166,9 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
         edge: '0.625rem',
         gap: '1.25rem',
         max: '90rem',
+        debug: undefined,
+        reduce: undefined,
+        base: 'vw',
       },
       typical,
     ),
@@ -179,6 +182,8 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
         columns: 12,
         max: '90rem',
         debug: true,
+        reduce: undefined,
+        base: 'vw',
       },
       columnsOnly,
     ),
@@ -193,6 +198,9 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
         edge: undefined,
         gap: undefined,
         max: '90rem',
+        debug: undefined,
+        reduce: undefined,
+        base: 'vw',
       },
       typical,
     ),
@@ -203,22 +211,17 @@ describe('Walk any `tidy` at-rules and collect locally-scoped options.', () => {
  * Nomalize config.
  */
 describe('Normalize option value types', () => {
-  test('Omits invalid option values', () => {
-    expect(normalizeOptions({
-      columns: 'none',
-      gap: '10vw',
-      edge: 2,
-      max: '90',
-      base: 'px',
-    }))
-      .toEqual({});
-  });
-
   test('Converts a string numerical value to a number', () => {
     expect(normalizeOptions({
       columns: '12',
+      debug: 'true',
+      reduce: 'false',
     }))
-      .toEqual({ columns: 12 });
+      .toEqual({
+        columns: 12,
+        debug: true,
+        reduce: undefined,
+      });
   });
 });
 

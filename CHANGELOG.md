@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `reduce` option for conditionally reducing the `calc()` output using [postcss-calc](https://github.com/postcss/postcss-calc/) (#70, #79)
 - `base` option for updating the fluid base value's units – `vw` or `%` (#79)
 - Disable an option by setting it to `false` (#80)
+- Validates options with `schema-utils` (#87)
 
 **Changed**
 
