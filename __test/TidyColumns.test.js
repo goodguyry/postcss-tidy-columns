@@ -242,12 +242,6 @@ describe('Get calc functions from spanCalc()', () => {
       'calc(100% / 12)',
       { ...columnsOnly, base: '%' },
     ],
-    [
-      '`base` option applied as expected: \'px\' ignored',
-      1,
-      'calc(100vw / 12)',
-      { ...columnsOnly, base: 'px' },
-    ],
   ])(
     '%O',
     (desc, input, output, opts = allValues) => {

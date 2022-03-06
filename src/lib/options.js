@@ -1,3 +1,5 @@
+const { validate } = require('schema-utils');
+const schema = require('./schema.json');
 const { isEmpty, isCustomProperty } = require('./values');
 
 /**
@@ -15,6 +17,9 @@ const LENGTH_REGEX = /[0-9.]+(px|r?em)+$/;
  * @return {Object}
  */
 const normalizeOptions = (options) => {
+  // Throws a validation error if options don't match the schema.
+  validate(schema, options);
+
   const validatedOptions = Object.keys(options)
     .reduce((acc, key) => {
       const option = options[key];
@@ -122,7 +127,7 @@ const getOptions = (node, options) => {
 
     // JavaScript options.
     debug: false,
-    reduce: false, // @todo Reduce only when this is true,
+    reduce: false,
   };
 
   // Collect this node's at-rule values.
@@ -131,11 +136,7 @@ const getOptions = (node, options) => {
   // Parse the CSS option values.
   const atRuleOpts = parseOptions(atRuleParams);
 
-  if ('root' === node.type) {
-    return normalizeOptions({ ...defaultOpts, ...options, ...atRuleOpts });
-  }
-
-  return normalizeOptions({ ...options, ...atRuleOpts });
+  return normalizeOptions({ ...defaultOpts, ...options, ...atRuleOpts });
 };
 
 module.exports = {

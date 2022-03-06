@@ -19,7 +19,8 @@
   "homepage": "https://github.com/goodguyry/postcss-tidy-columns",
   "dependencies": {
     "postcss-calc": "^8.2.4",
-    "postcss-value-parser": "^4.1.0"
+    "postcss-value-parser": "^4.1.0",
+    "schema-utils": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "^8.10.0",
