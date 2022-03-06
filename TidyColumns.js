@@ -141,8 +141,8 @@ class TidyColumns {
   /**
    * Builds the calc() function.
    *
-   * @param {Number} colSpan The number of columns to span.
-   * @param {Number} gapSpan The number of gaps to span.
+   * @param {Number|String} colSpan The number of columns to span.
+   * @param {Number|String} gapSpan The number of gaps to span.
    * @return {String}
    */
   buildCalcFunction(colSpan, gapSpan) {
@@ -180,6 +180,11 @@ class TidyColumns {
    * @return {String}
    */
   spanCalc(colSpan) {
+    // Assume `colSpan` is a var() function if it can't be parsed as a Number.
+    if (Number.isNaN(Number(colSpan))) {
+      return this.buildCalcFunction(colSpan, `(${colSpan} - 1)`);
+    }
+
     const columnSpan = parseFloat(colSpan, 10);
 
     /**
@@ -195,7 +200,7 @@ class TidyColumns {
   /**
    * Creates the offset `calc()` function declaration for each base value.
    *
-   * @param {String|Number} colSpan The number of columns to offset.
+   * @param {Number} colSpan The number of columns to offset.
    * @return {String}
    */
   offsetCalc(colSpan) {
