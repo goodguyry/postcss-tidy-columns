@@ -1,6 +1,6 @@
 const valueParser = require('postcss-value-parser');
-const reducer = require('postcss-calc/dist/lib/reducer');
-const { parser } = require('postcss-calc/dist/parser');
+const reducer = require('postcss-calc/src/lib/reducer');
+const { parser } = require('postcss-calc/src/parser');
 const { roundToPrecision } = require('./lib/values');
 
 /**
@@ -44,6 +44,8 @@ function stringify(node) {
       return roundToPrecision(value);
     case 'Function':
       return value;
+    case 'ParenthesizedExpression':
+      return `(${stringify(node.content)})`;
     default:
       return `${roundToPrecision(value)}${unit}`;
   }
