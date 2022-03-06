@@ -8,9 +8,9 @@
    * The design calls for the content area to be 6 columns wide (out of 8) on
    * small screens.
    *
-   * tidy-span: 6;
+   * width: tidy-span(6);
    */
-  tidy-span: 6;
+  width: tidy-span(6);
 
   @media (min-width(lg)) {
     /**
@@ -18,9 +18,9 @@
      * is centered. On larger screens, though, it's one column left of center,
      * or two columns from the left edge.
      *
-     * tidy-offset-left: 2;
+     * margin-left: tidy-offset(2);
      */
-    tidy-offset-left: 2;
+    margin-left: tidy-offset(2);
     /**
      * The design calls for the content area to be 6 columns wide (out of 12) on
      * larger screens.
@@ -32,9 +32,9 @@
      * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
      * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
      *
-     * tidy-span: 6;
+     * width: tidy-span(6);
      */
-      tidy-span: 6;
+      width: tidy-span(6);
   }
 }
 
@@ -60,31 +60,30 @@
   /**
    * The design calls for floated images to be pulled out of the content
    * container by one column. For elements floated to the right, use a negative
-   * `tidy-offset-right` value to pull the element out. Had this been floated
-   * left we'd have used the `tidy-offset-left` property.
+   * `tidy-offset` value to pull the element out.
    *
    * This is especially useful with CSS Grid Layout, as there's no other way to
    * access the grandparent's grid.
    *
-   * tidy-offset-right: -1;
+   * margin-right: tidy-offset(-1);
    */
-  tidy-offset-right: -1;
+  margin-right: tidy-offset(-1);
   /**
    * Set the figure to span 4 columns. This could have been achieved with
    * `width: calc(66.6666667% - 4px)`, but who wants to waste time with math?
    *
-   * tidy-span: 4;
+   * width: tidy-span(4);
    */
-  tidy-span: 4;
+  width: tidy-span(4);
 
   @media (min-width(md)) {
     /**
      * Set the figure to span 4 columns. This could have been achieved with
      * `width: calc(50% - 4px)`, but who wants to waste time with math?
      *
-     * tidy-span: 3;
+     * width: tidy-span(3);
      */
-    tidy-span: 3;
+    width: tidy-span(3);
   }
 
   @media (min-width(lg)) {
@@ -104,11 +103,11 @@
      * we've got a different grid specification for mobile then we do for
      * desktop.
      *
-     * tidy-offset-right: -1;
-     * tidy-span: 3;
+     * margin-right: tidy-offset(-1);
+     * width: tidy-span(3);
      */
-    tidy-offset-right: -1;
-    tidy-span: 3;
+    margin-right: tidy-offset(-1);
+    width: tidy-span(3);
   }
 }
 
@@ -132,26 +131,14 @@
      * the edge of the site, then tack on the edge value to pull the figure to
      * the edge of the site's max-width.
      *
-     * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+     * margin-left: calc(tidy-offset(-2) - tidy-var(edge));
      */
     margin-left: calc(tidy-offset(-2) - tidy-var(edge));
-    max-width: tidy-var(siteMax);
+    max-width: tidy-var(max);
 
     .content__img {
       margin-bottom: 0;
     }
-  }
-
-  @media (min-width(full)) {
-    /**
-     * When using tidy-* functions in non-width properties, the `-full` version
-     * of the function must be declared in a media query matching the site's
-     * max-width to ensure the static value is calculated based on the site's
-     * max-width rather than `vw` units.
-     *
-     * margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
-     */
-    margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
   }
 }
 
@@ -160,9 +147,9 @@
   /**
    * For small screens, this is the same as "full-width minus the edges".
    *
-   * tidy-span: 8
+   * width: tidy-span(8)
    */
-  tidy-span: 8;
+  width: tidy-span(8);
 
   @media (min-width(lg)) {
     bottom: rem(20);
@@ -178,18 +165,6 @@
     right: calc(tidy-var(edge) + tidy-offset(1));
     // Override the `tidy-span` property from the rule's root.
     width: auto;
-  }
-
-  @media (min-width(full)) {
-    /**
-     * When using tidy-* functions in non-width properties, the `-full` version
-     * of the function must be declared in a media query matching the site's
-     * max-width to ensure the static value is calculated based on the site's
-     * max-width rather than `vw` units.
-     *
-     * right: calc(tidy-var(edge) + tidy-offset-full(1));
-     */
-    right: calc(tidy-var(edge) + tidy-offset-full(1));
   }
 }
 

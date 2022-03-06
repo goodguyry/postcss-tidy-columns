@@ -1,24 +1,26 @@
-@tidy columns var(--t-cols);
-@tidy gap var(--t-gap);
-@tidy edge var(--t-edge);
-@tidy max var(--t-max);
-
-:root {
-  --t-cols: 8;
-  --t-gap: 0.5rem;
-  --t-edge: 0.75rem;
-  --t-max: 80rem;
-
-  @media (min-width(lg)) {
-    --t-cols: 12;
-    --t-gap: 1.25rem;
-    --t-edge: 1.875rem;
-  }
-}
-
 @import 'utilities';
 @import 'colors';
 @import 'layout';
+
+@tidy columns var(--columns);
+@tidy gap var(--gap);
+@tidy edge var(--edge);
+@tidy max var(--site-max);
+
+:root {
+  --columns: 8;
+  --gap: rem(8);
+  --edge: rem(12);
+  --site-max: rem(1280);
+  --overlay-column-color: #FBB294;
+
+  @media (min-width(lg)) {
+    --columns: 12;
+    --gap: rem(20);
+    --edge: rem(30);
+    --site-max: rem(1280);
+  }
+}
 
 @import 'reset';
 @import 'overlay';

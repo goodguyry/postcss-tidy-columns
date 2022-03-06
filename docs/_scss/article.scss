@@ -10,9 +10,9 @@
     /**
      * Quick and dirty full-width container.
      *
-     * tidy-span: tidy-var(columns);
+     * width: tidy-span(tidy-var(columns));
      */
-    tidy-span: tidy-var(columns);
+    width: tidy-span(tidy-var(columns));
   }
 }
 
@@ -46,9 +46,9 @@
   /**
    * Make the caption full-width on small screens.
    *
-   * tidy-span: 8;
+   * width: tidy-span(8);
    */
-  tidy-span: 8;
+  width: tidy-span(8);
 
   @media (min-width(lg)) {
     order: 0;
@@ -57,9 +57,11 @@
      * column shorthand to size and offset the caption to look as if it's next
      * to the header intro.
      *
-     * tidy-column: 9 / span 3 / 0;
+     * margin-left: tidy-offset(9);
+     * width: tidy-span(3);
      */
-    tidy-column: 9 / span 3 / 0;
+    margin-left: tidy-offset(9);
+    width: tidy-span(3);
   }
 }
 
@@ -72,17 +74,17 @@
   /**
    * Make the header intro full-width on small screens.
    *
-   * tidy-span: 8;
+   * width: tidy-span(8);
    */
-  tidy-span: 8;
+  width: tidy-span(8);
 
   @media (min-width(md)) {
     /**
      * The header intro should span 6 columns on medium screens.
      *
-     * tidy-span: 6;
+     * width: tidy-span(6);
      */
-    tidy-span: 6;
+    width: tidy-span(6);
   }
 
   @media (min-width(lg)) {
@@ -101,8 +103,8 @@
      * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
      * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
      *
-     * tidy-span: 6;
+     * width: tidy-span(6);
      */
-    tidy-span: 6;
+    width: tidy-span(6);
   }
 }

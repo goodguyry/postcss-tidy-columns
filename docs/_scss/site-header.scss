@@ -29,9 +29,9 @@
   /**
    * Quick and dirty full-width container.
    *
-   * tidy-span: tidy-var(columns);
+   * width: tidy-span(tidy-var(columns));
    */
-  tidy-span: tidy-var(columns);
+  width: tidy-span(tidy-var(columns));
 
   @media (min-width(lg)) {
     align-items: center;
@@ -45,10 +45,10 @@
      * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
      *
      * padding: tidy-var(edge) 0;
-     * tidy-span: tidy-var(columns);
+     * width: tidy-span(tidy-var(columns));
      */
     padding: tidy-var(edge) 0;
-    tidy-span: tidy-var(columns);
+    width: tidy-span(tidy-var(columns));
   }
 }
 

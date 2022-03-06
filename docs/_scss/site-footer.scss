@@ -9,9 +9,9 @@
   /**
    * Quick and dirty full-width container.
    *
-   * tidy-span: tidy-var(columns);
+   * width: tidy-span(tidy-var(columns));
    */
-  tidy-span: tidy-var(columns);
+  width: tidy-span(tidy-var(columns));
 
   @media (min-width(lg)) {
     /**
@@ -22,9 +22,9 @@
      * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
      * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
      *
-     * tidy-span: tidy-var(columns);
+     * width: tidy-span(tidy-var(columns));
      */
-    tidy-span: tidy-var(columns);
+    width: tidy-span(tidy-var(columns));
   }
 
   p {
@@ -32,9 +32,9 @@
      * The design calls for the footer content to be offset by 1.5 columns.
      * It happens.
      *
-     * tidy-offset-left: 1.5;
+     * margin-left: tidy-offset(1.5);
      */
-    tidy-offset-left: 1.5;
+    margin-left: tidy-offset(1.5);
 
     @media (min-width(lg)) {
       /**
@@ -45,9 +45,9 @@
        * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
        * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
        *
-       * tidy-offset-left: 1.5;
+       * margin-left: tidy-offset(1.5);
        */
-      tidy-offset-left: 1.5;
+      margin-left: tidy-offset(1.5);
     }
   }
 }
