@@ -102,7 +102,7 @@ The `tidy-offset()` function returns a `calc()` declaration for use in positioni
 > tidy-var(edge) // => var(--site-edge)
 > ```
 
-See the [Tips and Tricks](https://github.com/goodguyry/postcss-tidy-columns/wiki/Tips-and-Tricks) Wiki page for more.
+See the [Examples Wiki page](https://github.com/goodguyry/postcss-tidy-columns/wiki/Examples) for more.
 
 ## Options
 
