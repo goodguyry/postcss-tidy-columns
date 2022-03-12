@@ -1,12 +1,16 @@
+@use 'utilities' as *;
+@use 'breakpoints' as bp;
+@use 'layout';
+
 /**
  * Styles the article elements.
  */
 
 .article {
-  @include auto-margins;
+  @include layout.auto-margins;
   margin-bottom: rem(75);
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     /**
      * Quick and dirty full-width container.
      *
@@ -25,7 +29,7 @@
   flex-direction: column;
   position: relative;
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     display: block;
   }
 }
@@ -34,14 +38,14 @@
   margin-bottom: rem(8);
   order: 2;
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     margin-bottom: rem(20);
     order: 0;
   }
 }
 
 .article-header__figcaption {
-  @include auto-margins;
+  @include layout.auto-margins;
   order: 2;
   /**
    * Make the caption full-width on small screens.
@@ -50,7 +54,7 @@
    */
   width: tidy-span(8);
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     order: 0;
     /**
      * Since `article-header__intro` is absolutely positioned, we'll use the
@@ -66,7 +70,7 @@
 }
 
 .article-header__intro {
-  @include auto-margins;
+  @include layout.auto-margins;
   background-color: white;
   margin-bottom: rem(20);
   padding: rem(20) rem(12);
@@ -78,7 +82,7 @@
    */
   width: tidy-span(8);
 
-  @media (min-width(md)) {
+  @media (bp.min(md)) {
     /**
      * The header intro should span 6 columns on medium screens.
      *
@@ -87,7 +91,7 @@
     width: tidy-span(6);
   }
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     bottom: 0;
     left: 0;
     margin-bottom: 0;

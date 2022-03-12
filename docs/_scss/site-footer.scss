@@ -1,9 +1,13 @@
+@use 'utilities' as *;
+@use 'breakpoints' as bp;
+@use 'layout';
+
 /**
  * Styles the site footer.
  */
 
 [role="contentinfo"] {
-  @include auto-margins;
+  @include layout.auto-margins;
   font-size: rem(12);
   margin-bottom: rem(10);
   /**
@@ -13,7 +17,7 @@
    */
   width: tidy-span(tidy-var(columns));
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     /**
      * Because I am using a breakpoint configuration to set up two distinct
      * Tidy Columns configurations, the declaration must be re-declared within
@@ -36,7 +40,7 @@
      */
     margin-left: tidy-offset(1.5);
 
-    @media (min-width(lg)) {
+    @media (bp.min(lg)) {
       /**
        * Because I am using a breakpoint configuration to set up two distinct
        * Tidy Columns configurations, the declaration must be re-declared within

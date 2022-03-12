@@ -1,3 +1,8 @@
+@use 'utilities' as *;
+@use 'breakpoints' as bp;
+@use 'layout';
+@use 'colors';
+
 /**
  * Reset styles and setup.
  */
@@ -48,7 +53,7 @@ a {
 
   &:focus,
   &:hover {
-    color: $link-hover;
+    color: colors.$link-hover;
   }
 }
 
@@ -65,7 +70,7 @@ h1 {
   font-size: rem(24);
   margin-bottom: rem(12);
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     font-size: rem(36);
   }
 }
@@ -73,7 +78,7 @@ h1 {
 h2 {
   font-size: rem(18);
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     font-size: rem(30);
   }
 }
@@ -81,7 +86,7 @@ h2 {
 p {
 
   &:not(:last-child) {
-    margin-bottom: $vertical-rhythm;
+    margin-bottom: layout.$vertical-rhythm;
   }
 }
 
@@ -95,7 +100,7 @@ strong {
 
 ol, ul {
   list-style-type: circle;
-  margin: 0 0 $vertical-rhythm 0;
+  margin: 0 0 layout.$vertical-rhythm 0;
   padding: 0;
 }
 
@@ -147,17 +152,17 @@ code {
 }
 
 hr {
-  @include auto-margins;
+  @include layout.auto-margins;
   height: 1px;
   border: none;
   background-color: lightgray;
   width: 80%;
-  margin-bottom: $vertical-rhythm;
+  margin-bottom: layout.$vertical-rhythm;
 }
 
 body {
   background-color: white;
-  color: $color-text;
+  color: colors.$color-text;
   font-family: 'Open Sans', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;

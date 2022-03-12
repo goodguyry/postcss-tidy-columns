@@ -1,6 +1,7 @@
-@import 'utilities';
-@import 'colors';
-@import 'layout';
+@use 'utilities' as *;
+@use 'breakpoints' as bp;
+@use 'colors';
+@use 'layout';
 
 @tidy columns var(--columns);
 @tidy gap var(--gap);
@@ -9,16 +10,16 @@
 
 :root {
   --columns: 8;
-  --gap: rem(8);
-  --edge: rem(12);
-  --site-max: rem(1280);
+  --gap: #{rem(8)};
+  --edge: #{rem(12)};
+  --site-max: #{rem(1280)};
   --overlay-column-color: #FBB294;
 
-  @media (min-width(lg)) {
+  @media (bp.min(lg)) {
     --columns: 12;
-    --gap: rem(20);
-    --edge: rem(30);
-    --site-max: rem(1280);
+    --gap: #{rem(20)};
+    --edge: #{rem(30)};
+    --site-max: #{rem(1280)};
   }
 }
 

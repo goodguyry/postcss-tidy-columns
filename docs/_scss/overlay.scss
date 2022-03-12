@@ -1,3 +1,7 @@
+@use 'utilities' as *;
+@use 'breakpoints' as bp;
+@use 'layout';
+
 /**
  * Styles the grid overlay.
  */
@@ -5,7 +9,7 @@
 .show-overlay {
 
   .grid-overlay {
-    @include auto-margins;
+    @include layout.auto-margins;
     display: grid;
     grid-gap: 0 var(--gap);
     grid-template-columns: repeat(var(--columns), 1fr);
@@ -27,7 +31,7 @@
       &:nth-last-child(-n+4) {
         display: none;
 
-        @media (min-width(lg)) {
+        @media (bp.min(lg)) {
           display: inline-block;
         }
       }

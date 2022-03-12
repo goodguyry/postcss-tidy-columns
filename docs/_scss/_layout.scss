@@ -1,1 +1,11 @@
+@use 'utilities' as *;
+
 $vertical-rhythm: rem(28);
+
+/**
+ * Centered container.
+ */
+@mixin auto-margins {
+  margin-left: auto;
+  margin-right: auto;
+}

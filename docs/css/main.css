@@ -1,3 +1,42 @@
+/**
+ * Convert px to rem or em. Unitless values are assumed to be in px.
+ *
+ * @param {Number}  $px        Single value to convert.
+ * @param {Boolean} $em        Use `em` units if true.
+ * @param {Number}  $base-size Root font size on which to base conversions.
+ *
+ * @returns {String} A rem or em value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to either rem or em.
+ *
+ * @param {Number|List} $values     Single value or list of values to convert.
+ * @param {Boolean}     $em         Use `em` units if true.
+ * @param {Number}      $base-value Root font size on which to base conversions.
+ *
+ * @returns {List|Number} A list of values, or a single value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to em.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to rem.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Strip CSS units from a value.
+ *
+ * @param {String} $value A CSS length value.
+ * @returns {String} A unitless value.
+ */
+/**
+ * Centered container.
+ */
 :root {
   --columns: 8;
   --gap: 0.5rem;
@@ -14,6 +53,45 @@
   }
 }
 
+/**
+ * Convert px to rem or em. Unitless values are assumed to be in px.
+ *
+ * @param {Number}  $px        Single value to convert.
+ * @param {Boolean} $em        Use `em` units if true.
+ * @param {Number}  $base-size Root font size on which to base conversions.
+ *
+ * @returns {String} A rem or em value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to either rem or em.
+ *
+ * @param {Number|List} $values     Single value or list of values to convert.
+ * @param {Boolean}     $em         Use `em` units if true.
+ * @param {Number}      $base-value Root font size on which to base conversions.
+ *
+ * @returns {List|Number} A list of values, or a single value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to em.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to rem.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Strip CSS units from a value.
+ *
+ * @param {String} $value A CSS length value.
+ * @returns {String} A unitless value.
+ */
+/**
+ * Centered container.
+ */
 /**
  * Reset styles and setup.
  */
@@ -194,6 +272,45 @@ body {
 }
 
 /**
+ * Convert px to rem or em. Unitless values are assumed to be in px.
+ *
+ * @param {Number}  $px        Single value to convert.
+ * @param {Boolean} $em        Use `em` units if true.
+ * @param {Number}  $base-size Root font size on which to base conversions.
+ *
+ * @returns {String} A rem or em value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to either rem or em.
+ *
+ * @param {Number|List} $values     Single value or list of values to convert.
+ * @param {Boolean}     $em         Use `em` units if true.
+ * @param {Number}      $base-value Root font size on which to base conversions.
+ *
+ * @returns {List|Number} A list of values, or a single value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to em.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to rem.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Strip CSS units from a value.
+ *
+ * @param {String} $value A CSS length value.
+ * @returns {String} A unitless value.
+ */
+/**
+ * Centered container.
+ */
+/**
  * Styles the grid overlay.
  */
 .show-overlay .grid-overlay {
@@ -226,6 +343,45 @@ body {
   }
 }
 
+/**
+ * Convert px to rem or em. Unitless values are assumed to be in px.
+ *
+ * @param {Number}  $px        Single value to convert.
+ * @param {Boolean} $em        Use `em` units if true.
+ * @param {Number}  $base-size Root font size on which to base conversions.
+ *
+ * @returns {String} A rem or em value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to either rem or em.
+ *
+ * @param {Number|List} $values     Single value or list of values to convert.
+ * @param {Boolean}     $em         Use `em` units if true.
+ * @param {Number}      $base-value Root font size on which to base conversions.
+ *
+ * @returns {List|Number} A list of values, or a single value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to em.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to rem.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Strip CSS units from a value.
+ *
+ * @param {String} $value A CSS length value.
+ * @returns {String} A unitless value.
+ */
+/**
+ * Centered container.
+ */
 /**
  * Styles the site header, including navigation.
  */
@@ -370,6 +526,45 @@ body {
 }
 
 /**
+ * Convert px to rem or em. Unitless values are assumed to be in px.
+ *
+ * @param {Number}  $px        Single value to convert.
+ * @param {Boolean} $em        Use `em` units if true.
+ * @param {Number}  $base-size Root font size on which to base conversions.
+ *
+ * @returns {String} A rem or em value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to either rem or em.
+ *
+ * @param {Number|List} $values     Single value or list of values to convert.
+ * @param {Boolean}     $em         Use `em` units if true.
+ * @param {Number}      $base-value Root font size on which to base conversions.
+ *
+ * @returns {List|Number} A list of values, or a single value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to em.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to rem.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Strip CSS units from a value.
+ *
+ * @param {String} $value A CSS length value.
+ * @returns {String} A unitless value.
+ */
+/**
+ * Centered container.
+ */
+/**
  * Styles the article elements.
  */
 .article {
@@ -488,6 +683,45 @@ body {
   }
 }
 
+/**
+ * Convert px to rem or em. Unitless values are assumed to be in px.
+ *
+ * @param {Number}  $px        Single value to convert.
+ * @param {Boolean} $em        Use `em` units if true.
+ * @param {Number}  $base-size Root font size on which to base conversions.
+ *
+ * @returns {String} A rem or em value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to either rem or em.
+ *
+ * @param {Number|List} $values     Single value or list of values to convert.
+ * @param {Boolean}     $em         Use `em` units if true.
+ * @param {Number}      $base-value Root font size on which to base conversions.
+ *
+ * @returns {List|Number} A list of values, or a single value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to em.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to rem.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Strip CSS units from a value.
+ *
+ * @param {String} $value A CSS length value.
+ * @returns {String} A unitless value.
+ */
+/**
+ * Centered container.
+ */
 /**
  * Styles miscellaneous content elements.
  */
@@ -669,6 +903,45 @@ body {
   text-transform: uppercase;
 }
 
+/**
+ * Convert px to rem or em. Unitless values are assumed to be in px.
+ *
+ * @param {Number}  $px        Single value to convert.
+ * @param {Boolean} $em        Use `em` units if true.
+ * @param {Number}  $base-size Root font size on which to base conversions.
+ *
+ * @returns {String} A rem or em value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to either rem or em.
+ *
+ * @param {Number|List} $values     Single value or list of values to convert.
+ * @param {Boolean}     $em         Use `em` units if true.
+ * @param {Number}      $base-value Root font size on which to base conversions.
+ *
+ * @returns {List|Number} A list of values, or a single value.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to em.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Convert a list of px values (with or without the 'px' string) to rem.
+ *
+ * @param {List}   $values     Single value or list of values to convert.
+ * @param {Number} $base-value Root font size on which to base conversions.
+ */
+/**
+ * Strip CSS units from a value.
+ *
+ * @param {String} $value A CSS length value.
+ * @returns {String} A unitless value.
+ */
+/**
+ * Centered container.
+ */
 /**
  * Styles the site footer.
  */
