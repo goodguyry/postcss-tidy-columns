@@ -5,21 +5,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Added**
 
-- `reduce` option for conditionally reducing the `calc()` output using [postcss-calc](https://github.com/postcss/postcss-calc/) (#70, #79)
-- `base` option for updating the fluid base value's units – `vw` or `%` (#79)
-- Disable an option by setting it to `false` (#80)
-- Validates options with `schema-utils` (#87)
+- Support for reducing the `calc()` output using [postcss-calc](https://github.com/postcss/postcss-calc/) (#70, #79)
+- Support for updating the fluid base value's units – `vw` or `%` (#79)
+- Support for disabling an option by setting it to `false` (#80)
+- Option validation using `schema-utils` (#87)
 
 **Changed**
 
 - Drops support for PostCSS < 8 (#73)
 - Updates dependencies (#72)
 - Updates option name: `site-max` and `siteMax` are now `max` (#79)
-- Initial support for outputting a single value using a `min()` function, rather than a media query (#79)
-- The `max` option can now be set to a `var()` function (#79)
-- Properties are deprecated and will be removed in a future version: `tidy-column`, `tidy-offset`, `tidy-span`, `tidy-offset-left`, `tidy-offset-right` (#81)
-- `debug` will now print a warning, rather than preserve the declaration as a comment (#83)
+- Outputs a single value using a `min()` function, rather than adding media queries (#79)
+- Support for using a `var()` function as the `max` option's value (#79)
+- The `debug` will now print a warning, rather than preserve the original declaration as a comment (#83)
 - Updates to the `postcss-calc^8.2.4` (#86)
+
+**Deprecated**
+
+- `tidy-*` properties will be removed in a future version (#81)
+  - `tidy-column`
+  - `tidy-offset`
+  - `tidy-span`
+  - `tidy-offset-left`
+  - `tidy-offset-right`
 
 **Removed**
 
