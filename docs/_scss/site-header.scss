@@ -10,11 +10,11 @@
 .site-header {
   background-color: colors.$header-color;
   color: white;
-  margin-bottom: rem(30);
   width: 100vw;
 
   @media (bp.min(lg)) {
     height: rem(80);
+    margin-bottom: rem(30);
   }
 }
 
