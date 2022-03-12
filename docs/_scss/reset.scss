@@ -83,13 +83,6 @@ h2 {
   }
 }
 
-p {
-
-  &:not(:last-child) {
-    margin-bottom: layout.$vertical-rhythm;
-  }
-}
-
 em {
   font-style: italic;
 }

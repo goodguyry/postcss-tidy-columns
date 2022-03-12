@@ -7,6 +7,11 @@
  */
 
 .content {
+
+  > :where(* + *) {
+    margin-top: layout.$vertical-rhythm;
+  }
+
   @include layout.auto-margins;
   /**
    * The design calls for the content area to be 6 columns wide (out of 8) on
@@ -72,6 +77,7 @@
    * margin-right: tidy-offset(-1);
    */
   margin-right: tidy-offset(-1);
+  margin-top: 0;
   /**
    * Set the figure to span 4 columns. This could have been achieved with
    * `width: calc(66.6666667% - 4px)`, but who wants to waste time with math?
@@ -148,6 +154,7 @@
 
 .content__figcaption--fullwidth {
   @include layout.auto-margins;
+  text-align: right;
   /**
    * For small screens, this is the same as "full-width minus the edges".
    *

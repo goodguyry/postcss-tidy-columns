@@ -111,4 +111,8 @@
      */
     width: tidy-span(6);
   }
+
+  > :where(p + p) {
+    margin-top: layout.$vertical-rhythm;
+  }
 }
