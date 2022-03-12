@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/goodguyry/postcss-tidy-columns/issues"
   },
-  "homepage": "https://github.com/goodguyry/postcss-tidy-columns",
+  "homepage": "https://goodguyry.github.io/postcss-tidy-columns/",
   "dependencies": {
     "postcss-calc": "^8.2.4",
     "postcss-value-parser": "^4.1.0",
