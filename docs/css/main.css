@@ -1,42 +1,3 @@
-/**
- * Convert px to rem or em. Unitless values are assumed to be in px.
- *
- * @param {Number}  $px        Single value to convert.
- * @param {Boolean} $em        Use `em` units if true.
- * @param {Number}  $base-size Root font size on which to base conversions.
- *
- * @returns {String} A rem or em value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to either rem or em.
- *
- * @param {Number|List} $values     Single value or list of values to convert.
- * @param {Boolean}     $em         Use `em` units if true.
- * @param {Number}      $base-value Root font size on which to base conversions.
- *
- * @returns {List|Number} A list of values, or a single value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to em.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to rem.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Strip CSS units from a value.
- *
- * @param {String} $value A CSS length value.
- * @returns {String} A unitless value.
- */
-/**
- * Centered container.
- */
 :root {
   --columns: 8;
   --gap: 0.5rem;
@@ -53,45 +14,6 @@
   }
 }
 
-/**
- * Convert px to rem or em. Unitless values are assumed to be in px.
- *
- * @param {Number}  $px        Single value to convert.
- * @param {Boolean} $em        Use `em` units if true.
- * @param {Number}  $base-size Root font size on which to base conversions.
- *
- * @returns {String} A rem or em value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to either rem or em.
- *
- * @param {Number|List} $values     Single value or list of values to convert.
- * @param {Boolean}     $em         Use `em` units if true.
- * @param {Number}      $base-value Root font size on which to base conversions.
- *
- * @returns {List|Number} A list of values, or a single value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to em.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to rem.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Strip CSS units from a value.
- *
- * @param {String} $value A CSS length value.
- * @returns {String} A unitless value.
- */
-/**
- * Centered container.
- */
 /**
  * Reset styles and setup.
  */
@@ -177,10 +99,6 @@ h2 {
   h2 {
     font-size: 1.875rem;
   }
-}
-
-p:not(:last-child) {
-  margin-bottom: 1.75rem;
 }
 
 em {
@@ -272,45 +190,6 @@ body {
 }
 
 /**
- * Convert px to rem or em. Unitless values are assumed to be in px.
- *
- * @param {Number}  $px        Single value to convert.
- * @param {Boolean} $em        Use `em` units if true.
- * @param {Number}  $base-size Root font size on which to base conversions.
- *
- * @returns {String} A rem or em value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to either rem or em.
- *
- * @param {Number|List} $values     Single value or list of values to convert.
- * @param {Boolean}     $em         Use `em` units if true.
- * @param {Number}      $base-value Root font size on which to base conversions.
- *
- * @returns {List|Number} A list of values, or a single value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to em.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to rem.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Strip CSS units from a value.
- *
- * @param {String} $value A CSS length value.
- * @returns {String} A unitless value.
- */
-/**
- * Centered container.
- */
-/**
  * Styles the grid overlay.
  */
 .show-overlay .grid-overlay {
@@ -344,56 +223,17 @@ body {
 }
 
 /**
- * Convert px to rem or em. Unitless values are assumed to be in px.
- *
- * @param {Number}  $px        Single value to convert.
- * @param {Boolean} $em        Use `em` units if true.
- * @param {Number}  $base-size Root font size on which to base conversions.
- *
- * @returns {String} A rem or em value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to either rem or em.
- *
- * @param {Number|List} $values     Single value or list of values to convert.
- * @param {Boolean}     $em         Use `em` units if true.
- * @param {Number}      $base-value Root font size on which to base conversions.
- *
- * @returns {List|Number} A list of values, or a single value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to em.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to rem.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Strip CSS units from a value.
- *
- * @param {String} $value A CSS length value.
- * @returns {String} A unitless value.
- */
-/**
- * Centered container.
- */
-/**
  * Styles the site header, including navigation.
  */
 .site-header {
   background-color: #0E244B;
   color: white;
-  margin-bottom: 1.875rem;
   width: 100vw;
 }
 @media (min-width: 64rem) {
   .site-header {
     height: 5rem;
+    margin-bottom: 1.875rem;
   }
 }
 
@@ -422,18 +262,9 @@ body {
     align-items: center;
     flex-wrap: nowrap;
     /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: tidy-var(edge) 0;
-     * width: tidy-span(tidy-var(columns));
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the offset nor 8-column span.
      */
-    padding: var(--edge) 0;
-    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * var(--columns)) + var(--gap) * (var(--columns) - 1));
   }
 }
 
@@ -477,16 +308,9 @@ body {
     font-size: 1rem;
     margin-bottom: 0;
     /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: 0 tidy-var(edge);
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the offset.
      */
-    padding: 0 var(--edge);
   }
 }
 
@@ -526,45 +350,6 @@ body {
 }
 
 /**
- * Convert px to rem or em. Unitless values are assumed to be in px.
- *
- * @param {Number}  $px        Single value to convert.
- * @param {Boolean} $em        Use `em` units if true.
- * @param {Number}  $base-size Root font size on which to base conversions.
- *
- * @returns {String} A rem or em value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to either rem or em.
- *
- * @param {Number|List} $values     Single value or list of values to convert.
- * @param {Boolean}     $em         Use `em` units if true.
- * @param {Number}      $base-value Root font size on which to base conversions.
- *
- * @returns {List|Number} A list of values, or a single value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to em.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to rem.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Strip CSS units from a value.
- *
- * @param {String} $value A CSS length value.
- * @returns {String} A unitless value.
- */
-/**
- * Centered container.
- */
-/**
  * Styles the article elements.
  */
 .article {
@@ -588,140 +373,90 @@ body {
 }
 
 .article-header__figure {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  display: grid;
+  /**
+   * Use the global grid gap value for the header grid.
+   *
+   * tidy-var(gap)
+   */
+  gap: 0.625rem var(--gap);
+  /**
+   * tidy-span works well with grid when defining column widths.
+   *
+   * minmax(0, var(--figure-span, tidy-span(8)))
+   */
+  grid-template-columns: 1fr minmax(0, var(--figure-span, calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 8) + var(--gap) * 7))) 1fr;
+  grid-template-rows: 1fr -webkit-max-content;
+  grid-template-rows: 1fr max-content;
 }
-@media (min-width: 64rem) {
+@media (min-width: 48rem) {
   .article-header__figure {
-    display: block;
+    /**
+     * The header intro should span 6 columns on medium screens.
+     *
+     * --figure-span: tidy-span(6);
+     */
+    --figure-span: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 6) + var(--gap) * 5);
   }
 }
 
 .article-header__img {
-  margin-bottom: 0.5rem;
-  order: 2;
-}
-@media (min-width: 64rem) {
-  .article-header__img {
-    margin-bottom: 1.25rem;
-    order: 0;
-  }
+  grid-column: 1/-1;
+  grid-row: 1;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .article-header__figcaption {
   margin-left: auto;
   margin-right: auto;
-  order: 2;
+  grid-column: 1/-1;
+  grid-row: 2;
+  padding: 0.25rem 0;
   /**
    * Make the caption full-width on small screens.
    *
-   * width: tidy-span(8);
+   * width: tidy-span(tidy-var(columns));
    */
-  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 8) + var(--gap) * 7);
+  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * var(--columns)) + var(--gap) * (var(--columns) - 1));
 }
 @media (min-width: 64rem) {
   .article-header__figcaption {
-    order: 0;
-    /**
-     * Since `article-header__intro` is absolutely positioned, we'll use the
-     * column shorthand to size and offset the caption to look as if it's next
-     * to the header intro.
-     *
-     * margin-left: tidy-offset(9);
-     * width: tidy-span(3);
-     */
-    margin-left: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 9) + var(--gap) * 9);
-    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2);
+    grid-column: 3;
+    text-align: right;
+    width: 100%;
   }
 }
 
 .article-header__intro {
   margin-left: auto;
   margin-right: auto;
+  align-self: end;
   background-color: white;
+  grid-column: 2;
+  grid-row: 1;
   margin-bottom: 1.25rem;
+  margin-top: 1.25rem;
   padding: 1.25rem 0.75rem;
+  position: relative;
   text-align: center;
-  /**
-   * Make the header intro full-width on small screens.
-   *
-   * width: tidy-span(8);
-   */
-  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 8) + var(--gap) * 7);
-}
-@media (min-width: 48rem) {
-  .article-header__intro {
-    /**
-     * The header intro should span 6 columns on medium screens.
-     *
-     * width: tidy-span(6);
-     */
-    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 6) + var(--gap) * 5);
-  }
+  z-index: 1;
 }
 @media (min-width: 64rem) {
   .article-header__intro {
-    bottom: 0;
-    left: 0;
+    grid-row: 1/-1;
     margin-bottom: 0;
     padding-left: 4rem;
     padding-right: 4rem;
-    position: absolute;
-    right: 0;
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * width: tidy-span(6);
-     */
-    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 6) + var(--gap) * 5);
   }
 }
+.article-header__intro > :where(p + p) {
+  margin-top: 1.75rem;
+}
 
-/**
- * Convert px to rem or em. Unitless values are assumed to be in px.
- *
- * @param {Number}  $px        Single value to convert.
- * @param {Boolean} $em        Use `em` units if true.
- * @param {Number}  $base-size Root font size on which to base conversions.
- *
- * @returns {String} A rem or em value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to either rem or em.
- *
- * @param {Number|List} $values     Single value or list of values to convert.
- * @param {Boolean}     $em         Use `em` units if true.
- * @param {Number}      $base-value Root font size on which to base conversions.
- *
- * @returns {List|Number} A list of values, or a single value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to em.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to rem.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Strip CSS units from a value.
- *
- * @param {String} $value A CSS length value.
- * @returns {String} A unitless value.
- */
-/**
- * Centered container.
- */
 /**
  * Styles miscellaneous content elements.
  */
@@ -735,6 +470,9 @@ body {
    * width: tidy-span(6);
    */
   width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 6) + var(--gap) * 5);
+}
+.content > :where(* + *) {
+  margin-top: 1.75rem;
 }
 @media (min-width: 64rem) {
   .content {
@@ -750,16 +488,9 @@ body {
      * The design calls for the content area to be 6 columns wide (out of 12) on
      * larger screens.
      *
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * width: tidy-span(6);
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the 6-column span.
      */
-    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 6) + var(--gap) * 5);
   }
 }
 
@@ -774,15 +505,6 @@ body {
 .content__figure--floated {
   float: right;
   /**
-   * Example use of the tidy-var() function to retrieve a value from the plugin
-   * configuration.
-   *
-   * margin-bottom: tidy-var(gap);
-   * margin-left: tidy-var(gap);
-   */
-  margin-bottom: var(--gap);
-  margin-left: var(--gap);
-  /**
    * The design calls for floated images to be pulled out of the content
    * container by one column. For elements floated to the right, use a negative
    * `tidy-offset` value to pull the element out.
@@ -790,9 +512,14 @@ body {
    * This is especially useful with CSS Grid Layout, as there's no other way to
    * access the grandparent's grid.
    *
+   * Example use of the tidy-var() function to retrieve a value from the plugin
+   * configuration.
+   *
    * margin-right: tidy-offset(-1);
+   * margin-bottom: tidy-var(gap);
+   * margin-left: tidy-var(gap);
    */
-  margin-right: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * -1) + var(--gap) * -1);
+  margin: 0 calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * -1) + var(--gap) * -1) var(--gap) var(--gap);
   /**
    * Set the figure to span 4 columns. This could have been achieved with
    * `width: calc(66.6666667% - 4px)`, but who wants to waste time with math?
@@ -809,31 +536,6 @@ body {
      *
      * width: tidy-span(3);
      */
-    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2);
-  }
-}
-@media (min-width: 64rem) {
-  .content__figure--floated {
-    /**
-     * Re-declare the margin values within the large breakpoint to ensure the
-     * calculations use the correct configuration values; remember, we've got a
-     * different grid specification for mobile then we do for desktop.
-     *
-     * margin-bottom: tidy-var(gap);
-     * margin-left: tidy-var(gap);
-     */
-    margin-bottom: var(--gap);
-    margin-left: var(--gap);
-    /**
-     * Re-declare the right offset and span within the large breakpoint to
-     * ensure the calculations use the correct configuration values; remember,
-     * we've got a different grid specification for mobile then we do for
-     * desktop.
-     *
-     * margin-right: tidy-offset(-1);
-     * width: tidy-span(3);
-     */
-    margin-right: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * -1) + var(--gap) * -1);
     width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2);
   }
 }
@@ -872,6 +574,7 @@ body {
 .content__figcaption--fullwidth {
   margin-left: auto;
   margin-right: auto;
+  text-align: right;
   /**
    * For small screens, this is the same as "full-width minus the edges".
    *
@@ -904,45 +607,6 @@ body {
 }
 
 /**
- * Convert px to rem or em. Unitless values are assumed to be in px.
- *
- * @param {Number}  $px        Single value to convert.
- * @param {Boolean} $em        Use `em` units if true.
- * @param {Number}  $base-size Root font size on which to base conversions.
- *
- * @returns {String} A rem or em value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to either rem or em.
- *
- * @param {Number|List} $values     Single value or list of values to convert.
- * @param {Boolean}     $em         Use `em` units if true.
- * @param {Number}      $base-value Root font size on which to base conversions.
- *
- * @returns {List|Number} A list of values, or a single value.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to em.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Convert a list of px values (with or without the 'px' string) to rem.
- *
- * @param {List}   $values     Single value or list of values to convert.
- * @param {Number} $base-value Root font size on which to base conversions.
- */
-/**
- * Strip CSS units from a value.
- *
- * @param {String} $value A CSS length value.
- * @returns {String} A unitless value.
- */
-/**
- * Centered container.
- */
-/**
  * Styles the site footer.
  */
 [role=contentinfo] {
@@ -951,48 +615,19 @@ body {
   font-size: 0.75rem;
   margin-bottom: 0.625rem;
   /**
-   * Quick and dirty full-width container.
+   * Quick and dirty full-width container, which inherits gracefully across
+   * breakpoints because I configured Tidy Columns to use Custom Properties.
    *
    * width: tidy-span(tidy-var(columns));
    */
   width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * var(--columns)) + var(--gap) * (var(--columns) - 1));
 }
-@media (min-width: 64rem) {
-  [role=contentinfo] {
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * width: tidy-span(tidy-var(columns));
-     */
-    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * var(--columns)) + var(--gap) * (var(--columns) - 1));
-  }
-}
 [role=contentinfo] p {
   /**
    * The design calls for the footer content to be offset by 1.5 columns.
-   * It happens.
+   * It happens...
    *
    * margin-left: tidy-offset(1.5);
    */
   margin-left: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 1.5) + var(--gap));
-}
-@media (min-width: 64rem) {
-  [role=contentinfo] p {
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * margin-left: tidy-offset(1.5);
-     */
-    margin-left: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 1.5) + var(--gap));
-  }
 }
