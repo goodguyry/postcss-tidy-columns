@@ -34,16 +34,9 @@
      * The design calls for the content area to be 6 columns wide (out of 12) on
      * larger screens.
      *
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * width: tidy-span(6);
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the 6-column span.
      */
-      width: tidy-span(6);
   }
 }
 
@@ -58,15 +51,6 @@
 .content__figure--floated {
   float: right;
   /**
-   * Example use of the tidy-var() function to retrieve a value from the plugin
-   * configuration.
-   *
-   * margin-bottom: tidy-var(gap);
-   * margin-left: tidy-var(gap);
-   */
-  margin-bottom: tidy-var(gap);
-  margin-left: tidy-var(gap);
-  /**
    * The design calls for floated images to be pulled out of the content
    * container by one column. For elements floated to the right, use a negative
    * `tidy-offset` value to pull the element out.
@@ -74,10 +58,14 @@
    * This is especially useful with CSS Grid Layout, as there's no other way to
    * access the grandparent's grid.
    *
+   * Example use of the tidy-var() function to retrieve a value from the plugin
+   * configuration.
+   *
    * margin-right: tidy-offset(-1);
+   * margin-bottom: tidy-var(gap);
+   * margin-left: tidy-var(gap);
    */
-  margin-right: tidy-offset(-1);
-  margin-top: 0;
+  margin: 0 tidy-offset(-1) tidy-var(gap) tidy-var(gap);
   /**
    * Set the figure to span 4 columns. This could have been achieved with
    * `width: calc(66.6666667% - 4px)`, but who wants to waste time with math?
@@ -93,30 +81,6 @@
      *
      * width: tidy-span(3);
      */
-    width: tidy-span(3);
-  }
-
-  @media (bp.min(lg)) {
-    /**
-     * Re-declare the margin values within the large breakpoint to ensure the
-     * calculations use the correct configuration values; remember, we've got a
-     * different grid specification for mobile then we do for desktop.
-     *
-     * margin-bottom: tidy-var(gap);
-     * margin-left: tidy-var(gap);
-     */
-    margin-bottom: tidy-var(gap);
-    margin-left: tidy-var(gap);
-    /**
-     * Re-declare the right offset and span within the large breakpoint to
-     * ensure the calculations use the correct configuration values; remember,
-     * we've got a different grid specification for mobile then we do for
-     * desktop.
-     *
-     * margin-right: tidy-offset(-1);
-     * width: tidy-span(3);
-     */
-    margin-right: tidy-offset(-1);
     width: tidy-span(3);
   }
 }
