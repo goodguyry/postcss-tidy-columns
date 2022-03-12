@@ -1,6 +1,6 @@
 {
   "name": "postcss-tidy-columns",
-  "version": "0.4.0",
+  "version": "1.0.0-beta-1",
   "description": "PostCSS plugin to manage column and margin alignment.",
   "keywords": [
     "postcss",
@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/goodguyry/postcss-tidy-columns/issues"
   },
-  "homepage": "https://github.com/goodguyry/postcss-tidy-columns",
+  "homepage": "https://goodguyry.github.io/postcss-tidy-columns/",
   "dependencies": {
     "postcss-calc": "^8.2.4",
     "postcss-value-parser": "^4.1.0",
