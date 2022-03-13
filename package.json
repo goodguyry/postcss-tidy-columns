@@ -1,6 +1,6 @@
 {
   "name": "postcss-tidy-columns",
-  "version": "1.0.0-beta-1",
+  "version": "1.0.0-beta-2",
   "description": "PostCSS plugin to manage column and margin alignment.",
   "keywords": [
     "postcss",
@@ -45,7 +45,6 @@
   },
   "files": [
     "/*.js",
-    "/lib/*.js",
-    "/src/*.js"
+    "/src/**/*.js"
   ]
 }
