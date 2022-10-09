@@ -142,7 +142,7 @@ The width of the gap between each column.
 
 ### `edge`
 
-The minimum width of the flexible space between the content and the edge of the page.
+The minimum width of the flexible space between the edge of the content and the viewport.
 
 > **Default**: `undefined`
 >
