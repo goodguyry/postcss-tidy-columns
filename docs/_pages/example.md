@@ -4,7 +4,7 @@ title: Example Page
 permalink: /
 ---
 
-{% include intro.md %}
+{% include intro.html %}
 
 {% include figure-small.html %}
 
