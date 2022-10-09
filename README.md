@@ -59,7 +59,7 @@ div {
 
 ## API
 
-These functions can be used anywhere a `calc()` or `min()` function can.
+These functions can be used anywhere a `calc()` or `min()` function can be used.
 
 ### Span Function
 
