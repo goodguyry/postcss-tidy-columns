@@ -58,7 +58,7 @@
      */
     @tidy base %;
     @tidy columns 4;
-    --edge: 0px;
+    @tidy edge false;
 
     width: tidy-span(3);
     margin-left: auto;

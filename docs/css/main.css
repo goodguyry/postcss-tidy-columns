@@ -508,8 +508,7 @@ body {
   /**
    * Contrived example of a sub-grid using the `base` option.
    */
-  --edge: 0px;
-  width: calc((((min(100%, var(--site-max)) - var(--edge) * 2) / 4 - (var(--gap) / 4 * (4 - 1))) * 3) + var(--gap) * 2);
+  width: calc(((min(100%, var(--site-max)) / 4 - (var(--gap) / 4 * (4 - 1))) * 3) + var(--gap) * 2);
   margin-left: auto;
   margin-right: auto;
 }
