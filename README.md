@@ -1,4 +1,4 @@
-# Tidy Columns [![Build Status][ci-img]][ci] [![npm version][npmjs-img]][npmjs]
+# Tidy Columns [![github-ci][gh-badge]][gh-ci] [![npm version][npmjs-img]][npmjs]
 
 [PostCSS] plugin to manage column alignment.
 
@@ -229,10 +229,12 @@ Global options are defined via `@tidy` at-rules _outside_ of any rule, in the st
 Local options are defined via `@tidy` at-rules _inside_ a rule and are scoped to that rule block. Values declared here take precedence over the global at-rules.
 
 <!-- links -->
-[wiki]: https://github.com/goodguyry/postcss-tidy-columns/wiki
+[wiki]:    https://github.com/goodguyry/postcss-tidy-columns/wiki
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.com/goodguyry/postcss-tidy-columns.svg?branch=master
-[ci]:      https://travis-ci.org/goodguyry/postcss-tidy-columns
+[demo]:    https://goodguyry.github.io/postcss-tidy-columns/
+
+<!-- badges -->
+[gh-badge]:  https://github.com/goodguyry/postcss-tidy-columns/actions/workflows/node-tests.yml/badge.svg
+[gh-ci]:     https://github.com/goodguyry/postcss-tidy-columns/actions/workflows/node-tests.yml
 [npmjs-img]: https://badge.fury.io/js/postcss-tidy-columns.svg
-[npmjs]: https://badge.fury.io/js/postcss-tidy-columns
-[demo]: https://goodguyry.github.io/postcss-tidy-columns/
+[npmjs]:     https://badge.fury.io/js/postcss-tidy-columns
