@@ -44,9 +44,9 @@
   border-radius: 2px;
   border: 1px solid;
   margin-bottom: layout.$vertical-rhythm;
-  margin-left: tidy-offset(-1);
-  padding: rem(20) 0;
-  width: tidy-span(8);
+  margin-left: calc(tidy-var(gap) * -1);
+  padding: rem(20) tidy-var(gap);
+  width: calc(100% + tidy-var(gap) * 2);
 
   > :where(* + *) {
     margin-top: layout.$vertical-rhythm;
@@ -57,10 +57,10 @@
      * Contrived example of a sub-grid using the `base` option.
      */
     @tidy base %;
-    @tidy columns 4;
+    @tidy columns 3;
     @tidy edge false;
 
-    width: tidy-span(3);
+    width: tidy-span(2);
     margin-left: auto;
     margin-right: auto;
   }
