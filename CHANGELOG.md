@@ -1,7 +1,7 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Next
+## 1.0.0
 
 **Added**
 
@@ -13,12 +13,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 **Changed**
 
 - Drops support for PostCSS < 8 (#73)
-- Updates dependencies (#72)
+- Updates dependencies (#72, #86)
 - Updates option name: `site-max` and `siteMax` are now `max` (#79)
 - Outputs a single value using a `min()` function, rather than adding media queries (#79)
 - Support for using a `var()` function as the `max` option's value (#79)
-- The `debug` will now print a warning, rather than preserve the original declaration as a comment (#83)
-- Updates to the `postcss-calc^8.2.4` (#86)
+- The `debug` option will now print a warning, rather than preserve the original declaration as a comment (#83)
 
 **Deprecated**
 
@@ -31,8 +30,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 **Removed**
 
-- The `breakpoints` option is no longer suppoerted (#79)
-- `tidy-span-full()` and `tidy-offset-full()` are no longer supported (#80)
+- The `breakpoints` option is no longer supported (#79)
+- `tidy-span-full()` and `tidy-offset-full()` functions are no longer needed, so removed (#80)
 - The plugin will no longer create a full-width media query, since it now outputs a single value (#80)
 
 ## 0.4.0
