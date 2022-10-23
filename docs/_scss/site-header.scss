@@ -1,20 +1,25 @@
+@use 'utilities' as *;
+@use 'breakpoints' as bp;
+@use 'layout';
+@use 'colors';
+
 /**
  * Styles the site header, including navigation.
  */
 
 .site-header {
-  background-color: $header-color;
+  background-color: colors.$header-color;
   color: white;
-  margin-bottom: rem(30);
   width: 100vw;
 
-  @media (min(lg)) {
+  @media (bp.min(lg)) {
     height: rem(80);
+    margin-bottom: rem(30);
   }
 }
 
 .site-header__inner {
-  @include auto-margins;
+  @include layout.auto-margins;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
@@ -29,26 +34,17 @@
   /**
    * Quick and dirty full-width container.
    *
-   * tidy-span: tidy-var(columns);
+   * width: tidy-span(tidy-var(columns));
    */
-  tidy-span: tidy-var(columns);
+  width: tidy-span(tidy-var(columns));
 
-  @media (min(lg)) {
+  @media (bp.min(lg)) {
     align-items: center;
     flex-wrap: nowrap;
     /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: tidy-var(edge) 0;
-     * tidy-span: tidy-var(columns);
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the offset nor 8-column span.
      */
-    padding: tidy-var(edge) 0;
-    tidy-span: tidy-var(columns);
   }
 }
 
@@ -58,7 +54,7 @@
   text-align: center;
   width: 100%;
 
-  @media (min(lg)) {
+  @media (bp.min(lg)) {
     margin-bottom: 0;
     margin-right: rem(50);
     text-align: left;
@@ -71,7 +67,7 @@
   background-color: white;
   border-radius: 3px;
   border: 1px solid #455066;
-  color: $color-text;
+  color: colors.$color-text;
   font: inherit;
   font-size: rem(14);
   height: rem(36);
@@ -84,20 +80,13 @@
    */
   padding: 0 tidy-var(edge);
 
-  @media (min(lg)) {
+  @media (bp.min(lg)) {
     font-size: rem(16);
     margin-bottom: 0;
     /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: 0 tidy-var(edge);
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the offset.
      */
-    padding: 0 tidy-var(edge);
   }
 }
 
@@ -111,7 +100,7 @@
   margin: 0;
   padding: 0;
 
-  @media (min(md)) {
+  @media (bp.min(md)) {
     align-items: center;
     display: flex;
     font-size: rem(16);
@@ -121,7 +110,7 @@
 .menu__item {
   margin-bottom: rem(5);
 
-  @media (min(md)) {
+  @media (bp.min(md)) {
     margin-bottom: 0;
 
     &:not(:last-of-type) {

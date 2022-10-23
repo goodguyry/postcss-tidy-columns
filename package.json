@@ -1,6 +1,6 @@
 {
   "name": "postcss-tidy-columns",
-  "version": "0.4.0",
+  "version": "1.0.0-beta-3",
   "description": "PostCSS plugin to manage column and margin alignment.",
   "keywords": [
     "postcss",
@@ -16,34 +16,35 @@
   "bugs": {
     "url": "https://github.com/goodguyry/postcss-tidy-columns/issues"
   },
-  "homepage": "https://github.com/goodguyry/postcss-tidy-columns",
+  "homepage": "https://goodguyry.github.io/postcss-tidy-columns/",
   "dependencies": {
-    "autoprefixer": "^9.5.1",
-    "node-sass": "^4.12.0",
-    "nodemon": "^1.19.1",
-    "postcss": "^6.0.22",
-    "postcss-units": "^1.2.1"
+    "postcss-calc": "^8.2.4",
+    "postcss-value-parser": "^4.1.0",
+    "schema-utils": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.0",
-    "jest": "^24.7.1",
-    "jest-cli": "^24.7.1"
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "jest": "^27.5.1",
+    "jest-cli": "^27.5.1",
+    "postcss": "^8.4.7"
+  },
+  "peerDependencies": {
+    "postcss": "^8.4.7"
   },
   "scripts": {
-    "test": "jest",
+    "test": "npm run lint && jest",
     "watch": "jest --watchAll",
-    "watch:verbose": "jest --watchAll  --verbose",
-    "build:css": "npm test && node docs/_bin/build.js",
-    "watch:css": "nodemon -e scss -x node docs/_bin/build.js"
+    "watch:verbose": "jest --watchAll  --verbose --detectOpenHandles",
+    "build": "npm run build --prefix docs",
+    "lint": "eslint ."
   },
   "jest": {
     "testEnvironment": "node"
   },
   "files": [
     "/*.js",
-    "/lib/*.js",
-    "/src/*.js"
+    "/src/**/*.js*"
   ]
 }

@@ -1,18 +1,22 @@
+@use 'utilities' as *;
+@use 'breakpoints' as bp;
+@use 'layout';
+
 /**
  * Styles the article elements.
  */
 
 .article {
-  @include auto-margins;
+  @include layout.auto-margins;
   margin-bottom: rem(75);
 
-  @media (min(lg)) {
+  @media (bp.min(lg)) {
     /**
      * Quick and dirty full-width container.
      *
-     * tidy-span: tidy-var(columns);
+     * width: tidy-span(tidy-var(columns));
      */
-    tidy-span: tidy-var(columns);
+    width: tidy-span(tidy-var(columns));
   }
 }
 
@@ -21,88 +25,79 @@
 }
 
 .article-header__figure {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  display: grid;
+  /**
+   * Use the global grid gap value for the header grid.
+   *
+   * tidy-var(gap)
+   */
+  gap: rem(10) tidy-var(gap);
+  /**
+   * tidy-span works well with grid when defining column widths.
+   *
+   * minmax(0, var(--figure-span, tidy-span(8)))
+   */
+  grid-template-columns: 1fr minmax(0, var(--figure-span, tidy-span(8))) 1fr;
+  grid-template-rows: 1fr max-content;
 
-  @media (min(lg)) {
-    display: block;
+  @media (bp.min(md)) {
+    /**
+     * The header intro should span 6 columns on medium screens.
+     *
+     * --figure-span: tidy-span(6);
+     */
+    --figure-span: tidy-span(6);
   }
 }
 
 .article-header__img {
-  margin-bottom: rem(8);
-  order: 2;
-
-  @media (min(lg)) {
-    margin-bottom: rem(20);
-    order: 0;
-  }
+  grid-column: 1 / -1;
+  grid-row: 1;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .article-header__figcaption {
-  @include auto-margins;
-  order: 2;
+  @include layout.auto-margins;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  padding: rem(4) 0;
   /**
    * Make the caption full-width on small screens.
    *
-   * tidy-span: 8;
+   * width: tidy-span(tidy-var(columns));
    */
-  tidy-span: 8;
+  width: tidy-span(tidy-var(columns));
 
-  @media (min(lg)) {
-    order: 0;
-    /**
-     * Since `article-header__intro` is absolutely positioned, we'll use the
-     * column shorthand to size and offset the caption to look as if it's next
-     * to the header intro.
-     *
-     * tidy-column: 9 / span 3 / 0;
-     */
-    tidy-column: 9 / span 3 / 0;
+  @media (bp.min(lg)) {
+    grid-column: 3;
+    text-align: right;
+    width: 100%;
   }
 }
 
 .article-header__intro {
-  @include auto-margins;
+  @include layout.auto-margins;
+  align-self: end;
   background-color: white;
+  grid-column: 2;
+  grid-row: 1;
   margin-bottom: rem(20);
+  margin-top: rem(20);
   padding: rem(20) rem(12);
+  position: relative;
   text-align: center;
-  /**
-   * Make the header intro full-width on small screens.
-   *
-   * tidy-span: 8;
-   */
-  tidy-span: 8;
+  z-index: 1;
 
-  @media (min(md)) {
-    /**
-     * The header intro should span 6 columns on medium screens.
-     *
-     * tidy-span: 6;
-     */
-    tidy-span: 6;
-  }
-
-  @media (min(lg)) {
-    bottom: 0;
-    left: 0;
+  @media (bp.min(lg)) {
+    grid-row: 1 / -1;
     margin-bottom: 0;
     padding-left: rem(64);
     padding-right: rem(64);
-    position: absolute;
-    right: 0;
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * tidy-span: 6;
-     */
-    tidy-span: 6;
+  }
+
+  > :where(p + p) {
+    margin-top: layout.$vertical-rhythm;
   }
 }

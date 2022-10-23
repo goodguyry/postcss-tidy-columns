@@ -1,70 +1,48 @@
-const postcss = require('postcss');
-const Tidy = require('./Tidy');
-const getGlobalOptions = require('./src/getGlobalOptions');
-const { tidyShorthandProperty } = require('./tidy-shorthand-property');
-const { tidyProperty } = require('./tidy-property');
-const { tidyFunction } = require('./tidy-function');
-const { tidyVar } = require('./tidy-var');
+const TidyColumns = require('./TidyColumns');
+const { tidyFunction } = require('./src/tidy-function');
+const { tidyVar } = require('./src/tidy-var');
+const tidyDeprecated = require('./src/tidy-deprecated');
 
 /**
  * Parse rules and insert span and offset values.
  *
- * @param {Object} root The root CSS object.
+ * @param {Object} options The plugin options.
  */
-module.exports = postcss.plugin(
-  'postcss-tidy-columns',
-  (options = {}) => function postcssTidyColumns(root) {
-    // Collect the global options.
-    const globalOptions = Object.freeze(getGlobalOptions(root, options));
+module.exports = (options = {}) => ({
+  postcssPlugin: 'postcss-tidy-columns',
+  prepare() {
+    const tidy = new TidyColumns(options);
 
-    // Parse rules and declarations, replace `tidy-` properties.
-    root.walkRules((rule) => {
-      const tidy = new Tidy(rule, globalOptions);
+    return {
+      /**
+       * Collect the global at-rule options.
+       */
+      Once(root) {
+        tidy.initRoot(root);
+      },
 
-      // Replace shorthand declarations with their long-form equivalents.
-      rule.walkDecls(/^tidy-(column|offset)$/, (declaration) => {
-        tidyShorthandProperty(declaration, tidy);
-      });
+      /**
+       * Set up rule-specific options and properties.
+       */
+      Rule(rule) {
+        tidy.initRule(rule);
+      },
 
-      // Set up rule-specific properties.
-      tidy.initRule();
+      /**
+       * Replace tidy functions.
+       */
+      Declaration(declaration, { result }) {
+        // Handle deprecated properties.
+        tidyDeprecated(declaration, result);
 
-      rule.walkDecls((declaration) => {
         // Replace `tidy-var()` functions.
-        tidyVar(declaration, tidy);
-        // Replace `tidy-*` properties.
-        tidyProperty(declaration, tidy);
-        // Replace `tidy-[span|offset]()` and `tidy-[span|offset]-full()` functions.
-        tidyFunction(declaration, tidy);
-      });
+        tidyVar(declaration, tidy, result);
 
-      const { fullWidthRule } = tidy;
-      const { siteMax } = tidy.columns.options;
-
-      // Add the media query if a siteMax is declared and the `fullWidthRule` has children.
-      if (undefined !== siteMax && fullWidthRule.nodes.length > 0) {
-        /**
-         * The siteMax-width atRule.
-         * Contains full-width margin offset declarations.
-         */
-        const fullWidthAtRule = postcss.atRule({
-          name: 'media',
-          params: `(min-width: ${siteMax})`,
-          nodes: [],
-          source: rule.source,
-        }).append(fullWidthRule);
-
-        // Insert the media query
-        if ('atrule' === rule.parent.type) {
-          // Insert after the parent at-rule.
-          root.insertAfter(rule.parent, fullWidthAtRule);
-        } else {
-          // Insert after the current rule.
-          root.insertAfter(rule, fullWidthAtRule);
-        }
-      }
-    });
+        // Replace `tidy-[span|offset]()` functions.
+        tidyFunction(declaration, tidy, result);
+      },
+    };
   },
-);
+});
 
-// module.exports = postcss.plugin('postcss-tidy-columns', postcssTidyColumns);
+module.exports.postcss = true;

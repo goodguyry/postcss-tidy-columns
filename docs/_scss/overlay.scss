@@ -1,32 +1,21 @@
+@use 'utilities' as *;
+@use 'breakpoints' as bp;
+@use 'layout';
+
 /**
  * Styles the grid overlay.
  */
 
-:root {
-  --columns: 8;
-  --gap: rem(8);
-  --edge: rem(12);
-  --siteMax: rem(1280);
-  --overlay-column-color: #FBB294;
-
-  @media (min(lg)) {
-    --columns: 12;
-    --gap: rem(20);
-    --edge: rem(30);
-    --siteMax: rem(1280);
-  }
-}
-
 .show-overlay {
 
   .grid-overlay {
-    @include auto-margins;
+    @include layout.auto-margins;
     display: grid;
     grid-gap: 0 var(--gap);
     grid-template-columns: repeat(var(--columns), 1fr);
     height: 100%;
     left: 0;
-    max-width: var(--siteMax);
+    max-width: var(--site-max);
     opacity: 0.3;
     padding: 0 var(--edge);
     pointer-events: none;
@@ -42,7 +31,7 @@
       &:nth-last-child(-n+4) {
         display: none;
 
-        @media (min(lg)) {
+        @media (bp.min(lg)) {
           display: inline-block;
         }
       }

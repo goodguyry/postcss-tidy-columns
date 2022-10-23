@@ -1,0 +1,104 @@
+{
+  "title": "PostCSS Tidy Columns options",
+  "type": "object",
+  "definitions": {
+    "MaybeStringBoolean": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "enum": ["true", "false"]
+        }
+      ]
+    },
+    "LengthOrVarFunction": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "A CSS Length",
+          "pattern": "[0-9.]+(px|r?em)+$"
+        },
+        {
+          "type": "string",
+          "description": "A CSS `var()` function",
+          "pattern": "var\\(\\s?(--[\\w-]+)\\s?[^)]*\\)"
+        }
+      ]
+    }
+  },
+  "properties": {
+    "columns": {
+      "description": "The number of grid columns in the design.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 2
+        },
+        {
+          "description": "A CSS unitless number value",
+          "type": "string"
+        }
+      ]
+    },
+    "gap": {
+      "description": "The width of the gap between each column.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/LengthOrVarFunction"
+        },
+        {
+          "$ref": "#/definitions/MaybeStringBoolean"
+        }
+      ]
+    },
+    "edge": {
+      "description": "The minimum width of the flexible space between the content and the edge of the page.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/LengthOrVarFunction"
+        },
+        {
+          "$ref": "#/definitions/MaybeStringBoolean"
+        }
+      ]
+    },
+    "max": {
+      "description": "The max-width of the site, including [`edge`](#edge) spacing; the point at which the site transitions from fluid width to static width. Setting a `max` value ensures the column and margin widths are correct once the site width is static.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/LengthOrVarFunction"
+        },
+        {
+          "$ref": "#/definitions/MaybeStringBoolean"
+        }
+      ]
+    },
+    "base": {
+      "description": "The units – either `vw` or `%` – used in the fluid base for calculations. This value is always appended to `100`.",
+      "type": "string",
+      "enum": ["vw", "%"]
+    },
+    "reduce": {
+      "description": "Set `reduce` to `true` to reduce the `calc()` output using postcss-calc.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/MaybeStringBoolean"
+        }
+      ]
+    },
+    "debug": {
+      "description": "Set `debug` to `true` print the pre-processed CSS declaration as a warning.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/MaybeStringBoolean"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "columns"
+  ]
+}

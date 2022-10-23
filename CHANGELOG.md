@@ -1,6 +1,39 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0
+
+**Added**
+
+- Support for reducing the `calc()` output using [postcss-calc](https://github.com/postcss/postcss-calc/) (#70, #79)
+- Support for updating the fluid base value's units – `vw` or `%` (#79)
+- Support for disabling an option by setting it to `false` (#80)
+- Option validation using `schema-utils` (#87)
+
+**Changed**
+
+- Drops support for PostCSS < 8 (#73)
+- Updates dependencies (#72, #86)
+- Updates option name: `site-max` and `siteMax` are now `max` (#79)
+- Outputs a single value using a `min()` function, rather than adding media queries (#79)
+- Support for using a `var()` function as the `max` option's value (#79)
+- The `debug` option will now print a warning, rather than preserve the original declaration as a comment (#83)
+
+**Deprecated**
+
+- `tidy-*` properties will be removed in a future version (#81)
+  - `tidy-column`
+  - `tidy-offset`
+  - `tidy-span`
+  - `tidy-offset-left`
+  - `tidy-offset-right`
+
+**Removed**
+
+- The `breakpoints` option is no longer supported (#79)
+- `tidy-span-full()` and `tidy-offset-full()` functions are no longer needed, so removed (#80)
+- The plugin will no longer create a full-width media query, since it now outputs a single value (#80)
+
 ## 0.4.0
 
 **Added**

@@ -1,3 +1,19 @@
+:root {
+  --columns: 8;
+  --gap: 0.5rem;
+  --edge: 0.75rem;
+  --site-max: 80rem;
+  --overlay-column-color: #FBB294;
+}
+@media (min-width: 64rem) {
+  :root {
+    --columns: 12;
+    --gap: 1.25rem;
+    --edge: 1.875rem;
+    --site-max: 80rem;
+  }
+}
+
 /**
  * Reset styles and setup.
  */
@@ -24,7 +40,6 @@ figure, figcaption, img {
   font: inherit;
   vertical-align: baseline;
 }
-
 html::before, html::after, body::before, body::after, div::before, div::after, span::before, span::after,
 article::before,
 article::after, aside::before, aside::after, footer::before, footer::after, header::before, header::after, nav::before, nav::after, section::before, section::after,
@@ -54,7 +69,6 @@ a {
   font-weight: 700;
   transition: color 250ms ease;
 }
-
 a:focus, a:hover {
   color: #AC7DA9;
 }
@@ -72,7 +86,6 @@ h1 {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
 }
-
 @media (min-width: 64rem) {
   h1 {
     font-size: 2.25rem;
@@ -82,15 +95,10 @@ h1 {
 h2 {
   font-size: 1.125rem;
 }
-
 @media (min-width: 64rem) {
   h2 {
     font-size: 1.875rem;
   }
-}
-
-p:not(:last-child) {
-  margin-bottom: 1.75rem;
 }
 
 em {
@@ -144,12 +152,11 @@ svg {
   width: 100%;
 }
 
-p code,
-li code {
+p code, li code {
   background-color: aliceblue;
   border: 1px solid lightgray;
   border-radius: 2px;
-  font: 400 90% 'Courier', monospace;
+  font: 400 90% "Courier", monospace;
   padding: 0 0.3em;
 }
 
@@ -166,7 +173,7 @@ hr {
 body {
   background-color: white;
   color: #31313B;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   line-height: 1.4;
@@ -178,30 +185,13 @@ body {
   word-break: keep-all;
 }
 
-[role="main"] {
+[role=main] {
   /* tbd */
 }
 
 /**
  * Styles the grid overlay.
  */
-:root {
-  --columns: 8;
-  --gap: 0.5rem;
-  --edge: 0.75rem;
-  --siteMax: 80rem;
-  --overlay-column-color: #FBB294;
-}
-
-@media (min-width: 64rem) {
-  :root {
-    --columns: 12;
-    --gap: 1.25rem;
-    --edge: 1.875rem;
-    --siteMax: 80rem;
-  }
-}
-
 .show-overlay .grid-overlay {
   margin-left: auto;
   margin-right: auto;
@@ -210,7 +200,7 @@ body {
   grid-template-columns: repeat(var(--columns), 1fr);
   height: 100%;
   left: 0;
-  max-width: var(--siteMax);
+  max-width: var(--site-max);
   opacity: 0.3;
   padding: 0 var(--edge);
   pointer-events: none;
@@ -220,15 +210,12 @@ body {
   width: 100%;
   z-index: 1000;
 }
-
 .show-overlay .grid-overlay span {
   background-color: var(--overlay-column-color);
 }
-
 .show-overlay .grid-overlay span:nth-last-child(-n+4) {
   display: none;
 }
-
 @media (min-width: 64rem) {
   .show-overlay .grid-overlay span:nth-last-child(-n+4) {
     display: inline-block;
@@ -241,13 +228,12 @@ body {
 .site-header {
   background-color: #0E244B;
   color: white;
-  margin-bottom: 1.875rem;
   width: 100vw;
 }
-
 @media (min-width: 64rem) {
   .site-header {
     height: 5rem;
+    margin-bottom: 1.875rem;
   }
 }
 
@@ -263,33 +249,22 @@ body {
    *
    * padding: tidy-var(edge) 0;
    */
-  padding: 0.75rem 0;
+  padding: var(--edge) 0;
   /**
    * Quick and dirty full-width container.
    *
-   * tidy-span: tidy-var(columns);
+   * width: tidy-span(tidy-var(columns));
    */
-  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * var(--columns)) + var(--gap) * (var(--columns) - 1));
 }
-
 @media (min-width: 64rem) {
   .site-header__inner {
     align-items: center;
     flex-wrap: nowrap;
     /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: tidy-var(edge) 0;
-     * tidy-span: tidy-var(columns);
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the offset nor 8-column span.
      */
-    padding: 1.875rem 0;
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
   }
 }
 
@@ -299,7 +274,6 @@ body {
   text-align: center;
   width: 100%;
 }
-
 @media (min-width: 64rem) {
   .site-header__title {
     margin-bottom: 0;
@@ -327,24 +301,16 @@ body {
    *
    * padding: 0 tidy-var(edge);
    */
-  padding: 0 0.75rem;
+  padding: 0 var(--edge);
 }
-
 @media (min-width: 64rem) {
   .site-header__toggle {
     font-size: 1rem;
     margin-bottom: 0;
     /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * padding: 0 tidy-var(edge);
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the offset.
      */
-    padding: 0 1.875rem;
   }
 }
 
@@ -358,7 +324,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 @media (min-width: 48rem) {
   .menu__list {
     align-items: center;
@@ -370,7 +335,6 @@ body {
 .menu__item {
   margin-bottom: 0.3125rem;
 }
-
 @media (min-width: 48rem) {
   .menu__item {
     margin-bottom: 0;
@@ -379,7 +343,6 @@ body {
     margin-right: 1.875rem;
   }
 }
-
 .menu__item a {
   color: white;
   font-weight: normal;
@@ -394,16 +357,14 @@ body {
   margin-right: auto;
   margin-bottom: 4.6875rem;
 }
-
 @media (min-width: 64rem) {
   .article {
     /**
      * Quick and dirty full-width container.
      *
-     * tidy-span: tidy-var(columns);
+     * width: tidy-span(tidy-var(columns));
      */
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
+    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * var(--columns)) + var(--gap) * (var(--columns) - 1));
   }
 }
 
@@ -412,111 +373,87 @@ body {
 }
 
 .article-header__figure {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  display: grid;
+  /**
+   * Use the global grid gap value for the header grid.
+   *
+   * tidy-var(gap)
+   */
+  gap: 0.625rem var(--gap);
+  /**
+   * tidy-span works well with grid when defining column widths.
+   *
+   * minmax(0, var(--figure-span, tidy-span(8)))
+   */
+  grid-template-columns: 1fr minmax(0, var(--figure-span, calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 8) + var(--gap) * 7))) 1fr;
+  grid-template-rows: 1fr max-content;
 }
-
-@media (min-width: 64rem) {
+@media (min-width: 48rem) {
   .article-header__figure {
-    display: block;
+    /**
+     * The header intro should span 6 columns on medium screens.
+     *
+     * --figure-span: tidy-span(6);
+     */
+    --figure-span: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 6) + var(--gap) * 5);
   }
 }
 
 .article-header__img {
-  margin-bottom: 0.5rem;
-  order: 2;
-}
-
-@media (min-width: 64rem) {
-  .article-header__img {
-    margin-bottom: 1.25rem;
-    order: 0;
-  }
+  grid-column: 1/-1;
+  grid-row: 1;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .article-header__figcaption {
   margin-left: auto;
   margin-right: auto;
-  order: 2;
+  grid-column: 1/-1;
+  grid-row: 2;
+  padding: 0.25rem 0;
   /**
    * Make the caption full-width on small screens.
    *
-   * tidy-span: 8;
+   * width: tidy-span(tidy-var(columns));
    */
-  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * var(--columns)) + var(--gap) * (var(--columns) - 1));
 }
-
 @media (min-width: 64rem) {
   .article-header__figcaption {
-    order: 0;
-    /**
-     * Since `article-header__intro` is absolutely positioned, we'll use the
-     * column shorthand to size and offset the caption to look as if it's next
-     * to the header intro.
-     *
-     * tidy-column: 9 / span 3 / 0;
-     */
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-    margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 9) + 1.25rem * 9);
-  }
-}
-
-@media (min-width: 80rem) {
-  .article-header__figcaption {
-    margin-left: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 9) + 1.25rem * 9);
+    grid-column: 3;
+    text-align: right;
+    width: 100%;
   }
 }
 
 .article-header__intro {
   margin-left: auto;
   margin-right: auto;
+  align-self: end;
   background-color: white;
+  grid-column: 2;
+  grid-row: 1;
   margin-bottom: 1.25rem;
+  margin-top: 1.25rem;
   padding: 1.25rem 0.75rem;
+  position: relative;
   text-align: center;
-  /**
-   * Make the header intro full-width on small screens.
-   *
-   * tidy-span: 8;
-   */
-  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+  z-index: 1;
 }
-
-@media (min-width: 48rem) {
-  .article-header__intro {
-    /**
-     * The header intro should span 6 columns on medium screens.
-     *
-     * tidy-span: 6;
-     */
-    width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 6) + 0.5rem * 5);
-  }
-}
-
 @media (min-width: 64rem) {
   .article-header__intro {
-    bottom: 0;
-    left: 0;
+    grid-row: 1/-1;
     margin-bottom: 0;
     padding-left: 4rem;
     padding-right: 4rem;
-    position: absolute;
-    right: 0;
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * tidy-span: 6;
-     */
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
   }
+}
+.article-header__intro > :where(p + p) {
+  margin-top: 1.75rem;
 }
 
 /**
@@ -529,11 +466,13 @@ body {
    * The design calls for the content area to be 6 columns wide (out of 8) on
    * small screens.
    *
-   * tidy-span: 6;
+   * width: tidy-span(6);
    */
-  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 6) + 0.5rem * 5);
+  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 6) + var(--gap) * 5);
 }
-
+.content > :where(* + *) {
+  margin-top: 1.75rem;
+}
 @media (min-width: 64rem) {
   .content {
     /**
@@ -541,31 +480,37 @@ body {
      * is centered. On larger screens, though, it's one column left of center,
      * or two columns from the left edge.
      *
-     * tidy-offset-left: 2;
+     * margin-left: tidy-offset(2);
      */
-    margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
+    margin-left: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 2) + var(--gap) * 2);
     /**
      * The design calls for the content area to be 6 columns wide (out of 12) on
      * larger screens.
      *
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * tidy-span: 6;
+     * Because I configured Tidy Columns to use Custom Properties, the values
+     * inherit as expected, so no need to redeclare the 6-column span.
      */
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 6) + 1.25rem * 5);
   }
 }
 
-@media (min-width: 80rem) {
-  .content {
-    margin-left: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 2) + 1.25rem * 2);
-  }
+.content__intro {
+  border-radius: 2px;
+  border: 1px solid;
+  margin-bottom: 1.75rem;
+  margin-left: calc(var(--gap) * -1);
+  padding: 1.25rem var(--gap);
+  width: calc(100% + var(--gap) * 2);
+}
+.content__intro > :where(* + *) {
+  margin-top: 1.75rem;
+}
+.content__intro > * {
+  /**
+   * Contrived example of a sub-grid using the `base` option.
+   */
+  width: calc(((min(100%, var(--site-max)) / 3 - (var(--gap) / 3 * (3 - 1))) * 2) + var(--gap));
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .content__figure {
@@ -579,77 +524,38 @@ body {
 .content__figure--floated {
   float: right;
   /**
-   * Example use of the tidy-var() function to retrieve a value from the plugin
-   * configuration.
-   *
-   * margin-bottom: tidy-var(gap);
-   * margin-left: tidy-var(gap);
-   */
-  margin-bottom: 0.5rem;
-  margin-left: 0.5rem;
-  /**
    * The design calls for floated images to be pulled out of the content
    * container by one column. For elements floated to the right, use a negative
-   * `tidy-offset-right` value to pull the element out. Had this been floated
-   * left we'd have used the `tidy-offset-left` property.
+   * `tidy-offset` value to pull the element out.
    *
    * This is especially useful with CSS Grid Layout, as there's no other way to
    * access the grandparent's grid.
    *
-   * tidy-offset-right: -1;
+   * Example use of the tidy-var() function to retrieve a value from the plugin
+   * configuration.
+   *
+   * margin-right: tidy-offset(-1);
+   * margin-bottom: tidy-var(gap);
+   * margin-left: tidy-var(gap);
    */
-  margin-right: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * -1) + 0.5rem * -1);
+  margin: 0 calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * -1) + var(--gap) * -1) var(--gap) var(--gap);
   /**
    * Set the figure to span 4 columns. This could have been achieved with
    * `width: calc(66.6666667% - 4px)`, but who wants to waste time with math?
    *
-   * tidy-span: 4;
+   * width: tidy-span(4);
    */
-  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 4) + 0.5rem * 3);
+  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 4) + var(--gap) * 3);
 }
-
 @media (min-width: 48rem) {
   .content__figure--floated {
     /**
      * Set the figure to span 4 columns. This could have been achieved with
      * `width: calc(50% - 4px)`, but who wants to waste time with math?
      *
-     * tidy-span: 3;
+     * width: tidy-span(3);
      */
-    width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 3) + 0.5rem * 2);
-  }
-}
-
-@media (min-width: 64rem) {
-  .content__figure--floated {
-    /**
-     * Re-declare the margin values within the large breakpoint to ensure the
-     * calculations use the correct configuration values; remember, we've got a
-     * different grid specification for mobile then we do for desktop.
-     *
-     * margin-bottom: tidy-var(gap);
-     * margin-left: tidy-var(gap);
-     */
-    margin-bottom: 1.25rem;
-    margin-left: 1.25rem;
-    /**
-     * Re-declare the right offset and span within the large breakpoint to
-     * ensure the calculations use the correct configuration values; remember,
-     * we've got a different grid specification for mobile then we do for
-     * desktop.
-     *
-     * tidy-offset-right: -1;
-     * tidy-span: 3;
-     */
-    margin-right: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * -1) + 1.25rem * -1);
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 3) + 1.25rem * 2);
-  }
-}
-
-@media (min-width: 80rem) {
-  .content__figure--floated {
-    margin-right: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * -1) + 1.25rem * -1);
+    width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 3) + var(--gap) * 2);
   }
 }
 
@@ -662,11 +568,10 @@ body {
    *
    * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
    */
-  margin-left: calc(((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * -1) + 0.5rem * -1) - 0.75rem);
+  margin-left: calc(((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * -1) + var(--gap) * -1) - var(--edge));
   max-width: 100vw;
   width: 100vw;
 }
-
 @media (min-width: 64rem) {
   .content__figure--fullwidth {
     /**
@@ -675,41 +580,27 @@ body {
      * the edge of the site, then tack on the edge value to pull the figure to
      * the edge of the site's max-width.
      *
-     * margin-left: calc(tidy-offset(-1) - tidy-var(edge));
+     * margin-left: calc(tidy-offset(-2) - tidy-var(edge));
      */
-    margin-left: calc(((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * -2) + 1.25rem * -2) - 1.875rem);
-    max-width: 80rem;
+    margin-left: calc(((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * -2) + var(--gap) * -2) - var(--edge));
+    max-width: var(--site-max);
   }
   .content__figure--fullwidth .content__img {
     margin-bottom: 0;
   }
 }
 
-@media (min-width: 80rem) {
-  .content__figure--fullwidth {
-    /**
-     * When using tidy-* functions in non-width properties, the `-full` version
-     * of the function must be declared in a media query matching the site's
-     * max-width to ensure the static value is calculated based on the site's
-     * max-width rather than `vw` units.
-     *
-     * margin-left: calc(tidy-offset-full(-2) - tidy-var(edge));
-     */
-    margin-left: calc(((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * -2) + 1.25rem * -2) - 1.875rem);
-  }
-}
-
 .content__figcaption--fullwidth {
   margin-left: auto;
   margin-right: auto;
+  text-align: right;
   /**
    * For small screens, this is the same as "full-width minus the edges".
    *
-   * tidy-span: 8
+   * width: tidy-span(8)
    */
-  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 8) + var(--gap) * 7);
 }
-
 @media (min-width: 64rem) {
   .content__figcaption--fullwidth {
     bottom: 1.25rem;
@@ -722,22 +613,8 @@ body {
      *
      * right: calc(tidy-var(edge) + tidy-offset(1));
      */
-    right: calc(1.875rem + (((100vw - 1.875rem * 2) / 12 - 1.1458rem) + 1.25rem));
+    right: calc(var(--edge) + (((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) + var(--gap)));
     width: auto;
-  }
-}
-
-@media (min-width: 80rem) {
-  .content__figcaption--fullwidth {
-    /**
-     * When using tidy-* functions in non-width properties, the `-full` version
-     * of the function must be declared in a media query matching the site's
-     * max-width to ensure the static value is calculated based on the site's
-     * max-width rather than `vw` units.
-     *
-     * right: calc(tidy-var(edge) + tidy-offset-full(1));
-     */
-    right: calc(1.875rem + (((80rem - 1.875rem * 2) / 12 - 1.1458rem) + 1.25rem));
   }
 }
 
@@ -751,64 +628,25 @@ body {
 /**
  * Styles the site footer.
  */
-[role="contentinfo"] {
+[role=contentinfo] {
   margin-left: auto;
   margin-right: auto;
   font-size: 0.75rem;
   margin-bottom: 0.625rem;
   /**
-   * Quick and dirty full-width container.
+   * Quick and dirty full-width container, which inherits gracefully across
+   * breakpoints because I configured Tidy Columns to use Custom Properties.
    *
-   * tidy-span: tidy-var(columns);
+   * width: tidy-span(tidy-var(columns));
    */
-  width: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 8) + 0.5rem * 7);
+  width: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * var(--columns)) + var(--gap) * (var(--columns) - 1));
 }
-
-@media (min-width: 64rem) {
-  [role="contentinfo"] {
-    /**
-     * Because I am using a breakpoint configuration to set up two distinct
-     * Tidy Columns configurations, the declaration must be re-declared within
-     * the breakpoint to ensure the correct values are used in the calculation.
-     *
-     * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-     * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-     *
-     * tidy-span: tidy-var(columns);
-     */
-    width: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
-    max-width: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 12) + 1.25rem * 11);
-  }
-}
-
-[role="contentinfo"] p {
+[role=contentinfo] p {
   /**
-     * The design calls for the footer content to be offset by 1.5 columns.
-     * It happens.
-     *
-     * tidy-offset-left: 1.5;
-     */
-  margin-left: calc((((100vw - 0.75rem * 2) / 8 - 0.4375rem) * 1.5) + 0.5rem);
-}
-
-@media (min-width: 64rem) {
-  [role="contentinfo"] p {
-    /**
-       * Because I am using a breakpoint configuration to set up two distinct
-       * Tidy Columns configurations, the declaration must be re-declared within
-       * the breakpoint to ensure the correct values are used in the calculation.
-       *
-       * Check out the Tidy Columns Wiki for simple `keep-tidy` Sass mixin.
-       * @see https://github.com/goodguyry/postcss-tidy-columns/wiki
-       *
-       * tidy-offset-left: 1.5;
-       */
-    margin-left: calc((((100vw - 1.875rem * 2) / 12 - 1.1458rem) * 1.5) + 1.25rem);
-  }
-}
-
-@media (min-width: 80rem) {
-  [role="contentinfo"] p {
-    margin-left: calc((((80rem - 1.875rem * 2) / 12 - 1.1458rem) * 1.5) + 1.25rem);
-  }
+   * The design calls for the footer content to be offset by 1.5 columns.
+   * It happens...
+   *
+   * margin-left: tidy-offset(1.5);
+   */
+  margin-left: calc((((min(100vw, var(--site-max)) - var(--edge) * 2) / var(--columns) - (var(--gap) / var(--columns) * (var(--columns) - 1))) * 1.5) + var(--gap));
 }
