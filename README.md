@@ -108,6 +108,8 @@ See the [Examples Wiki page](https://github.com/goodguyry/postcss-tidy-columns/w
 
 Tidy Columns can be configured with `@tidy` at-rules in the CSS or via the plugin options object.
 
+⚠️ Depending on how your build tool processes files, a loader like [sass-resources-loader](https://www.npmjs.com/package/sass-resources-loader) may be required to include `@tidy` at-rules in every Sass partial. The PostCSS JavaScript API is the best way to ensure options are globally available.
+
 ```js
 require('postcss-tidy-columns')({
   columns: 'var(--site-columns)',
@@ -116,8 +118,6 @@ require('postcss-tidy-columns')({
   max: '80rem',
 });
 ```
-
-⚠️ Depending on how your build tool processes files, a loader like [sass-resources-loader](https://www.npmjs.com/package/sass-resources-loader) may be required to include these `@tidy` at-rules in every Sass partial. The plugin options object is the best way to ensure options are globally available.
 
 Options can be set to either a static value or a `var()` function:
 
@@ -232,13 +232,17 @@ Set `debug` to `true` print the pre-processed CSS declaration as a warning.
 
 ## Options Cascade
 
+### Plugin options
+
+Options passed directly to the plugin via the PostCSS JavaScript API.
+
 ### Global at-rules
 
-Global options are defined via `@tidy` at-rules _outside_ of any rule, in the stylesheet root.
+Global options defined via `@tidy` at-rules _outside_ of any rule, in the stylesheet root.
 
 ### Local at-rules
 
-Local options are defined via `@tidy` at-rules _inside_ a rule and are scoped to that rule block. Values declared here take precedence over the global at-rules.
+Local options defined via `@tidy` at-rules _inside_ a rule and are scoped to that rule block. Values declared here take precedence over the global at-rules.
 
 <!-- links -->
 [wiki]:    https://github.com/goodguyry/postcss-tidy-columns/wiki
